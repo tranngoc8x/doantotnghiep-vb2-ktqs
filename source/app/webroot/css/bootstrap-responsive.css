@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Responsive v2.3.1
+ * Bootstrap Responsive v2.3.2
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -457,12 +457,49 @@
     margin-left: 0;
   }
 }
-
-@media (min-width: 768px) and (max-width: 979px) {
+@media(min-width: 767px){
+  .hidden-menu{
+    display: none !important;
+  }
+}
+@media (max-width: 766px) {
+  .hidden-menu{
+    display: block !important;
+  }
+  ul.topmenu{
+    display: none;
+  }
+  ul.topmenu li{
+    width: 100%;
+    background: #ffffff;
+  }
+  ul.topmenu li a {
+    color: #0088CC !important;
+    line-height: 30px !important;
+  }
+  ul.topmenu li:hover a{
+    color: #FFFFFF !important;
+    transition: .3s;
+    padding-left: 20px;
+  }
+  #left{
+    display: none;
+    position: absolute;
+    float: left;
+    width: 250px !important;
+  }
+  #main{
+    overflow: hidden;
+    position: relative;
+    float: left;
+  }
+}
+@media (min-width: 767px) and (max-width: 979px) {
   .row {
     margin-left: -20px;
     *zoom: 1;
   }
+
   .row:before,
   .row:after {
     display: table;
@@ -799,11 +836,12 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 766px) {
   body {
     padding-right: 20px;
     padding-left: 20px;
   }
+
   .navbar-fixed-top,
   .navbar-fixed-bottom,
   .navbar-static-top {
