@@ -35,4 +35,7 @@ class HTML {
 		}
 		return $data;
 	}
+	function element($fileName = null) {
+		include(APP.'/views/element/'.$fileName.'.php');
+	}
 }

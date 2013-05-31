@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v2.3.1
+ * Bootstrap v2.3.2
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -741,7 +741,7 @@ h6 {
   margin: 10px 0;
   font-family: inherit;
   font-weight: bold;
-  line-height: 20px;
+  line-height: 16px;
   color: inherit;
   text-rendering: optimizelegibility;
 }
@@ -760,7 +760,7 @@ h6 small {
 h1,
 h2,
 h3 {
-  line-height: 40px;
+  /*line-height: 40px;*/
 }
 
 h1 {
@@ -3009,6 +3009,15 @@ table th[class*="span"],
   display: block;
 }
 
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+}
+
 .pull-right > .dropdown-menu {
   right: 0;
   left: auto;
@@ -3950,7 +3959,7 @@ input[type="submit"].btn.btn-mini {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #0088CC;
 }
 
 .nav > li > a > img {
