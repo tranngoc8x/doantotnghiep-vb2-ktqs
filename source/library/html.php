@@ -1,17 +1,33 @@
 <?php
 
 class HTML {
-	private $js = array();
-	function link($text,$path,$prompt = null,$confirmMessage = "Bạn có chắc muốn thực hiện hành động này ?") {
+	function link($text,$path,$dis = null,$alert = false,$confirmMessage = "Bạn có chắc muốn thực hiện hành động này ?") {
 		$path = str_replace(' ','-',$path);
-		if ($prompt) {
-			$data = '<a href="javascript:void(0);" onclick="javascript:jumpTo(\''.BASE_PATH.'/'.$path.'\',\''.$confirmMessage.'\')">'.$text.'</a>';
+		$_path = implode("/", $path);
+		$_dis = " ";
+		if(!empty($dis)){
+			foreach ($dis as $key => $value) {
+				$_dis .= $key.'="'.$value.'" ';
+			}
+		}
+
+
+		if ($alert == TRUE) {
+			$data = '<a href="javascript:void(0);" '.$_dis.' onclick="javascript:jumpTo(\''.BASE_PATH.'/'.$_path.'\',\''.$confirmMessage.'\')">'.$text.'</a>';
 		} else {
-			$data = '<a href="'.BASE_PATH.'/'.$path.'">'.$text.'</a>';
+			$data = '<a href="'.BASE_PATH.'/'.$_path.'" '.$_dis.'>'.$text.'</a>';
 		}
 		return $data;
 	}
-
+	function img($src=null,$array = null){
+		$tt = "";
+		if(is_array($array)){
+			foreach ($array as $key => $value) {
+				$tt .= $key."='".$value."' ";
+			}
+		}
+		return "<img src='".BASE_PATH."/".$src."' ".$tt."/>";
+	}
 	function script($fileName) {
 		$data = "";
 		if(!is_array($fileName)){

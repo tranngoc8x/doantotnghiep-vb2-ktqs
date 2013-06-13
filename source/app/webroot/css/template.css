@@ -7,8 +7,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -17,7 +17,7 @@ time, mark, audio, video {
 	font-size: 11px;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -186,13 +186,6 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 
 /*END MAIN CONTENT*/
 
-
-/*MAIN*/
-#main{
-}
-
-/*END MAIN*/
-
 /* PRIMARY COLUMN
 --------------------------------------------------------- */
 #content {
@@ -245,6 +238,22 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 .boxheader ul {
 	list-style: none;
 }
+
+/*CONTENT
+--------------------------------------------------------- */
+.thumbnails li{
+ 
+	float: left;
+}
+.article{
+	float: left;
+}
+.item{
+	float: left;
+	margin-left: 10px;
+}
+
+
 /* HEADER
 --------------------------------------------------------- */
 #header {
@@ -370,7 +379,6 @@ li.firstitem {
 	width: 20%;
 	float: left;
 }
-
 .sublogo a {
 	font-size: 200%;
 	display: block;
@@ -383,10 +391,6 @@ li.firstitem {
 	left: 10px;
 }
 
-.narrow .sublogo a {
-	width: 140px;
-	height: 70px;
-}
 
 .copyright {
 	width: 80%;
@@ -427,5 +431,15 @@ li.firstitem {
 #poweredby a#t3-logo:active {
 	background-position: left bottom;
 }
+#debug{
+	display: block;
+	clear: both;
 
- 
+}
+#debug pre{
+	font-size: 14px !important;
+}
+.entry{
+	font-weight:  bold;
+	text-align: center;
+}

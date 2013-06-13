@@ -38,3 +38,10 @@ $(document).ready(function(){
 
 	});
 });
+
+function jumpTo(link,mess){
+    if(confirm(mess)){
+        window.location.href = link;
+    }
+    else return;
+}
