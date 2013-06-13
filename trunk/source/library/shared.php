@@ -13,7 +13,14 @@ if (DEVELOPMENT_ENVIRONMENT == true) {
 	ini_set('error_log', ROOT.DS.'tmp'.DS.'logs'.DS.'error.log');
 }
 }
-
+//debug data
+function debug($value){
+	echo "<div id=debug><pre>";
+	echo "Bug result : ";
+	print_r($value);
+	echo "<br>--------------------------------";
+	echo "</pre></div>";
+}
 /** Check for Magic Quotes and remove them **/
 
 function stripSlashesDeep($value) {
@@ -22,11 +29,11 @@ function stripSlashesDeep($value) {
 }
 
 function removeMagicQuotes() {
-if ( get_magic_quotes_gpc() ) {
-	$_GET    = stripSlashesDeep($_GET   );
-	$_POST   = stripSlashesDeep($_POST  );
-	$_COOKIE = stripSlashesDeep($_COOKIE);
-}
+	if ( get_magic_quotes_gpc() ) {
+		$_GET    = stripSlashesDeep($_GET   );
+		$_POST   = stripSlashesDeep($_POST  );
+		$_COOKIE = stripSlashesDeep($_COOKIE);
+	}
 }
 
 /** Check register globals and remove them **/
@@ -47,66 +54,25 @@ function unregisterGlobals() {
 /** Secondary Call Function **/
 
 function performAction($controller,$action,$queryString = null,$render = 0) {
-
 	$controllerName = ucfirst($controller).'Controller';
 	$dispatch = new $controllerName($controller,$action);
+	//echo $controllerName;
 	$dispatch->render = $render;
 	return call_user_func_array(array($dispatch,$action),$queryString);
 }
 
 /** Routing **/
-
 function routeURL($url) {
 	global $routing;
-
 	foreach ( $routing as $pattern => $result ) {
             if ( preg_match( $pattern, $url ) ) {
-				return preg_replace( $pattern, $result, $url );
+				return preg_replace( $pattern, $result, $url);
 			}
 	}
 	return ($url);
 }
 
-/** Main Call Function **/
-
-function callHook() {
-	global $url;
-	global $default;
-	$queryString = array();
-	if (!isset($url)) {
-		$controller = $default['controller'];
-		$action = $default['action'];
-	} else {
-		$url = routeURL($url);
-		$urlArray = array();
-		$urlArray = explode("/",$url);
-		$controller = $urlArray[0];
-		array_shift($urlArray);
-		if (isset($urlArray[0])) {
-			$action = $urlArray[0];
-			array_shift($urlArray);
-		} else {
-			$action = 'index'; // Default Action
-		}
-		$queryString = $urlArray;
-	}
-
-	$controllerName = ucfirst($controller).'Controller';
-
-	$dispatch = new $controllerName($controller,$action);
-
-	if ((int)method_exists($controllerName, $action)) {
-		call_user_func_array(array($dispatch,"beforeAction"),$queryString);
-		call_user_func_array(array($dispatch,$action),$queryString);
-		call_user_func_array(array($dispatch,"afterAction"),$queryString);
-	} else {
-		/* Error Generation Code Here */
-	}
-}
-
-
 /** Autoload any classes that are required **/
-
 function __autoload($className) {
 	if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.php');
@@ -119,6 +85,47 @@ function __autoload($className) {
 	}
 }
 
+/** Main Call Function **/
+
+function callHook() {
+	global $url;
+	global $default;
+	global $authpath;
+	$admin_url = "";
+	$queryString = array();
+	if (!isset($url)) {
+		$controller = $default['controller'];
+		$action = $default['action'];
+	} else {
+		$url = routeURL($url);
+		$urlArray = array();
+		$urlArray = explode("/",$url);
+		if($urlArray[0] == $authpath){
+			$admin_url = $authpath.'_';
+			array_shift($urlArray);
+		}
+		$controller = $urlArray[0];
+		array_shift($urlArray);
+		if (isset($urlArray[0])) {
+			$action = $admin_url.$urlArray[0];
+			array_shift($urlArray);
+		} else {
+			$action = 'index'; // Default Action
+		}
+		$queryString = $urlArray;
+	}
+	$controllerName = ucfirst($controller).'Controller';
+	$dispatch = new $controllerName($controller,$action);
+	if ((int)method_exists($controllerName, $action)) {
+		call_user_func_array(array($dispatch,"beforeAction"),$queryString);
+		call_user_func_array(array($dispatch,$action),$queryString);
+		call_user_func_array(array($dispatch,"afterAction"),$queryString);
+	} else {
+		/* Error Generation Code Here */
+	}
+}
+
+
 
 /** GZip Output **/
 
@@ -129,26 +136,21 @@ function gzipOutput() {
         || false !== strpos($ua, 'Opera')) {
         return false;
     }
-
     $version = (float)substr($ua, 30);
     return (
         $version < 6
         || ($version == 6  && false === strpos($ua, 'SV1'))
     );
 }
-
 /** Get Required Files **/
-
 gzipOutput() || ob_start("ob_gzhandler");
 
 
 $cache = new Cache();
 $inflect = new Inflection();
-
 setReporting();
 removeMagicQuotes();
 unregisterGlobals();
 callHook();
-
 
 ?>

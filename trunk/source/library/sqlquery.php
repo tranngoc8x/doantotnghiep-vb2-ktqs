@@ -5,6 +5,7 @@ class SQLQuery {
     protected $_result;
 	protected $_query;
 	protected $_table;
+	protected $_fields;
 
 	protected $_describe = array();
 
@@ -79,7 +80,7 @@ class SQLQuery {
 		$this->_order = $order;
 	}
 
-	function find() {
+	function find($fields = null) {
 
 		global $inflect;
 
@@ -92,9 +93,9 @@ class SQLQuery {
 
 			foreach ($this->hasOne as $alias => $model) {
 				$table = strtolower($inflect->pluralize($model));
-				$singularAlias = strtolower($alias);
+				//$singularAlias = strtolower($alias);
 				$from .= 'LEFT JOIN `'.$table.'` as `'.$alias.'` ';
-				$from .= 'ON `'.$this->_model.'`.`'.$singularAlias.'_id` = `'.$alias.'`.`id`  ';
+				$from .= 'ON `'.$this->_model.'`.`'.$table.'_id` = `'.$alias.'`.`id`  ';
 			}
 		}
 
@@ -114,11 +115,20 @@ class SQLQuery {
 
 		if (isset($this->_page)) {
 			$offset = ($this->_page-1)*$this->_limit;
-			$conditions .= ' LIMIT '.$this->_limit.' OFFSET '.$offset;
+			  	$conditions .= ' LIMIT '.$this->_limit.' OFFSET '.$offset;
+		}else{
+				$conditions .= ' LIMIT '.$this->_limit;
 		}
-
-		$this->_query = 'SELECT * FROM '.$from.' WHERE '.$conditions;
-		#echo '<!--'.$this->_query.'-->';
+		if($fields == null) $this->_fields = "*";
+		else{
+			if(is_array($fields)){
+					$this->_fields = "id,".implode(",", $fields);
+			}else{
+				$this->_fields = "*";
+			}
+		}
+		$this->_query = 'SELECT '.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
+		#echo  $this->_query ;
 		$this->_result = mysql_query($this->_query, $this->_dbHandle);
 		$result = array();
 		$table = array();
@@ -253,11 +263,8 @@ class SQLQuery {
     /** Custom SQL Query **/
 
 	function query($query) {
-
 		global $inflect;
-
 		$this->_result = mysql_query($query, $this->_dbHandle);
-
 		$result = array();
 		$table = array();
 		$field = array();

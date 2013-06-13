@@ -5,7 +5,12 @@
         <div class="box-ct">
             <ul class="menu">
                 <li class="active"><a href="#"><span>Home</span></a></li>
+                <?php global $sidebar; debug($sidebar);?>
+                <?php
+                    foreach ($sidebar as $key => $value) {
+                ?>
                 <li><a href="#"><span>Shop</span></a></li>
+                <?php }?>
                 <li><a href="#"><span>Explore</span></a> </li>
                 <li><a href="#"><span>Typography</span></a> </li>
                 <li><a href="#"><span>RTL Languages</span></a></li>

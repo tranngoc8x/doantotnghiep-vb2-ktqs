@@ -458,6 +458,9 @@
   }
 }
 @media(min-width: 767px){
+  .thumbnails li{
+    width: 45%;
+  }
   .hidden-menu{
     display: none !important;
   }

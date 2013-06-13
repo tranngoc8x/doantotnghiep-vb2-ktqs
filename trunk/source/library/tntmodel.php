@@ -1,5 +1,5 @@
 <?php
-class AppModel extends SQLQuery {
+class TntModel extends SQLQuery {
 	protected $_model;
 	function __construct() {
 		global $inflect;
