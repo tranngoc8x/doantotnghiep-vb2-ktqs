@@ -32,12 +32,11 @@ class TntController {
 	function render($doNotRenderHeader = 0) {
 		$html = new HTML;
 		extract($this->variables);
-		//echo $this->_template;
 		if ($doNotRenderHeader == 0) {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_controller . DS . $this->_template.'header.php')) {
 				include (ROOT . DS . 'app' . DS . 'views' . DS . $controller . DS . $this->_template.'header.php');
 			} else {
-				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_template.'header.php');
+				include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'header.php');
 			}
 		}
 		if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_controller . DS . $this->_action . '.php')) {
@@ -47,7 +46,7 @@ class TntController {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_controller . DS . $this->_template.'footer.php')) {
 				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_controller . DS . $this->_template.'footer.php');
 			} else {
-				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_template.'footer.php');
+				include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'footer.php');
 			}
 		}
     }
