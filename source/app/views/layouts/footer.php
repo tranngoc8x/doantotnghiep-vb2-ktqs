@@ -8,8 +8,8 @@
                     <div class="box-bl span12">
                         <div class="box-br span12">
                             <div class="sublogo">
-                                <div id="poweredby">	<a id="t3-logo" href="http://t3.joomlart.com/" title="Powered By T3 Framework" target="_blank">Powered By T3 Framework</a>
-
+                                <div id="poweredby">
+                                    <a id="t3-logo" href="http://t3.joomlart.com/" title="Powered By T3 Framework" target="_blank">Powered By T3 Framework</a>
                                 </div>
                             </div>
                             <div class="copyright">
