@@ -1,6 +1,6 @@
 <?php
 
 class Drug extends AppModel {
-	var $hasOne = array('Manufacture' => 'Manufacture','Type'=>"Type");
+	var $hasOne = array('Manu' => 'Manu','Type'=>"Type");
 	//var $hasManyAndBelongsToMany = array('Tag' => 'Tag');
 }

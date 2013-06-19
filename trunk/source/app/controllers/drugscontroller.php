@@ -16,9 +16,10 @@ class DrugsController extends AppController {
 		//debug($drugs);
 	}
 	function admin_index() {
+		$this->Drug->showHasOne();
 		$this->Drug->orderBy('ten','ASC');
 		$this->Drug->setLimit('15');
-		$drugs = $this->Drug->find(array("id","ten","anh"));
+		$drugs = $this->Drug->find();
 		$this->set(compact('drugs'));
 
 		//debug($this);
