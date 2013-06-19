@@ -66,9 +66,10 @@ function routeURL($url) {
 	global $routing;
 	foreach ( $routing as $pattern => $result ) {
             if ( preg_match( $pattern, $url ) ) {
-				return preg_replace( $pattern, $result, $url);
+				return preg_replace($pattern, $result, $url);
 			}
 	}
+
 	return ($url);
 }
 
@@ -98,6 +99,7 @@ function callHook() {
 		$action = $default['action'];
 	} else {
 		$url = routeURL($url);
+		//echo $url;
 		$urlArray = array();
 		$urlArray = explode("/",$url);
 		if($urlArray[0] == $authpath){

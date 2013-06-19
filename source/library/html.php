@@ -3,6 +3,8 @@
 class HTML {
 	function link($text,$path,$dis = null,$alert = false,$confirmMessage = "Bạn có chắc muốn thực hiện hành động này ?") {
 		$path = str_replace(' ','-',$path);
+
+		$qr =  $_SERVER['QUERY_STRING'];
 		$_path = implode("/", $path);
 		$_dis = " ";
 		if(!empty($dis)){
@@ -11,11 +13,16 @@ class HTML {
 			}
 		}
 
-
+		$arqr = explode('/', $qr);
+		if(isset($arqr[0]) && $arqr[0] == 'url=admin'){
+			$d_path = BASE_PATH.'/admin';
+		}else{
+			$d_path = BASE_PATH;
+		}
 		if ($alert == TRUE) {
-			$data = '<a href="javascript:void(0);" '.$_dis.' onclick="javascript:jumpTo(\''.BASE_PATH.'/'.$_path.'\',\''.$confirmMessage.'\')">'.$text.'</a>';
+			$data = '<a href="javascript:void(0);" '.$_dis.' onclick="javascript:jumpTo(\''.$d_path.'/'.$_path.'\',\''.$confirmMessage.'\')">'.$text.'</a>';
 		} else {
-			$data = '<a href="'.BASE_PATH.'/'.$_path.'" '.$_dis.'>'.$text.'</a>';
+			$data = '<a href="'.$d_path.'/'.$_path.'" '.$_dis.'>'.$text.'</a>';
 		}
 		return $data;
 	}
