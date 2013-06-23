@@ -24,6 +24,27 @@ class DrugsController extends AppController {
 
 		//debug($this);
 	}
+	function admin_add(){
+		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
+			$this->Drug->save();
+			$this->redirect(array('controller'=>'drugs','action'=>'index'));
+		}
+	}
+	function admin_edit($id = null){
+		$drug = $this->Drug->read($id);
+
+		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
+			$this->Drug->id = $id;
+			$this->Drug->save();
+			$this->redirect(array('controller'=>'drugs','action'=>'index'));
+		}
+		$this->set(compact('drug','drugs'));
+	}
+	function admin_delete($id){
+		$this->Drug->id = $id;
+		$this->Drug->delete();
+		$this->redirect(array('controller'=>'drugs','action'=>'index'));
+	}
 	function view($id = null) {
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();

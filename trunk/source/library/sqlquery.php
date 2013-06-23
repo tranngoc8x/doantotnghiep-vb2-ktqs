@@ -1,6 +1,6 @@
 <?php
 
-class SQLQuery {
+class SQLQuery{
     protected $_dbHandle;
     protected $_result;
 	protected $_query;
@@ -47,8 +47,12 @@ class SQLQuery {
 
     /** Select Query **/
 
-	function where($field, $value) {
-		$this->_extraConditions .= '`'.$this->_model.'`.`'.$field.'` = \''.mysql_real_escape_string($value).'\' AND ';
+	function where($cond) {
+		//$field, $value
+		//extract($cond);
+		foreach ($cond as $key => $value) {
+			$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+		}
 	}
 
 	function like($field, $value) {
@@ -79,7 +83,65 @@ class SQLQuery {
 		$this->_orderBy = $orderBy;
 		$this->_order = $order;
 	}
+	function _validate(){
+		$session = new Session();
+		$result = mysql_query('SHOW COLUMNS FROM  `'.$this->_table. '`');
+		if (!$result) {
+		    echo 'Could not run query: ' . mysql_error();
+		    exit;
+		}
+		if (mysql_num_rows($result) > 0) {
+			$i=0;
+			$rturn = '<script src="'.BASE_PATH.'/js/jquery-1.9.1.js"></script>';
+			$rturn .= "<script>
+				$(document).ready(function(){";
+		    while ($row = mysql_fetch_assoc($result)) {
+		    	if($row["Null"] == "NO" && $row["Field"] != 'id'){
+		    		if($_POST[$this->_model][$row['Field']] == null || $_POST[$this->_model][$row['Field']] == ""){
+		    			$rturn .=$session->writeErr("Nội dung không được bỏ trống hoặc không hợp lệ.",$this->_model.$row['Field'],$row['Field']);
+		    			$i++;
+		    		}else{
+		    			if(strpos('email',$_POST[$this->_model][$row['Field']]) === true){
+							if(!filter_var($msg, FILTER_VALIDATE_EMAIL)){
+								$i++;
+							}
+						}
+		    			$rturn .=$session->writeErr($_POST[$this->_model][$row['Field']],$this->_model.$row['Field'],$row['Field'],1);
+		    		}
+		    	}
 
+		    }
+		    $rturn .="});</script>";
+		}
+		echo $rturn;
+		if($i>0) return false;
+		else return true;
+	}
+	function read($id){
+		global $inflect;
+
+		$from = '`'.$this->_table.'` as `'.$this->_model.'` ';
+		$conditions = '`'.$this->_model.'`.`id` ='. mysql_real_escape_string($id);
+		$this->_query = 'SELECT *'.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
+		#echo  $this->_query ;
+		$this->_result = mysql_query($this->_query, $this->_dbHandle);
+		$table = array();
+		$field = array();
+		$results = array();
+		$numOfFields = mysql_num_fields($this->_result);
+		for ($i = 0; $i < $numOfFields; ++$i) {
+		    array_push($table,mysql_field_table($this->_result, $i));
+		    array_push($field,mysql_field_name($this->_result, $i));
+		}
+		if (mysql_num_rows($this->_result) > 0 ) {
+			while ($row = mysql_fetch_row($this->_result)) {
+				for ($i = 0;$i < $numOfFields; ++$i) {
+					$results[$table[$i]][$field[$i]] = $row[$i];
+				}
+			}
+		}
+		return $results;
+	}
 	function find($fields = null) {
 
 		global $inflect;
@@ -245,16 +307,16 @@ class SQLQuery {
 
 			if (mysql_num_rows($this->_result) == 1 && $this->id != null) {
 				mysql_free_result($this->_result);
-				$this->clear();
+				$this->_clear();
 				return($result[0]);
 			} else {
 				mysql_free_result($this->_result);
-				$this->clear();
+				$this->_clear();
 				return($result);
 			}
 		} else {
 			mysql_free_result($this->_result);
-			$this->clear();
+			$this->_clear();
 			return $result;
 		}
 
@@ -264,6 +326,7 @@ class SQLQuery {
 
 	function query($query) {
 		global $inflect;
+		//echo $query;
 		$this->_result = mysql_query($query, $this->_dbHandle);
 		$result = array();
 		$table = array();
@@ -287,7 +350,7 @@ class SQLQuery {
 			}
 			mysql_free_result($this->_result);
 		}
-		$this->clear();
+		$this->_clear();
 		return($result);
 	}
 
@@ -295,9 +358,7 @@ class SQLQuery {
 
 	protected function _describe() {
 		global $cache;
-
 		$this->_describe = $cache->get('describe'.$this->_table);
-
 		if (!$this->_describe) {
 			$this->_describe = array();
 			$query = 'DESCRIBE '.$this->_table;
@@ -309,9 +370,12 @@ class SQLQuery {
 			mysql_free_result($this->_result);
 			$cache->set('describe'.$this->_table,$this->_describe);
 		}
-
 		foreach ($this->_describe as $field) {
-			$this->$field = null;
+			if(isset($_POST[$this->_model][$field]) && $_POST[$this->_model][$field] != null){
+				$this->$field = $_POST[$this->_model][$field];
+			}else{
+				$this->$field = null;
+			}
 		}
 	}
 
@@ -321,7 +385,7 @@ class SQLQuery {
 		if ($this->id) {
 			$query = 'DELETE FROM '.$this->_table.' WHERE `id`=\''.mysql_real_escape_string($this->id).'\'';
 			$this->_result = mysql_query($query, $this->_dbHandle);
-			$this->clear();
+			$this->_clear();
 			if ($this->_result == 0) {
 			    /** Error Generation **/
 				return -1;
@@ -336,11 +400,14 @@ class SQLQuery {
     /** Saves an Object i.e. Updates/Inserts Query **/
 
 	function save() {
+		if($this->_validate() == false){
+			return ;
+		}
 		$query = '';
 		if (isset($this->id)) {
 			$updates = '';
 			foreach ($this->_describe as $field) {
-				if ($this->$field) {
+				if ($this->$field != null) {
 					$updates .= '`'.$field.'` = \''.mysql_real_escape_string($this->$field).'\',';
 				}
 			}
@@ -352,31 +419,29 @@ class SQLQuery {
 			$fields = '';
 			$values = '';
 			foreach ($this->_describe as $field) {
-				if ($this->$field) {
+				if (isset($this->$field))
+				{
 					$fields .= '`'.$field.'`,';
 					$values .= '\''.mysql_real_escape_string($this->$field).'\',';
 				}
 			}
 			$values = substr($values,0,-1);
 			$fields = substr($fields,0,-1);
-
 			$query = 'INSERT INTO '.$this->_table.' ('.$fields.') VALUES ('.$values.')';
 		}
 		$this->_result = mysql_query($query, $this->_dbHandle);
-		$this->clear();
+		foreach($this->_describe as $field) {
+			$this->$field = null;
+		}
 		if ($this->_result == 0) {
             /** Error Generation **/
 			return -1;
-        }
+        }else return 1;
 	}
 
 	/** Clear All Variables **/
 
-	function clear() {
-		foreach($this->_describe as $field) {
-			$this->$field = null;
-		}
-
+	function _clear() {
 		$this->_orderby = null;
 		$this->_extraConditions = null;
 		$this->_hO = null;
@@ -384,6 +449,7 @@ class SQLQuery {
 		$this->_hMABTM = null;
 		$this->_page = null;
 		$this->_order = null;
+
 	}
 
 	/** Pagination Count **/

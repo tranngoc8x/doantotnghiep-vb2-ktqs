@@ -7,19 +7,25 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<!-- Bootstrap -->
-	<?php echo $html->css(array('bootstrap.min','bootstrap-responsive.min','admin/glyphicons'));?>
+	<?php echo $html->css(array('bootstrap.min','bootstrap-responsive.min','admin/glyphicons','admin/template'));?>
 	<!-- Theme -->
 	<link rel="stylesheet/less" href="<?php echo BASE_PATH;?>/css/admin/style.less" />
 	<?php
-		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min'));
+		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script'));
 	?>
+	<script type="text/javascript">
+	bkLib.onDomLoaded(function() {
+		new nicEditor().panelInstance('editor');
+	});
+	</script>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
 	<!-- Start Content -->
 	<div class="container-fluid fixed">
 		<div class="navbar main">
-			<a href="index.php" class="appbrand"><span>Admin+ <span>lovely headline here</span></span></a>
+			<a href="index" class="appbrand"><span>Admin+ <span>lovely headline here</span></span></a>
 			<button type="button" class="btn btn-navbar">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
@@ -41,25 +47,6 @@
 				</li>
 				<li class="hidden-phone">
 					<a href="#themer" data-toggle="collapse" class="glyphicons eyedropper"><i></i><span>Themer</span></a>
-					<div id="themer" class="collapse">
-						<div class="wrapper">
-							<h4>Themer <span>color &amp; layout options</span></h4>
-							<ul>
-								<li>Theme: <select id="themer-theme" class="pull-right"></select><div class="clearfix"></div></li>
-								<li>Primary Color: <input type="text" data-type="minicolors" data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left" id="themer-primary-cp" /><div class="clearfix"></div></li>
-								<li>
-									<span class="link" id="themer-custom-reset">reset theme</span>
-									<span class="pull-right"><label>advanced <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
-								</li>
-							</ul>
-							<div id="themer-getcode" class="hide">
-								<hr class="separator" />
-								<button class="btn btn-primary btn-small pull-right btn-icon glyphicons download" id="themer-getcode-less"><i></i>Get LESS</button>
-								<button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download" id="themer-getcode-css"><i></i>Get CSS</button>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
 				</li>
 				<li class="hidden-phone">
 					<a href="#" data-toggle="dropdown"><img src="theme/images/lang/en.png" alt="en" /></a>
@@ -100,24 +87,18 @@
 		<div id="wrapper">
 			<div id="menu" class="hidden-phone">
 				<div id="menuInner">
-					<div id="search">
-						<input type="text" placeholder="Quick search ..." />
-						<button class="glyphicons search"><i></i></button>
-					</div>
 					<ul>
-						<li class="heading"><span>Category</span></li>
-						<li class="glyphicons home active"><a href="index.php"><i></i><span>Dashboard</span></a></li>
-						<li class="glyphicons cogwheels"><a href="ui.php"><i></i><span>UI Elements</span></a></li>
-						<li class="glyphicons charts"><a href="charts.php"><i></i><span>Charts</span></a></li>
-						<li class="hasSubmenu">
-							<a data-toggle="collapse" class="glyphicons show_thumbnails_with_lines" href="#menu_forms"><i></i><span>Forms</span></a>
-							<ul class="collapse" id="menu_forms">
-								<li class=""><a href="form_demo.php"><span>My Account</span></a></li>
-								<li class=""><a href="form_elements.php"><span>Form Elements</span></a></li>
-								<li class=""><a href="form_validator.php"><span>Form Validator</span></a></li>
-								<li class=""><a href="file_managers.php"><span>File Managers</span></a></li>
-							</ul>
+						<li class="heading"><span>Menu</span></li>
+						<li class="glyphicons edit <?php if($this->_controller == "Manus") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nhà sản xuất</span>',array('controller'=>'manus','action'=>'index'));?>
 						</li>
+						<li class="glyphicons edit <?php if($this->_controller == "Types") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nhóm dược lý</span>',array('controller'=>'types','action'=>'index'));?>
+						</li>
+						<li class="glyphicons edit <?php if($this->_controller == "Drugs") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Thuốc</span>',array('controller'=>'drugs','action'=>'index'));?>
+						</li>
+
 						<li class="">
 							<a class="glyphicons table" href="tables.php"><i></i><span>Tables</span></a>
 						</li>
@@ -142,10 +123,10 @@
 			</div>
 			<div id="content">
 				<ul class="breadcrumb">
-					<li><a href="index.php" class="glyphicons home"><i></i> Quản trị</a></li>
+					<li><a href="index" class="glyphicons home"><i></i> Quản trị</a></li>
 					<li class="divider"></li>
-					<li>Trang chủ</li>
+					<li>
+						<?php echo $html->link($this->_controller,array('controller'=>strtolower($this->_controller),'action'=>'index'));?>
+					</li>
 				</ul>
 				<div class="separator"></div>
-
-				
