@@ -2,9 +2,9 @@
 *,a:focus{outline:none !important;}
 button:focus{outline:none !important;}
 button::-moz-focus-inner{border:0;}
-body{font-family:Arial,sans-serif;background:#272729;background:#f5fbff;background:#f9f9f9;background:#ECECEC;background:#ffffff url(../images/pattern1.png) repeat;font-size:10pt;padding-bottom:35px;}
+body{font-family:Arial,sans-serif;background:#272729;background:#f5fbff;background:#f9f9f9;background:#ECECEC;background:#ffffff url(../../img/pattern1.png) repeat;font-size:10pt;padding-bottom:35px;}
 a{color:#37a6cd;outline:0 !important;}
-input,button,select,textarea{font-family:'Open Sans',sans-serif;}
+input,button,select,textarea{font-family:Arial,sans-serif;}
 a:hover{color:#333;}
 h1,h2,h3,h4,h5,h6{font-family:Arial,sans-serif;margin:0 0 10px;font-weight:700;color:#575655;}h1.glyphicons,h2.glyphicons,h3.glyphicons,h4.glyphicons,h5.glyphicons,h6.glyphicons{color:#575655;}
 p{font-size:12px;margin:0 0 10px;line-height:normal;}

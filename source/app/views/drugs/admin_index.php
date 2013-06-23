@@ -1,7 +1,7 @@
 <div class="heading-buttons">
-<h3 class="glyphicons display"><i></i> Dashboard</h3>
+<h3 class="glyphicons display"><i></i> Quản lý thông tin thuốc</h3>
 <div class="buttons pull-right">
-    <a href="" class="btn btn-default btn-icon glyphicons edit"><i></i> Edit</a>
+    <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'drugs','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
 </div>
 <div class="clearfix" style="clear: both;"></div>
 </div>
@@ -15,7 +15,7 @@
 		<th>Tùy chọn</th>
 
 	</tr>
-	 <?php debug($drugs); foreach ($drugs as $drug):?>
+	 <?php foreach ($drugs as $drug):?>
     <tr>
     	<td>id</td>
     	<td>
@@ -24,7 +24,12 @@
     	</td>
         <td><?php echo $drug['Type']['ten'];?></td>
     	<td><?php echo $drug['Manu']['ten'];?></td>
-    	<td>sửa - xóa</td>
+    	<td>
+             <?php echo $html->link("Sửa",
+                            array('controller'=>'drugs','action'=>'edit/'.$drug['Drug']['id']));?>
+         - <?php echo $html->link("Xóa",
+                            array('controller'=>'drugs','action'=>'delete/'.$drug['Drug']['id']),null,true);?></td>
+        </td>
     </tr>
     <?php endforeach?>
 </table>

@@ -1,10 +1,8 @@
 <?php
 
-class HTML {
-	function link($text,$path,$dis = null,$alert = false,$confirmMessage = "Bạn có chắc muốn thực hiện hành động này ?") {
+class HTML{
+	function link($text,$path,$dis = null,$confirmMessage = NULL) {
 		$path = str_replace(' ','-',$path);
-
-		$qr =  $_SERVER['QUERY_STRING'];
 		$_path = implode("/", $path);
 		$_dis = " ";
 		if(!empty($dis)){
@@ -12,15 +10,15 @@ class HTML {
 				$_dis .= $key.'="'.$value.'" ';
 			}
 		}
-
+		$qr =  $_SERVER['QUERY_STRING'];
 		$arqr = explode('/', $qr);
 		if(isset($arqr[0]) && $arqr[0] == 'url=admin'){
 			$d_path = BASE_PATH.'/admin';
 		}else{
 			$d_path = BASE_PATH;
 		}
-		if ($alert == TRUE) {
-			$data = '<a href="javascript:void(0);" '.$_dis.' onclick="javascript:jumpTo(\''.$d_path.'/'.$_path.'\',\''.$confirmMessage.'\')">'.$text.'</a>';
+		if ($confirmMessage != NULL) {
+			$data = '<a href="javascript:void(0);" '.$_dis.' onclick="javascript:jumpTo(\''.$d_path.'/'.$_path.'\',\'Bạn có chắc muốn xóa bản ghi này không ?\')">'.$text.'</a>';
 		} else {
 			$data = '<a href="'.$d_path.'/'.$_path.'" '.$_dis.'>'.$text.'</a>';
 		}
@@ -60,5 +58,9 @@ class HTML {
 	}
 	function element($fileName = null) {
 		include(APP.'/views/element/'.$fileName.'.php');
+	}
+	function stt($idstt){
+		if($idstt ==0) echo "Ẩn";
+		else echo "Hiển thị";
 	}
 }
