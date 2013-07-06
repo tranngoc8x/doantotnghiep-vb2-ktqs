@@ -1,4 +1,4 @@
-<div class="well" style="padding-bottom: 20px; margin: 0;">
+ 
 	 <?php //debug($manu);?>
     <?php echo $form->create("Manu",array('controller'=>'manus','action'=>'edit/'.$manu['Manu']['id']));?>
     <h4>Cập nhật thông tin nhà sản xuất</h4>
@@ -15,7 +15,7 @@
         <div class="control-group">
           <label class="control-label" for="lastname">Thông tin chung</label>
           <div class="controls">
-            <?php echo $form->textarea('gioithieu',$manu['Manu']['gioithieu'],array('class'=>'span12','id'=>'Manugioithieu'));?>
+            <?php echo $form->textarea('gioithieu',$manu['Manu']['gioithieu'],array('class'=>'span12','id'=>'gioithieu'));?>
           </div>
         </div>
         <div class="control-group">
@@ -31,4 +31,4 @@
       <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i>Save</button>
       <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
     </div>
-</div>
+ 

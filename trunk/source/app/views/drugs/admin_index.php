@@ -9,7 +9,8 @@
 <table class="table table-bordered table-hover" width=100%>
 	<tr>
 		<th>id</th>
-		<th>Tên thuốc</th>
+        <th>Tên thuốc</th>
+		<th>Số đăng ký</th>
         <th>Nhóm dược lý</th>
 		<th>Nhà sản xuất</th>
 		<th>Tùy chọn</th>
@@ -22,6 +23,7 @@
     	<?php echo $html->link($drug['Drug']['ten'],
                             array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),false);?>
     	</td>
+        <td><?php echo $drug['Drug']['sodk'];?></td>
         <td><?php echo $drug['Type']['ten'];?></td>
     	<td><?php echo $drug['Manu']['ten'];?></td>
     	<td>
