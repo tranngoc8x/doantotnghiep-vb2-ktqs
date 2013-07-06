@@ -92,6 +92,9 @@
 						<li class="glyphicons edit <?php if($this->_controller == "Manus") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Nhà sản xuất</span>',array('controller'=>'manus','action'=>'index'));?>
 						</li>
+						<li class="glyphicons edit <?php if($this->_controller == "Distributes") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nhà phân phối</span>',array('controller'=>'distributes','action'=>'index'));?>
+						</li>
 						<li class="glyphicons edit <?php if($this->_controller == "Types") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Nhóm dược lý</span>',array('controller'=>'types','action'=>'index'));?>
 						</li>
@@ -130,3 +133,4 @@
 					</li>
 				</ul>
 				<div class="separator"></div>
+				<div class='well'>

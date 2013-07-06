@@ -1,4 +1,4 @@
-<div class="well" style="padding-bottom: 20px; margin: 0;">
+ 
     <?php echo $form->create("Manu",array('controller'=>'manus','action'=>'add'));?>
     <h4>Thêm mới nhà sản xuất</h4>
     <hr class="separator">
@@ -30,4 +30,4 @@
       <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i>Save</button>
       <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
     </div>
-</div>
+ 

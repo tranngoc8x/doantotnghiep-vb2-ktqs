@@ -29,6 +29,10 @@ class DrugsController extends AppController {
 			$this->Drug->save();
 			$this->redirect(array('controller'=>'drugs','action'=>'index'));
 		}
+		$manus = $this->Drug->lists('manus');
+		$types = $this->Drug->lists('types');
+		$distributes = $this->Drug->lists('distributes');
+		$this->set(compact('manus','types','distributes'));
 	}
 	function admin_edit($id = null){
 		$drug = $this->Drug->read($id);
@@ -38,7 +42,10 @@ class DrugsController extends AppController {
 			$this->Drug->save();
 			$this->redirect(array('controller'=>'drugs','action'=>'index'));
 		}
-		$this->set(compact('drug','drugs'));
+		$manus = $this->Drug->lists('manus');
+		$types = $this->Drug->lists('types');
+		$distributes = $this->Drug->lists('distributes');
+		$this->set(compact('drug','manus','types','distributes'));
 	}
 	function admin_delete($id){
 		$this->Drug->id = $id;

@@ -353,7 +353,34 @@ class SQLQuery{
 		$this->_clear();
 		return($result);
 	}
+	function lists($table,$cond = null) {
+		global $inflect;
+		$this->_model = ucfirst($inflect->singularize($table));
+		$conditions = '\'1\'=\'1\' AND ';
+		if(is_array($cond) and !empty($cond)){
+			foreach ($cond as $key => $value) {
+			$conditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+		}
 
+		}
+		$conditions = substr($conditions,0,-4);
+		$from = '`'.$table.'` as `'.$this->_model.'` ';
+		$query = "SELECT id,ten FROM ".$from."WHERE ".$conditions;
+		#echo $query;
+		$this->_result = mysql_query($query, $this->_dbHandle);
+		$result = array();
+
+		if(substr_count(strtoupper($query),"SELECT")>0) {
+			if (mysql_num_rows($this->_result) > 0) {
+				while ($row = mysql_fetch_row($this->_result)) {
+					$result[$row[0]] = $row[1];
+				}
+			}
+			mysql_free_result($this->_result);
+		}
+		$this->_clear();
+		return($result);
+	}
     /** Describes a Table **/
 
 	protected function _describe() {
