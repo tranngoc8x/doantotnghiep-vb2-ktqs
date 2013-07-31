@@ -5,4 +5,4 @@ $routing = array(
 );
 $authpath = "admin";
 $default['controller'] = 'drugs';
-$default['action'] = 'index';
+$default['action'] = 'home';

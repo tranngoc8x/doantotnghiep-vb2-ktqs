@@ -3,20 +3,37 @@
 class DrugsController extends AppController {
 	function beforeAction () {
 	}
-	function index() {
-		$this->Drug->orderBy('ten','ASC');
-		$this->Drug->setLimit('10');
-		$this->Drug->setPage('1');
+	function home() {
+		$this->Drug->orderBy('id','DESC');
+		$this->Drug->setLimit('6');
+	//	$this->Drug->setPage('1');
+		$this->Drug->showHasOne();
 		//$this->Drug->showHasOne();
 		//$this->Drug->showHasMany();
 		//$this->Drug->where('parent_id','0');
-		$drugs = $this->Drug->find(array("id","ten","anh"));
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
 		$this->set(compact('drugs'));
+		//echo
+		//debug($drugs);
+	}
+	function index($idtype=null) {
+		$this->Drug->orderBy('id','DESC');
+		$this->Drug->setLimit('20');
+	 	$this->Drug->setPage('1');
+		$this->Drug->showHasOne();
+		//$this->Drug->showHasOne();
+		//$this->Drug->showHasMany();
+		if(!empty($idtype)){
+			$this->Drug->where(array('types_id'=>$idtype));
+		}
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
+		$this->set(compact('drugs','idtype'));
 		//echo
 		//debug($drugs);
 	}
 	function admin_index() {
 		$this->Drug->showHasOne();
+		$this->Drug->showHasMany();
 		$this->Drug->orderBy('ten','ASC');
 		$this->Drug->setLimit('15');
 		$drugs = $this->Drug->find();

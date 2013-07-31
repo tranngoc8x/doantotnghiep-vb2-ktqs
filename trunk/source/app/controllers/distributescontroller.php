@@ -16,6 +16,7 @@
 				}
 			}
 		}
+		
 		function admin_edit($id = null){
 			$distribute = $this->Distribute->read($id);
 			if(isset($_POST['Distribute']) && !empty($_POST['Distribute'])){

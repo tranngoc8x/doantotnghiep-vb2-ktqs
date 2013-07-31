@@ -1,4 +1,6 @@
-				    </div>
+				        </div>
+                        <!-- //CONTENT -->
+                    </div>
                 </div>
             </div>
             <!-- //MAIN CONTAINER -->
