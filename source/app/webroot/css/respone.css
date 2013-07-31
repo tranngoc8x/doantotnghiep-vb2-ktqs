@@ -1,0 +1,33 @@
+@media (min-width: 1025px) {
+
+	.ulitem li{
+		width: 47%;
+		margin-bottom: 15px;
+	}
+	.ulitem li:nth-child(3n+1){
+	padding-right:  1%;
+	margin-right:  2%;
+	border-right: 1px solid #e6e6e6;
+	}
+	.ulitem li p{
+		display: block;
+		padding: 0;
+		margin: 0;
+	}
+	.ulitem li h6{
+		margin: 0;	
+	}
+	.ulitem li img{
+		margin: 0 5px;
+	}
+	.ulitem li:nth-child(2n+1){
+	}
+	.ulitem li:nth-child(n){
+		padding-left: 0;
+	}
+}
+@media (max-width: 1024px) {
+	.ulitem li{
+		width: 49%;
+	}
+}

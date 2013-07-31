@@ -16,7 +16,7 @@ class SQLQuery{
 	protected $_hM;
 	protected $_hMABTM;
 	protected $_page;
-	protected $_limit;
+	protected $_limit = 10;
 
     /** Connects to database **/
 
@@ -184,13 +184,13 @@ class SQLQuery{
 		if($fields == null) $this->_fields = "*";
 		else{
 			if(is_array($fields)){
-					$this->_fields = "id,".implode(",", $fields);
+					$this->_fields = $this->_model.".id,".implode(",", $fields);
 			}else{
 				$this->_fields = "*";
 			}
 		}
 		$this->_query = 'SELECT '.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
-		#echo  $this->_query ;
+		 #echo  $this->_query ;
 		$this->_result = mysql_query($this->_query, $this->_dbHandle);
 		$result = array();
 		$table = array();
@@ -493,6 +493,27 @@ class SQLQuery{
 		} else {
 			/* Error Generation Code Here */
 			return -1;
+		}
+	}
+	function paginate(){
+		$numberpage = $this->totalPages();
+		if($numberpage >1){
+			$url= str_replace('url=','',$_SERVER['QUERY_STRING']);
+			$arurl=explode('/', $url);
+			if(preg_match('/page:/', $arurl[count($arurl)-1])){
+				$p = array_pop($arurl);
+				$number=str_replace('page:', '', $p);
+			}
+			$url = implode('/', $arurl);
+			
+			$strpage = "".
+			'<div class="paginate">'.
+			'<a href='.BASE_PATH.'/'.$url.'>Đầu</a>'.
+
+			'<a href='.BASE_PATH.'/'.$url.'/page:'.$numberpage.'>Cuối</a>'
+			;
+			$strpage.='</div>';
+			return $strpage;
 		}
 	}
 
