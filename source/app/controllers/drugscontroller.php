@@ -16,20 +16,24 @@ class DrugsController extends AppController {
 		//echo
 		//debug($drugs);
 	}
-	function index($idtype=null) {
+	function index() {
 		$this->Drug->orderBy('id','DESC');
 		$this->Drug->setLimit('20');
-	 	$this->Drug->setPage('1');
 		$this->Drug->showHasOne();
-		//$this->Drug->showHasOne();
-		//$this->Drug->showHasMany();
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
+		$this->set(compact('drugs','idtype'));
+	}
+	function types($idtype=null) {
+		$this->Drug->orderBy('id','DESC');
+		$this->Drug->setLimit('20');
+		$this->Drug->showHasOne();
+		
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
 		}
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
-		$this->set(compact('drugs','idtype'));
-		//echo
-		//debug($drugs);
+		$typename = $this->Drug->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
+		$this->set(compact('drugs','idtype','typename'));
 	}
 	function admin_index() {
 		$this->Drug->showHasOne();
@@ -72,10 +76,9 @@ class DrugsController extends AppController {
 	function view($id = null) {
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
-		//$this->Drug->showHMABTM();
-		//$this->Drug->where('id',$id);
 		$drug = $this->Drug->find();
-		$this->set('drug',$drug);
+		//$typename = $this->Drug->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
+		$this->set(compact('drug'));
 
 	}
 	function afterAction() {
