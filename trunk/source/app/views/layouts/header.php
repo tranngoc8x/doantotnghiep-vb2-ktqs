@@ -71,7 +71,7 @@
 						                    foreach ($sidebar as $key => $value) {
 						                ?>
 						                <li <?php if(isset($idtype) && $idtype == $value['Type']['id']){?> class="active" <?php }?>>
-											<?php echo $html->link("<span>".$value['Type']['ten']."</span>",array('drugs/index/'.$value['Type']['id'].'/'.$value['Type']['ten']));?>
+											<?php echo $html->link("<span>".$value['Type']['ten']."</span>",array('drugs/types/'.$value['Type']['id'].'/'.$value['Type']['ten']));?>
 						                </li>
 						                <?php }?>
 						            </ul>

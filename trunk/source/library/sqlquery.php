@@ -16,6 +16,7 @@ class SQLQuery{
 	protected $_hM;
 	protected $_hMABTM;
 	protected $_page;
+	protected $_urlpage;
 	protected $_limit = 10;
 
     /** Connects to database **/
@@ -83,6 +84,19 @@ class SQLQuery{
 		$this->_orderBy = $orderBy;
 		$this->_order = $order;
 	}
+	function currentPage($u = null){
+		$url= str_replace('url=','',$_SERVER['QUERY_STRING']);
+		$arurl=explode('/', $url);
+		if(preg_match('/page:/', $arurl[count($arurl)-1])){
+			$p = array_pop($arurl);
+			$number=str_replace('page:', '', $p);
+			$this->_page = $number;
+		}
+		if(isset($u) && !empty($u)){
+			$this->_urlpage = implode('/', $arurl);	
+		}
+		
+	}
 	function _validate(){
 		$session = new Session();
 		$result = mysql_query('SHOW COLUMNS FROM  `'.$this->_table. '`');
@@ -143,7 +157,6 @@ class SQLQuery{
 		return $results;
 	}
 	function find($fields = null) {
-
 		global $inflect;
 
 		$from = '`'.$this->_table.'` as `'.$this->_model.'` ';
@@ -174,7 +187,9 @@ class SQLQuery{
 		if (isset($this->_orderBy)) {
 			$conditions .= ' ORDER BY `'.$this->_model.'`.`'.$this->_orderBy.'` '.$this->_order;
 		}
-
+		if(!isset($this->_page)){
+			$this->currentPage();
+		}
 		if (isset($this->_page)) {
 			$offset = ($this->_page-1)*$this->_limit;
 			  	$conditions .= ' LIMIT '.$this->_limit.' OFFSET '.$offset;
@@ -190,7 +205,7 @@ class SQLQuery{
 			}
 		}
 		$this->_query = 'SELECT '.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
-		 #echo  $this->_query ;
+		#echo  $this->_query ;
 		$this->_result = mysql_query($this->_query, $this->_dbHandle);
 		$result = array();
 		$table = array();
@@ -498,22 +513,32 @@ class SQLQuery{
 	function paginate(){
 		$numberpage = $this->totalPages();
 		if($numberpage >1){
-			$url= str_replace('url=','',$_SERVER['QUERY_STRING']);
-			$arurl=explode('/', $url);
-			if(preg_match('/page:/', $arurl[count($arurl)-1])){
-				$p = array_pop($arurl);
-				$number=str_replace('page:', '', $p);
-			}
-			$url = implode('/', $arurl);
+			$this->currentPage(true);
+			$url = $this->_urlpage;
 			
-			$strpage = "".
-			'<div class="paginate">'.
-			'<a href='.BASE_PATH.'/'.$url.'>Đầu</a>'.
-
-			'<a href='.BASE_PATH.'/'.$url.'/page:'.$numberpage.'>Cuối</a>'
-			;
+			$strpage = '<div class="paginate">';
+			if(empty($this->_page)) $this->_page = 1;
+			for($i=1;$i <= $numberpage;$i++){
+				if($i==1){
+					$nonedisplay = "";
+					if(empty($this->_page) || $this->_page ==1) {$nonedisplay = " hidden";}
+					$strpage .= '<a class="number_page'.$nonedisplay.'" href='.BASE_PATH.'/'.$url.'>Đầu</a>';	
+				}
+				if(($i-3) < $this->_page && $this->_page < ($i+3)){
+					if($i==$this->_page || (empty($this->_page) && $i==1)){
+						$strpage .='<span class="number_page current">'.$i.'</span>';
+					}else{
+						$strpage .='<a class="number_page" href='.BASE_PATH.'/'.$url.'/page:'.$i.'>'.$i.'</a>';
+					}
+				}
+				if($i==$numberpage){
+					$nonedisplay_l = "";
+					if($this->_page == $numberpage) {$nonedisplay_l = " hidden";}
+					$strpage .='<a class="number_page'.$nonedisplay_l.'" href='.BASE_PATH.'/'.$url.'/page:'.$numberpage.'>Cuối</a>';
+				}
+			}
 			$strpage.='</div>';
-			return $strpage;
+			echo $strpage;
 		}
 	}
 
