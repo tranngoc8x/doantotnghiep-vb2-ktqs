@@ -1,6 +1,6 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
-        <h3>Danh mục thuốc</h3>
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Danh mục thuốc</h3>
         <div class="box-ct clearfix row-fluid"> 
             <ul class='ulitem row-fluid'>
                 <?php foreach ($drugs as $k=> $drug):?>
