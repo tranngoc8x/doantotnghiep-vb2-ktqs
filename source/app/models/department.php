@@ -1,7 +1,7 @@
 <?php
 
-class Clinic extends AppModel {
+class Department extends AppModel {
 	//var $hasOne = array('Manu' => 'Manu','Type'=>"Type",'Distribute'=>'Distribute');
 	//var $hasManyAndBelongsToMany = array('Tag' => 'Tag');
-	var $hasOne = array('City' => 'City');
+	var $hasMany = array('Clinic' => 'Clinic');
 }

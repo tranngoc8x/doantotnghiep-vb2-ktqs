@@ -9,8 +9,9 @@ class TypesController extends AppController {
 	}
 	function admin_add(){
 			if(isset($_POST['Type']) && !empty($_POST['Type'])){
-				$this->Type->save();
-				$this->redirect(array('controller'=>'types','action'=>'index'));
+				if($this->Type->save()){
+					$this->redirect(array('controller'=>'types','action'=>'index'));
+				}
 			}
 		}
 		function admin_edit($id = null){
@@ -18,8 +19,9 @@ class TypesController extends AppController {
 
 			if(isset($_POST['Type']) && !empty($_POST['Type'])){
 				$this->Type->id = $id;
-				$this->Type->save();
-				$this->redirect(array('controller'=>'types','action'=>'index'));
+				if($this->Type->save()){
+					$this->redirect(array('controller'=>'types','action'=>'index'));
+				}
 			}
 			$this->set(compact('type','types'));
 		}
