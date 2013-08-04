@@ -104,8 +104,10 @@ class SQLQuery{
 		    echo 'Could not run query: ' . mysql_error();
 		    exit;
 		}
+		
 		if (mysql_num_rows($result) > 0) {
 			$i=0;
+
 			$rturn = '<script src="'.BASE_PATH.'/js/jquery-1.9.1.js"></script>';
 			$rturn .= "<script>
 				$(document).ready(function(){";
@@ -127,6 +129,7 @@ class SQLQuery{
 		    }
 		    $rturn .="});</script>";
 		}
+
 		echo $rturn;
 		if($i>0) return false;
 		else return true;
@@ -374,9 +377,8 @@ class SQLQuery{
 		$conditions = '\'1\'=\'1\' AND ';
 		if(is_array($cond) and !empty($cond)){
 			foreach ($cond as $key => $value) {
-			$conditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
-		}
-
+				$conditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+			}
 		}
 		$conditions = substr($conditions,0,-4);
 		$from = '`'.$table.'` as `'.$this->_model.'` ';
@@ -445,6 +447,7 @@ class SQLQuery{
 		if($this->_validate() == false){
 			return ;
 		}
+		
 		$query = '';
 		if (isset($this->id)) {
 			$updates = '';
@@ -471,6 +474,7 @@ class SQLQuery{
 			$fields = substr($fields,0,-1);
 			$query = 'INSERT INTO '.$this->_table.' ('.$fields.') VALUES ('.$values.')';
 		}
+		#echo $query;
 		$this->_result = mysql_query($query, $this->_dbHandle);
 		foreach($this->_describe as $field) {
 			$this->$field = null;

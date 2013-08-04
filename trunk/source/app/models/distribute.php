@@ -1,6 +1,6 @@
 <?php
 
 class Distribute extends AppModel {
-		var $hasMany = array('Drug' => 'Drug');
+		var $hasMany = array('Drug' => 'Drug','Equip'=>'Equip');
 
 }

@@ -47,8 +47,9 @@ class DrugsController extends AppController {
 	}
 	function admin_add(){
 		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
-			$this->Drug->save();
-			$this->redirect(array('controller'=>'drugs','action'=>'index'));
+			if($this->Drug->save()){
+				$this->redirect(array('controller'=>'drugs','action'=>'index'));
+			}
 		}
 		$manus = $this->Drug->lists('manus');
 		$types = $this->Drug->lists('types');
@@ -60,8 +61,9 @@ class DrugsController extends AppController {
 
 		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
 			$this->Drug->id = $id;
-			$this->Drug->save();
-			$this->redirect(array('controller'=>'drugs','action'=>'index'));
+			if($this->Drug->save()){
+				$this->redirect(array('controller'=>'drugs','action'=>'index'));
+			}
 		}
 		$manus = $this->Drug->lists('manus');
 		$types = $this->Drug->lists('types');
