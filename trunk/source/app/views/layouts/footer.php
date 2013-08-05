@@ -28,9 +28,9 @@
                                     <li><a href="#" class="mainlevel-nav">The Community</a>
 
                                     </li>
-                                </ul> <small>Copyright © 2013 JA Mesolite II. All Rights Reserved. Designed by
-					<a href="#" title="Visit Joomlart.com!" target="blank">JoomlArt.com</a>.</small>
-
+                                <!-- </ul> <small>Copyright © 2013 JA Mesolite II. All Rights Reserved. Designed by
+					<a href="#" title="Visit Joomlart.com!" target="blank">JoomlArt.com</a>.</small> -->
+                                    <?php echo $footer['Infor']['content'];?>
                             </div>
                         </div>
                     </div>

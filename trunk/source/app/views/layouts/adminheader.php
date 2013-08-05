@@ -11,7 +11,7 @@
 	<!-- Theme -->
 	<link rel="stylesheet/less" href="<?php echo BASE_PATH;?>/css/admin/style.less" />
 	<?php
-		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script','nicedit'));
+		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script','nicdit'));
 	?>
 	<script type="text/javascript">
 	bkLib.onDomLoaded(function() {
@@ -86,7 +86,10 @@
 					</ul>
 					<ul>
 						<li class="heading"><span>Hệ thống</span></li>
-						<li class="glyphicons user"><a href="login.php"><i></i><span>Login</span></a></li>
+						<li class="glyphicons user"><a href="logout"><i></i><span>Logout</span></a></li>
+						<li class="glyphicons edit <?php if($this->_controller == "Infor") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nội dung chung</span>',array('controller'=>'infor','action'=>'index'));?>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -97,6 +100,7 @@
 					<li>
 						<?php echo $html->link($this->_controller,array('controller'=>strtolower($this->_controller),'action'=>'index'));?>
 					</li>
+
 				</ul>
 				<div class="separator"></div>
 				<div class='well'>
