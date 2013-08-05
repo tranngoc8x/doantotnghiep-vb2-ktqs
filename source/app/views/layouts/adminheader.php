@@ -71,6 +71,9 @@
 						<li class="glyphicons edit <?php if($this->_controller == "Hopitals") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Bệnh viện</span>',array('controller'=>'hopitals','action'=>'index'));?>
 						</li>
+						<li class="glyphicons edit <?php if($this->_controller == "Drugstores") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nhà thuốc</span>',array('controller'=>'drugstores','action'=>'index'));?>
+						</li>
 						<li class="glyphicons edit <?php if($this->_controller == "Departments") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Chuyên khoa</span>',array('controller'=>'departments','action'=>'index'));?>
 						</li>
