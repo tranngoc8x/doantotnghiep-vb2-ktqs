@@ -9,7 +9,7 @@ class HopitalsController extends AppController {
 		$this->Hopital->setLimit('20');
 		$this->Hopital->showHasOne();
 		$hopitals = $this->Hopital->find();
-		$this->set(compact('clinics'));
+		$this->set(compact('hopitals'));
 	}
 	function admin_index() {
 		$this->Hopital->showHasOne();

@@ -36,6 +36,13 @@ class EquipsController extends AppController {
 		$this->Equip->delete();
 		$this->redirect(array('controller'=>'equips','action'=>'index'));
 	}
+	function index() {
+		$this->Equip->orderBy('id','DESC');
+		$this->Equip->setLimit('20');
+		$this->Equip->showHasOne();
+		$equips = $this->Equip->find();
+		$this->set(compact('equips'));
+	}
 	function afterAction() {
 
 	}

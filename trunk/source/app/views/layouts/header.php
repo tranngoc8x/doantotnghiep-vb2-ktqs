@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="robots" content="index, follow">
         <meta name="keywords" content="Duoc lieu, nha thuoc, tung tam kham benh, y te, thuoc">
-        <meta name="description" content="Website tra cứu thuoc va duoc lieu">
+        <meta name="description" content="Website tra cứu thuoc va dược liệu">
         <meta name="generator" content="TRAN NGOC THANG">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone'));?>
@@ -36,17 +36,14 @@
 
 	                        </li>
 	                        <li><?php echo $html->link("Thuốc",array('drugs/index'),array('title'=>'Thuốc'));?></li>
-	                        <li><a href="#" title="Nhà thuốc">Nhà thuốc</a>
-
+	                        <li><?php echo $html->link("Nhà thuốc",array('drugstores/index'),array('title'=>'Nhà Thuốc'));?></li>
+	                        <li><?php echo $html->link("Phòng khám",array('clinics/index'),array('title'=>'Phòng Khám'));?></li>
+	                        <li><?php echo $html->link("Bệnh viện",array('hopitals/index'),array('title'=>'Bệnh viện'));?></li>
+	                       <!--  <li><a href="#" title="Dịch vụ khám chữa bệnh">Dịch vụ khám chữa bệnh</a>
+	                        </li> -->
+	                        <li><?php echo $html->link("Trang thiết bị",array('equips/index'),array('title'=>'Trang thiết bị'));?>
 	                        </li>
-	                        <li><a href="#" title="Phòng khám">Phòng khám</a>
-
-	                        </li>
-	                        <li><a href="#" title="Dịch vụ khám chữa bệnh">Dịch vụ khám chữa bệnh</a>
-	                        </li>
-	                        <li><a href="#" title="Trang thiết bị">Trang thiết bị</a>
-	                        </li>
-	                        <li class="last"><a href="#" title="Liên hệ">Liên hệ</a>
+	                        <li class="last"><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?>
 	                        </li>
 	                    </ul>
 	                </div>

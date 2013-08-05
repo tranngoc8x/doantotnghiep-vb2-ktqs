@@ -5,6 +5,9 @@ body{
 ul{
 	margin: 0;padding: 0;
 }
+.container{
+	margin-bottom: 15px;
+}
 /* MAIN NAVIGATION */
 #mainnav .main {
 	border-top: 1px solid #E6E6E6;
@@ -115,6 +118,7 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 	display: block;
 	width: 100%;
 	overflow: hidden;
+	
 }
 #container .main {
 	margin-top: 5px;
