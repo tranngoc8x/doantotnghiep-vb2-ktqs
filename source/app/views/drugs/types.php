@@ -1,7 +1,7 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
         <h3>
-		<?php echo $html->img('img/icon-home.png');?> :: <?php echo ($typename[0]['Type']['ten']);?>
+		<?php echo $html->img('img/icon-home.png');?> :: <?php echo ($typename['Type']['ten']);?>
         </h3>
         <div class="box-ct clearfix row-fluid"> 
             <ul class='ulitem row-fluid'>

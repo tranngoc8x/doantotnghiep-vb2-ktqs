@@ -352,23 +352,28 @@ class SQLQuery{
 		$tempResults = array();
 
 		if(substr_count(strtoupper($query),"SELECT")>0) {
-			if (mysql_num_rows($this->_result) > 0) {
+			$num_of_rows = mysql_num_rows($this->_result);
+			if ($num_of_rows > 0) {
 				$numOfFields = mysql_num_fields($this->_result);
 				for ($i = 0; $i < $numOfFields; ++$i) {
 					array_push($table,mysql_field_table($this->_result, $i));
 					array_push($field,mysql_field_name($this->_result, $i));
 				}
-					while ($row = mysql_fetch_row($this->_result)) {
-						for ($i = 0;$i < $numOfFields; ++$i) {
-							$table[$i] = ucfirst($inflect->singularize($table[$i]));
-							$tempResults[$table[$i]][$field[$i]] = $row[$i];
-						}
-						array_push($result,$tempResults);
+				while ($row = mysql_fetch_row($this->_result)) {
+					//if()
+					for ($i = 0;$i < $numOfFields; ++$i) {
+						$table[$i] = ucfirst($inflect->singularize($table[$i]));
+						$tempResults[$table[$i]][$field[$i]] = $row[$i];
 					}
+					array_push($result,$tempResults);
+				}
 			}
 			mysql_free_result($this->_result);
 		}
 		$this->_clear();
+		if(count($result)==1){
+			$result = $result[0];
+		}
 		return($result);
 	}
 	function lists($table,$cond = null) {
