@@ -233,6 +233,9 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 .paginate .current{
 	font-weight: bold;
 }
+.errormesage{
+	color: #FF0000;
+}
 /* HEADER
 --------------------------------------------------------- */
 #header {
