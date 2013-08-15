@@ -21,7 +21,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($dis['Distribute']['ten'],
-                            array('controller'=>'distributes','action'=>'view/'.$dis['Distribute']['id']));?>
+                            array('controller'=>'distributes','action'=>'edit/'.$dis['Distribute']['id']));?>
     	</td>
         <td><?php echo $html->stt($dis['Distribute']['trangthai']);?></td>
     	<td>

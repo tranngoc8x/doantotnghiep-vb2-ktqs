@@ -21,7 +21,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($drug['Drug']['ten'],
-                            array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),false);?>
+                            array('controller'=>'drugs','action'=>'edit/'.$drug['Drug']['id']),false);?>
     	</td>
         <td><?php echo $drug['Drug']['sodk'];?></td>
         <td><?php echo $drug['Type']['ten'];?></td>

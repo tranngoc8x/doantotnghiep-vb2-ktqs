@@ -20,7 +20,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($hopital['Hopital']['ten'],
-                            array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id']),false);?>
+                            array('controller'=>'hopitals','action'=>'edit/'.$hopital['Hopital']['id']),false);?>
     	</td>
         <td><?php echo $hopital['City']['ten'];?></td>
         <td><a target="_blank" href="https://maps.google.com/?q=<?php echo $hopital['Hopital']['map'];?>">Xem</a></td>

@@ -19,7 +19,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($clinic['Clinic']['ten'],
-                            array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id']),false);?>
+                            array('controller'=>'clinics','action'=>'edit/'.$clinic['Clinic']['id']),false);?>
     	</td>
         <td><?php echo $clinic['City']['ten'];?></td>
     	<td>

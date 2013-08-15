@@ -52,7 +52,15 @@ class SQLQuery{
 		//$field, $value
 		//extract($cond);
 		foreach ($cond as $key => $value) {
-			$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+			$akey = explode(' ', $key); 
+			//print_r($akey);
+			if(count($akey) == 1 || (count($akey) > 1 and empty($akey[1]))){
+				$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+			}else{
+				$f = array_shift($akey);
+				$s = implode(' ', $akey);
+				$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'`'.$s.'\''.mysql_real_escape_string($value).'\' AND ';
+			}
 		}
 	}
 
@@ -109,8 +117,8 @@ class SQLQuery{
 			$i=0;
 
 			$rturn = '<script src="'.BASE_PATH.'/js/jquery-1.9.1.js"></script>';
-			$rturn .= "<script>
-				$(document).ready(function(){";
+			$rturn .= '<script>
+				$(document).ready(function(){';
 		    while ($row = mysql_fetch_assoc($result)) {
 		    	if($row["Null"] == "NO" && $row["Field"] != 'id'){
 		    		if($_POST[$this->_model][$row['Field']] == null || $_POST[$this->_model][$row['Field']] == ""){

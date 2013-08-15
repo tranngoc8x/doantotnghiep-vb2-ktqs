@@ -10,6 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone'));?>
 		<title>Tra cứu thuốc và dược liệu</title>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1y92TzXvD1IOBJovofxMpwK_C3_21HYA&sensor=true"></script>
+
     </head>
 
     <body>

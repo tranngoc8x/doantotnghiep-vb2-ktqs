@@ -2,18 +2,18 @@
     <h4>Thêm mới nhà phân phối</h4>
     <hr class="separator">
     <div class="row-fluid">
-      <div class="span8">
+      <div class="span12">
         <?php echo $session->setFlash("Distribute");?>
         <div class="control-group">
           <label class="control-label" for="firstname">Tên nhà phân phối</label>
           <div class="controls">
-            <?php echo $form->input('ten',array('class'=>'span12','id'=>'ten'));?>
+            <?php echo $form->input('ten',array('class'=>'span8','id'=>'ten'));?>
         </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="lastname">Thông tin chung</label>
           <div class="controls">
-            <?php echo $form->textarea('gioithieu',null,array('class'=>'span12','id'=>'gioithieu'));?>
+            <?php echo $form->textarea('gioithieu',null,array('class'=>'span12 ckeditor','id'=>'gioithieu'));?>
           </div>
         </div>
         <div class="control-group">

@@ -35,8 +35,9 @@ class DrugstoresController extends AppController {
 
 		if(isset($_POST['Drugstore']) && !empty($_POST['Drugstore'])){
 			$this->Drugstore->id = $id;
-			$this->Drugstore->save();
-			$this->redirect(array('controller'=>'drugstores','action'=>'index'));
+			if($this->Drugstore->save()){
+				$this->redirect(array('controller'=>'drugstores','action'=>'index'));
+			}
 		}
 		$cities = $this->Drugstore->lists('cities');
 		$this->set(compact('drugstore','cities'));
@@ -49,7 +50,8 @@ class DrugstoresController extends AppController {
 	function view($id = null) {
 		$this->Drugstore->id = $id;
 		$this->Drugstore->showHasOne();
-		$drugstore = $this->Drugstore->read($id);
+		$this->Drugstore->where(array('id'=>$id));
+		$drugstore = $this->Drugstore->find();
 		$this->set(compact('drugstore'));
 
 	}

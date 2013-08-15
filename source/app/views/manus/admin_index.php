@@ -21,7 +21,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($manu['Manu']['ten'],
-                            array('controller'=>'manus','action'=>'view/'.$manu['Manu']['id']));?>
+                            array('controller'=>'manus','action'=>'edit/'.$manu['Manu']['id']));?>
     	</td>
         <td><?php echo $html->stt($manu['Manu']['trangthai']);?></td>
     	<td>

@@ -7,7 +7,7 @@
                 <li > 
                     
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstore','action'=>'view/'.$drugstore['Drugstore']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstores','action'=>'view/'.$drugstore['Drugstore']['id']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $Clinic);?>
             		<p class="item"><b>Chủ nhà thuốc :</b> <?php echo $drugstore['Drugstore']['daidien'];?></p>

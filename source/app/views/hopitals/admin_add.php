@@ -3,18 +3,18 @@
     <h4>Thêm mới thông tin bệnh viện</h4>
     <hr class="separator">
     <div class="row-fluid">
-      <div class="span8">
+      <div class="span12">
         <?php echo $session->setFlash("Hopital");?>
         <div class="control-group">
           	<label class="control-label" for="ten">Tên bệnh viện</label>
           	<div class="controls">
-            	<?php echo $form->input('ten',array('class'=>'span12','id'=>'ten'));?>
+            	<?php echo $form->input('ten',array('class'=>'span8','id'=>'ten'));?>
         	</div>
         </div>
         <div class="control-group">
 	        <label class="control-label" for="diachi">Địa chi</label>
 	        <div class="controls">
-	            <?php echo $form->input('diachi',array('class'=>'span12','id'=>'diachi'));?>
+	            <?php echo $form->input('diachi',array('class'=>'span8','id'=>'diachi'));?>
 	        </div>
         </div>
         <div class="control-group">
@@ -26,13 +26,13 @@
         <div class="control-group">
           	<label class="control-label" for="gioithieu">Thông tin</label>
           	<div class="controls">
-            	<?php echo $form->textarea('gioithieu',null,array('class'=>'span12','id'=>'gioithieu'));?>
+            	<?php echo $form->textarea('gioithieu',null,array('class'=>'span12 ckeditor','id'=>'gioithieu'));?>
           	</div>
         </div>
         <div class="control-group">
           	<label class="control-label" for="map">Vị trí trên bản đồ</label>
           	<div class="controls">
-            	 <?php echo $form->input('map',array('class'=>'span12','id'=>'map'));?>
+            	 <?php echo $form->input('map',array('class'=>'span8','id'=>'map'));?>
           	</div>
         </div>
         

@@ -42,10 +42,10 @@ class Session{
 					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* Dữ liệu phải là số.</div>');";
 					break;
 				case 'char':
-					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* ".$msg."</div>');";
+					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* ".trim($msg)."</div>');";
 					break;
 				default:
-					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* ".$msg."</div>');";
+					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* ".trim($msg)."</div>');";
 
 					break;
 			}
@@ -55,11 +55,11 @@ class Session{
 				if(!filter_var($msg, FILTER_VALIDATE_EMAIL)){
 					$str= "$('#".$field."').after('<div class=\' span12 errormesage\'>* Email không đúng định dạng</div>');";
 				}else{
-					$str= "$('#".$field."').val('".$msg."');";
+					$str= "$('#".$field."').val(\"".trim($msg)."\");";
 				}
 			}
 			else{
-				$str= "$('#".$field."').val('".$msg."');";
+				$str= "$('#".$field."').val(\"".trim($msg)."\");";
 			}
 		}
 		return $str;

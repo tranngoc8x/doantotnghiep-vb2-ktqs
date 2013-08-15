@@ -3,7 +3,7 @@
         <h3><?php echo $html->img('img/icon-home.png');?> :: Liên hệ</h3>
         <div class="box-ct clearfix row-fluid">
 			<div class='span4'>
-			
+			<?php echo $contact['Infor']['content'];?>
 			</div>
 			<div class='span6'>
 				<?php echo $form->create("Contact",array('controller'=>'contacts','action'=>'index'));?>
@@ -17,7 +17,7 @@
 				<label class="control-label" for="diachi">Email</label>
 				<?php echo $form->input('email',array('class'=>'span12','id'=>'email','placeholder'=>'Địa chỉ email của bạn ...'));?>
 				<label class="control-label" for="content">Nội dung</label>
-				<?php echo $form->textarea('content',null,array('class'=>'span12','id'=>'content','placeholder'=>'Nhập nội dung ...'));?>
+				<?php echo $form->textarea('content',null,array('class'=>'span12','rows'=>5,'id'=>'content','placeholder'=>'Nhập nội dung ...'));?>
 				<hr class="separator">
 				<div class="form-actions">
 					<button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i>Gửi liên hệ</button>

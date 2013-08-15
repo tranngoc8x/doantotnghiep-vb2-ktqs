@@ -4,12 +4,12 @@
     <h4>Cập nhật thông tin chuyên khoa</h4>
     <hr class="separator">
     <div class="row-fluid">
-      <div class="span8">
+      <div class="span12">
         <?php echo $session->setFlash("Department");?>
         <div class="control-group">
           <label class="control-label" for="firstname">Tên chuyên khoa</label>
           <div class="controls">
-            <?php echo $form->input('ten',array('class'=>'span12','id'=>'ten','value'=>$department['Department']['ten']));?>
+            <?php echo $form->input('ten',array('class'=>'span8','id'=>'ten','value'=>$department['Department']['ten']));?>
         </div>
         </div>
         <div class="control-group">
