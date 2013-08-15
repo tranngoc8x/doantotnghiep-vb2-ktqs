@@ -9,7 +9,6 @@ class AppController extends TntController {
 		$this->common();
 	}
 	function beforeAction () {
-
 	}
 	function common(){
 		global $inflect;

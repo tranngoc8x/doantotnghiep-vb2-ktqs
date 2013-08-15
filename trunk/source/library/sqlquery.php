@@ -368,7 +368,6 @@ class SQLQuery{
 					array_push($field,mysql_field_name($this->_result, $i));
 				}
 				while ($row = mysql_fetch_row($this->_result)) {
-					//if()
 					for ($i = 0;$i < $numOfFields; ++$i) {
 						$table[$i] = ucfirst($inflect->singularize($table[$i]));
 						$tempResults[$table[$i]][$field[$i]] = $row[$i];

@@ -1,11 +1,11 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Bệnh viện</h3>
-        <div class="box-ct clearfix row-fluid"> 
+        <div class="box-ct clearfix row-fluid">
             <ul class='ulitem row-fluid'>
                 <?php foreach ($hopitals as $k=> $hopital):?>
-                <li > 
-                    
+                <li >
+
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($hopital['Hopital']['ten'],array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id']),array('class'=>'item'));?>
             		</h6>
@@ -19,4 +19,4 @@
             </ul>
         </div>
     </div>
-</div> 
+</div>

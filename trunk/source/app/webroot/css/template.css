@@ -217,6 +217,11 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 .ulitem .article a{
 	margin-right: 10px;
 }
+.rates img {
+margin: 0 !important;
+float: left;
+padding-right: 1px;
+}
 .paginate{
 	display: block;
 	padding: 5px 0;
@@ -258,6 +263,84 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 }
 #map-canvas{
 	height: 400px;
+}
+.contentblock{
+	float: left;
+	display: block;
+}
+.rateblock{
+	border: 1px solid #ccc;
+	background: #e6e6e6;
+	width: 220px;
+	text-align: center;
+	float: right;
+}
+.rateitem li{
+	display: block;
+	clear: both;
+	height: 18px;
+	margin: 5px 0;
+	line-height: 18px;
+	background: url(../img/star_mark.png) center left no-repeat;
+	padding-left: 16px;
+	float: left;
+}
+.rateitem li .r_number{
+	height: 18px;
+	vertical-align: top;
+
+}
+.rateitem #bar1{
+	background: #FF8B5A;
+}
+.rateitem #bar2{
+	background: #FFB234;
+}
+.rateitem #bar3{
+	background: #FFD834;
+}
+.rateitem #bar4{
+	background: #ADD633;
+}
+.rateitem #bar5{
+	background: #90B24D;
+}
+.rateitem img{
+	vertical-align: top;
+
+}
+.total_rate{
+	float: left;
+	width: 30px;
+	text-align: center;
+}
+.total_rate span{
+	color: #333;
+	font-size: 64px;
+	font-weight: 100;
+	line-height: 64px;
+	font-family: "Roboto",Arial,sans-serif;
+
+}
+.star-icon img{
+	padding: 0 3px;
+	vertical-align: top;
+}
+.total-person{
+	text-align: center;
+	font-weight: bold;
+}
+.total-person .icon-total{
+	vertical-align: top;
+	padding-right: 3px;
+	background: url(../img/icon-total-rate.png) left center no-repeat;
+}
+.percent_rate{
+	height: 18px;
+	width: 100px;
+	padding-left: 5px;
+	display: inline-block;
+	margin-left: 5px;
 }
 /* HEADER
 --------------------------------------------------------- */
