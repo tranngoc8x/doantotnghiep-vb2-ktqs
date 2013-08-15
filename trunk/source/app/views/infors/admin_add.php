@@ -3,18 +3,18 @@
     <h4>Thêm mới nội dung</h4>
     <hr class="separator">
     <div class="row-fluid">
-      <div class="span8">
+      <div class="span12">
         <?php echo $session->setFlash("Infor");?>
         <div class="control-group">
-          <label class="control-label" for="firstname">Tên nội dung</label>
+          <label class="control-label" for="ten">Tên nội dung</label>
           <div class="controls">
-            <?php echo $form->input('ten',array('class'=>'span12','id'=>'ten'));?>
+            <?php echo $form->input('ten',array('class'=>'span8','id'=>'ten'));?>
         </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="content">Chi tiết</label>
           <div class="controls">
-            <?php echo $form->textarea('content',null,array('class'=>'span12','id'=>'content'));?>
+            <?php echo $form->textarea('content',null,array('class'=>'span12 ckeditor','id'=>'content'));?>
           </div>
         </div>
         <div class="control-group">

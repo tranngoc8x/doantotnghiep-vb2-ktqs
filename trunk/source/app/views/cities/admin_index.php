@@ -20,7 +20,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($city['City']['ten'],
-                            array('controller'=>'cities','action'=>'view/'.$city['City']['id']));?>
+                            array('controller'=>'cities','action'=>'edit/'.$city['City']['id']));?>
     	</td>
         <td><?php echo $html->stt($city['City']['trangthai']);?></td>
     	<td>

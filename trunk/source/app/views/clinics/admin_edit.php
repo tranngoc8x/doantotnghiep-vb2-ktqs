@@ -3,30 +3,30 @@
     <h4>Cập nhật thông tin phòng khám</h4>
     <hr class="separator">
     <div class="row-fluid">
-      <div class="span8">
+      <div class="span12">
         <?php echo $session->setFlash("Clinic");?>
         <div class="control-group">
             <label class="control-label" for="ten">Tên phòng khám</label>
             <div class="controls">
-              <?php echo $form->input('ten',array('class'=>'span12','id'=>'ten','value'=>$clinic['Clinic']['ten']));?>
+              <?php echo $form->input('ten',array('class'=>'span8','id'=>'ten','value'=>$clinic['Clinic']['ten']));?>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="daidien">Người đại diện</label>
           <div class="controls">
-              <?php echo $form->input('daidien',array('class'=>'span12','id'=>'daidien','value'=>$clinic['Clinic']['daidien']));?>
+              <?php echo $form->input('daidien',array('class'=>'span8','id'=>'daidien','value'=>$clinic['Clinic']['daidien']));?>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="chuyenkhoa">Chuyên khoa</label>
           <div class="controls">
-              <?php echo $form->input('chuyenkhoa',array('class'=>'span12','id'=>'chuyenkhoa','value'=>$clinic['Clinic']['chuyenkhoa']));?>
+              <?php echo $form->input('chuyenkhoa',array('class'=>'span8','id'=>'chuyenkhoa','value'=>$clinic['Clinic']['chuyenkhoa']));?>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="diachi">Địa chi</label>
           <div class="controls">
-              <?php echo $form->input('diachi',array('class'=>'span12','id'=>'diachi','value'=>$clinic['Clinic']['diachi']));?>
+              <?php echo $form->input('diachi',array('class'=>'span8','id'=>'diachi','value'=>$clinic['Clinic']['diachi']));?>
           </div>
         </div>
         <div class="control-group">
@@ -38,19 +38,19 @@
         <div class="control-group">
           <label class="control-label" for="dienthoai">Điện thoại</label>
           <div class="controls">
-              <?php echo $form->input('dienthoai',array('class'=>'span12','id'=>'dienthoai','value'=>$clinic['Clinic']['dienthoai']));?>
+              <?php echo $form->input('dienthoai',array('class'=>'span8','id'=>'dienthoai','value'=>$clinic['Clinic']['dienthoai']));?>
           </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="gioithieu">Thông tin</label>
             <div class="controls">
-              <?php echo $form->textarea('gioithieu',$clinic['Clinic']['gioithieu'],array('class'=>'span12','id'=>'gioithieu'));?>
+              <?php echo $form->textarea('gioithieu',$clinic['Clinic']['gioithieu'],array('class'=>'span12 ckeditor','id'=>'gioithieu'));?>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="map">Vị trí trên bản đồ</label>
             <div class="controls">
-               <?php echo $form->input('map',array('class'=>'span12','id'=>'map','value'=>$clinic['Clinic']['map']));?>
+               <?php echo $form->input('map',array('class'=>'span8','id'=>'map','value'=>$clinic['Clinic']['map']));?>
             </div>
         </div>
         

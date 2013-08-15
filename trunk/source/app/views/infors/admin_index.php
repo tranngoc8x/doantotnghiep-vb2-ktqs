@@ -20,7 +20,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($infor['Infor']['ten'],
-                            array('controller'=>'manus','action'=>'view/'.$infor['Infor']['id']));?>
+                            array('controller'=>'infors','action'=>'edit/'.$infor['Infor']['id']));?>
     	</td>
         <td><?php echo $html->stt($infor['Infor']['trangthai']);?></td>
     	<td align='center'>

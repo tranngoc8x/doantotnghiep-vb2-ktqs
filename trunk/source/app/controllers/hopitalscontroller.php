@@ -50,7 +50,6 @@ class HopitalsController extends AppController {
 		$this->Hopital->id = $id;
 		$this->Hopital->showHasOne();
 		$hopital = $this->Hopital->find();
-		//$typename = $this->Clinic->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
 		$this->set(compact('hopital'));
 
 	}

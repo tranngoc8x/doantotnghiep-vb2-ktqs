@@ -43,6 +43,19 @@ class EquipsController extends AppController {
 		$equips = $this->Equip->find();
 		$this->set(compact('equips'));
 	}
+	function view($id = null) {
+		$this->Equip->id = $id;
+		$this->Equip->showHasOne();
+		$equip = $this->Equip->find();
+		$manu_id = @$equip['Equip']['manus_id'];
+		$this->Equip->id = null;
+		$this->Equip->setLimit('8');
+		$this->Equip->where(array('id !='=>$id,'manus_id'=>$manu_id));
+		$this->Equip->showHasOne();
+		$manu_equips = $this->Equip->find(array("Equip.id","Equip.ten","Equip.anh",'Manu.ten',"Distribute.ten"));
+		$this->set(compact('equip','manu_equips'));
+
+	}
 	function afterAction() {
 
 	}

@@ -4,10 +4,10 @@
         <div class="box-ct clearfix row-fluid"> 
             <ul class='ulitem row-fluid'>
                 <?php foreach ($equips as $k=> $equip):?>
-                <li > 
+                <li class='article'> 
                      <?php echo $html->link($html->img('files/equips/'.$equip['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
                                            array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),
-                                           array('class'=>"article left entry thumbnail"),false);?>
+                                           array('class'=>"left entry thumbnail"),false);?>
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($equip['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),array('class'=>'item'));?>
             		</h6>

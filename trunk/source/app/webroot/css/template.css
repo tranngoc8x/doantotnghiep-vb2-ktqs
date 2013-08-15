@@ -188,8 +188,9 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 
 }
 .article{
-	float: none;
-
+	margin: 5px 0;
+}
+.article img.left{
 	margin-right: 10px;
 }
 .item{
@@ -197,6 +198,9 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 }
 .left{
 	float: left;
+}
+.right{
+	float: right;
 }
 .clearfix{
 	clear: both;
@@ -209,6 +213,9 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 }
 .ulitem hr:last-child{
 	display: none;
+}
+.ulitem .article a{
+	margin-right: 10px;
 }
 .paginate{
 	display: block;
@@ -235,6 +242,22 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 }
 .errormesage{
 	color: #FF0000;
+}
+.detail{
+	padding-right: 20px;
+}
+.img-head{
+	margin-right: 10px;
+}
+.innerdiv{
+	padding-bottom: 3px;
+	border-bottom:  1px dotted #e6e6e6;
+}
+.innerdiv h6{
+	margin:5px 0 10px 0;
+}
+#map-canvas{
+	height: 400px;
 }
 /* HEADER
 --------------------------------------------------------- */

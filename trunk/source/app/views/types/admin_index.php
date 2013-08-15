@@ -20,7 +20,7 @@
     	<td>id</td>
     	<td>
     	<?php echo $html->link($type['Type']['ten'],
-                            array('controller'=>'manus','action'=>'view/'.$type['Type']['id']));?>
+                            array('controller'=>'manus','action'=>'edit/'.$type['Type']['id']));?>
     	</td>
         <td><?php echo $html->stt($type['Type']['trangthai']);?></td>
     	<td>

@@ -79,8 +79,22 @@ class DrugsController extends AppController {
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
 		$drug = $this->Drug->find();
-		//$typename = $this->Drug->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
-		$this->set(compact('drug'));
+		$type_id = @$drug['Drug']['types_id'];
+		$manu_id = @$drug['Drug']['manus_id'];
+		$this->Drug->id = null;
+
+		//thuốc cùng nhóm dược lý
+		$this->Drug->setLimit('5');
+		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id));
+		$this->Drug->showHasOne();
+		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten"));
+		//thuốc cùng nhà sx
+		$this->Drug->setLimit('5');
+		$this->Drug->where(array('id !='=>$id,'manus_id'=>$manu_id));
+		$this->Drug->showHasOne();
+		$manu_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id',"Distribute.ten",'Type.ten'));
+		
+		$this->set(compact('drug','type_drugs','manu_drugs'));
 
 	}
 	function afterAction() {

@@ -11,14 +11,14 @@
 	<!-- Theme -->
 	<link rel="stylesheet/less" href="<?php echo BASE_PATH;?>/css/admin/style.less" />
 	<?php
-		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script','nicdit'));
+		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script','ckeditor/ckeditor'));
 	?>
-	<script type="text/javascript">
-	bkLib.onDomLoaded(function() {
-		new nicEditor().panelInstance('editor');
-	});
+	<script>
+		CKEDITOR.replace( 'ckeditor' ,
+		{
+		enterMode	 : Number(2)
+		});
 	</script>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
@@ -87,8 +87,8 @@
 					<ul>
 						<li class="heading"><span>Hệ thống</span></li>
 						<li class="glyphicons user"><a href="logout"><i></i><span>Logout</span></a></li>
-						<li class="glyphicons edit <?php if($this->_controller == "Infor") echo "active";?>">
-							<?php echo $html->link('<i></i><span>Nội dung chung</span>',array('controller'=>'infor','action'=>'index'));?>
+						<li class="glyphicons edit <?php if($this->_controller == "Infors") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Nội dung chung</span>',array('controller'=>'infors','action'=>'index'));?>
 						</li>
 					</ul>
 				</div>
