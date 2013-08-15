@@ -34,6 +34,7 @@ class TntController{
 	}
 	function render($doNotRenderHeader = 0) {
 		$html = new HTML;
+		$view = new view;
 		$form = new Form;
 		$session = new Session;
 		extract($this->variables);

@@ -10,7 +10,7 @@
 	<tr>
 		<th>id</th>
         <th>Tên phòng khám</th>
-		<th>Thành phố</th>
+		<th>Chuyên khoa</th>
 		<th>Tùy chọn</th>
 
 	</tr>
@@ -21,7 +21,7 @@
     	<?php echo $html->link($clinic['Clinic']['ten'],
                             array('controller'=>'clinics','action'=>'edit/'.$clinic['Clinic']['id']),false);?>
     	</td>
-        <td><?php echo $clinic['City']['ten'];?></td>
+        <td><?php echo $clinic['Department']['ten'];?></td>
     	<td>
              <?php echo $html->link("Sửa",
                             array('controller'=>'clinics','action'=>'edit/'.$clinic['Clinic']['id']));?>

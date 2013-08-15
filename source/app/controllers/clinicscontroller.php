@@ -13,7 +13,7 @@ class ClinicsController extends AppController {
 	}
 	function admin_index() {
 		$this->Clinic->showHasOne();
-		$this->Clinic->orderBy('ten','ASC');
+		$this->Clinic->orderBy('id','DESC');
 		$this->Clinic->setLimit('15');
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
@@ -28,7 +28,8 @@ class ClinicsController extends AppController {
 			}
 		}
 		$cities = $this->Clinic->lists('cities');
-		$this->set(compact('cities'));
+		$departments = $this->Clinic->lists('departments');
+		$this->set(compact('cities','departments'));
 	}
 	function admin_edit($id = null){
 		$clinic = $this->Clinic->read($id);
@@ -40,7 +41,8 @@ class ClinicsController extends AppController {
 			}
 		}
 		$cities = $this->Clinic->lists('cities');
-		$this->set(compact('clinic','cities'));
+		$departments = $this->Clinic->lists('departments');
+		$this->set(compact('clinic','departments','cities'));
 	}
 	function admin_delete($id){
 		$this->Clinic->id = $id;

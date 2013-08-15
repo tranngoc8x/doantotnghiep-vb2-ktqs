@@ -18,9 +18,9 @@
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="chuyenkhoa">Chuyên khoa</label>
+          <label class="control-label" for="departments_id">Chuyên khoa</label>
           <div class="controls">
-              <?php echo $form->input('chuyenkhoa',array('class'=>'span8','id'=>'chuyenkhoa','value'=>$clinic['Clinic']['chuyenkhoa']));?>
+              <?php echo $form->select('departments_id',$departments,array('empty'=>false,'selected'=>$clinic['Clinic']['departments_id']));?>
           </div>
         </div>
         <div class="control-group">
