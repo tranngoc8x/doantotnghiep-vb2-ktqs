@@ -12,10 +12,11 @@
     	    		<p class="item"><b>Số đăng ký : </b><?php echo $drug['Drug']['sodk'];?></p>
     	    		<p class="item"><b>Dạng bào chế : </b><?php echo $drug['Drug']['dangbaoche'];?></p>
     	    		<p class="item"><b>Giá kê khai : </b><?php echo $drug['Drug']['giakekhai'];?></p>
+                    <div class='clearfix'><p></p></div>
                 </div>
 
                 <div class='rateblock span5'>
-                    <?php if(!empty($rates)){?>
+                    <?php if(!empty($rates)){ debug($rates);?>
                     <?php $data = $view->rateitem($rates);?>
                     <div class='total_rate span6'>
                        <span><?php echo $data['mark'];?></span>
@@ -25,10 +26,12 @@
                                 for ($i=1; $i <=$intmark ; $i++) {
                                     echo $html->img('img/star_full.png');
                                 }
-                                if($data['mark'] - $intmark < 0.5){
-                                    echo $html->img('img/star_none.png');
-                                }else{
-                                    echo $html->img('img/star_half.png');
+                                if($intmark<5){
+                                    if($data['mark'] - $intmark < 0.5){
+                                        echo $html->img('img/star_none.png');
+                                    }else{
+                                        echo $html->img('img/star_half.png');
+                                    }
                                 }
                                 for ($i=$intmark+1; $i < 5 ; $i++) {
                                     echo $html->img('img/star_none.png');
@@ -36,7 +39,7 @@
                             ?>
                        </div>
                        <div class='total-person'><span class='icon-total'></span><?php echo $data['total'];?> người</div>
-
+                        <div class='clearfix'></div>
                     </div>
                     <ul class="rateitem span6">
                     <?php
@@ -64,8 +67,9 @@
                             ?>
                         </p>
                         <?php }else{?>
-                            <button type='button' value='Đánh giá'></button>
-
+                            <!-- <a rel="leanModal" class='btn_review' href='#write_review' title='Đánh giá'>Đánh giá</a> -->
+                           <span class='title_rate'> Đánh giá :</span><div class="write-rating" data-average="0" data-id="1"></div>
+                            <p></p>
                         <?php }?>
                 </div>
 	        	<div class="clearfix"><br></div>
@@ -91,10 +95,10 @@
                                            array('class'=>"left entry thumbnail img-head"),false);?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),array('class'=>'item'));?>
             		</h6>
-            		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></div>
-            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Manu']['id']),array('class'=>'item'));?></div>
             		<div class='item rates'>
                         <?php echo $html->img('img/star_full.png');?>
                         <?php echo $html->img('img/star_full.png');?>
@@ -110,3 +114,27 @@
         </div>
     </div>
 <div class="clearfix"><br></div>
+<div id="write_review">
+    <div id="write_review-ct">
+        <div id="write_review-header">
+            <h2>Viết đánh giá của bạn</h2>
+            <a class="modal_close" href="#"></a>
+        </div>
+
+        <form action="">
+
+          <div class="txt-fld">
+            <label for="">Tiêu đề</label>
+            <input id="" name="title" type="text">
+
+          </div>
+          <div class="txt-fld">
+            <label for="">Nhận xét</label>
+            <textarea id="" name="nhanxet" type="textarea"></textarea>
+          </div>
+          <div class="btn-fld">
+          <button type="submit">Gửi »</button>
+          </div>
+         </form>
+    </div>
+</div>

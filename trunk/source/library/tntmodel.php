@@ -7,7 +7,7 @@ class TntModel extends SQLQuery {
 		$this->_limit = PAGINATE_LIMIT;
 		$this->_model = get_class($this);
 		$this->_table = strtolower($inflect->pluralize($this->_model));
-		if (!isset($this->abstract)) {
+		if (!isset($this->abstract) && $this->_model !='Common') {
 			$this->_describe();
 		}
 	}
