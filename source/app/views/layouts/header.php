@@ -8,10 +8,29 @@
         <meta name="description" content="Website tra cứu thuoc va dược liệu">
         <meta name="generator" content="TRAN NGOC THANG">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone'));?>
+		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone','jRating.jquery'));?>
 		<title>Tra cứu thuốc và dược liệu</title>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1y92TzXvD1IOBJovofxMpwK_C3_21HYA&sensor=true"></script>
 
+		<?php
+    		echo $html->script(array('jquery-1.9.1','bootstrap','bootstrap.min','script','jRating.jquery'));
+    	?>
+		<script>
+			var toado='0,0';
+			var noidung = '';
+			$(document).ready(function(){
+				$('.write-rating').jRating({
+					step:true,
+					length : 5,
+					decimalLength:0,
+					starHeight :5,
+					phpPath : '../../commons/view',
+					tables : 'rate_drugs',
+					members : 1,
+					values : <?php echo $drug['Drug']['id'];?>
+				});
+			});
+		</script>
     </head>
 
     <body>
@@ -76,7 +95,7 @@
 						            </ul>
 						        </div>
 						    </div>
-						    
+
 						    <div class="boxheader">
 						        <h3>Thống kê</h3>
 						        <div class="box-ct">
@@ -94,5 +113,4 @@
 						<!-- //LEFT COLUMN-->
 						<!-- CONTENT -->
 						<div id="main" class="span9 row-fluid">
-						        
-						
+

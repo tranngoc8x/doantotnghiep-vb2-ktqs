@@ -29,9 +29,8 @@
             </div>
             <!-- //FOOTER -->
         </div>
-        <?php
-			echo $html->script(array('jquery-1.9.1','bootstrap','bootstrap.min','script'));
-		?>
+        
+    
         <script>
                         var geocoder;
                         var map;
@@ -49,6 +48,7 @@
 
                         function codeAddress() {
                           var address = query;
+
                            var infowindow = new google.maps.InfoWindow({
                               content: noidung
                           });

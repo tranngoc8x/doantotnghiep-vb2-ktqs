@@ -38,8 +38,6 @@ class TntController{
 		$form = new Form;
 		$session = new Session;
 		extract($this->variables);
-		debug($this->_controller);
-		debug($this->_action);
 		if ($doNotRenderHeader == 0) {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'header.php')) {
 				include (ROOT . DS . 'app' . DS . 'views' . DS . $controller . DS . $this->_template.'header.php');

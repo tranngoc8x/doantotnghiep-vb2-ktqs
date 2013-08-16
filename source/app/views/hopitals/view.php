@@ -13,9 +13,9 @@
                 </div>
 	        	<div class="span8">
 					<script type="text/javascript">
-						var toado = "<?php echo $hopital['Hopital']['map'];?>";
-						var noidung = "<h6><?php echo $hopital['Hopital']['ten'];?></h6><?php echo $hopital['Hopital']['diachi'];?>";
-					</script>	
+						toado = "<?php echo $hopital['Hopital']['map'];?>";
+						noidung = "<h6><?php echo $hopital['Hopital']['ten'];?></h6><?php echo $hopital['Hopital']['diachi'];?>";
+					</script>
 					 <div id="map-canvas" class='span12'></div>
 		        	<div class="clearfix"><br></div>
 		        </div>

@@ -15,8 +15,8 @@
 	        	</div>
 	        	<div class="span8">
 					<script type="text/javascript">
-						var toado = "<?php echo $clinic['Clinic']['map'];?>";
-						var noidung = "<h6><?php echo $clinic['Clinic']['ten'];?></h6>";
+						toado = "<?php echo $clinic['Clinic']['map'];?>";
+						noidung = "<h6><?php echo $clinic['Clinic']['ten'];?></h6>";
 						noidung+="Đại diện : <?php echo $clinic['Clinic']['daidien'];?>";
 						noidung+="<br>Địa chỉ : <?php echo $clinic['Clinic']['diachi'].' , '.$clinic['City']['ten'];?>";
 					</script>

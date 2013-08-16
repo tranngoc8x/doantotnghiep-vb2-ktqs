@@ -6,11 +6,11 @@ class AppController extends TntController {
 		if($this->_admin){
 			$this->_template = 'admin';
 		}
-		$this->common();
+		$this->_common();
 	}
 	function beforeAction () {
 	}
-	function common(){
+	function _common(){
 		global $inflect;
 		$model = ucfirst($inflect->singularize($this->_controller));
 		$sidebar = $this->{$model}->query("select id,ten from types where trangthai = 1");
@@ -18,7 +18,6 @@ class AppController extends TntController {
 		$contact = $this->{$model}->query("select content from infors where id = 2 and trangthai = 1 limit 1");
 		$this->set(compact("sidebar","footer","contact"));
 		// debug($footer);
-
 	}
 	function afterAction() {
 	}
