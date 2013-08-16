@@ -18,21 +18,9 @@
 		<script>
 			var toado='0,0';
 			var noidung = '';
-			$(document).ready(function(){
-				$('.write-rating').jRating({
-					step:true,
-					length : 5,
-					decimalLength:0,
-					starHeight :5,
-					phpPath : '../../commons/view',
-					tables : 'rate_drugs',
-					members : 1,
-					values : <?php echo $drug['Drug']['id'];?>
-				});
-			});
+
 		</script>
     </head>
-
     <body>
         <div class="container">
             <a name="Top" id="Top"></a>
@@ -65,6 +53,8 @@
 	                        <li><?php echo $html->link("Trang thiết bị",array('equips/index'),array('title'=>'Trang thiết bị'));?>
 	                        </li>
 	                        <li class="last"><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?>
+	                        </li>
+	                          <li class="last"><?php echo $html->link("Đăng nhập",array('members/login'),array('title'=>'Đăng nhập'));?>
 	                        </li>
 	                    </ul>
 	                </div>

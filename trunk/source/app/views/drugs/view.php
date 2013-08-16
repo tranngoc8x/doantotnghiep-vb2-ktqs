@@ -16,7 +16,7 @@
                 </div>
 
                 <div class='rateblock span5'>
-                    <?php if(!empty($rates)){ debug($rates);?>
+                    <?php if(!empty($rates)){?>
                     <?php $data = $view->rateitem($rates);?>
                     <div class='total_rate span6'>
                        <span><?php echo $data['mark'];?></span>
@@ -67,10 +67,24 @@
                             ?>
                         </p>
                         <?php }else{?>
+                            <script>
+                                $(document).ready(function(){
+                                    $('.write-rating').jRating({
+
+                                        phpPath : '../../commons/view',
+                                        tables : 'rate_drugs',
+                                        members : <?php echo $_SESSION['ssid'];?>,
+                                        values : <?php echo $drug['Drug']['id'];?>
+                                    });
+                                });
+                            </script>
                             <!-- <a rel="leanModal" class='btn_review' href='#write_review' title='Đánh giá'>Đánh giá</a> -->
                            <span class='title_rate'> Đánh giá :</span><div class="write-rating" data-average="0" data-id="1"></div>
                             <p></p>
+                            <div class="serverResponse"><p></p></div>
+                            <p></p>
                         <?php }?>
+
                 </div>
 	        	<div class="clearfix"><br></div>
 	        	<p class="item"><b>Thành phần : </b><?php echo $drug['Drug']['thanhphan'];?></p>

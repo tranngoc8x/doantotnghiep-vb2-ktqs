@@ -7,15 +7,16 @@ class TntController{
 	protected $data = array();
 	protected $variables = array();
 	public $doNotRenderHeader;
+	protected $session;
 	public $render;
 	function __construct($controller, $action) {
 		global $inflect;
 		global $authpath;
-
+		$this->session = new Session();
 		$this->_controller = ucfirst($controller);
 		$this->_action = $action;
 		$model = ucfirst($inflect->singularize($controller));
-		$this->doNotRenderHeader = 0;
+		//$this->doNotRenderHeader = 0;
 		$this->render = 1;
 		$this->$model = new $model;
 		$this->_template = "";
@@ -36,7 +37,7 @@ class TntController{
 		$html = new HTML;
 		$view = new view;
 		$form = new Form;
-		$session = new Session;
+		$session = new Session;//view
 		extract($this->variables);
 		if ($doNotRenderHeader == 0) {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'header.php')) {

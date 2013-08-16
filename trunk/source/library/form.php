@@ -70,5 +70,8 @@ class Form{
 
 		return $str ;
 	}
+	function end(){
+		return "</form>";
+	}
 
 }

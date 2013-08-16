@@ -5,7 +5,6 @@ class Session{
 	public $model_name;
 	function __construct(){
 		@session_start();
-
 	}
 	function setFlash($model,$message = "Bạn cần nhập đủ các thông tin!"){
 		//extract($_POST[$model]);
@@ -64,4 +63,5 @@ class Session{
 		}
 		return $str;
 	}
+	
 }
