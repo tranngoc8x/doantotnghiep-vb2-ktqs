@@ -52,7 +52,7 @@ class SQLQuery{
 		//$field, $value
 		//extract($cond);
 		foreach ($cond as $key => $value) {
-			$akey = explode(' ', $key); 
+			$akey = explode(' ', $key);
 			//print_r($akey);
 			if(count($akey) == 1 || (count($akey) > 1 and empty($akey[1]))){
 				$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
@@ -101,9 +101,9 @@ class SQLQuery{
 			$this->_page = $number;
 		}
 		if(isset($u) && !empty($u)){
-			$this->_urlpage = implode('/', $arurl);	
+			$this->_urlpage = implode('/', $arurl);
 		}
-		
+
 	}
 	function _validate(){
 		$session = new Session();
@@ -112,7 +112,7 @@ class SQLQuery{
 		    echo 'Could not run query: ' . mysql_error();
 		    exit;
 		}
-		
+
 		if (mysql_num_rows($result) > 0) {
 			$i=0;
 
@@ -459,7 +459,7 @@ class SQLQuery{
 		if($this->_validate() == false){
 			return ;
 		}
-		
+
 		$query = '';
 		if (isset($this->id)) {
 			$updates = '';
@@ -531,14 +531,14 @@ class SQLQuery{
 		if($numberpage >1){
 			$this->currentPage(true);
 			$url = $this->_urlpage;
-			
+
 			$strpage = '<div class="paginate">';
 			if(empty($this->_page)) $this->_page = 1;
 			for($i=1;$i <= $numberpage;$i++){
 				if($i==1){
 					$nonedisplay = "";
 					if(empty($this->_page) || $this->_page ==1) {$nonedisplay = " hidden";}
-					$strpage .= '<a class="number_page'.$nonedisplay.'" href='.BASE_PATH.'/'.$url.'>Đầu</a>';	
+					$strpage .= '<a class="number_page'.$nonedisplay.'" href='.BASE_PATH.'/'.$url.'>Đầu</a>';
 				}
 				if(($i-3) < $this->_page && $this->_page < ($i+3)){
 					if($i==$this->_page || (empty($this->_page) && $i==1)){

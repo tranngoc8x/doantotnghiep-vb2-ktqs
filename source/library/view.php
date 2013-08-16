@@ -4,6 +4,11 @@ class View extends HTML{
 		$total=0;
 		$t_result = array();
 		$mark = 0;
+		if(isset($array['Rate'])){
+			$array[0] = $array;
+			unset($array['Rate']);
+			unset($array['']);
+		}
 		foreach ($array as $k => $v) {
 			$total +=$v['']['numbers'];
 			$t_result[$v['Rate']['mark']] = $v['']['numbers'];

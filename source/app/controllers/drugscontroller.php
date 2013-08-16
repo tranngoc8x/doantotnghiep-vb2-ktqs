@@ -93,7 +93,8 @@ class DrugsController extends AppController {
 
 		//rate
 		$rates = $this->Drug->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugs as Rate WHERE drugs_id = '$id' GROUP BY mark");
-		$your_review = $this->Drug->query("SELECT mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id=12");
+		$ssid = $_SESSION["ssid"];
+		$your_review = $this->Drug->query("SELECT mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id='$ssid'");
 
 		//echo "SELECT DISTINCT (mark), COUNT(mark) as counts FROM  rate_drugs WHERE drugs_id = '$id' GROUP BY mark";
 		//thuốc cùng nhà sx

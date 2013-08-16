@@ -25,6 +25,8 @@
 			sendRequest: true, // send values to server
 
 			/** Integer vars **/
+			step:true,
+            starHeight :5,
 			length:5, // number of star to display
 			decimalLength : 0, // number of decimals.
 			rateMax : 5, // maximal rate - integer from 0 to 9999 (or more)
@@ -176,7 +178,9 @@
 								if(!data.error)
 								{
 									/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
-										$('.serverResponse p').html(data.server);
+										$('.serverResponse p').html(data.message);
+										$('.serverResponse p').delay(3000).slideUp('slow');
+										setInterval(window.document.location.reload(), 3000);
 									/** END ONLY FOR THE DEMO **/
 
 
@@ -189,7 +193,9 @@
 								{
 
 									/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
-										$('.serverResponse p').html(data.server);
+										$('.serverResponse p').html(data.message);
+										$('.serverResponse p').delay(3000).slideUp('slow');
+										setInterval(window.document.location.reload(), 3000);
 									/** END ONLY FOR THE DEMO **/
 
 									/** Here you can display an alert box,
