@@ -54,7 +54,12 @@
 	                        </li>
 	                        <li class="last"><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?>
 	                        </li>
-	                          <li class="last"><?php echo $html->link("Đăng nhập",array('members/login'),array('title'=>'Đăng nhập'));?>
+	                          <li class="last">
+	                          	<?php if(!isset($_SESSION['ssid']) || empty($_SESSION['ssid'])){?>
+	                          	<?php echo $html->link("Đăng nhập",array('members/login'),array('title'=>'Đăng nhập'));?>
+	                          	<?php }else{?>
+	                          	<?php echo $html->link("Thoát",array('members/logout'),array('title'=>'Thoát'));?>
+	                          	<?php }?>
 	                        </li>
 	                    </ul>
 	                </div>

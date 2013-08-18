@@ -9,6 +9,9 @@
 	text-align: center;
 	margin: 0 auto;
 }
+.rated{
+	background: transparent;
+}
 .title_rate{
 	height: 20px;
 	line-height: 20px;
@@ -23,7 +26,7 @@
 	height:100%;
 }
 .jRatingColor {
-	background-color:#f4c239; /* bgcolor of the stars*/
+	background-color:#f62929; /* bgcolor of the stars*/
 	position:relative;
 	top:0;
 	left:0;

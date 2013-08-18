@@ -93,14 +93,15 @@ class DrugsController extends AppController {
 
 		//rate
 		$rates = $this->Drug->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugs as Rate WHERE drugs_id = '$id' GROUP BY mark");
-		$ssid = $_SESSION["ssid"];
-		$your_review = $this->Drug->query("SELECT mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id='$ssid'");
-
+		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
+			$ssid = $_SESSION["ssid"];
+			$your_review = $this->Drug->query("SELECT id,mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id='$ssid'");
+		}
 		//echo "SELECT DISTINCT (mark), COUNT(mark) as counts FROM  rate_drugs WHERE drugs_id = '$id' GROUP BY mark";
 		//thuốc cùng nhà sx
 		//$this->Drug->setLimit('5');
 		//$this->Drug->where(array('id !='=>$id,'manus_id'=>$manu_id));
-		$this->Drug->showHasOne();
+		//$this->Drug->showHasOne();
 		////$manu_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id',"Distribute.ten",'Type.ten'));
 
 		$this->set(compact('drug','type_drugs','manu_drugs','rates','your_review'));
