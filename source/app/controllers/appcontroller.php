@@ -26,7 +26,7 @@ class AppController extends TntController {
 		$temp = $this->{$model}->find();
 		if(!empty($temp)){
 			if(md5($array['password']) == $temp[0][$model][$pas]){
-				
+
 				$_SESSION['ssid'] = $temp[0][$model]['id'];
 				$_SESSION['username'] = $temp[0][$model][$usr];
 				$_SESSION['ten'] = $temp[0][$model]['ten'];
@@ -36,7 +36,7 @@ class AppController extends TntController {
 		}else{
 			return 0;
 		}
-		
+
 	}
 
 	function afterAction() {

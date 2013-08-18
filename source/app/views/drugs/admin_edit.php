@@ -1,6 +1,6 @@
  
     <?php echo $form->create("Drug",array('controller'=>'drugs','action'=>'edit/'.$drug['Drug']['id']));?>
-    <h4>Thêm mới thông tin thuốc</h4>
+    <h4>Cập nhật thông tin thuốc</h4>
     <hr class="separator">
     <div class="row-fluid">
       <div class="span12">

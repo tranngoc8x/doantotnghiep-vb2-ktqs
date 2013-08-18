@@ -8,5 +8,6 @@ class MembersController extends AppController {
 	}
 	function logout(){
 		session_destroy();
+		$this->redirect(array('controller'=>'members','action'=>'login'));
 	}
 }

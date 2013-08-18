@@ -55,36 +55,42 @@
                     </ul>
                     <hr class='clearfix'/>
                     <?php }?>
+                    <?php
+                    if(isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){?>
+                    <script>
+                        $(document).ready(function(){
+                            $('.write-rating').jRating({
+
+                                phpPath : '../../commons/rating',
+                                tables : 'rate_drugs',
+                                members : <?php echo $_SESSION['ssid'];?>,
+                                values : <?php echo $drug['Drug']['id'];?>
+                            });
+                        });
+                    </script>
                     <?php if(!empty($your_review)){?>
                          <p class='star-icon'>Đánh giá của bạn :
-                            <?php
-                                for ($i=1; $i <=$your_review['Rate']['mark'] ; $i++) {
+                          <!--   <?php
+                                for ($i=1; $i <= $your_review['Rate']['mark']; $i++) {
                                     echo $html->img('img/star_full.png');
                                 }
                                 for ($i=$your_review['Rate']['mark']; $i < 5 ; $i++) {
                                     echo $html->img('img/star_none.png');
                                 }
-                            ?>
+                            ?> -->
+                            <div class="write-rating rated" data-average="<?php echo $your_review['Rate']['mark'];?>" data-id="<?php echo $your_review['Rate']['id'];?>"></div>
+                            <p></p>
+                            <div class="serverResponse"><p></p></div>
+                            <p></p>
                         </p>
                         <?php }else{?>
-                            <script>
-                                $(document).ready(function(){
-                                    $('.write-rating').jRating({
-
-                                        phpPath : '../../commons/view',
-                                        tables : 'rate_drugs',
-                                        members : <?php echo $_SESSION['ssid'];?>,
-                                        values : <?php echo $drug['Drug']['id'];?>
-                                    });
-                                });
-                            </script>
                             <!-- <a rel="leanModal" class='btn_review' href='#write_review' title='Đánh giá'>Đánh giá</a> -->
-                           <span class='title_rate'> Đánh giá :</span><div class="write-rating" data-average="0" data-id="1"></div>
+                           <span class='title_rate'> Đánh giá :</span><div class="write-rating" data-average="0" data-id="0"></div>
                             <p></p>
                             <div class="serverResponse"><p></p></div>
                             <p></p>
                         <?php }?>
-
+                    <?php }?>
                 </div>
 	        	<div class="clearfix"><br></div>
 	        	<p class="item"><b>Thành phần : </b><?php echo $drug['Drug']['thanhphan'];?></p>

@@ -1,7 +1,7 @@
 <?php
 class View extends HTML{
 	function rateitem($array=null){
-		$total=0;
+		$person=0;
 		$t_result = array();
 		$mark = 0;
 		if(isset($array['Rate'])){
@@ -10,17 +10,14 @@ class View extends HTML{
 			unset($array['']);
 		}
 		foreach ($array as $k => $v) {
-			$total +=$v['']['numbers'];
+			//$v['Rate']['mark']: điểm 1,2,3,4,5
+			//$v['']['numbers'] số lượng người cho điểm
+			$person +=$v['']['numbers'];
 			$t_result[$v['Rate']['mark']] = $v['']['numbers'];
-			if($v['Rate']['mark']==3){
-				$mark+=$v['Rate']['mark']/2;
-			}
-			if($v['Rate']['mark']>3){
-				$mark+=$v['']['numbers'];
-			}
+			$mark+=$v['Rate']['mark']*$v['']['numbers'];
 		}
-		$t_result['total'] = $total;
-		$mark = round($mark/$total*5,1);
+		$t_result['total'] = $person;
+		$mark = round($mark/$person,1);
 		$t_result['mark'] = $mark;
 		for ($i=1; $i <=5 ; $i++) {
 			if(!isset($t_result[$i])){
