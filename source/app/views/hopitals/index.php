@@ -11,7 +11,10 @@
             		</h6>
             		<p class="item"><b>Địa chi :</b> <?php echo $hopital['Hopital']['diachi'],' , '.$hopital['City']['ten'];?></p>
                     <p class="item"><b>Xem chỉ đường :</b> <a target="_blank" href="https://maps.google.com/?q=<?php echo $hopital['Hopital']['map'];?>">Xem</a></p>
-                	<div class="clearfix"></div>
+                	<div class='item rates'>
+                        <?php echo $view->rateres($hopital['Rate_hopital'],'hopital');?>
+                    </div>
+                    <div class="clearfix"></div>
                 </li>
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach?>

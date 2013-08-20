@@ -17,11 +17,7 @@
             		<p class="item">Nhà phân phối: <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></p>
             		<p class="item">Nhà sản xuất: <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></p>
             		<div class='item rates'>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_half.png');?>
+                        <?php echo $view->rateres($drug['Rate_drug'],'drug');?>
                     </div>
                 	<div class="clearfix"></div>
                 </li>

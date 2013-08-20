@@ -16,7 +16,7 @@
                 </div>
 
                 <div class='rateblock span5'>
-                    <?php if(!empty($rates)){?>
+                    <?php if(!empty($rates)){//if1?>
                     <?php $data = $view->rateitem($rates);?>
                     <div class='total_rate span6'>
                        <span><?php echo $data['mark'];?></span>
@@ -53,8 +53,11 @@
 
                     <?php }?>
                     </ul>
-                    <hr class='clearfix'/>
+                    <?php }else{?>
+                    <?php echo "Chưa có đánh giá nào"; ?>
                     <?php }?>
+                    <hr class='clearfix'/>
+
                     <?php
                     if(isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){?>
                     <script>
@@ -62,7 +65,7 @@
                             $('.write-rating').jRating({
 
                                 phpPath : '../../commons/rating',
-                                tables : 'rate_drugs',
+                                tables : 'drugs',
                                 members : <?php echo $_SESSION['ssid'];?>,
                                 values : <?php echo $drug['Drug']['id'];?>
                             });
@@ -90,6 +93,8 @@
                             <div class="serverResponse"><p></p></div>
                             <p></p>
                         <?php }?>
+                    <?php }else{?>
+                    <?php echo "Hãy đăng nhập để đánh giá";?>
                     <?php }?>
                 </div>
 	        	<div class="clearfix"><br></div>
@@ -132,7 +137,16 @@
                 <?php endforeach;?>
             </ul>
         </div>
+            <div class="boxheader boxheader-main clearfix">
+                <h3>Đánh giá</h3>
+                <div class="box-ct clearfix row-fluid">
+                    <div class='span12 article detail'>
+                        Đang nâng cấp...
+                    </div>
+                </div>
+            </div>
     </div>
+</div>
 <div class="clearfix"><br></div>
 <div id="write_review">
     <div id="write_review-ct">

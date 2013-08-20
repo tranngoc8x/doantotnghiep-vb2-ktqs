@@ -11,20 +11,18 @@ class CommonsController extends AppController{
 			$_POST = is_array($_POST) ? array_map('stripSlashesDeep', $_POST) : stripslashes($_POST);
 			if(isset($_POST['action']))
 			{
-
 				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
 				{
 					$id = intval($_POST['idBox']);
 					$table = $_POST['table'];
-					$fref = str_replace('rate_', "", $table);
-					$field = $fref.'_id';
-
+					$field = $table.'_id';
+					$table = 'rate_'.$table;
 					$value = $_POST['value'];
 					$rate = floatval($_POST['rate']);
 					$member =$_SESSION['ssid'];
 					$rated = 0;
 					if($id>0){
-						$check = mysql_query("SELECT count(id)   as rated FROM $table as Rate WHERE $field = '$value' AND members_id='$member'");
+						$check = mysql_query("SELECT count(id)  as rated FROM $table as Rate WHERE $field = '$value' AND members_id='$member'");
 						//echo "SELECT count(id) FROM  as rated $table as rated WHERE $field = '$value' AND members_id='$member'";
 						$rated = mysql_result($check,0,'rated');
 					}

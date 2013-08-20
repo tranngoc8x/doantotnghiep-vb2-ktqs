@@ -78,13 +78,13 @@
 						        <div class="box-ct">
 						            <ul class="menu">
 						                <li <?php if(!isset($idtype)  || empty($idtype)){?> class="active" <?php }?>>
-											<?php echo $html->link("<span>Tất cả</span>",array('drugs/index'));?>
+											<?php echo $html->link("<span>Tất cả</span>",array($sidebar[0]['']['controller'].'/index'));?>
 						                </li>
 						                <?php
 						                    foreach ($sidebar as $key => $value) {
 						                ?>
-						                <li <?php if(isset($idtype) && $idtype == $value['Type']['id']){?> class="active" <?php }?>>
-											<?php echo $html->link("<span>".$value['Type']['ten']."</span>",array('drugs/types/'.$value['Type']['id'].'/'.$value['Type']['ten']));?>
+						                <li <?php if(isset($idtype) && $idtype == $value['Menu']['id']){?> class="active" <?php }?>>
+											<?php echo $html->link("<span>".$value['Menu']['ten']."</span>",array($value['']['controller'].'/types/'.$value['Menu']['id'].'/'.$value['Menu']['ten']));?>
 						                </li>
 						                <?php }?>
 						            </ul>

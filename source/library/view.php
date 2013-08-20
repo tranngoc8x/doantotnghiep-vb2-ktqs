@@ -1,6 +1,7 @@
 <?php
 class View extends HTML{
 	function rateitem($array=null){
+		//if ($array == null) return;
 		$person=0;
 		$t_result = array();
 		$mark = 0;
@@ -25,5 +26,31 @@ class View extends HTML{
 			}
 		}
 		return $t_result;
+	}
+	function rateres($array=null,$model){
+		if ($array == null){
+			return ;
+		}else{
+			$person=count($array);
+			$mark = 0;
+			foreach ($array as $key => $v) {
+				$mark+=$v['Rate_'.$model]['mark'];
+			}
+			$mark = round($mark/$person,1);
+			$intmark = floor($mark);
+			for ($i=1; $i <=$intmark ; $i++) {
+	            echo $this->img('img/star_full.png');
+	        }
+	        if($intmark<5){
+	            if($mark - $intmark < 0.5){
+	                echo $this->img('img/star_none.png');
+	            }else{
+	                echo $this->img('img/star_half.png');
+	            }
+	        }
+	        for ($i=$intmark+1; $i < 5 ; $i++) {
+	            echo $this->img('img/star_none.png');
+	        }
+	    }
 	}
 }
