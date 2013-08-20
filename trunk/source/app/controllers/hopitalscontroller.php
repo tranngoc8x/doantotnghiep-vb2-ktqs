@@ -8,6 +8,7 @@ class HopitalsController extends AppController {
 		$this->Hopital->orderBy('id','DESC');
 		$this->Hopital->setLimit('20');
 		$this->Hopital->showHasOne();
+		$this->Hopital->showHasMany();
 		$hopitals = $this->Hopital->find();
 		$this->set(compact('hopitals'));
 	}
@@ -50,7 +51,12 @@ class HopitalsController extends AppController {
 		$this->Hopital->id = $id;
 		$this->Hopital->showHasOne();
 		$hopital = $this->Hopital->find();
-		$this->set(compact('hopital'));
+		$rates = $this->Hopital->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_hopitals as Rate WHERE hopitals_id = '$id' GROUP BY mark");
+		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
+			$ssid = $_SESSION["ssid"];
+			$your_review = $this->Hopital->query("SELECT id,mark FROM  rate_hopitals as Rate WHERE hopitals_id = '$id' AND members_id='$ssid'");
+		}
+		$this->set(compact('hopital','rates','your_review'));
 
 	}
 	function afterAction() {

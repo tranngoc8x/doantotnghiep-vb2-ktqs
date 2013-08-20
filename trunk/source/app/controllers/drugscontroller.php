@@ -7,6 +7,7 @@ class DrugsController extends AppController {
 		$this->Drug->orderBy('id','DESC');
 		$this->Drug->setLimit('6');
 		$this->Drug->showHasOne();
+		$this->Drug->showHasMany();
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
 
 		//bệnh viện,phòng khám, nhà thuốc
@@ -22,6 +23,7 @@ class DrugsController extends AppController {
 		$this->Drug->orderBy('id','DESC');
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
+		$this->Drug->showHasMany();
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
 		$this->set(compact('drugs','idtype'));
 	}
@@ -29,7 +31,7 @@ class DrugsController extends AppController {
 		$this->Drug->orderBy('id','DESC');
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
-
+		$this->Drug->showHasMany();
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
 		}

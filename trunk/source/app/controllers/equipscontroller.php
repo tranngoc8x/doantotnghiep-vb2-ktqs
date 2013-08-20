@@ -40,6 +40,7 @@ class EquipsController extends AppController {
 		$this->Equip->orderBy('id','DESC');
 		$this->Equip->setLimit('20');
 		$this->Equip->showHasOne();
+		$this->Equip->showHasMany();
 		$equips = $this->Equip->find();
 		$this->set(compact('equips'));
 	}
@@ -53,7 +54,12 @@ class EquipsController extends AppController {
 		$this->Equip->where(array('id !='=>$id,'manus_id'=>$manu_id));
 		$this->Equip->showHasOne();
 		$manu_equips = $this->Equip->find(array("Equip.id","Equip.ten","Equip.anh",'Manu.ten',"Distribute.ten"));
-		$this->set(compact('equip','manu_equips'));
+		$rates = $this->Equip->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_equips as Rate WHERE equips_id = '$id' GROUP BY mark");
+		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
+			$ssid = $_SESSION["ssid"];
+			$your_review = $this->Equip->query("SELECT id,mark FROM  rate_equips as Rate WHERE equips_id = '$id' AND members_id='$ssid' limit 1");
+		}
+		$this->set(compact('equip','manu_equips','rates','your_review'));
 
 	}
 	function afterAction() {

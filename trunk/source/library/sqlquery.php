@@ -245,10 +245,10 @@ class SQLQuery{
 
 						$fromChild .= '`'.$tableChild.'` as `'.$aliasChild.'`';
 
-						$conditionsChild .= '`'.$aliasChild.'`.`'.strtolower($this->_model).'_id` = \''.$tempResults[$this->_model]['id'].'\'';
+						$conditionsChild .= '`'.$aliasChild.'`.`'.strtolower($this->_model).'s_id` = \''.$tempResults[$this->_model]['id'].'\'';
 
 						$queryChild =  'SELECT * FROM '.$fromChild.' WHERE '.$conditionsChild;
-						#echo '<!--'.$queryChild.'-->';
+						#echo $queryChild;
 						$resultChild = mysql_query($queryChild, $this->_dbHandle);
 
 						$tableChild = array();
@@ -295,8 +295,8 @@ class SQLQuery{
 						$fromChild .= '`'.$tableChild.'` as `'.$aliasChild.'`,';
 						$fromChild .= '`'.$joinTable.'`,';
 
-						$conditionsChild .= '`'.$joinTable.'`.`'.$singularAliasChild.'_id` = `'.$aliasChild.'`.`id` AND ';
-						$conditionsChild .= '`'.$joinTable.'`.`'.strtolower($this->_model).'_id` = \''.$tempResults[$this->_model]['id'].'\'';
+						$conditionsChild .= '`'.$joinTable.'`.`'.$singularAliasChild.'s_id` = `'.$aliasChild.'`.`id` AND ';
+						$conditionsChild .= '`'.$joinTable.'`.`'.strtolower($this->_model).'s_id` = \''.$tempResults[$this->_model]['id'].'\'';
 						$fromChild = substr($fromChild,0,-1);
 
 						$queryChild =  'SELECT * FROM '.$fromChild.' WHERE '.$conditionsChild;

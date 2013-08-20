@@ -8,6 +8,7 @@ class ClinicsController extends AppController {
 		$this->Clinic->orderBy('id','DESC');
 		$this->Clinic->setLimit('20');
 		$this->Clinic->showHasOne();
+		$this->Clinic->showHasMany();
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
 	}
@@ -53,8 +54,12 @@ class ClinicsController extends AppController {
 		$this->Clinic->id = $id;
 		$this->Clinic->showHasOne();
 		$clinic = $this->Clinic->find();
-		//$typename = $this->Clinic->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
-		$this->set(compact('clinic'));
+		$rates = $this->Clinic->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_clinics as Rate WHERE clinics_id = '$id' GROUP BY mark");
+		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
+			$ssid = $_SESSION["ssid"];
+			$your_review = $this->Clinic->query("SELECT id,mark FROM  rate_clinics as Rate WHERE clinics_id = '$id' AND members_id='$ssid'");
+		}
+		$this->set(compact('clinic','rates','your_review'));
 
 	}
 	function afterAction() {
