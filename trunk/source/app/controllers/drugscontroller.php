@@ -8,6 +8,8 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('6');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
+		//$this->Drug->BindModel(array('hasMany' => array('Comment')));
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
 
 		//bệnh viện,phòng khám, nhà thuốc
@@ -24,6 +26,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
 		$this->set(compact('drugs','idtype'));
 	}
@@ -32,6 +35,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
 		}
@@ -82,6 +86,7 @@ class DrugsController extends AppController {
 	function view($id = null) {
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
+		$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$drug = $this->Drug->find();
 		$type_id = @$drug['Drug']['types_id'];
 		$manu_id = @$drug['Drug']['manus_id'];
@@ -91,22 +96,18 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('5');
 		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id));
 		$this->Drug->showHasOne();
+		$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten"));
-
 		//rate
 		$rates = $this->Drug->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugs as Rate WHERE drugs_id = '$id' GROUP BY mark");
 		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
 			$ssid = $_SESSION["ssid"];
 			$your_review = $this->Drug->query("SELECT id,mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id='$ssid'");
 		}
-		//echo "SELECT DISTINCT (mark), COUNT(mark) as counts FROM  rate_drugs WHERE drugs_id = '$id' GROUP BY mark";
-		//thuốc cùng nhà sx
-		//$this->Drug->setLimit('5');
-		//$this->Drug->where(array('id !='=>$id,'manus_id'=>$manu_id));
-		//$this->Drug->showHasOne();
-		////$manu_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id',"Distribute.ten",'Type.ten'));
 
-		$this->set(compact('drug','type_drugs','manu_drugs','rates','your_review'));
+		//comment
+		$comments = $this->Drug->query("SELECT * FROM  comments WHERE drugs_id = '$id'");
+		$this->set(compact('drug','type_drugs','manu_drugs','rates','your_review','comments'));
 
 	}
 	function mark(){}

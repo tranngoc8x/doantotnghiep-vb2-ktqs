@@ -167,9 +167,33 @@ class SQLQuery{
 		}
 		return $results;
 	}
+	function unBindModel($array){
+		if(isset($array['hasMany']) && ($array['hasMany'])){
+			foreach ($array['hasMany'] as $value) {
+				unset($this->hasMany[$value]);
+			}
+		}
+		if(isset($array['hasOne']) && ($array['hasOne'])){
+			foreach ($array['hasOne'] as $value) {
+				unset($this->hasOne[$value]);
+			}
+		}
+	}
+	function BindModel($array){
+		if(isset($array['hasMany']) && ($array['hasMany'])){
+			foreach ($array['hasMany'] as  $value) {
+				$this->hasMany[$value] = $value;
+			}
+		}
+		if(isset($array['hasOne']) && ($array['hasOne'])){
+			foreach ($array['hasOne'] as $value) {
+				$this->hasOne[$value] = $value;
+			}
+		}
+	}
+
 	function find($fields = null) {
 		global $inflect;
-
 		$from = '`'.$this->_table.'` as `'.$this->_model.'` ';
 		$conditions = '\'1\'=\'1\' AND ';
 		$conditionsChild = '';
