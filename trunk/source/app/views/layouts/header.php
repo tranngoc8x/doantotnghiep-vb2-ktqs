@@ -95,8 +95,8 @@
 						        <h3>Thống kê</h3>
 						        <div class="box-ct">
 						        	<ul class="menu"><li>
-							            <strong>Số người online</strong> : 8
-							            <br><strong>Số người đã truy cập</strong> : 60
+							            <strong>Số người online</strong> :<?php echo $counter->getCountFormated();?>
+							            <br><strong>Số người đã truy cập</strong> : <?php echo $counter->getCountFormated();?>
 							            <br><strong>Tổng số thuốc</strong> : 6
 							            <br><strong>Số loại thuốc</strong> : 2
 							            <br><strong>Tổng số nhà thuốc</strong> : 148
