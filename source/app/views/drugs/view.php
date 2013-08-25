@@ -141,34 +141,112 @@
                 <h3>Đánh giá</h3>
                 <div class="box-ct clearfix row-fluid">
                     <div class='span12 article detail'>
-                        Đang nâng cấp...
+                        <?php
+                            $comments= CommonsController::showpost();
+                        ?>
+                        <form action="" method="post" class='commentForm' name="postsForm">
+                            <textarea class="span12" id="watermark" placeholder='Hãy viết đánh giá của bạn về sản phẩm này ...' name="watermark" cols="60"></textarea>
+                            <button id="shareButton" type='button' class="btn btn-icon btn-primary glyphicons circle_ok">Bình luận</button>
+                        </form>
+                        <hr class='clearfix'/>
+                        <div id="posting" align="center">
+                            <?php
+                                foreach ($comments as $key => $item) {
+
+                             ?>
+                                   <div class="friends_area" id="record-<?php  echo $item['Comment']['id']?>">
+                                        <div class='span1'>
+                                            <?php echo $html->img('img/surgeon.png',array('style'=>"float:left;"));?>
+                                        </div>
+                                        <div class='span11'>
+                                           <label class="name">
+                                           <b><?php echo $item['Member']['ten'];?></b>
+                                           <em><?php  echo $item['Comment']['content'];?></em>
+                                           <br />
+                                           <span>
+                                           <?php
+                                                $arts = explode(':', $item['Comment']['TimeSpent']);
+                                                $ts = $arts[0]*3600+ $arts[1]*60+$arts[2];
+                                                if($ts>2073600) echo date('d/m/Y',strtotime($item['Comment']['ngayviet']));
+                                                elseif($ts>86400) echo  'hôm qua';
+                                                else if($ts>3600) echo $arts[0].' giờ trước.';
+                                                else if($ts>60) echo $arts[1].' phút trước.';
+                                                else $val = 'vài giây trước.';
+                                            ?>
+                                           </span>
+                                           <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Comments</a>
+                                           </label>
+                                           <?php
+                                            if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                            <a href="#" class="delete"> Remove</a>
+                                           <?php
+                                            }?>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div id="CommentPosted<?php  echo $item['Comment']['id']?>">
+                                            <?php
+                                            $comment_num_row = count($item['Ykien_drug_child']);
+                                            if($comment_num_row > 0)
+                                            {
+                                                foreach ($item['Ykien_drug_child'] as $value)
+                                                {
+
+                                                ?>
+                                                <div class="commentPanel row" id="record-<?php  echo $value['id'];?>" align="left">
+                                                    <div class='span1'>
+                                                    <?php echo $html->img('img/surgeon_small.png',array('class'=>"CommentImg",'style'=>"float:left; clear: right"));?>
+                                                    </div>
+                                                    <div class='span11'>
+                                                        <label class="postedComments">
+                                                            <?php  echo $value['content'];?>
+                                                        </label>
+                                                        <span style="color:#666666; font-size:11px">
+                                                       <?php
+                                                            $diffdate = (strtotime(date('Y-m-d H:i:s')) - strtotime($value['ngayviet']));
+                                                            if($diffdate>172800) echo date('d/m/Y',strtotime($value['ngayviet']));
+                                                            elseif($diffdate>86400) echo  'hôm qua';
+                                                            else if($diffdate>3600) echo floor($diffdate/3600).' giờ trước.';
+                                                            else if($diffdate>60) echo floor($diffdate/60).' phút trước.';
+                                                            else $val = 'vài giây trước.';
+                                                        ?>
+                                                        </span>
+                                                        <?php
+                                                            if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                                            &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
+                                                        <?php }?>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                }?>
+                                                <?php
+                                            }?>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="commentBox row" align="right" id="commentBox-<?php  echo $item['Comment']['id'];?>" <?php echo (($comment_num_row) ? '' :'style="display:none"')?>>
+                                            <div class='span1'>
+                                                <?php echo $html->img('img/surgeon_small.png',array('class'=>"CommentImg",'style'=>"float:left;"));?>
+                                            </div>
+                                             <div class='span11'>
+                                                <label id="record-<?php  echo $item['Comment']['id'];?>">
+                                                    <textarea class="span12" id="commentMark-<?php  echo $item['Comment']['id'];?>" name="commentMark" cols="60"></textarea>
+                                                </label>
+                                                <a id="SubmitComment" class="btn btn-icon btn-primary glyphicons circle_ok">Trả lời</a>
+                                            </div>
+                                        </div>
+                                   </div>
+                                <?php
+                                }
+                                if(@$show_more_button == 1){?>
+                                <div id="bottomMoreButton">
+                                <a id="more_<?php echo @$next_records?>" class="more_records" href="javascript: void(0)">Older Posts</a>
+                                </div>
+                                <?php
+                                }?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
     </div>
 </div>
 <div class="clearfix"><br></div>
-<div id="write_review">
-    <div id="write_review-ct">
-        <div id="write_review-header">
-            <h2>Viết đánh giá của bạn</h2>
-            <a class="modal_close" href="#"></a>
-        </div>
-
-        <form action="">
-
-          <div class="txt-fld">
-            <label for="">Tiêu đề</label>
-            <input id="" name="title" type="text">
-
-          </div>
-          <div class="txt-fld">
-            <label for="">Nhận xét</label>
-            <textarea id="" name="nhanxet" type="textarea"></textarea>
-          </div>
-          <div class="btn-fld">
-          <button type="submit">Gửi »</button>
-          </div>
-         </form>
-    </div>
-</div>

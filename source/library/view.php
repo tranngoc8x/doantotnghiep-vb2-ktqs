@@ -8,14 +8,13 @@ class View extends HTML{
 		if(isset($array['Rate'])){
 			$array[0] = $array;
 			unset($array['Rate']);
-			unset($array['']);
 		}
 		foreach ($array as $k => $v) {
 			//$v['Rate']['mark']: điểm 1,2,3,4,5
-			//$v['']['numbers'] số lượng người cho điểm
-			$person +=$v['']['numbers'];
-			$t_result[$v['Rate']['mark']] = $v['']['numbers'];
-			$mark+=$v['Rate']['mark']*$v['']['numbers'];
+			//$v['Rate']['numbers'] số lượng người cho điểm
+			$person +=$v['Rate']['numbers'];
+			$t_result[$v['Rate']['mark']] = $v['Rate']['numbers'];
+			$mark+=$v['Rate']['mark']*$v['Rate']['numbers'];
 		}
 		$t_result['total'] = $person;
 		$mark = round($mark/$person,1);

@@ -74,12 +74,16 @@ class TntController{
 		}
 		header("Location:".$d_path.DS.$controller.DS.$action);
     }
+    function element($name,$path = 'elements'){
+    	if(empty($name)) return;
+    	if($path== 'elements'){
+    		include(APP.'/views/elements/'.$name);
+    	}else{
+    		include(APP.'/'.$path.'/'.$name);
+    	}
+    }
     function __destruct() {
-
-		if ($this->render) {
-			$this->render($this->doNotRenderHeader);
-		}
-		if(isset($_POST)){
+    	if(isset($_POST)){
 			$this->data = array_merge($this->data,$_POST);
 		}
 		if(isset($_GET)){
@@ -88,5 +92,10 @@ class TntController{
 		if(isset($_REQUEST)){
 			$this->data = array_merge($this->data,$_REQUEST);
 		}
+		//$common = new CommonsController($this->_controller, $this->_action);
+		if ($this->render) {
+			$this->render($this->doNotRenderHeader);
+		}
+
 	}
 }

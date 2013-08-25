@@ -374,9 +374,23 @@ class SQLQuery{
 
     /** Custom SQL Query **/
 
-	function query($query) {
+	function query($query,$many=null,$one=null) {
 		global $inflect;
-		//echo $query;
+		#echo $query;
+		// $from="";
+		// if (isset($one) && !empty($one)) {
+
+		// 	foreach ($one as $alias => $model) {
+		// 		$tableOne = strtolower($inflect->pluralize($model));
+		// 		$tableMn = strtolower($inflect->pluralize($alias));
+		// 		//$tableOne = strtolower($inflect->singularize($model));
+		// 		$from .= 'LEFT JOIN `'.$tableOne.'` as `'.$model.'` ';
+		// 		$from .= 'ON `'.$tableMn.'`.`'.$tableOne.'_id` = `'.$model.'`.`id`  ';
+		// 	}
+		// 	$tempQuery = strtolower($query);
+		// 	$arquery = explode('from',$tempQuery);
+		// }
+		// debug($from);
 		$this->_result = mysql_query($query, $this->_dbHandle);
 		$result = array();
 		$table = array();
@@ -388,7 +402,15 @@ class SQLQuery{
 			if ($num_of_rows > 0) {
 				$numOfFields = mysql_num_fields($this->_result);
 				for ($i = 0; $i < $numOfFields; ++$i) {
-					array_push($table,mysql_field_table($this->_result, $i));
+					$tbl = mysql_field_table($this->_result, $i);
+
+					if(empty($tbl)){
+						$tblOld = mysql_field_table($this->_result, 0);
+						array_push($table,$tblOld);
+					}else{
+						array_push($table,$tbl);
+					}
+
 					array_push($field,mysql_field_name($this->_result, $i));
 				}
 				while ($row = mysql_fetch_row($this->_result)) {
@@ -396,9 +418,47 @@ class SQLQuery{
 						$table[$i] = ucfirst($inflect->singularize($table[$i]));
 						$tempResults[$table[$i]][$field[$i]] = $row[$i];
 					}
+					if (isset($many) && !empty($many)) {
+						foreach ($many as $parent=> $modelChild) {
+							$queryChild = '';
+							$conditionsChild = '';
+							$fromChild = '';
+
+							$tableChild = strtolower($inflect->pluralize($modelChild));
+							$tableParent = strtolower($parent);
+							$fromChild .= '`'.$tableChild.'` as `'.$modelChild.'`';
+							$conditionsChild .= '`'.$modelChild.'`.`'.strtolower($tableParent).'s_id` = \''.$tempResults[$table['0']]['id'].'\'';
+							$queryChild =  'SELECT * FROM '.$fromChild.' WHERE '.$conditionsChild;
+							#echo $queryChild;
+							$resultChild = mysql_query($queryChild, $this->_dbHandle);
+							$tableChild = array();
+							$fieldChild = array();
+							$tempResultsChild = array();
+							$resultsChild = array();
+
+							if (mysql_num_rows($resultChild) > 0) {
+								$numOfFieldsChild = mysql_num_fields($resultChild);
+								for ($j = 0; $j < $numOfFieldsChild; ++$j) {
+									array_push($tableChild,mysql_field_table($resultChild, $j));
+									array_push($fieldChild,mysql_field_name($resultChild, $j));
+								}
+
+								while ($rowChild = mysql_fetch_row($resultChild)) {
+									for ($j = 0;$j < $numOfFieldsChild; ++$j) {
+										$tempResultsChild[$fieldChild[$j]] = $rowChild[$j];
+									}
+									array_push($resultsChild,$tempResultsChild);
+								}
+							}
+							$tempResults[$modelChild] = $resultsChild;
+							mysql_free_result($resultChild);
+						}
+					}
 					array_push($result,$tempResults);
 				}
+				//end child
 			}
+
 			mysql_free_result($this->_result);
 		}
 		$this->_clear();
