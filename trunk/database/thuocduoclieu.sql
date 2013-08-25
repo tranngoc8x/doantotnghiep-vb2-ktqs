@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 20, 2013 at 06:02 PM
+-- Generation Time: Aug 25, 2013 at 06:33 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -75,6 +75,23 @@ INSERT INTO `clinics` (`id`, `ten`, `daidien`, `departments_id`, `diachi`, `citi
 (4, 'Nha Khoa Minh Anh', 'Phan Thá»‹ Thu Háº£i', 1, '60 HoÃ ng Diá»‡u', 1, '(04).7345595', 'Äang cáº­p nháº­t...', 1, '0,0'),
 (5, 'PhÃ²ng Chuáº©n trá»‹ Y há»c Cá»• truyá»n KhÆ°Æ¡ng SÆ¡n', 'Pháº¡m ÄÃ¬nh Vinh', 15, 'P15 - A11 Táº­p thá»ƒ Thanh XuÃ¢n Báº¯c', 1, '(04).5536308', 'Äang cáº­p nháº­t...', 1, '0,0'),
 (6, 'PhÃ²ng KhÃ¡m Äa Khoa Äá»©c Minh', 'LÃª Äá»©c PhÃºc', 3, '32 PhÃ¹ng HÆ°ng', 1, '(04).9289836', 'Äang cáº­p nháº­t...', 1, '0,0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `members_id` int(11) NOT NULL,
+  `drugs_id` int(11) NOT NULL,
+  `noidung` text NOT NULL,
+  `parent` int(11) NOT NULL,
+  `thoigian` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -427,6 +444,7 @@ CREATE TABLE IF NOT EXISTS `rate_drugs` (
   `drugs_id` int(11) NOT NULL,
   `members_id` int(11) DEFAULT '1',
   `mark` int(2) NOT NULL,
+  `ykien` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=68 ;
 
@@ -434,43 +452,43 @@ CREATE TABLE IF NOT EXISTS `rate_drugs` (
 -- Dumping data for table `rate_drugs`
 --
 
-INSERT INTO `rate_drugs` (`id`, `drugs_id`, `members_id`, `mark`) VALUES
-(1, 6, 1, 5),
-(2, 6, 2, 5),
-(3, 6, 3, 5),
-(4, 6, 4, 5),
-(5, 6, 23, 5),
-(6, 6, 5, 5),
-(7, 6, 6, 5),
-(8, 6, 24, 5),
-(9, 6, 7, 5),
-(10, 6, 8, 5),
-(11, 6, 9, 4),
-(12, 6, 10, 4),
-(13, 6, 11, 4),
-(14, 6, 12, 4),
-(15, 6, 13, 4),
-(16, 6, 14, 4),
-(17, 6, 15, 3),
-(18, 6, 16, 3),
-(19, 6, 17, 3),
-(20, 6, 18, 2),
-(21, 6, 19, 1),
-(22, 6, 20, 1),
-(23, 6, 21, 1),
-(24, 6, 22, 1),
-(26, 5, 5, 5),
-(27, 5, 1, 3),
-(57, 3, 1, 5),
-(58, 1, 1, 3),
-(59, 4, 1, 4),
-(60, 5, 2, 4),
-(61, 4, 2, 4),
-(62, 2, 2, 5),
-(64, 1, 2, 5),
-(65, 7, 2, 4),
-(66, 7, 2, 4),
-(67, 7, 2, 4);
+INSERT INTO `rate_drugs` (`id`, `drugs_id`, `members_id`, `mark`, `ykien`) VALUES
+(1, 6, 1, 5, NULL),
+(2, 6, 2, 5, NULL),
+(3, 6, 3, 5, NULL),
+(4, 6, 4, 5, NULL),
+(5, 6, 23, 5, NULL),
+(6, 6, 5, 5, NULL),
+(7, 6, 6, 5, NULL),
+(8, 6, 24, 5, NULL),
+(9, 6, 7, 5, NULL),
+(10, 6, 8, 5, NULL),
+(11, 6, 9, 4, NULL),
+(12, 6, 10, 4, NULL),
+(13, 6, 11, 4, NULL),
+(14, 6, 12, 4, NULL),
+(15, 6, 13, 4, NULL),
+(16, 6, 14, 4, NULL),
+(17, 6, 15, 3, NULL),
+(18, 6, 16, 3, NULL),
+(19, 6, 17, 3, NULL),
+(20, 6, 18, 2, NULL),
+(21, 6, 19, 1, NULL),
+(22, 6, 20, 1, NULL),
+(23, 6, 21, 1, NULL),
+(24, 6, 22, 1, NULL),
+(26, 5, 5, 5, NULL),
+(27, 5, 1, 3, NULL),
+(57, 3, 1, 5, NULL),
+(58, 1, 1, 3, NULL),
+(59, 4, 1, 4, NULL),
+(60, 5, 2, 4, NULL),
+(61, 4, 2, 4, NULL),
+(62, 2, 2, 5, NULL),
+(64, 1, 2, 5, NULL),
+(65, 7, 2, 4, NULL),
+(66, 7, 2, 4, NULL),
+(67, 7, 2, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -611,6 +629,55 @@ CREATE TABLE IF NOT EXISTS `users` (
   `trangthai` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ykien_drugs`
+--
+
+DROP TABLE IF EXISTS `ykien_drugs`;
+CREATE TABLE IF NOT EXISTS `ykien_drugs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `drugs_id` int(11) NOT NULL,
+  `members_id` int(11) NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ngayviet` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `ykien_drugs`
+--
+
+INSERT INTO `ykien_drugs` (`id`, `drugs_id`, `members_id`, `content`, `ngayviet`) VALUES
+(1, 6, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', '2013-08-25 20:45:00'),
+(2, 6, 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit', '2013-08-23 18:15:00'),
+(3, 6, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicin', '2013-08-23 18:15:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ykien_drug_childs`
+--
+
+DROP TABLE IF EXISTS `ykien_drug_childs`;
+CREATE TABLE IF NOT EXISTS `ykien_drug_childs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ykien_drugs_id` int(11) NOT NULL,
+  `members_id` int(11) NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ngayviet` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `ykien_drug_childs`
+--
+
+INSERT INTO `ykien_drug_childs` (`id`, `ykien_drugs_id`, `members_id`, `content`, `ngayviet`) VALUES
+(1, 2, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '2013-08-20 07:28:00'),
+(2, 2, 2, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo', '2013-08-25 18:26:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -65,10 +65,10 @@ class Inflection
         'foot'   => 'feet',
         'goose'  => 'geese',
         'sex'    => 'sexes',
-        'child'  => 'children',
-        'man'    => 'men',
-        'tooth'  => 'teeth',
-        'person' => 'people',
+        // 'child'  => 'children',
+        // 'man'    => 'men',
+        // 'tooth'  => 'teeth',
+        // 'person' => 'people',
         'admin' => 'admin'
     );
 

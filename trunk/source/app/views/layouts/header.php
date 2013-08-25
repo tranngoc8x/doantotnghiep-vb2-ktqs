@@ -8,12 +8,12 @@
         <meta name="description" content="Website tra cứu thuoc va dược liệu">
         <meta name="generator" content="TRAN NGOC THANG">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone','jRating.jquery'));?>
+		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone','jRating.jquery','comment'));?>
 		<title>Tra cứu thuốc và dược liệu</title>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1y92TzXvD1IOBJovofxMpwK_C3_21HYA&sensor=true"></script>
 
 		<?php
-    		echo $html->script(array('jquery-1.9.1','bootstrap','bootstrap.min','script','jRating.jquery'));
+    		echo $html->script(array('jquery-1.9.1','bootstrap','bootstrap.min','script','jRating.jquery','jquery.livequery','comment'));
     	?>
 		<script>
 			var toado='0,0';
@@ -78,13 +78,13 @@
 						        <div class="box-ct">
 						            <ul class="menu">
 						                <li <?php if(!isset($idtype)  || empty($idtype)){?> class="active" <?php }?>>
-											<?php echo $html->link("<span>Tất cả</span>",array($sidebar[0]['']['controller'].'/index'));?>
+											<?php echo $html->link("<span>Tất cả</span>",array($sidebar[0]['Menu']['controller'].'/index'));?>
 						                </li>
 						                <?php
 						                    foreach ($sidebar as $key => $value) {
 						                ?>
 						                <li <?php if(isset($idtype) && $idtype == $value['Menu']['id']){?> class="active" <?php }?>>
-											<?php echo $html->link("<span>".$value['Menu']['ten']."</span>",array($value['']['controller'].'/types/'.$value['Menu']['id'].'/'.$value['Menu']['ten']));?>
+											<?php echo $html->link("<span>".$value['Menu']['ten']."</span>",array($value['Menu']['controller'].'/types/'.$value['Menu']['id'].'/'.$value['Menu']['ten']));?>
 						                </li>
 						                <?php }?>
 						            </ul>

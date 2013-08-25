@@ -83,6 +83,10 @@ function __autoload($className) {
 		require_once(ROOT . DS . 'app' . DS . 'models' . DS . strtolower($className) . '.php');
 	} else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . strtolower($className) . '.php');
+	}else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'controllers' . DS . strtolower($className) . '.php')) {
+		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'controllers' . DS . strtolower($className) . '.php');
+	}else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'models' . DS . strtolower($className) . '.php')) {
+		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'models' . DS . strtolower($className) . '.php');
 	} else {
 		/* Error Generation Code Here */
 	}
