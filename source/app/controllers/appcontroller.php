@@ -1,6 +1,6 @@
 <?php
 class AppController extends TntController {
-
+	var $helper = array('Counter');
 	function __construct($controller, $action) {
 		parent:: __construct($controller, $action);
 		if($this->_admin){

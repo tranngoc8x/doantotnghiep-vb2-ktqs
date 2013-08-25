@@ -5,6 +5,7 @@ class TntController{
 	protected $_template;
 	protected $_admin = false;
 	protected $data = array();
+	protected $helper = array();
 	protected $variables = array();
 	public $doNotRenderHeader;
 	protected $session;
@@ -24,7 +25,6 @@ class TntController{
 		if(isset($ar_action) && $ar_action[0]== $authpath){
 			$this->_admin = true;
 		}
-
 	}
 	function set($name,$value = null) {
 		if(!is_array($name)){
@@ -38,6 +38,12 @@ class TntController{
 		$view = new view;
 		$form = new Form;
 		$session = new Session;//view
+		if(!empty($this->helper) && is_array($this->helper)){
+			foreach ($this->helper as $v) {
+				$vv  = lcfirst($v);
+				$$vv = new $v();
+			}
+		}
 		extract($this->variables);
 		if ($doNotRenderHeader == 0) {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'header.php')) {
