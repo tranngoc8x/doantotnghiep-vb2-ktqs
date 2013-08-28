@@ -1,58 +1,114 @@
 // <![CDATA[
 
 	$(document).ready(function(){
+		//khi bấm nút bình luận
 		$('#shareButton').click(function(){
 			var a = $("#watermark").val();
-			if(a != "")
+			var token = $("#token").val();
+			var items = $("#itemid").val();
+			//if(a!='' && )
+			if(a != "" && token !='')
 			{
-				$.post("commons/showpost/"+a, {
+				$.post("../../commons/showpost/"+a+"/"+token+"/"+items, {
 				}, function(response){
-					console.log(response);
-					$('#posting').prepend($(response).fadeIn('slow'));
-					$("#watermark").val("What's on your mind?");
+					//console.log(response);
+					var data = $.parseJSON(response);
+					thoigian = data.Comment.TimeSpent;
+					arts = thoigian.split(":");
+					ts = arts[0]*3600+ arts[1]*60+arts[2];
+					if(ts>2073600){
+					    val = data.Comment.ngayviet;
+					}
+					else if(ts>86400) val=  'hôm qua';
+					else if(ts>3600) val = arts[0]+' giờ trước.';
+					else if(ts>60) val = arts[1]+' phút trước.';
+					else val = 'vài giây trước.';
+
+
+					value = "<div class='friends_area' id='record-"+data.Comment.id+"'>"+
+					"<div class='span1'>"+
+					"<img src='"+baseurl+"/img/surgeon.png' style='float:left;'/>"+
+					"</div>"+
+					"<div class='span11'>"+
+					   "<label class='name'>"+
+					   "<b>"+data.Member.ten+"</b>&nbsp;"+
+					   "<em>"+data.Comment.content+"</em>"+
+					   "<br />"+
+					   "<span>"+
+					  val+
+					   "</span>"+
+					   "<a href='javascript: void(0)' id='post_id"+data.Comment.id+"' class='showCommentBox'>Comments</a>"+
+					   "</label>"+
+					    "<a href='#' class='delete'> Remove</a>"+
+					"</div>"+
+					"<div class='clearfix'></div>"+
+					"<div id='CommentPosted"+data.Comment.id+"'>"+
+					    "<div class='clearfix'></div>"+
+					"</div>"+
+					"<div class='commentBox row' align='right' id='commentBox-"+data.Comment.id+"' style='display:none'>"+
+					   " <div class='span1'>"+
+					        "<img src='"+baseurl+"/img/surgeon_small.png' class='CommentImg' style='float:left;'/>"+
+					    "</div>"+
+					     "<div class='span11'>"+
+					        "<label id='record-"+data.Comment.id+"'>"+
+					            "<textarea class='span12' placeholder='Hãy viết ý kiến của bạn vào đây...' id='commentMark-"+data.Comment.id+"' name='commentMark' cols='60'></textarea>"+
+					        "</label>"+
+					        "<a id='SubmitComment' class='btn btn-icon btn-primary glyphicons circle_ok'>Trả lời</a>"+
+					    "</div>"+
+					"</div>";
+					$('#posting').prepend($(value).fadeIn('slow'));
+					$("#watermark").val('');
 				});
 			}
 		});
 
 
-		$('.commentMark').livequery("focus", function(e){
-
-			var parent  = $('.commentMark').parent();
-			$(".commentBox").children(".commentMark").css('width','320px');
-			$(".commentBox").children("a#SubmitComment").hide();
-			// $(".commentBox").children(".CommentImg").hide();
-
-			var getID =  parent.attr('id').replace('record-','');
-			$("#commentBox-"+getID).children("a#SubmitComment").show();
-			$('.commentMark').css('width','300px');
-			$("#commentBox-"+getID).children(".CommentImg").show();
-		});
+		// $('.commentMark').livequery("focus", function(e){
+		// 	var parent  = $('.commentMark').parent();
+		// 	$(".commentBox").children(".commentMark").css('width','320px');
+		// 	$(".commentBox").children("a#SubmitComment").hide();
+		// 	// $(".commentBox").children(".CommentImg").hide();
+		// 	var getID =  parent.attr('id').replace('record-','');
+		// 	$("#commentBox-"+getID).children("a#SubmitComment").show();
+		// 	$('.commentMark').css('width','300px');
+		// 	$("#commentBox-"+getID).children(".CommentImg").show();
+		// });
 
 		//showCommentBox
-		$('a.showCommentBox').livequery("click", function(e){
-
+		//hiển thị ô trả lời khi bấm link(#nút) trả lời ý kiến đánh giá
+		$('a.showCommentBox').click(function(e){
 			var getpID =  $(this).attr('id').replace('post_id','');
-
 			$("#commentBox-"+getpID).css('display','');
-			$("#commentMark-"+getpID).focus();
-			$("#commentBox-"+getpID).children("CommentImg").show();
-			$("#commentBox-"+getpID).children("a#SubmitComment").show();
 		});
 
 		//SubmitComment
-		$('a.comment').livequery("click", function(e){
-
-			var getpID =  $(this).parent().attr('id').replace('commentBox-','');
+		//khi bấm nút trả lời
+		$('a.replyCmt').click(function(e){
+			var token = $("#token").val();
+			var getpID =  $(this).parent().parent().attr('id').replace('commentBox-','');
 			var comment_text = $("#commentMark-"+getpID).val();
-
-			if(comment_text != "Write a comment...")
+			if(comment_text != "1")
 			{
-				$.post("add_comment.php?comment_text="+comment_text+"&post_id="+getpID, {
-
+				$.post("../../commons/replypost/"+getpID+"/"+comment_text+"/"+token, {
 				}, function(response){
-
-					$('#CommentPosted'+getpID).append($(response).fadeIn('slow'));
-					$("#commentMark-"+getpID).val("Write a comment...");
+					console.log(response);
+					data2 = $.parseJSON(response);
+					value2 = "<div class='commentPanel row' id='record-"+data2.ReplyComment.id+"' align='left'>"+
+						"<div id='record-"+data2.ReplyComment.id+"' align='left'>"+
+							"<img src='"+baseurl+"/img/surgeon_small.png' style='float:left;'/>"+
+							"<label class='postedComments'>"+
+								"<b>"+data2.Member.ten+"</b>&nbsp;"+
+								data2.ReplyComment.content+
+							"</label>"+
+							"<br clear='all' />"+
+							"<span style='margin-left:43px; color:#666666; font-size:11px'>"+
+							"<?php ?>"+
+							"</span>"+
+							"&nbsp;&nbsp;<a href='#' id='CID-"+data2.ReplyComment.id+"' class='c_delete'>Delete</a>"+
+						"</div>"+
+					"</div>";
+					$('#CommentPosted'+getpID).append($(value2).fadeIn('slow'));
+					$("#commentMark-"+getpID).val("");
 				});
 			}
 
