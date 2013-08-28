@@ -142,12 +142,23 @@
                 <div class="box-ct clearfix row-fluid">
                     <div class='span12 article detail'>
                         <?php
-                            $comments= CommonsController::showpost();
+                            $comments = CommonsController::showpost();
+                            $formtoken = uniqid();
+                            if(isset($_SESSION['user_token'])) unset($_SESSION['user_token']);
+                            $_SESSION['user_token'] = $formtoken;
+                            if(isset($_SESSION['drugid'])) unset($_SESSION['drugid']);
+                            $_SESSION['drugid'] = $drug['Drug']['id'];
                         ?>
+                        <input type='hidden' name='itemid' id='itemid' value='<?php echo $drug['Drug']['id'];?>' />
+                        <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
+                        <input type='hidden' name='token' id='token' value='<?php echo $formtoken;?>' />
                         <form action="" method="post" class='commentForm' name="postsForm">
                             <textarea class="span12" id="watermark" placeholder='Hãy viết đánh giá của bạn về sản phẩm này ...' name="watermark" cols="60"></textarea>
                             <button id="shareButton" type='button' class="btn btn-icon btn-primary glyphicons circle_ok">Bình luận</button>
                         </form>
+                        <?php }else{?>
+                        <p style='color:#f00'>Hãy đăng nhập để thực hiện đánh giá của bạn !<p>
+                        <?php }?>
                         <hr class='clearfix'/>
                         <div id="posting" align="center">
                             <?php
@@ -167,14 +178,16 @@
                                            <?php
                                                 $arts = explode(':', $item['Comment']['TimeSpent']);
                                                 $ts = $arts[0]*3600+ $arts[1]*60+$arts[2];
-                                                if($ts>2073600) echo date('d/m/Y',strtotime($item['Comment']['ngayviet']));
+                                                if($ts>172800) echo $item['Comment']['ngayviet'];
                                                 elseif($ts>86400) echo  'hôm qua';
                                                 else if($ts>3600) echo $arts[0].' giờ trước.';
                                                 else if($ts>60) echo $arts[1].' phút trước.';
                                                 else $val = 'vài giây trước.';
                                             ?>
                                            </span>
-                                           <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Comments</a>
+                                            <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
+                                           <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
+                                           <?php }?>
                                            </label>
                                            <?php
                                             if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
@@ -198,6 +211,10 @@
                                                     </div>
                                                     <div class='span11'>
                                                         <label class="postedComments">
+                                                            <b><?php
+                                                                $member =  MembersController::getInfor($value['members_id']);
+                                                                echo $member['Member']['ten'];
+                                                            ?></b>
                                                             <?php  echo $value['content'];?>
                                                         </label>
                                                         <span style="color:#666666; font-size:11px">
@@ -222,17 +239,19 @@
                                             }?>
                                             <div class="clearfix"></div>
                                         </div>
+                                         <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
                                         <div class="commentBox row" align="right" id="commentBox-<?php  echo $item['Comment']['id'];?>" <?php echo (($comment_num_row) ? '' :'style="display:none"')?>>
                                             <div class='span1'>
                                                 <?php echo $html->img('img/surgeon_small.png',array('class'=>"CommentImg",'style'=>"float:left;"));?>
                                             </div>
                                              <div class='span11'>
                                                 <label id="record-<?php  echo $item['Comment']['id'];?>">
-                                                    <textarea class="span12" id="commentMark-<?php  echo $item['Comment']['id'];?>" name="commentMark" cols="60"></textarea>
+                                                    <textarea class="span12" placeholder='Hãy viết ý kiến của bạn vào đây...' id="commentMark-<?php  echo $item['Comment']['id'];?>" name="commentMark" cols="60"></textarea>
                                                 </label>
-                                                <a id="SubmitComment" class="btn btn-icon btn-primary glyphicons circle_ok">Trả lời</a>
+                                                <a id="SubmitComment" class="btn btn-icon btn-primary glyphicons circle_ok replyCmt">Trả lời</a>
                                             </div>
                                         </div>
+                                        <?php }?>
                                    </div>
                                 <?php
                                 }
@@ -241,6 +260,7 @@
                                 <a id="more_<?php echo @$next_records?>" class="more_records" href="javascript: void(0)">Older Posts</a>
                                 </div>
                                 <?php
+
                                 }?>
                             </div>
                         </div>

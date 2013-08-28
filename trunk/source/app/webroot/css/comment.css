@@ -22,7 +22,10 @@ a.c_delete{color:#3B5998;
 	padding-bottom:12px;
 	padding-top:10px;
     border-bottom: #e6e6e6 solid 1px;
-    }
+}
+.friends_area label{
+   	cursor: text;
+   }
 .top_area{
 	background:#627AAD;
 	font-size:14px;

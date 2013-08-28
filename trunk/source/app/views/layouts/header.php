@@ -18,7 +18,7 @@
 		<script>
 			var toado='0,0';
 			var noidung = '';
-
+			var baseurl = "<?php echo BASE_PATH;?>";
 		</script>
     </head>
     <body>

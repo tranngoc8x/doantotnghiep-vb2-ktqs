@@ -70,17 +70,14 @@ class CommonsController extends AppController{
 		}
 	}
 
-	function _checkValues($value)
+	public function _checkValues($value)
 	{
-		 $value = trim($value);
-
+		$value = trim($value);
 		if (get_magic_quotes_gpc()) {
 			$value = stripslashes($value);
 		}
-
-		 $value = strtr($value,array_flip(get_html_translation_table(HTML_ENTITIES)));
-
-		 $value = strip_tags($value);
+		$value = strtr($value,array_flip(get_html_translation_table(HTML_ENTITIES)));
+		$value = strip_tags($value);
 		$value = mysql_real_escape_string($value);
 		$value = htmlspecialchars ($value);
 		return $value;
@@ -97,38 +94,63 @@ class CommonsController extends AppController{
 		$ret = substr($ret, 1);
 		return $ret;
 	}
-	function showpost(){
+	function showpost($value=null , $token=null, $itemid = null){
 		global $inflect;
-		if( isset($_REQUEST['value']) && $this->_checkValues($_REQUEST['value']))
+		$result = array();
+		$item_id =$_SESSION['drugid'];
+		$model = ucfirst($inflect->singularize($this->_controller));
+		//$item_id = $this->variables[lcfirst($model)][$model]['id'];
+		//khi bấm nút bình luận
+		if( !empty($value) && CommonsController::_checkValues($value))
 		{
-			$users_id = $_SESSION['ssid'];
-			mysql_query("INSERT INTO  ykien_drugs (drugs_id,members_id,content,ngayviet) VALUES('6','".$users_id."','".$this->_checkValues($_REQUEST['value'])."','".(date("Y-m-d H:i:s"))."')");
-			$result = mysql_query("SELECT *, NOW() - ngayviet AS TimeSpent FROM  ykien_drugs order by p_id desc limit 1");
+			if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+				$users_id = $_SESSION['ssid'];
+				$this->{$model}->query("INSERT INTO ykien_drugs (drugs_id,members_id,content,ngayviet) VALUES('".$_SESSION['drugid']."','".$users_id."','".$this->_checkValues($value)."','".(date("Y-m-d H:i:s"))."')");
+				$result = $this->{$model}->query("SELECT Comment.*, DATE_FORMAT(  Comment.ngayviet ,  '%d/%m/%Y' ) AS ngayviet,TIMEDIFF (NOW() , Comment.ngayviet) AS TimeSpent,Member.ten FROM  ykien_drugs as Comment LEFT JOIN members AS Member ON Comment.members_id = Member.id WHERE Comment.drugs_id = '$item_id' order by Comment.id desc limit 1");
+				echo json_encode($result);
+				exit();
+			}
 		}
-
 		// bấm  nút xem thêm
-		elseif(isset($_REQUEST['value']) && !empty($_REQUEST['show_more_post']))
+		elseif(!empty($value) && !empty($_GET['show_more_post']))
 		{
-			$next_records = $_REQUEST['show_more_post'] + 10;
-			$result = mysql_query("SELECT *,
-			NOW() - ngayviet AS TimeSpent FROM  ykien_drugs order by id desc limit ".$_REQUEST['show_more_post'].", 10");
-			$check_res = mysql_query("SELECT * FROM  ykien_drugs order by id desc limit ".$next_records.", 10");
+			$next_records = $_POST['show_more_post'] + 10;
+			$result = $this->{$model}->query("SELECT Comment.*,DATE_FORMAT(  Comment.ngayviet ,  '%d/%m/%Y' ) AS ngayviet,
+			TIMEDIFF (NOW() , Comment.ngayviet) AS TimeSpent FROM,Member.ten ykien_drugs as Comment LEFT JOIN members AS Member ON Comment.members_id = Member.id WHERE Comment.drugs_id = '$item_id' order by Comment.id  desc limit "."1".", 10",array('Ykien_drug'=>'Ykien_drug_child'),array('Ykien_drug'=>'Member'));
+			$check_res = $this->{$model}->query("SELECT * FROM  ykien_drugs order by id desc limit ".$next_records.", 10");
 			$show_more_button = 0; // button in the end
 			$check_result = mysql_num_rows(@$check_res);
 			if($check_result > 0)
 			{
 				$show_more_button = 1;
 			}
+			echo  json_encode($result);
+			exit();
 		}
-		else
+		else//hiển thị lần đầu tiên khi load trang web
 		{
 			$show_more_button = 1;
-			$model = ucfirst($inflect->singularize($this->_controller));
-			//echo "SELECT *, NOW() - Comment.ngayviet AS TimeSpent FROM  ykien_drugs AS Comment LEFT JOIN  ykien_drug_childs AS CommentChild ON Comment.id = CommentChild.ykien_drugs_id ORDER BY Comment.id DESC LIMIT 0,10";
-			$result = $this->{$model}->query("SELECT *,
-			TIMEDIFF (NOW() , Comment.ngayviet) AS TimeSpent FROM  ykien_drugs AS Comment LEFT JOIN members AS Member ON Comment.members_id = Member.id ORDER BY Comment.id DESC LIMIT 0,10",array('Ykien_drug'=>'Ykien_drug_child'),array('Ykien_drug'=>'Member'));
+		//	$item_id = @$this->variables[lcfirst($model)][$model]['id'];
+			//,DATE_FORMAT(  Comment.ngayviet ,  '%d/%m/%Y' ) AS ngayviet
+			//echo "SELECT *, NOW() - Comment.ngayviet AS TimeSpent FROM  ykien_drugs AS Comment LEFT JOIN  ykien_drug_childs AS CommentChild ON Comment.id = CommentChild.ykien_drugs_id WHERE Comment.drugs_id = '$item_id' ORDER BY Comment.id DESC LIMIT 0,10";
+			$result = $this->{$model}->query("SELECT *,DATE_FORMAT(  Comment.ngayviet ,  '%d/%m/%Y' ) AS ngayviet,
+			TIMEDIFF (NOW() , Comment.ngayviet) AS TimeSpent FROM  ykien_drugs AS Comment LEFT JOIN members AS Member ON Comment.members_id = Member.id WHERE Comment.drugs_id = '$item_id' ORDER BY Comment.id DESC LIMIT 0,10",array('Ykien_drug'=>'Ykien_drug_child'),array('Ykien_drug'=>'Member'));
 		}
 		return $result;
+	}
+	function replypost($idcmt=null,$value=null , $token=null){
+		global $inflect;
+		$result = array();
+		$model = ucfirst($inflect->singularize($this->_controller));
+		if( !empty($value) && CommonsController::_checkValues($value))
+		{
+			if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+				$users_id = $_SESSION['ssid'];
+				$this->{$model}->query("INSERT INTO ykien_drug_childs (ykien_drugs_id,members_id,content,ngayviet) VALUES('".$idcmt."','".$users_id."','".$this->_checkValues($value)."','".(date("Y-m-d H:i:s"))."')");
+				$result = $this->{$model}->query("SELECT ReplyComment.*, DATE_FORMAT(  ReplyComment.ngayviet ,  '%d/%m/%Y' ) AS ngayviet,TIMEDIFF (NOW() , ReplyComment.ngayviet) AS TimeSpent,Member.ten FROM  ykien_drug_childs as ReplyComment LEFT JOIN members AS Member ON ReplyComment.members_id = Member.id WHERE ReplyComment.ykien_drugs_id = '$idcmt' order by ReplyComment.id desc limit 1");
+			}
+		}
+		echo json_encode($result);
 	}
 
 	function afterAction() {
