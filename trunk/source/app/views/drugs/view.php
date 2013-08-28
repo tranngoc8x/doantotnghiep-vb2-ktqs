@@ -224,7 +224,7 @@
                                                             elseif($diffdate>86400) echo  'hôm qua';
                                                             else if($diffdate>3600) echo floor($diffdate/3600).' giờ trước.';
                                                             else if($diffdate>60) echo floor($diffdate/60).' phút trước.';
-                                                            else $val = 'vài giây trước.';
+                                                            else echo 'vài giây trước.';
                                                         ?>
                                                         </span>
                                                         <?php
@@ -237,7 +237,6 @@
                                                 }?>
                                                 <?php
                                             }?>
-                                            <div class="clearfix"></div>
                                         </div>
                                          <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
                                         <div class="commentBox row" align="right" id="commentBox-<?php  echo $item['Comment']['id'];?>" <?php echo (($comment_num_row) ? '' :'style="display:none"')?>>

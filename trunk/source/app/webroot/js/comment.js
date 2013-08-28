@@ -37,9 +37,9 @@
 					   "<span>"+
 					  val+
 					   "</span>"+
-					   "<a href='javascript: void(0)' id='post_id"+data.Comment.id+"' class='showCommentBox'>Comments</a>"+
+					   "<a href='javascript: void(0)' id='post_id"+data.Comment.id+"' class='showCommentBox'>Trả lời</a>"+
+					   "<a href='#' class='delete'> Xóa</a>"+
 					   "</label>"+
-					    "<a href='#' class='delete'> Remove</a>"+
 					"</div>"+
 					"<div class='clearfix'></div>"+
 					"<div id='CommentPosted"+data.Comment.id+"'>"+
@@ -64,14 +64,16 @@
 
 		//showCommentBox
 		//hiển thị ô trả lời khi bấm link(#nút) trả lời ý kiến đánh giá
-		$('a.showCommentBox').click(function(e){
+		//$('a.showCommentBox').click(function(e){
+		$('a.showCommentBox').livequery("click", function(e){
 			var getpID =  $(this).attr('id').replace('post_id','');
 			$("#commentBox-"+getpID).css('display','');
 		});
 
 		//SubmitComment
 		//khi bấm nút trả lời
-		$('a.replyCmt').click(function(e){
+		//$('a.replyCmt').click(function(e){
+		$('a.replyCmt').livequery("click", function(e){
 			var token = $("#token").val();
 			var getpID =  $(this).parent().parent().attr('id').replace('commentBox-','');
 			var comment_text = $("#commentMark-"+getpID).val();
@@ -79,20 +81,30 @@
 			{
 				$.post("../../commons/replypost/"+getpID+"/"+comment_text+"/"+token, {
 				}, function(response){
-					console.log(response);
 					data2 = $.parseJSON(response);
+					thoigian2 = data2.ReplyComment.TimeSpent;
+					arts2 = thoigian2.split(":");
+					ts2 = arts2[0]*3600+ arts2[1]*60+arts2[2];
+					if(ts2>2073600){
+					    val2 = data2.ReplyComment.ngayviet;
+					}
+					else if(ts2>86400) val=  'hôm qua';
+					else if(ts2>3600) val = arts2[0]+' giờ trước.';
+					else if(ts2>60) val = arts2[1]+' phút trước.';
+					else val2 = 'vài giây trước.';
 					value2 = "<div class='commentPanel row' id='record-"+data2.ReplyComment.id+"' align='left'>"+
-						"<div id='record-"+data2.ReplyComment.id+"' align='left'>"+
+						"<div class='span1'>"+
 							"<img src='"+baseurl+"/img/surgeon_small.png' style='float:left;'/>"+
+						"</div>"+
+						"<div class='span11'>"+
 							"<label class='postedComments'>"+
 								"<b>"+data2.Member.ten+"</b>&nbsp;"+
 								data2.ReplyComment.content+
 							"</label>"+
-							"<br clear='all' />"+
-							"<span style='margin-left:43px; color:#666666; font-size:11px'>"+
-							"<?php ?>"+
+							"<span style=' color:#666666; font-size:11px'>"+
+							val2+
 							"</span>"+
-							"&nbsp;&nbsp;<a href='#' id='CID-"+data2.ReplyComment.id+"' class='c_delete'>Delete</a>"+
+							"&nbsp;&nbsp;<a href='#' id='CID-"+data2.ReplyComment.id+"' class='c_delete'>Xóa</a>"+
 						"</div>"+
 					"</div>";
 					$('#CommentPosted'+getpID).append($(value2).fadeIn('slow'));
@@ -117,7 +129,7 @@
 
 		});
 
-		$('a.delete').click(function(e){
+		$('a.delete').livequery("click", function(e){
 			if(confirm('Bạn có chắc muốn xóa bình luận này ?')==false)
 			return false;
 			e.preventDefault();
@@ -141,13 +153,13 @@
 		});
 
 		//deleteChild Comment
-		$('a.c_delete').click(function(e){
+		$('a.c_delete').livequery("click", function(e){
 
 			if(confirm('Bạn có chắc muốn xóa bình luận này ?')==false)
 			return false;
 			e.preventDefault();
 			var token = $("#token").val();
-			var parent  = $('a.c_delete').parent().parent();
+			var parent  = $(this).parent().parent();
 			var c_id =  $(this).attr('id').replace('CID-','');
 			$.ajax({
 				type: 'get',
