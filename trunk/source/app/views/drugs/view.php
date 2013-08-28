@@ -188,12 +188,12 @@
                                             <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
                                            <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
                                            <?php }?>
-                                           </label>
                                            <?php
                                             if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
-                                            <a href="#" class="delete"> Remove</a>
-                                           <?php
-                                            }?>
+                                            <a href="#" class="delete"> Xóa</a>
+                                           <?php }?>
+                                           </label>
+
                                         </div>
                                         <div class="clearfix"></div>
                                         <div id="CommentPosted<?php  echo $item['Comment']['id']?>">
@@ -228,7 +228,7 @@
                                                         ?>
                                                         </span>
                                                         <?php
-                                                            if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                                            if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
                                                             &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
                                                         <?php }?>
                                                     </div>

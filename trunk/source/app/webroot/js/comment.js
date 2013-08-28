@@ -62,18 +62,6 @@
 			}
 		});
 
-
-		// $('.commentMark').livequery("focus", function(e){
-		// 	var parent  = $('.commentMark').parent();
-		// 	$(".commentBox").children(".commentMark").css('width','320px');
-		// 	$(".commentBox").children("a#SubmitComment").hide();
-		// 	// $(".commentBox").children(".CommentImg").hide();
-		// 	var getID =  parent.attr('id').replace('record-','');
-		// 	$("#commentBox-"+getID).children("a#SubmitComment").show();
-		// 	$('.commentMark').css('width','300px');
-		// 	$("#commentBox-"+getID).children(".CommentImg").show();
-		// });
-
 		//showCommentBox
 		//hiển thị ô trả lời khi bấm link(#nút) trả lời ý kiến đánh giá
 		$('a.showCommentBox').click(function(e){
@@ -129,90 +117,50 @@
 
 		});
 
-		//deleteComment
-		$('a.c_delete').livequery("click", function(e){
-
-			if(confirm('Are you sure you want to delete this comment?')==false)
-
+		$('a.delete').click(function(e){
+			if(confirm('Bạn có chắc muốn xóa bình luận này ?')==false)
 			return false;
-
 			e.preventDefault();
-			var parent  = $('a.c_delete').parent();
-			var c_id =  $(this).attr('id').replace('CID-','');
-
+			var parent  = $('a.delete').parent().parent().parent();
+			var pid    = parent.attr('id').replace('record-','');
+			var token = $("#token").val();
+			//var main_tr = $('#'+temp).parent();
 			$.ajax({
-
 				type: 'get',
-
-				url: 'delete_comment.php?c_id='+ c_id,
-
+			//	url: 'delete.php?id='+ parent.attr('id').replace('record-',''),
+				url: '../../commons/deleteCmt/'+ pid+"/"+token,
 				data: '',
-
 				beforeSend: function(){
-
 				},
-
 				success: function(){
-
 					parent.fadeOut(200,function(){
-
 						parent.remove();
-
 					});
-
 				}
-
 			});
 		});
 
-		/// hover show remove button
-		$('.friends_area').livequery("mouseenter", function(e){
-			$(this).children("a.delete").show();
-		});
-		$('.friends_area').livequery("mouseleave", function(e){
-			$('a.delete').hide();
-		});
-		/// hover show remove button
+		//deleteChild Comment
+		$('a.c_delete').click(function(e){
 
-
-		$('a.delete').livequery("click", function(e){
-
-		if(confirm('Are you sure you want to delete this post?')==false)
-
-		return false;
-
-		e.preventDefault();
-
-		var parent  = $('a.delete').parent();
-
-		var temp    = parent.attr('id').replace('record-','');
-
-		var main_tr = $('#'+temp).parent();
-
+			if(confirm('Bạn có chắc muốn xóa bình luận này ?')==false)
+			return false;
+			e.preventDefault();
+			var token = $("#token").val();
+			var parent  = $('a.c_delete').parent().parent();
+			var c_id =  $(this).attr('id').replace('CID-','');
 			$.ajax({
-
 				type: 'get',
-
-				url: 'delete.php?id='+ parent.attr('id').replace('record-',''),
-
+				url: '../../commons/deleteCmtChild/'+ c_id+"/"+token,
 				data: '',
-
 				beforeSend: function(){
-
 				},
-
 				success: function(){
-
 					parent.fadeOut(200,function(){
-
-						main_tr.remove();
-
+						parent.remove();
 					});
-
 				}
-
 			});
-
 		});
 
 	});

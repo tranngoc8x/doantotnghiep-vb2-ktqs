@@ -95,6 +95,7 @@ class CommonsController extends AppController{
 		return $ret;
 	}
 	function showpost($value=null , $token=null, $itemid = null){
+		$this->doNotRenderHeader=1;
 		global $inflect;
 		$result = array();
 		$item_id =$_SESSION['drugid'];
@@ -139,6 +140,7 @@ class CommonsController extends AppController{
 		return $result;
 	}
 	function replypost($idcmt=null,$value=null , $token=null){
+		$this->doNotRenderHeader=1;
 		global $inflect;
 		$result = array();
 		$model = ucfirst($inflect->singularize($this->_controller));
@@ -151,6 +153,25 @@ class CommonsController extends AppController{
 			}
 		}
 		echo json_encode($result);
+	}
+	function deleteCmt($id,$token=null){
+		global $inflect;
+		$this->doNotRenderHeader=1;
+		if(!isset($id) || empty($id)) exit();
+		if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+			$model = ucfirst($inflect->singularize($this->_controller));
+			$result = $this->{$model}->query("DELETE FROM ykien_drug_childs WHERE ykien_drugs_id ='".$id."' AND members_id ='".$_SESSION['ssid']."'");
+			$result = $this->{$model}->query("DELETE FROM ykien_drugs WHERE id ='".$id."' AND members_id ='".$_SESSION['ssid']."'");
+		}
+	}
+	function deleteCmtChild($id,$token=null){
+		global $inflect;
+		$this->doNotRenderHeader=1;
+		if(!isset($id) || empty($id)) exit();
+		if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+			$model = ucfirst($inflect->singularize($this->_controller));
+			$result = $this->{$model}->query("DELETE FROM ykien_drug_childs WHERE id ='".$id."' AND members_id ='".$_SESSION['ssid']."'");
+		}
 	}
 
 	function afterAction() {
