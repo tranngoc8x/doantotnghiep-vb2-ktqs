@@ -21,7 +21,7 @@
                                     <li><a href="#" class="mainlevel-nav">Điều khoản</a> </li>
                                     <li><a href="#" class="mainlevel-nav">Liên hệ</a> </li>
                                  </ul>
-                                    <?php echo $footer['Infor']['content'];?>
+                                    <?php echo $footer[0]['Infor']['content'];?>
                             </div>
                         </div>
                     </div>

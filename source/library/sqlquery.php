@@ -462,9 +462,6 @@ class SQLQuery{
 			mysql_free_result($this->_result);
 		}
 		$this->_clear();
-		if(count($result)==1){
-			$result = $result[0];
-		}
 		return($result);
 	}
 	function lists($table,$cond = null) {

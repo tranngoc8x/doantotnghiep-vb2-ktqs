@@ -5,6 +5,6 @@
 	define('DB_USER', 'root');
 	define('DB_PASSWORD', '');
 	define('DB_HOST', 'localhost');
-	define('BASE_PATH','http://localhost/DOAN/Source');
+	define('BASE_PATH','http://localhost/DOAN/source');
 	define('PAGINATE_LIMIT', '20');
 	date_default_timezone_set('Asia/Ho_Chi_Minh');

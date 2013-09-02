@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1y92TzXvD1IOBJovofxMpwK_C3_21HYA&sensor=true"></script>
 
 		<?php
-    		echo $html->script(array('jquery-1.9.1','bootstrap','bootstrap.min','script','jRating.jquery','jquery.livequery','comment'));
+    		echo $html->script(array('jquery-1.4.1','bootstrap','bootstrap.min','script','jRating.jquery','jquery.livequery','comment'));
     	?>
 		<script>
 			var toado='0,0';
