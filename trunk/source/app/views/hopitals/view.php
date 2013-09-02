@@ -89,7 +89,7 @@
 		                                    echo $html->img('img/star_none.png');
 		                                }
 		                            ?> -->
-		                            <div class="write-rating rated" data-average="<?php echo $your_review['Rate']['mark'];?>" data-id="<?php echo $your_review['Rate']['id'];?>"></div>
+		                            <div class="write-rating rated" data-average="<?php echo $your_review[0]['Rate']['mark'];?>" data-id="<?php echo $your_review[0]['Rate']['id'];?>"></div>
 		                            <p></p>
 		                            <div class="serverResponse"><p></p></div>
 		                            <p></p>
@@ -110,5 +110,131 @@
 				</div>
 			</div>
 		</div>
+		<div class="boxheader boxheader-main clearfix">
+            <h3>Đánh giá</h3>
+            <div class="box-ct clearfix row-fluid">
+                <?php
+                    if(isset($_SESSION['user_token'])) unset($_SESSION['user_token']);
+                    $formtoken = uniqid();
+                    $_SESSION['user_token'] = $formtoken;
+                ?>
+
+                <?php $comments = CommonsController::showpost($hopital['Hopital']['id']);?>
+                <div class='span12 article detail'>
+                    <?php
+                        $show_more_button = count($comments);
+                    ?>
+                    <input type='hidden' name='itemid' id='itemid' value="t4_<?php echo $hopital['Hopital']['id'];?>" />
+                    <?php if(isset($_SESSION['user_token']) && !empty($_SESSION['ssid'])){?>
+                    <input type='hidden' name='token' id='token' value='<?php echo $formtoken;?>' />
+                    <form action="" method="post" class='commentForm' name="postsForm">
+                        <textarea class="span12" id="watermark" placeholder='Hãy viết đánh giá của bạn về sản phẩm này ...' name="watermark" cols="60"></textarea>
+                        <button id="shareButton" type='button' class="btn btn-icon btn-primary glyphicons circle_ok">Bình luận</button>
+                    </form>
+                    <?php }else{?>
+                    <p style='color:#f00'>Hãy đăng nhập để thực hiện đánh giá của bạn !<p>
+                    <?php }?>
+                    <hr class='clearfix'/>
+                    <div id="posting" align="center">
+                        <?php
+                            foreach ($comments as $key => $item) {
+
+                         ?>
+                               <div class="friends_area" id="record-<?php  echo $item['Comment']['id']?>">
+                                    <div class='span1'>
+                                        <?php echo $html->img('img/surgeon.png',array('style'=>"float:left;"));?>
+                                    </div>
+                                    <div class='span11'>
+                                       <label class="name">
+                                       <b><?php echo $item['Member']['ten'];?></b>
+                                       <em><?php  echo $item['Comment']['content'];?></em>
+                                       <br />
+                                       <span>
+                                       <?php
+                                            $arts = explode(':', $item['Comment']['TimeSpent']);
+                                            $ts = $arts[0]*3600+ $arts[1]*60+$arts[2];
+                                            if($ts>172800) echo $item['Comment']['ngayviet'];
+                                            elseif($ts>86400) echo  'hôm qua';
+                                            else if($ts>3600) echo $arts[0].' giờ trước.';
+                                            else if($ts>60) echo $arts[1].' phút trước.';
+                                            else echo 'vài giây trước.';
+                                        ?>
+                                       </span>
+                                        <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
+                                       <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
+                                       <?php }?>
+                                       <?php
+                                        if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                        <a href="#" class="delete"> Xóa</a>
+                                       <?php }?>
+                                       </label>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div id="CommentPosted<?php  echo $item['Comment']['id']?>">
+                                        <?php
+                                        $comment_num_row = count($item['Ykien_hopital_child']);
+                                        if($comment_num_row > 0)
+                                        {
+                                            foreach ($item['Ykien_hopital_child'] as $value)
+                                            {
+                                            ?>
+                                            <div class="commentPanel row" id="record-<?php  echo $value['id'];?>" align="left">
+                                                <div class='span1'>
+                                                <?php echo $html->img('img/surgeon_small.png',array('class'=>"CommentImg",'style'=>"float:left; clear: right"));?>
+                                                </div>
+                                                <div class='span11'>
+                                                    <label class="postedComments">
+                                                        <b><?php
+                                                            $member =  MembersController::getInfor($value['members_id']);
+                                                            echo $member[0]['Member']['ten'];
+                                                        ?></b>
+                                                        <?php  echo $value['content'];?>
+                                                    </label>
+                                                    <span style="color:#666666; font-size:11px">
+                                                   <?php
+                                                        $diffdate = (strtotime(date('Y-m-d H:i:s')) - strtotime($value['ngayviet']));
+                                                        if($diffdate>172800) echo date('d/m/Y',strtotime($value['ngayviet']));
+                                                        elseif($diffdate>86400) echo  'hôm qua';
+                                                        else if($diffdate>3600) echo floor($diffdate/3600).' giờ trước.';
+                                                        else if($diffdate>60) echo floor($diffdate/60).' phút trước.';
+                                                        else echo 'vài giây trước.';
+                                                    ?>
+                                                    </span>
+                                                    <?php
+                                                        if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
+                                                        &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
+                                                    <?php }?>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            }?>
+                                            <?php
+                                        }?>
+                                    </div>
+                                     <?php if(isset($_SESSION['user_token']) && isset($_SESSION['ssid'])){?>
+                                    <div class="commentBox row" align="right" id="commentBox-<?php  echo $item['Comment']['id'];?>" <?php echo (($comment_num_row) ? '' :'style="display:none"')?>>
+                                        <div class='span1'>
+                                            <?php echo $html->img('img/surgeon_small.png',array('class'=>"CommentImg",'style'=>"float:left;"));?>
+                                        </div>
+                                         <div class='span11'>
+                                            <label id="record-<?php  echo $item['Comment']['id'];?>">
+                                                <textarea class="span12" placeholder='Hãy viết ý kiến của bạn vào đây...' id="commentMark-<?php  echo $item['Comment']['id'];?>" name="commentMark" cols="60"></textarea>
+                                            </label>
+                                            <a id="SubmitComment" class="btn btn-icon btn-primary glyphicons circle_ok replyCmt">Trả lời</a>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                               </div>
+                            <?php
+                            }?>
+                            <div id="bottomMoreButton">
+                            <a id="more_10" class="more_records" href="javascript: void(0)">Xem các đánh giá cũ hơn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>

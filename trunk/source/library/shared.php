@@ -1,7 +1,8 @@
 <?php
 
 /** Check if environment is development and display errors **/
-
+session_start();
+ini_set('allow_url_include','On');
 function setReporting() {
 if (DEVELOPMENT_ENVIRONMENT == true) {
 	error_reporting(E_ALL);
@@ -138,7 +139,7 @@ function callHook() {
 /** GZip Output **/
 
 function gzipOutput() {
-    $ua = $_SERVER['HTTP_USER_AGENT'];
+    $ua = @$_SERVER['HTTP_USER_AGENT'];
 
     if (0 !== strpos($ua, 'Mozilla/4.0 (compatible; MSIE ')
         || false !== strpos($ua, 'Opera')) {

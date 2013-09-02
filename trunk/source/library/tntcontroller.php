@@ -33,6 +33,25 @@ class TntController{
 			$this->variables = array_merge($name,$this->variables);
 		}
 	}
+	function auth($array,$table='users',$usr = 'username',$pas = 'password'){
+		global $inflect;
+		$model = ucfirst($inflect->singularize($table));
+		$this->{$model}->where(array($usr=>$array['username']));
+		$temp = $this->{$model}->find();
+		if(!empty($temp)){
+			if(md5($array['password']) == $temp[0][$model][$pas]){
+
+				$_SESSION['ssid'] = $temp[0][$model]['id'];
+				$_SESSION['username'] = $temp[0][$model][$usr];
+				$_SESSION['ten'] = $temp[0][$model]['ten'];
+				return 1;
+			}
+			return 0;
+		}else{
+			return 0;
+		}
+
+	}
 	function render($doNotRenderHeader = 0) {
 		$html = new HTML;
 		$view = new view;
@@ -77,9 +96,9 @@ class TntController{
     function element($name,$path = 'elements'){
     	if(empty($name)) return;
     	if($path== 'elements'){
-    		include(APP.'/views/elements/'.$name);
+    		include(BASE_PATH.'/views/elements/'.$name);
     	}else{
-    		include(APP.'/'.$path.'/'.$name);
+    		include(BASE_PATH.'/'.$path.'/'.$name);
     	}
     }
     function __destruct() {

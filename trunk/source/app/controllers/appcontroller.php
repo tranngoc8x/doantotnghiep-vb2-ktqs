@@ -23,25 +23,6 @@ class AppController extends TntController {
 		$this->set(compact("sidebar","footer","contact"));
 		// debug($footer);
 	}
-	function auth($array,$table='users',$usr = 'username',$pas = 'password'){
-		global $inflect;
-		$model = ucfirst($inflect->singularize($table));
-		$this->{$model}->where(array($usr=>$array['username']));
-		$temp = $this->{$model}->find();
-		if(!empty($temp)){
-			if(md5($array['password']) == $temp[0][$model][$pas]){
-
-				$_SESSION['ssid'] = $temp[0][$model]['id'];
-				$_SESSION['username'] = $temp[0][$model][$usr];
-				$_SESSION['ten'] = $temp[0][$model]['ten'];
-				return 1;
-			}
-			return 0;
-		}else{
-			return 0;
-		}
-
-	}
 
 	function afterAction() {
 	}

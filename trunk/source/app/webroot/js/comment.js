@@ -9,54 +9,9 @@
 			//if(a!='' && )
 			if(a != "" && token !='')
 			{
-				$.post("../../commons/showpost/"+a+"/"+token+"/"+items, {
+				$.post("../../commons/writePost/"+a+"/"+token+"/"+items, {
 				}, function(response){
-					//console.log(response);
-					var data = $.parseJSON(response);
-					thoigian = data.Comment.TimeSpent;
-					arts = thoigian.split(":");
-					ts = arts[0]*3600+ arts[1]*60+arts[2];
-					if(ts>2073600){
-					    val = data.Comment.ngayviet;
-					}
-					else if(ts>86400) val=  'hôm qua';
-					else if(ts>3600) val = arts[0]+' giờ trước.';
-					else if(ts>60) val = arts[1]+' phút trước.';
-					else val = 'vài giây trước.';
-
-
-					value = "<div class='friends_area' id='record-"+data.Comment.id+"'>"+
-					"<div class='span1'>"+
-					"<img src='"+baseurl+"/img/surgeon.png' style='float:left;'/>"+
-					"</div>"+
-					"<div class='span11'>"+
-					   "<label class='name'>"+
-					   "<b>"+data.Member.ten+"</b>&nbsp;"+
-					   "<em>"+data.Comment.content+"</em>"+
-					   "<br />"+
-					   "<span>"+
-					  val+
-					   "</span>"+
-					   "<a href='javascript: void(0)' id='post_id"+data.Comment.id+"' class='showCommentBox'>Trả lời</a>"+
-					   "<a href='#' class='delete'> Xóa</a>"+
-					   "</label>"+
-					"</div>"+
-					"<div class='clearfix'></div>"+
-					"<div id='CommentPosted"+data.Comment.id+"'>"+
-					    "<div class='clearfix'></div>"+
-					"</div>"+
-					"<div class='commentBox row' align='right' id='commentBox-"+data.Comment.id+"' style='display:none'>"+
-					   " <div class='span1'>"+
-					        "<img src='"+baseurl+"/img/surgeon_small.png' class='CommentImg' style='float:left;'/>"+
-					    "</div>"+
-					     "<div class='span11'>"+
-					        "<label id='record-"+data.Comment.id+"'>"+
-					            "<textarea class='span12' placeholder='Hãy viết ý kiến của bạn vào đây...' id='commentMark-"+data.Comment.id+"' name='commentMark' cols='60'></textarea>"+
-					        "</label>"+
-					        "<a id='SubmitComment' class='btn btn-icon btn-primary glyphicons circle_ok'>Trả lời</a>"+
-					    "</div>"+
-					"</div>";
-					$('#posting').prepend($(value).fadeIn('slow'));
+					$('#posting').prepend($(response).fadeIn('slow'));
 					$("#watermark").val('');
 				});
 			}
@@ -77,70 +32,40 @@
 			var token = $("#token").val();
 			var getpID =  $(this).parent().parent().attr('id').replace('commentBox-','');
 			var comment_text = $("#commentMark-"+getpID).val();
-			if(comment_text != "1")
+			var items = $("#itemid").val().split('_');
+			if(comment_text != "")
 			{
-				$.post("../../commons/replypost/"+getpID+"/"+comment_text+"/"+token, {
-				}, function(response){
-					data2 = $.parseJSON(response);
-					thoigian2 = data2.ReplyComment.TimeSpent;
-					arts2 = thoigian2.split(":");
-					ts2 = arts2[0]*3600+ arts2[1]*60+arts2[2];
-					if(ts2>2073600){
-					    val2 = data2.ReplyComment.ngayviet;
-					}
-					else if(ts2>86400) val=  'hôm qua';
-					else if(ts2>3600) val = arts2[0]+' giờ trước.';
-					else if(ts2>60) val = arts2[1]+' phút trước.';
-					else val2 = 'vài giây trước.';
-					value2 = "<div class='commentPanel row' id='record-"+data2.ReplyComment.id+"' align='left'>"+
-						"<div class='span1'>"+
-							"<img src='"+baseurl+"/img/surgeon_small.png' style='float:left;'/>"+
-						"</div>"+
-						"<div class='span11'>"+
-							"<label class='postedComments'>"+
-								"<b>"+data2.Member.ten+"</b>&nbsp;"+
-								data2.ReplyComment.content+
-							"</label>"+
-							"<span style=' color:#666666; font-size:11px'>"+
-							val2+
-							"</span>"+
-							"&nbsp;&nbsp;<a href='#' id='CID-"+data2.ReplyComment.id+"' class='c_delete'>Xóa</a>"+
-						"</div>"+
-					"</div>";
-					$('#CommentPosted'+getpID).append($(value2).fadeIn('slow'));
+				$.post("../../commons/replypost/"+items[0]+"/"+getpID+"/"+comment_text+"/"+token, {
+				}, function(response2){
+					$('#CommentPosted'+getpID).append($(response2).fadeIn('slow'));
 					$("#commentMark-"+getpID).val("");
 				});
 			}
 
 		});
 
-		//more records show
+		//more records show showmorepost
 		$('a.more_records').livequery("click", function(e){
-
 			var next =  $('a.more_records').attr('id').replace('more_','');
-
-			$.post("posts.php?show_more_post="+next, {
-
-			}, function(response){
+			var items = $("#itemid").val();
+			$.post("../../commons/morepost/"+next+'/'+items, {}, function(response){
 				$('#bottomMoreButton').remove();
-				$('#posting').append($(response).fadeIn('slow'));
-
+					$('#posting').append($(response).fadeIn('slow'));
 			});
-
 		});
+
 
 		$('a.delete').livequery("click", function(e){
 			if(confirm('Bạn có chắc muốn xóa bình luận này ?')==false)
 			return false;
 			e.preventDefault();
-			var parent  = $('a.delete').parent().parent().parent();
+			var parent  = $(this).parent().parent().parent();
 			var pid    = parent.attr('id').replace('record-','');
 			var token = $("#token").val();
-			//var main_tr = $('#'+temp).parent();
+			var items = $("#itemid").val().split('_');
 			$.ajax({
 				type: 'get',
-			//	url: 'delete.php?id='+ parent.attr('id').replace('record-',''),
-				url: '../../commons/deleteCmt/'+ pid+"/"+token,
+				url: '../../commons/deleteCmt/'+ pid+"/"+items[0]+"/"+token,
 				data: '',
 				beforeSend: function(){
 				},
@@ -160,10 +85,12 @@
 			e.preventDefault();
 			var token = $("#token").val();
 			var parent  = $(this).parent().parent();
+			var items = $("#itemid").val().split('_');
 			var c_id =  $(this).attr('id').replace('CID-','');
+
 			$.ajax({
 				type: 'get',
-				url: '../../commons/deleteCmtChild/'+ c_id+"/"+token,
+				url: '../../commons/deleteCmtChild/'+ c_id+"/"+items[0]+"/"+token,
 				data: '',
 				beforeSend: function(){
 				},
