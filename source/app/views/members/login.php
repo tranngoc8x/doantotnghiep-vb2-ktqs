@@ -4,52 +4,48 @@
         <div class="box-ct clearfix row-fluid">
         	<div class='row-fluid'>
         		<?php if(!isset($_SESSION['ssid'])){?>
-	        	<div class='span5'>
+	        	<div class='span12'>
 
 	        		 <div class="boxheader boxheader-main clearfix">
 						<h5>Đăng nhập</h5>
 	        		 </div>
 
-						<?php echo $form->create("Member",array('controller'=>'members','action'=>'login'));?>
-						<fieldset>
+						<?php echo $form->create("Member",array('controller'=>'members','action'=>'login'),array('class'=>'offset3 span3'));?>
+						<div class='row'>
 							<p>
 								<label for="username">Tài khoản</label>
-						        <?php echo $form->input('username',array('class'=>'span8','id'=>'username'));?>
+								<div class="input-prepend">
+							        <span class="add-on"><i class="icon-user"></i></span>
+							        <?php echo $form->input('username',array('class'=>'span12','placeholder'=>'tài khoản','id'=>'username'));?>
+							    </div>
 							</p>
 							<p>
 								<label for="password">Mật khẩu</label>
-						        <?php echo $form->input('password',array('type'=>'password','placeholder'=>'123','class'=>'span8','id'=>'password'));?>
+								<div class="input-prepend">
+							        <span class="add-on"><i class="icon-asterisk"></i></span>
+						        	<?php echo $form->input('password',array('type'=>'password','placeholder'=>'mật khẩu','class'=>'span12','id'=>'password'));?>
+								</div>
 							</p>
- 							<input type='submit' class='btn btn-icon btn-primary glyphicons circle_ok' name='btnlogin' value='Đăng nhập' />
-						</fieldset>
+						</div>
+						<div class='row'>
+ 							<span class='span6'><input type='submit' class='btn btn-icon btn-primary glyphicons circle_ok' name='btnlogin' value='Đăng nhập' /></span>
+ 							<span class='span6'>
+ 								<div><?php echo $html->link('Quên mật khẩu ?',array('controller'=>'members','action'=>'forget'));?></div>
+ 								<div><?php echo $html->link('Đăng ký tài khoản !',array('controller'=>'members','action'=>'register'));?></div>
+ 							</span>
+						</div>
+
 					<?php echo $form->end();?>
 
 				</div>
-				<div class='span7'>
-					<div class="boxheader boxheader-main clearfix">
-						<h5>Đăng ký tài khoản</h5>
-	        		 </div>
-					<form action="#" method="POST" id="login-form" class='span12'>
-						<fieldset>
-							<p>
-								<label for="login-username">Tài khoản</label>
-								<input type="text" id="login-username" class="round full-width-input" placeholder='user1,user2' autofocus />
-							</p>
-							<p>
-								<label for="login-password">Mật khẩu</label>
-								<input type="password" id="login-password" placeholder='123' class="round full-width-input" />
-							</p>
-							<p>I've <a href="#">forgotten my password</a>.</p>
-							<input type='submit' class='btn btn-icon btn-primary glyphicons circle_ok' name='btnregister' value='Đăng ký' />
-						</fieldset>
-					</form>
-				</div>
 				<?php }else{?>
-					<div class='span7'>
-					<div class="boxheader boxheader-main clearfix">
-						<h5>Thông báo</h5>
-	        		 </div>
-	        		 <p>Bạn đã đăng nhập thành công rồi</p>
+					<div class='span12'>
+						<div class="boxheader boxheader-main clearfix">
+							<h5>Thông báo</h5>
+		        		 </div>
+		        		 <p class='span12' align='center'><br>Bạn đã đăng nhập thành công.</p>
+		        		 <p class='span12' align='center'>Chuyển về trang chủ sau 3 giây nữa...</p>
+		        		 <?php header( "refresh:3;url=".BASE_PATH );?>
 	        		</div>
 				<?php }?>
 			</div>
