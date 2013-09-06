@@ -14,7 +14,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 98%;
+	font-size: 12px;
 	font-family: "Segoe UI", "Lucida Grande", Tahoma, Arial, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
@@ -37,8 +37,7 @@ q:before, q:after {
 body {
 	background: #E6E6E6;
 	color: #666666;
-	font-family: "Segoe UI", "Lucida Grande", Tahoma, Arial, sans-serif;
-	line-height: 1.6;
+	line-height: 1.5;
 	margin: 30px 0;
 }
 

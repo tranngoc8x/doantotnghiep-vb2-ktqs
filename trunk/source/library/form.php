@@ -21,7 +21,7 @@ class Form{
 		}
 		$lname = explode('/', $arr['action']);
 
-		if(!isset($dis['method'])) $_dis = 'method ="POST"';
+		if(!isset($dis['method'])) $_dis .= 'method ="POST"';
 		$str = "<form name=".$model.$lname[0]." action='".$d_path.DS.$controller.DS.$action."' ".$_dis.">";
 		$str.="<input id='".$this->_modelname."id' type='hidden' name='".$this->_modelname."[id]' >";
 		return $str;
