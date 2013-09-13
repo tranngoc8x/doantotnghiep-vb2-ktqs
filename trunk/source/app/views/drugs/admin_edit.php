@@ -1,5 +1,5 @@
- 
-    <?php echo $form->create("Drug",array('controller'=>'drugs','action'=>'edit/'.$drug['Drug']['id']));?>
+
+    <?php echo $form->create("Drug",array('controller'=>'drugs','action'=>'edit/'.$drug['Drug']['id']),array("enctype"=>"multipart/form-data"));?>
     <h4>Cập nhật thông tin thuốc</h4>
     <hr class="separator">
     <div class="row-fluid">
@@ -62,10 +62,11 @@
         <div class="control-group">
           	<label class="control-label" for="anh">Ảnh sản phẩm</label>
           	<div class="controls">
-            	<?php echo $form->input('anh',array('class'=>'span8','id'=>'anh','value'=>$drug['Drug']['anh']));?>
+              <?php echo $html->img('files/drugs/'.$drug['Drug']['anh'],array('width'=>'160','height'=>'120'));?><br/><br>
+              <?php echo $form->input('anh',array('class'=>'span8','id'=>'anh',"type"=>"file",'accept'=>"image/*"));?>
           	</div>
         </div>
-        
+
         <div class="control-group">
           	<label class="control-label" for="trangthai">Nhóm dược lý</label>
           	<div class="controls">
@@ -100,4 +101,3 @@
       <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok"><i></i>Save</button>
       <button type="reset" class="btn btn-icon btn-default glyphicons circle_remove"><i></i>Cancel</button>
     </div>
- 

@@ -240,6 +240,71 @@ class CommonsController extends AppController{
 		}
 	}
 
+	// hàm upload file
+	function upload($file,$name,$path=''){
+		global $inflect;
+		$model = $inflect->singularize($this->_controller);
+		$allowedExts = array("gif", "jpeg", "jpg", "png");
+		$temp = explode(".", $file[$model]["name"][$name]);
+		$extension = end($temp);
+		array_pop($temp);
+		$filename = implode('.', $temp);
+		$n = md5(date('YmdHis').$filename).'_'.$filename.".";
+		if ((($file[$model]["type"][$name] == "image/gif")
+		|| ($file[$model]["type"][$name] == "image/jpeg")
+		|| ($file[$model]["type"][$name] == "image/jpg")
+		|| ($file[$model]["type"][$name] == "image/pjpeg")
+		|| ($file[$model]["type"][$name] == "image/x-png")
+		|| ($file[$model]["type"][$name] == "image/png"))
+		&& ($file[$model]["size"][$name] < 5000000)
+		&& in_array($extension, $allowedExts))
+		{
+			if ($file[$model]["error"]['anh'] > 0)
+			    $re = 1;
+			else
+			{
+				$re = $n.$extension;
+			   move_uploaded_file($file[$model]["tmp_name"][$name],$path."/" . $n.$extension);
+			}
+		}
+		else
+		{
+		  $re = 2;
+		}
+		return $re;
+	}
+
+
+	//captcha
+	function captcha(){
+		$this->doNotRenderHeader=1;
+		$string = '';
+		for ($i = 0; $i < 4; $i++) {
+			$string .= chr(rand(97, 122));
+		}
+		$_SESSION['captchastr'] = $string;
+		$dir = WEBROOT.'/fonts/';
+		$image = imagecreatetruecolor(130, 30);
+		$num = rand(1,2);
+		switch($num){
+
+			case '1': $font = "Capture it 2.ttf"; break;
+			case '2': $font = "Molot.otf"; break;
+		}
+		$num2 = rand(1,2);
+		if($num2==1)
+		{
+			$color = imagecolorallocate($image, 113, 193, 217);// color
+		}
+		else
+		{
+			$color = imagecolorallocate($image, 163, 197, 82);// color
+		}
+		$white = imagecolorallocate($image, 255, 255, 255); // background color white
+		imagefilledrectangle($image,0,0,399,99,$white);
+		imagettftext ($image, 30, 0, 5, 30, $color, $dir.$font, $_SESSION['captchastr']);
+		$this->set(compact("image"));
+	}
 	function afterAction() {
 
 	}

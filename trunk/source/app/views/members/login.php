@@ -11,19 +11,31 @@
 	        		 </div>
 
 						<?php echo $form->create("Member",array('controller'=>'members','action'=>'login'),array('class'=>'offset3 span3'));?>
+
 						<div class='row'>
+
+							<?php if(!empty($mgs)){?>
+					    	<p><div class="span12 errormesage"><?php echo $mgs;?></div></p>
+					    	<?php }?>
+
 							<p>
 								<label for="username">Tài khoản</label>
 								<div class="input-prepend">
 							        <span class="add-on"><i class="icon-user"></i></span>
 							        <?php echo $form->input('username',array('class'=>'span12','placeholder'=>'tài khoản','id'=>'username'));?>
+							    	<?php if(!empty($mgs_usr)){?>
+							    	<div class="span12 errormesage"><?php echo $mgs_usr;?></div>
+							    	<?php }?>
 							    </div>
 							</p>
 							<p>
 								<label for="password">Mật khẩu</label>
 								<div class="input-prepend">
-							        <span class="add-on"><i class="icon-asterisk"></i></span>
+							        <span class="add-on"><i class="icon-lock"></i></span>
 						        	<?php echo $form->input('password',array('type'=>'password','placeholder'=>'mật khẩu','class'=>'span12','id'=>'password'));?>
+									<?php if(!empty($mgs_pass)){?>
+							    	<div class="span12 errormesage"><?php echo $mgs_pass;?></div>
+							    	<?php }?>
 								</div>
 							</p>
 						</div>

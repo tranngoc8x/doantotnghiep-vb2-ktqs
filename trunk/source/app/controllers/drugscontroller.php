@@ -55,7 +55,13 @@ class DrugsController extends AppController {
 	}
 	function admin_add(){
 		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
-			if($this->Drug->save()){
+		$fileupload = CommonsController::upload($_FILES,'anh','files/drugs');
+			if($fileupload == '1' || $fileupload == '2'){
+				$this->data['Drug']['anh'] ="";
+			}else{
+				$this->data['Drug']['anh'] = $fileupload;
+			}
+			if($this->Drug->save($this->data)){
 				$this->redirect(array('controller'=>'drugs','action'=>'index'));
 			}
 		}
@@ -66,10 +72,15 @@ class DrugsController extends AppController {
 	}
 	function admin_edit($id = null){
 		$drug = $this->Drug->read($id);
-
 		if(isset($_POST['Drug']) && !empty($_POST['Drug'])){
 			$this->Drug->id = $id;
-			if($this->Drug->save()){
+			$fileupload = CommonsController::upload($_FILES,'anh','files/drugs');
+			if($fileupload == '1' || $fileupload == '2'){
+				$this->data['Drug']['anh'] ="";
+			}else{
+				$this->data['Drug']['anh'] = $fileupload;
+			}
+			if($this->Drug->save($this->data)){
 				$this->redirect(array('controller'=>'drugs','action'=>'index'));
 			}
 		}
