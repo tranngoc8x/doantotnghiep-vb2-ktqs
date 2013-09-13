@@ -3,7 +3,7 @@
         <h3><?php echo $html->img('img/icon-home.png');?> :: Liên hệ</h3>
         <div class="box-ct clearfix row-fluid">
 			<div class='span4'>
-			<?php echo $contact['Infor']['content'];?>
+			<?php echo $contact[0]['Infor']['content'];?>
 			</div>
 			<div class='span6'>
 				<?php echo $form->create("Contact",array('controller'=>'contacts','action'=>'index'));?>

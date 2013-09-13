@@ -14,10 +14,7 @@
 		echo $html->script(array('jquery-1.9.1','jquery-1.8.2.min','bootstrap.min','less-1.3.3.min','script','ckeditor/ckeditor'));
 	?>
 	<script>
-		CKEDITOR.replace( 'ckeditor' ,
-		{
-		enterMode	 : Number(2)
-		});
+		CKEDITOR.replace('ckeditor',{enterMode: Number(2)});
 	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
@@ -30,7 +27,7 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<ul class="topnav pull-right">
-				 
+
 				<li class="dropdown visible-desktop">
 					<a href="" data-toggle="dropdown" class="glyphicons cogwheel"><i></i>Dropdown <span class="caret"></span></a>
 					<ul class="dropdown-menu pull-right">
@@ -39,11 +36,11 @@
 						<li><a href="">Other option</a></li>
 					</ul>
 				</li>
-				 
-				 
+
+
 				<li class="account">
 					<a href="#" class="glyphicons logout lock"><span class="hidden-phone text">tranngoc8x</span><i></i></a>
-					 
+
 				</li>
 			</ul>
 		</div>

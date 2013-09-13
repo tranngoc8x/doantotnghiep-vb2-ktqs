@@ -16,9 +16,20 @@
     		echo $html->script(array('jquery-1.4.1','bootstrap','bootstrap.min','script','jRating.jquery','jquery.livequery','comment'));
     	?>
 		<script>
-			var toado='0,0';
-			var noidung = '';
-			var baseurl = "<?php echo BASE_PATH;?>";
+		//maps
+		var toado='0,0';
+		var noidung = '';
+		//rating+ comment
+		var baseurl = "<?php echo BASE_PATH;?>";
+
+		$(document).ready(function(){
+
+			//refresh img captcha
+			$("#refreshimg").click(function(){
+				document.getElementById('captchaimg').src= '<?php echo BASE_PATH;?>/commons/captcha/';
+			});
+
+		})
 		</script>
     </head>
     <body>
@@ -31,6 +42,17 @@
 		                 <h1 id="logo">
 					        <a href="#" title="THUỐC VÀ DƯỢC LIỆU"><span>THUỐC VÀ DƯỢC LIỆU</span></a>
 					    </h1>
+				    	<ul id="top">
+				    		<?php if(!isset($_SESSION['ssid']) || empty($_SESSION['ssid'])){?>
+					    		<li><?php echo $html->link("Đăng nhập",array('members/login'),array('title'=>'Đăng nhập'));?></li>
+					    		<li><?php echo $html->link("Đăng ký",array('members/register'),array('title'=>'Đăng ký'));?></li>
+				    		<?php }else{?>
+								<li id='account'>
+									<?php echo $html->link("Chào ".$_SESSION['ten'],array('members/myaccount'),array('title'=>'Đăng nhập'));?>
+									<span></span>
+								</li>
+						    <?php }?>
+				    	</ul>
 					</div>
 	            </div>
         	</div>
@@ -54,13 +76,13 @@
 	                        </li>
 	                        <li class="last"><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?>
 	                        </li>
-	                          <li class="last">
+	                         <!--  <li class="last">
 	                          	<?php if(!isset($_SESSION['ssid']) || empty($_SESSION['ssid'])){?>
 	                          	<?php echo $html->link("Đăng nhập",array('members/login'),array('title'=>'Đăng nhập'));?>
 	                          	<?php }else{?>
 	                          	<?php echo $html->link("Thoát",array('members/logout'),array('title'=>'Thoát'));?>
 	                          	<?php }?>
-	                        </li>
+	                        </li> -->
 	                    </ul>
 	                </div>
                 </div>

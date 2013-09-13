@@ -25,6 +25,15 @@ class TntController{
 		if(isset($ar_action) && $ar_action[0]== $authpath){
 			$this->_admin = true;
 		}
+		if(isset($_POST)){
+			$this->data = array_merge($this->data,$_POST);
+		}
+		if(isset($_GET)){
+			$this->data = array_merge($this->data,$_GET);
+		}
+		if(isset($_REQUEST)){
+			$this->data = array_merge($this->data,$_REQUEST);
+		}
 	}
 	function set($name,$value = null) {
 		if(!is_array($name)){
@@ -44,11 +53,11 @@ class TntController{
 				$_SESSION['ssid'] = $temp[0][$model]['id'];
 				$_SESSION['username'] = $temp[0][$model][$usr];
 				$_SESSION['ten'] = $temp[0][$model]['ten'];
-				return 1;
+				return true;
 			}
-			return 0;
+			return false;
 		}else{
-			return 0;
+			return false;
 		}
 
 	}
@@ -102,15 +111,6 @@ class TntController{
     	}
     }
     function __destruct() {
-    	if(isset($_POST)){
-			$this->data = array_merge($this->data,$_POST);
-		}
-		if(isset($_GET)){
-			$this->data = array_merge($this->data,$_GET);
-		}
-		if(isset($_REQUEST)){
-			$this->data = array_merge($this->data,$_REQUEST);
-		}
 		//$common = new CommonsController($this->_controller, $this->_action);
 		if ($this->render) {
 			$this->render($this->doNotRenderHeader);

@@ -10,7 +10,13 @@ class EquipsController extends AppController {
 	}
 	function admin_add(){
 		if(isset($_POST['Equip']) && !empty($_POST['Equip'])){
-			if($this->Equip->save()){
+			$fileupload = CommonsController::upload($_FILES,'anh','files/equips');
+			if($fileupload == '1' || $fileupload == '2'){
+				$this->data['Equip']['anh'] ="";
+			}else{
+				$this->data['Equip']['anh'] = $fileupload;
+			}
+			if($this->Equip->save($this->data)){
 				$this->redirect(array('controller'=>'equips','action'=>'index'));
 			}
 		}
@@ -22,7 +28,14 @@ class EquipsController extends AppController {
 		$equip = $this->Equip->read($id);
 
 		if(isset($_POST['Equip']) && !empty($_POST['Equip'])){
+
 			$this->Equip->id = $id;
+			$fileupload = CommonsController::upload($_FILES,'anh','files/equips');
+			if($fileupload == '1' || $fileupload == '2'){
+				$this->data['Equip']['anh'] ="";
+			}else{
+				$this->data['Equip']['anh'] = $fileupload;
+			}
 			if($this->Equip->save()){
 				$this->redirect(array('controller'=>'equips','action'=>'index'));
 			}

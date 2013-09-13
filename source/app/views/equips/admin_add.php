@@ -1,5 +1,5 @@
  
-    <?php echo $form->create("Equip",array('controller'=>'equips','action'=>'add'));?>
+    <?php echo $form->create("Equip",array('controller'=>'equips','action'=>'add'),array("enctype"=>"multipart/form-data"));?>
     <h4>Thêm mới thông tin thiết bị</h4>
     <hr class="separator">
     <div class="row-fluid">
@@ -38,7 +38,7 @@
         <div class="control-group">
 	        <label class="control-label" for="anh">Ảnh thiết bị</label>
 	        <div class="controls">
-	            <?php echo $form->input('anh',array('class'=>'span8','id'=>'anh'));?>
+	            <?php echo $form->input('anh',array('class'=>'span8','id'=>'anh','type'=>'file','accept'=>"image/*"));?>
 	        </div>
         </div>
         

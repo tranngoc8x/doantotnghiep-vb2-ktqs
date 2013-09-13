@@ -20,6 +20,58 @@ ul{
 	overflow: hidden;
 	margin-left: 1px;
 }
+ul#top{
+	float: right;
+	height: 25px;
+	line-height: 25px;
+	margin-top: 5px;
+	/*background: #00A9DD;*/
+	border-radius:0 10px 0 10px;
+}
+ul#top li{
+	float: left;
+	line-height: 25px;
+	padding: 0 6px;
+	width: 70px;
+	border-radius: 4px;
+	text-align: center;
+	background: #f0f0f0;
+	border: 1px solid #e2e2e2;
+	margin: 0 3px;
+}
+ul#top li:hover{
+	background: #00A9DD;
+	border: 1px solid #e2e2e2;
+}
+ul#top li a{
+	color: #00A9DD;
+}
+ul#top li a:hover,ul#top li:hover a{
+	color: #ffffff;
+}
+
+ul#top li#account{
+	width: auto;
+}
+ul#top li#account a{
+	float: left;
+}
+
+ul#top li span{
+	background: url(../img/setting-acc.png) 0 0 no-repeat;
+	width: 16px;
+	height: 16px;
+	float: right;
+	display: inline-block;
+	margin-top: 5px;
+	margin-left: 15px;
+}
+ul#top li:hover span{
+	background-position:0 -16px;
+	cursor: pointer;
+}
+/*main menu*/
+
 ul.topmenu {
 	background: #FFFFFF;
     position: relative;
@@ -466,6 +518,9 @@ padding-right: 1px;
 	text-align: left;
 	width: 100%;
 	margin: 0 auto;
+}
+#refreshimg{
+	cursor: pointer;
 }
 /* HEADER
 --------------------------------------------------------- */

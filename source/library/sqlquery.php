@@ -17,7 +17,7 @@ class SQLQuery{
 	protected $_hMABTM;
 	protected $_page;
 	protected $_urlpage;
-	protected $_limit = 10;
+	protected $_limit;
 
     /** Connects to database **/
 
@@ -105,7 +105,7 @@ class SQLQuery{
 		}
 
 	}
-	function _validate(){
+	function _validate($array){
 		$session = new Session();
 		$result = mysql_query('SHOW COLUMNS FROM  `'.$this->_table. '`');
 		if (!$result) {
@@ -121,16 +121,16 @@ class SQLQuery{
 				$(document).ready(function(){';
 		    while ($row = mysql_fetch_assoc($result)) {
 		    	if($row["Null"] == "NO" && $row["Field"] != 'id'){
-		    		if($_POST[$this->_model][$row['Field']] == null || $_POST[$this->_model][$row['Field']] == ""){
+		    		if($array[$this->_model][$row['Field']] == null || $array[$this->_model][$row['Field']] == ""){
 		    			$rturn .=$session->writeErr("Nội dung không được bỏ trống hoặc không hợp lệ.",$this->_model.$row['Field'],$row['Field']);
 		    			$i++;
 		    		}else{
-		    			if(strpos('email',$_POST[$this->_model][$row['Field']]) === true){
+		    			if(strpos('email',$array[$this->_model][$row['Field']]) === true){
 							if(!filter_var($msg, FILTER_VALIDATE_EMAIL)){
 								$i++;
 							}
 						}
-		    			$rturn .=$session->writeErr($_POST[$this->_model][$row['Field']],$this->_model.$row['Field'],$row['Field'],1);
+		    			$rturn .=$session->writeErr($array[$this->_model][$row['Field']],$this->_model.$row['Field'],$row['Field'],1);
 		    		}
 		    	}
 
@@ -208,7 +208,6 @@ class SQLQuery{
 				$from .= 'ON `'.$this->_model.'`.`'.$table.'_id` = `'.$alias.'`.`id`  ';
 			}
 		}
-
 		if ($this->id) {
 			$conditions .= '`'.$this->_model.'`.`id` = \''.mysql_real_escape_string($this->id).'\' AND ';
 		}
@@ -493,7 +492,8 @@ class SQLQuery{
 	}
     /** Describes a Table **/
 
-	protected function _describe() {
+	protected function _describe($array = null) {
+
 		global $cache;
 		$this->_describe = $cache->get('describe'.$this->_table);
 		if (!$this->_describe) {
@@ -507,11 +507,23 @@ class SQLQuery{
 			mysql_free_result($this->_result);
 			$cache->set('describe'.$this->_table,$this->_describe);
 		}
-		foreach ($this->_describe as $field) {
-			if(isset($_POST[$this->_model][$field]) && $_POST[$this->_model][$field] != null){
-				$this->$field = $_POST[$this->_model][$field];
-			}else{
-				$this->$field = null;
+		if(!empty($array)){
+			foreach ($this->_describe as $field) {
+
+				if(isset($array[$this->_model][$field]) && $array[$this->_model][$field] != null){
+					$this->$field = $array[$this->_model][$field];
+				}else{
+					if($field != 'id')
+						$this->$field = null;
+				}
+			}
+		}else{
+			foreach ($this->_describe as $field) {
+				if(isset($_POST[$this->_model][$field]) && $_POST[$this->_model][$field] != null ){
+					$this->$field = $_POST[$this->_model][$field];
+				}else{
+					$this->$field = null;
+				}
 			}
 		}
 	}
@@ -536,8 +548,11 @@ class SQLQuery{
 
     /** Saves an Object i.e. Updates/Inserts Query **/
 
-	function save() {
-		if($this->_validate() == false){
+	function save($array = null) {
+		if(empty($array)){$array=$_POST;}
+
+		$this->_describe($array);
+		if($this->_validate($array) == false){
 			return ;
 		}
 
