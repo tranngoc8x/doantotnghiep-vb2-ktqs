@@ -285,14 +285,14 @@ class CommonsController extends AppController{
 		}
 		$_SESSION['captchastr'] = $string;
 		$dir = WEBROOT.'/fonts/';
-		$image = imagecreatetruecolor(130, 30);//size
-		$num = rand(3,5);
+		$image = imagecreatetruecolor(100, 35);//size
+		$num = rand(3,4);
 		switch($num){
 
 		//	case '1': $font = "Capture it 2.ttf"; break;
 			//case '2': $font = "Molot.otf"; break;
-			case '3': $font = "ChangChang.ttf"; break;
-			case '4': $font = "CUTEL___.ttf"; break;
+			case '3': $font = "3D Noise.ttf"; break;
+			case '4': $font = "321impact.ttf"; break;
 			case '5': $font = "ELRIOTT2.TTF"; break;
 		}
 		$num2 = rand(1,2);
@@ -306,7 +306,7 @@ class CommonsController extends AppController{
 		}
 		$white = imagecolorallocate($image, 255, 255, 255); // background color white
 		imagefilledrectangle($image,0,0,399,99,$white);
-		imagettftext ($image, 30, 0, 5, 30, $color, $dir.$font, $_SESSION['captchastr']);
+		imagettftext ($image, 25, 0, 3, 30, $color, $dir.$font, $_SESSION['captchastr']);
 		$this->set(compact("image"));
 	}
 

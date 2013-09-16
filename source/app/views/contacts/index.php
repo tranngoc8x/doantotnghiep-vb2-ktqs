@@ -7,7 +7,7 @@
 			</div>
 			<div class='span6'>
 				<?php echo $form->create("Contact",array('controller'=>'contacts','action'=>'index'));?>
-				<h4>Liện hệ với chúng tôi theo form bên dưới</h4>
+				<h4>Liên hệ với chúng tôi theo form bên dưới</h4>
 				<hr class="separator">
 				<?php echo $session->setFlash("Contact");?>
 				<label class="control-label" for="ten">Họ tên</label>
