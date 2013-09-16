@@ -62,6 +62,22 @@ class ClinicsController extends AppController {
 		$this->set(compact('clinic','rates','your_review'));
 
 	}
+	function search($type,$text=null){
+		global $inflect;
+		$f = explode(':', $type);
+		$f_key = lcfirst($f[0]).'s_id';// forign key
+		$f_id = $f[1];//id forign
+		if($f[0] == 'key'){
+			$key = 'ten like';
+			$this->Clinic->where(array($key=>$f_id.'%'));
+		}else
+		$this->Clinic->where(array($f_key=>$f_id));
+		$this->Clinic->showHasOne();
+		$this->Clinic->showHasMany();
+		$results = $this->Clinic->find();
+		$this->set(compact("results"));
+
+	}
 	function afterAction() {
 
 	}

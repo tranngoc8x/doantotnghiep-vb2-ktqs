@@ -27,7 +27,7 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<ul class="topnav pull-right">
-
+<!--
 				<li class="dropdown visible-desktop">
 					<a href="" data-toggle="dropdown" class="glyphicons cogwheel"><i></i>Dropdown <span class="caret"></span></a>
 					<ul class="dropdown-menu pull-right">
@@ -35,11 +35,14 @@
 						<li><a href="">Some other option</a></li>
 						<li><a href="">Other option</a></li>
 					</ul>
-				</li>
+				</li> -->
 
-
+				<li><a href="<?php echo BASE_PATH;?>" target="_blank">Xem website</a></li>
 				<li class="account">
-					<a href="#" class="glyphicons logout lock"><span class="hidden-phone text">tranngoc8x</span><i></i></a>
+					<?php echo $html->link('Chào, '.$_SESSION['name'],array('controller'=>'users','action'=>'logout'));?>
+				</li>
+				<li  class="account">
+					<?php echo $html->link('<span class="hidden-phone text">Thoát</span><i></i>',array('controller'=>'users','action'=>'logout'),array("class"=>"glyphicons logout lock"));?>
 
 				</li>
 			</ul>
@@ -83,7 +86,12 @@
 					</ul>
 					<ul>
 						<li class="heading"><span>Hệ thống</span></li>
-						<li class="glyphicons user"><a href="logout"><i></i><span>Logout</span></a></li>
+						<li class="glyphicons user">
+							<?php echo $html->link('<i></i><span>Thành viên</span>',array('controller'=>'members','action'=>'index'));?>
+						</li>
+						<li class="glyphicons user">
+							<?php echo $html->link('<i></i><span>Nhóm quản trị</span>',array('controller'=>'users','action'=>'index'));?>
+						</li>
 						<li class="glyphicons edit <?php if($this->_controller == "Infors") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Nội dung chung</span>',array('controller'=>'infors','action'=>'index'));?>
 						</li>

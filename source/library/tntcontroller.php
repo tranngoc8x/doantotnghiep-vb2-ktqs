@@ -44,15 +44,22 @@ class TntController{
 	}
 	function auth($array,$table='users',$usr = 'username',$pas = 'password'){
 		global $inflect;
+
 		$model = ucfirst($inflect->singularize($table));
 		$this->{$model}->where(array($usr=>$array['username']));
 		$temp = $this->{$model}->find();
 		if(!empty($temp)){
 			if(md5($array['password']) == $temp[0][$model][$pas]){
+				if($this->_admin == true){
+					$_SESSION['admin'] = $temp[0][$model]['id'];
+					$_SESSION['user'] = $temp[0][$model][$usr];
+					$_SESSION['name'] = $temp[0][$model]['ten'];
+				}else{
+					$_SESSION['ssid'] = $temp[0][$model]['id'];
+					$_SESSION['username'] = $temp[0][$model][$usr];
+					$_SESSION['ten'] = $temp[0][$model]['ten'];
 
-				$_SESSION['ssid'] = $temp[0][$model]['id'];
-				$_SESSION['username'] = $temp[0][$model][$usr];
-				$_SESSION['ten'] = $temp[0][$model]['ten'];
+				}
 				return true;
 			}
 			return false;

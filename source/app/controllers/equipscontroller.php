@@ -75,6 +75,23 @@ class EquipsController extends AppController {
 		$this->set(compact('equip','manu_equips','rates','your_review'));
 
 	}
+	function search($type,$text=null){
+		$this->doNotRenderHeader = 0;
+		global $inflect;
+		$f = explode(':', $type);
+		$f_key = lcfirst($f[0]).'s_id';// forign key
+		$f_id = $f[1];//id forign
+		if($f[0] == 'key'){
+			$key = 'ten like';
+			$this->Equip->where(array($key=>$f_id.'%'));
+		}else
+		$this->Equip->where(array($f_key=>$f_id));
+		$this->Equip->showHasOne();
+		$this->Equip->showHasMany();
+		$results = $this->Equip->find();
+		$this->set(compact("results"));
+
+	}
 	function afterAction() {
 
 	}
