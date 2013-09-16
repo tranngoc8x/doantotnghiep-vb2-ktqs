@@ -13,11 +13,19 @@ class ContactsController extends AppController {
 		//debug($this);
 	}
 	function index(){
+		$mgs_code = "";
 		if(isset($_POST['Contact']) && !empty($_POST['Contact'])){
-			if($this->Contact->save()){
-				$this->redirect(array('controller'=>'contacts','action'=>'index'));
+			$code =  $_SESSION['captchastr'];
+			if(strcmp ($code ,$_POST['Contact']['code'])!=0){
+				$mgs_code = "Mã an toàn không đúng !";
+			}
+			if(empty($mgs_code)){
+				if($this->Contact->save()){
+					$this->redirect(array('controller'=>'contacts','action'=>'index'));
+				}
 			}
 		}
+		$this->set(compact('mgs_code'));
 	}
 	function admin_view($id = null){
 		$contact = $this->Contact->read($id);

@@ -32,16 +32,16 @@
 								<?php }?>
 							</p>
 							<p>
-								<label for="username">Email</label>
+								<label for="email">Email</label>
 							    <?php echo $form->input('email',array('class'=>'span12','placeholder'=>'email','id'=>'email'));?>
 							</p>
 							<p>
-								<label for="username">Thông tin</label>
+								<label for="infor">Thông tin</label>
 							    <?php echo $form->textarea('infor',null,array('class'=>'span12','placeholder'=>'thông tin cá nhân khác','id'=>'infor'));?>
 							</p>
 							<p>
 
-								<label for="username">Mã an toàn</label>
+								<label for="Mã an toàn">Mã an toàn</label>
 								<div class="span4"><?php echo $form->input('code',array('class'=>'span12','id'=>'code'));?></div>
 							    <div class="span7">
 							    	<img src='<?php echo BASE_PATH;?>/commons/captcha/' id='captchaimg'>

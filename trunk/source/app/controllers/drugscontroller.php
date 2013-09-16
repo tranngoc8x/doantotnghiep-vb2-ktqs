@@ -10,12 +10,12 @@ class DrugsController extends AppController {
 		$this->Drug->showHasMany();
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		//$this->Drug->BindModel(array('hasMany' => array('Comment')));
-		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id","Distribute.ten",'Type.id','Type.ten'));
 
 		//bệnh viện,phòng khám, nhà thuốc
-		$hopitals = $this->Drug->query("select * from hopitals right join cities on hopitals.cities_id=cities.id where hopitals.trangthai = 1 order by hopitals.id DESC limit 6");
-		$clinics = $this->Drug->query("select * from clinics right join cities on clinics.cities_id=cities.id right join departments on clinics.departments_id=departments.id where clinics.trangthai = 1 order by clinics.id DESC limit 6");
-		$drugstores = $this->Drug->query("select * from drugstores right join cities on drugstores.cities_id=cities.id where drugstores.trangthai = 1 order by drugstores.id DESC limit 6");
+		$hopitals = $this->Drug->query("select * from hopitals right join cities on hopitals.cities_id=cities.id where hopitals.trangthai = 1 order by hopitals.id DESC limit 6",array("Hopital"=>"Rate_hopital"));
+		$clinics = $this->Drug->query("select * from clinics right join cities on clinics.cities_id=cities.id right join departments on clinics.departments_id=departments.id where clinics.trangthai = 1 order by clinics.id DESC limit 6",array("Clinic"=>"Rate_clinic"));
+		$drugstores = $this->Drug->query("select * from drugstores right join cities on drugstores.cities_id=cities.id where drugstores.trangthai = 1 order by drugstores.id DESC limit 6",array("Drugstore"=>"Rate_drugstore"));
 
 
 
@@ -27,7 +27,7 @@ class DrugsController extends AppController {
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
-		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id",'Type.id',"Distribute.ten",'Type.ten'));
 		$this->set(compact('drugs','idtype'));
 	}
 	function types($idtype=null) {
@@ -39,7 +39,7 @@ class DrugsController extends AppController {
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
 		}
-		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten",'Type.ten'));
+		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id",'Type.id',"Distribute.ten",'Type.ten'));
 		$typename = $this->Drug->query("SELECT Type.ten FROM types as Type where Type.id='$idtype'");
 		$this->set(compact('drugs','idtype','typename'));
 	}
@@ -122,6 +122,23 @@ class DrugsController extends AppController {
 
 	}
 	function mark(){}
+	//search item
+	function search($type){
+		global $inflect;
+		$f = explode(':', $type);
+		$f_key = lcfirst($f[0]).'s_id';// forign key
+		$f_id = $f[1];//id forign
+		if($f[0] == 'key'){
+			$key = 'ten like';
+			$this->Drug->where(array($key=>$f_id.'%'));
+		}else
+		$this->Drug->where(array($f_key=>$f_id));
+		$this->Drug->showHasOne();
+		$this->Drug->showHasMany();
+		$results = $this->Drug->find();
+		$this->set(compact("results"));
+
+	}
 	function afterAction() {
 
 	}

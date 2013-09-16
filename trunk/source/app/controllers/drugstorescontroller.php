@@ -60,6 +60,24 @@ class DrugstoresController extends AppController {
 		$this->set(compact('drugstore','your_review','rates'));
 
 	}
+
+	//search item
+	function search($type){
+		global $inflect;
+		$f = explode(':', $type);
+		$f_key = lcfirst($f[0]).'s_id';// forign key
+		$f_id = $f[1];//id forign
+		if($f[0] == 'key'){
+			$key = 'ten like';
+			$this->Drugstore->where(array($key=>$f_id.'%'));
+		}else
+		$this->Drugstore->where(array($f_key=>$f_id));
+		$this->Drugstore->showHasOne();
+		$this->Drugstore->showHasMany();
+		$results = $this->Drugstore->find();
+		$this->set(compact("results"));
+
+	}
 	function afterAction() {
 
 	}

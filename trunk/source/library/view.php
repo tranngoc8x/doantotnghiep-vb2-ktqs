@@ -52,4 +52,34 @@ class View extends HTML{
 	        }
 	    }
 	}
+	function rateother($array,$model){
+		if(empty($array)){
+			$person = 0;
+			$mark = 0;
+
+		}else{
+
+			$person=count($array);
+			$mark = 0;
+			foreach ($array as $v) {
+				$mark+=@$v['mark'];
+			}
+			$mark = round($mark/$person,1);
+		}
+
+		$intmark = floor($mark);
+		for ($i=1; $i <=$intmark ; $i++) {
+            echo $this->img('img/star_full.png');
+        }
+        if($intmark<5){
+            if($mark - $intmark < 0.5){
+                echo $this->img('img/star_none.png');
+            }else{
+                echo $this->img('img/star_half.png');
+            }
+        }
+        for ($i=$intmark+1; $i < 5 ; $i++) {
+            echo $this->img('img/star_none.png');
+        }
+	}
 }

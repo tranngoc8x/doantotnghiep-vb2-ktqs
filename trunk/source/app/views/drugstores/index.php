@@ -1,5 +1,18 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Tìm kiếm</h3>
+        <p>
+            <div class="pagination">
+                <ul>
+                    <li><?php echo $html->link("All",array('controller'=>'drugstores','action'=>'index'),array('class'=>'item'));?></li>
+                    <?php foreach ($alpa as $key => $value) {?>
+                    <li><?php echo $html->link($value,array('controller'=>'drugstores','action'=>'search/key:'.$key),array('class'=>'item'));?></li>
+                    <?php }?>
+                </ul>
+            </div>
+        </p>
+    </div>
+    <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Nhà thuốc</h3>
         <div class="box-ct clearfix row-fluid">
             <ul class='ulitem row-fluid'>

@@ -62,6 +62,7 @@ class SQLQuery{
 				$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'`'.$s.'\''.mysql_real_escape_string($value).'\' AND ';
 			}
 		}
+		//echo $this->_extraConditions;
 	}
 
 	function like($field, $value) {

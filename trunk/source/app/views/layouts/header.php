@@ -49,8 +49,8 @@
 				    		<?php }else{?>
 								<li id='account'>
 									<?php echo $html->link("Chào ".$_SESSION['ten'],array('members/myaccount'),array('title'=>'Đăng nhập'));?>
-									<span></span>
 								</li>
+								<li id="logout"><?php echo $html->link("Thoát",array('members/logout'),array('title'=>'Thoát'));?></li>
 						    <?php }?>
 				    	</ul>
 					</div>
@@ -63,7 +63,7 @@
 	                <div class="main span12">
 	                	<div id="hiddenmenu" class="hidden-menu span12"><span></span><a href='#'>Menu</a></div>
 	                    <ul class="topmenu nav">
-	                        <li class="active first"><?php echo $html->link("<span class='menu-title'>Trang chủ</span>",array('drugs/home'),array('title'=>'Trang chủ' ));?>
+	                        <li class="active first"><?php echo $html->link("<span class='menu-title'>Trang chủ</span>",array('drugs/home'),array('title'=>'Trang chủ'));?>
 
 	                        </li>
 	                        <li><?php echo $html->link("Thuốc",array('drugs/index'),array('title'=>'Thuốc'));?></li>
@@ -96,7 +96,7 @@
 					<!-- LEFT COLUMN-->
 						<div id='left' class='span3'>
 						    <div class="boxheader boxheader-menu">
-						        <h3>Nhóm thuốc</h3>
+						        <h3><?php echo $title_bar;?></h3>
 						        <div class="box-ct">
 						            <ul class="menu">
 						                <li <?php if(!isset($idtype)  || empty($idtype)){?> class="active" <?php }?>>

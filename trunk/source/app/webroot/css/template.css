@@ -57,18 +57,29 @@ ul#top li#account a{
 	float: left;
 }
 
-ul#top li span{
-	background: url(../img/setting-acc.png) 0 0 no-repeat;
-	width: 16px;
-	height: 16px;
+ul#top li#logout{
+
+	padding-left: 20px;
+	background: url(../img/bg-logout.png) 3px 3px no-repeat;
+	width: 40px;
 	float: right;
-	display: inline-block;
-	margin-top: 5px;
-	margin-left: 15px;
+	display: block;
 }
-ul#top li:hover span{
-	background-position:0 -16px;
+
+ul#top li#logout a{
+	line-height: 25px;
+	width: 15px;
+	height: 25px;
+	color: #FF0000;
+}
+ul#top li#logout a:hover,ul#top li#logout:hover a{
+	color: #FFFFFF;
+}
+ul#top li#logout:hover{
+	background-color: #00A9DD;
+	background-position:3px -21px;
 	cursor: pointer;
+
 }
 /*main menu*/
 

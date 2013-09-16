@@ -279,17 +279,21 @@ class CommonsController extends AppController{
 	function captcha(){
 		$this->doNotRenderHeader=1;
 		$string = '';
+		$k = array("a","A","b","B","c","C","d","D","e","E","f","F","g","G","h","H","i","I","j","J","k","K","l","L","m","M","n","N","o","O","p","P","q","Q","r","R","s","S","t","T","u","U","v","V","x","X","y","Y","z","Z","0","1","2","3","4","5","6","7","8","9");
 		for ($i = 0; $i < 4; $i++) {
-			$string .= chr(rand(97, 122));
+			$string .= $k[array_rand($k)];
 		}
 		$_SESSION['captchastr'] = $string;
 		$dir = WEBROOT.'/fonts/';
-		$image = imagecreatetruecolor(130, 30);
-		$num = rand(1,2);
+		$image = imagecreatetruecolor(130, 30);//size
+		$num = rand(3,5);
 		switch($num){
 
-			case '1': $font = "Capture it 2.ttf"; break;
-			case '2': $font = "Molot.otf"; break;
+		//	case '1': $font = "Capture it 2.ttf"; break;
+			//case '2': $font = "Molot.otf"; break;
+			case '3': $font = "ChangChang.ttf"; break;
+			case '4': $font = "CUTEL___.ttf"; break;
+			case '5': $font = "ELRIOTT2.TTF"; break;
 		}
 		$num2 = rand(1,2);
 		if($num2==1)
@@ -304,6 +308,27 @@ class CommonsController extends AppController{
 		imagefilledrectangle($image,0,0,399,99,$white);
 		imagettftext ($image, 30, 0, 5, 30, $color, $dir.$font, $_SESSION['captchastr']);
 		$this->set(compact("image"));
+	}
+
+
+
+	//search item
+	function search($label,$type,$text=null){
+		$this->doNotRenderHeader = 0;
+		global $inflect;
+		//label = controller
+		//type = loại
+		//id= mã item
+		//text = từ khóa
+		$table = lcfirst($label).'s';
+		$f = explode(':', $type);
+		$f_key = lcfirst($f[0]).'s_id';// forign key
+		$f_id = $f[1];//id forign
+		echo $text;
+		$condition = "Where 1=1 and $f_key ='$f_id'";
+		$results = $this->Common->query("SELECT * from $table right join tblmanu  $condition");
+		$this->set(compact("results"));
+
 	}
 	function afterAction() {
 
