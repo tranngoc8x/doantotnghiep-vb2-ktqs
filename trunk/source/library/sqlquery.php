@@ -59,10 +59,10 @@ class SQLQuery{
 			}else{
 				$f = array_shift($akey);
 				$s = implode(' ', $akey);
-				$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'`'.$s.'\''.mysql_real_escape_string($value).'\' AND ';
+				$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'` '.$s.' \''.mysql_real_escape_string($value).'\' AND ';
 			}
 		}
-		//echo $this->_extraConditions;
+		#echo $this->_extraConditions;
 	}
 
 	function like($field, $value) {

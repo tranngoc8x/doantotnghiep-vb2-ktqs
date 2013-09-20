@@ -6,7 +6,7 @@
                 <ul>
                     <li><?php echo $html->link("All",array('controller'=>'hopitals','action'=>'index'),array('class'=>'item'));?></li>
                     <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'hopitals','action'=>'search/key:'.$key),array('class'=>'item'));?></li>
+                    <li><?php echo $html->link($value,array('controller'=>'hopitals','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
                     <?php }?>
                 </ul>
             </div>

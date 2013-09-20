@@ -5,6 +5,7 @@ class TntController{
 	protected $_template;
 	protected $_admin = false;
 	protected $data = array();
+	protected $_view;
 	protected $helper = array();
 	protected $variables = array();
 	public $doNotRenderHeader;
@@ -87,8 +88,14 @@ class TntController{
 				include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'header.php');
 			}
 		}
-		if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
-			include (ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php');
+		if(empty($this->_view)){
+			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
+				include (ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php');
+			}
+		}else{
+			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
+				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_view. '.php');
+			}
 		}
 		if ($doNotRenderHeader == 0) {
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'footer.php')) {

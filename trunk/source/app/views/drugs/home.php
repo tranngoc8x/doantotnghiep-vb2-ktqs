@@ -13,9 +13,9 @@
                     <?php echo $html->link($drug['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $drug['Manu']);?>
-            		<p class="item">Nhóm dược lý : <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'search/Type:'.$drug['Type']['id']),array('class'=>'item'));?></p>
-            		<p class="item">Nhà phân phối: <?php echo $html->link($drug['Distribute']['ten'],array('controller'=>'drugs','action'=>'search/Distribute:'.$drug['Distribute']['id']),array('class'=>'item'));?></p>
-            		<p class="item">Nhà sản xuất: <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'search/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhóm dược lý : <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'label/Type:'.$drug['Type']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà phân phối: <?php echo $html->link($drug['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$drug['Distribute']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà sản xuất: <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
             		<div class='item rates'>
                         <?php echo $view->rateres($drug['Rate_drug'],'drug');?>
                     </div>
