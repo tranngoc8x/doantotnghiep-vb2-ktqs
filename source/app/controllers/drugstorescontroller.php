@@ -62,7 +62,7 @@ class DrugstoresController extends AppController {
 	}
 
 	//search item
-	function search($type){
+	function label($type){
 		global $inflect;
 		$f = explode(':', $type);
 		$f_key = lcfirst($f[0]).'s_id';// forign key

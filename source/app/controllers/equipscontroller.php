@@ -75,7 +75,7 @@ class EquipsController extends AppController {
 		$this->set(compact('equip','manu_equips','rates','your_review'));
 
 	}
-	function search($type,$text=null){
+	function label($type,$text=null){
 		$this->doNotRenderHeader = 0;
 		global $inflect;
 		$f = explode(':', $type);

@@ -6,7 +6,7 @@
                 <ul>
                     <li><?php echo $html->link("All",array('controller'=>'equips','action'=>'index'),array('class'=>'item'));?></li>
                     <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'search/key:'.$key),array('class'=>'item'));?></li>
+                    <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
                     <?php }?>
                 </ul>
             </div>
@@ -24,8 +24,8 @@
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$item['Equip']['id']),array('class'=>'item'));?>
             		</h6>
-            		<p class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'equips','action'=>'search/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></p>
-            		<p class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'equips','action'=>'search/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></p>
             		<p class="item"><b>Chức năng :</b> <?php echo $item['Equip']['ten'];?></p>
                     <div class='item rates'>
                         <?php echo $view->rateres($item['Rate_equip'],'equip');?>

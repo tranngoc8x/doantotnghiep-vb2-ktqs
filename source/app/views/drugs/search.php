@@ -6,10 +6,11 @@
                 <ul>
                     <li><?php echo $html->link("All",array('controller'=>'drugs','action'=>'index'),array('class'=>'item'));?></li>
                     <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'drugs','action'=>'search/key:'.$key),array('class'=>'item'));?></li>
+                    <li><?php echo $html->link($value,array('controller'=>'drugs','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
                     <?php }?>
                 </ul>
             </div>
+
         </p>
     </div>
     <div class="boxheader boxheader-main clearfix">
@@ -26,9 +27,9 @@
                     <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $item);?>
-            		<p class="item">Nhóm dược lý : <?php echo $html->link($item['Type']['ten'],array('controller'=>'drugs','action'=>'search/Type:'.$item['Type']['id']),array('class'=>'item'));?></p>
-            		<p class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'search/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></p>
-            		<p class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'search/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhóm dược lý : <?php echo $html->link($item['Type']['ten'],array('controller'=>'drugs','action'=>'label/Type:'.$item['Type']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></p>
+            		<p class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></p>
             			<div class='item rates'>
                         <?php echo $view->rateres($item['Rate_drug'],'drug');?>
                     </div>
@@ -38,6 +39,7 @@
                 <?php endforeach?>
                 <?php //debug($item);?>
                 <?php //echo $this->Drug->paginate();?>
+                 
             </ul>
         </div>
     </div>

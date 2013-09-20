@@ -62,7 +62,7 @@ class ClinicsController extends AppController {
 		$this->set(compact('clinic','rates','your_review'));
 
 	}
-	function search($type,$text=null){
+	function label($type,$text=null){
 		global $inflect;
 		$f = explode(':', $type);
 		$f_key = lcfirst($f[0]).'s_id';// forign key

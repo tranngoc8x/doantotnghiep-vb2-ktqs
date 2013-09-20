@@ -6,7 +6,7 @@
                 <ul>
                     <li><?php echo $html->link("All",array('controller'=>'clinics','action'=>'index'),array('class'=>'item'));?></li>
                     <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'clinics','action'=>'search/key:'.$key),array('class'=>'item'));?></li>
+                    <li><?php echo $html->link($value,array('controller'=>'clinics','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
                     <?php }?>
                 </ul>
             </div>
@@ -23,7 +23,7 @@
                     <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $Clinic);?>
-            		<p class="item"><b>Chuyên khoa :</b> <?php echo $html->link($clinic['Department']['ten'],array('controller'=>'clinics','action'=>'search/Department:'.$clinic['Department']['id']),array('class'=>'item'));?></p>
+            		<p class="item"><b>Chuyên khoa :</b> <?php echo $html->link($clinic['Department']['ten'],array('controller'=>'clinics','action'=>'label/Department:'.$clinic['Department']['id']),array('class'=>'item'));?></p>
             		<p class="item"><b>Chủ phòng khám :</b> <?php echo $clinic['Clinic']['daidien'];?></p>
             		<p class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['City']['ten'];?></p>
                     <p class="item"><b>Điện thoại :</b> <?php echo $clinic['Clinic']['dienthoai'];?></p>
