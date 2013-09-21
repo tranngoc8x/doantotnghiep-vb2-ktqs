@@ -26,7 +26,7 @@ class DrugsController extends AppController {
 	}
 	function index() {
 		$this->Drug->orderBy('id','DESC');
-		$this->Drug->setLimit('20');
+		//$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));

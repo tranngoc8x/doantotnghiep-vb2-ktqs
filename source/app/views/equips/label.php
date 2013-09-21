@@ -1,16 +1,46 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Tìm kiếm</h3>
-        <p>
-            <div class="pagination">
-                <ul>
-                    <li><?php echo $html->link("All",array('controller'=>'equips','action'=>'index'),array('class'=>'item'));?></li>
-                    <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
-                    <?php }?>
-                </ul>
-            </div>
-        </p>
+        <div class="pagination">
+            <ul>
+                <li><?php echo $html->link("All",array('controller'=>'equips','action'=>'index'),array('class'=>'item'));?></li>
+                <?php foreach ($alpa as $key => $value) {?>
+                <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
+                <?php }?>
+            </ul>
+        </div>
+        <div class="row">
+            <form action="<?php echo BASE_PATH;?>/commons/find" method="POST" class="span12">
+                <input type="hidden" name="model" value="<?php echo $this->_controller;?>" />
+                <div class="span4">
+                    <input type="text" placeholder="Từ khóa" name= 'q' value="<?php echo isset($q)?$q:"";?>" class="span12">
+                    <select name="distribute" id="distribute" class="span12">
+                        <option value="All" selected>Nhà phân phối</option>
+                        <?php
+                            if(!isset($distribute)){ $distribute="";}
+                            foreach ($list_dis as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Distribute']['id'];?>" <?php if($value['Distribute']['id'] == $distribute){echo 'selected';}?>><?php echo $value['Distribute']['ten'];?></option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="span4">
+                   
+                    <select name="manu" id="manu" class="span12">
+                        <option value="All" selected>Nhà sản xuất</option>
+                        <?php
+                            if(!isset($manu)){ $manu="";}
+                            foreach ($list_manus as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Manu']['id'];?>" <?php if($value['Manu']['id'] == $manu){echo 'selected';}?>><?php echo $value['Manu']['ten'];?></option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="span3">
+                    <input type="submit" name="" class="btn btn-primary" value="Tìm kiếm" />
+                </div>
+            </form>
+        </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Trang thiết bị y tế</h3>
@@ -34,8 +64,9 @@
                 </li>
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach?>
-                <?php echo $this->Equip->paginate();?>
+                
             </ul>
+            <?php echo $this->Equip->paginate();?>
         </div>
     </div>
 </div>

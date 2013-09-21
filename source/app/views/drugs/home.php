@@ -6,11 +6,11 @@
                 <?php foreach ($drugs as $k=> $drug):?>
                 <li class='article'>
                     <?php echo $html->link($html->img('files/drugs/'.$drug['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
-                                           array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),
+                                           array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id'].'/'.$drug['Drug']['ten']),
                                            array('class'=>"left entry thumbnail"),false);?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($drug['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($drug['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id'].'/'.$drug['Drug']['ten']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $drug['Manu']);?>
             		<p class="item">Nhóm dược lý : <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'label/Type:'.$drug['Type']['id']),array('class'=>'item'));?></p>
@@ -38,7 +38,7 @@
                     <?php foreach ($hopitals as $k=> $hopital):?>
                     <li class='article'>
                     <h6 style="word-wrap:none;overflow: hidden;">
-                        <?php echo $html->link($hopital['Hopital']['ten'],array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id']),array('class'=>'item'));?>
+                        <?php echo $html->link($hopital['Hopital']['ten'],array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id'].'/'.$hopital['Hopital']['ten']),array('class'=>'item'));?>
                     </h6>
                     <div class="item"><b>Địa chi :</b> <?php echo $hopital['Hopital']['diachi'],' , '.$hopital['City']['ten'];?></div>
                     <div class='item rates'>
@@ -63,7 +63,7 @@
                     <?php foreach ($drugstores as $k=> $drugstore):?>
                     <li class='article'>
                     <h6 style="word-wrap:none;overflow: hidden;">
-                        <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstores','action'=>'view/'.$drugstore['Drugstore']['id']),array('class'=>'item'));?>
+                        <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstores','action'=>'view/'.$drugstore['Drugstore']['id'].'/'.$drugstore['Drugstore']['ten']),array('class'=>'item'));?>
                     </h6>
                     <div class="item"><b>Địa chi :</b> <?php echo $drugstore['Drugstore']['diachi'],' , '.$drugstore['City']['ten'];?></div>
                     <div class='item rates'>
@@ -85,7 +85,7 @@
                     <?php foreach ($clinics as $k=> $clinic):?>
                     <li class='article'>
                     <h6 style="word-wrap:none;overflow: hidden;">
-                        <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id']),array('class'=>'item'));?>
+                        <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id'].'/'.$clinic['Clinic']['ten']),array('class'=>'item'));?>
                     </h6>
                     <div class="item"><b>Chuyên khoa :</b><?php echo $clinic['Department']['ten'];?></div>
                     <div class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['Clinic']['ten'];?></div>

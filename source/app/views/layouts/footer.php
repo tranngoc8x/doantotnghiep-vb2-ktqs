@@ -16,10 +16,10 @@
                             </div>
                             <div class="copyright">
                                 <ul id="mainlevel-nav">
-                                    <li class="firstitem"><a href="#" class="mainlevel-nav">Trang chủ</a></li>
+                                    <li class="firstitem"><?php echo $html->link("Trang chủ",array('drugs/home'),array('title'=>'Liên hệ'));?></li>
                                     <li><a href="#" class="mainlevel-nav">Giới thiệu</a></li>
                                     <li><a href="#" class="mainlevel-nav">Điều khoản</a> </li>
-                                    <li><a href="#" class="mainlevel-nav">Liên hệ</a> </li>
+                                    <li><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?> </li>
                                  </ul>
                                     <?php echo $footer[0]['Infor']['content'];?>
                             </div>
