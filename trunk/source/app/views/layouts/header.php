@@ -40,7 +40,12 @@
 	            <div id="header" class="span12">
 	            	<div class="inner span12">
 		                 <h1 id="logo">
-					        <a href="#" title="THUỐC VÀ DƯỢC LIỆU"><span>THUỐC VÀ DƯỢC LIỆU</span></a>
+					        <a href="#" title="THUỐC VÀ DƯỢC LIỆU">
+								<?php echo $html->img('img/logo.png',array('title'=>"Tra cứu thuốc và dược liệu",'alt'=>"Thuốc dược liệu"));?>
+					        	<span>
+					        	
+
+					        </span></a>
 					    </h1>
 				    	<ul id="top">
 				    		<?php if(!isset($_SESSION['ssid']) || empty($_SESSION['ssid'])){?>
