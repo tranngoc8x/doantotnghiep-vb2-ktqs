@@ -11,12 +11,12 @@
                         <div class="box-br span12">
                             <div class="sublogo">
                                 <div id="poweredby">
-                                    <a id="t3-logo">Powered By T3 Framework</a>
+                                    <a id="t3-logo">Design by Trần Ngọc Thắng</a>
                                 </div>
                             </div>
                             <div class="copyright">
                                 <ul id="mainlevel-nav">
-                                    <li class="firstitem"><?php echo $html->link("Trang chủ",array('drugs/home'),array('title'=>'Liên hệ'));?></li>
+                                    <li class="firstitem"><?php echo $html->link("Trang chủ",array('drugs/home'),array('title'=>'Trang chủ'));?></li>
                                     <li><a href="#" class="mainlevel-nav">Giới thiệu</a></li>
                                     <li><a href="#" class="mainlevel-nav">Điều khoản</a> </li>
                                     <li><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?> </li>

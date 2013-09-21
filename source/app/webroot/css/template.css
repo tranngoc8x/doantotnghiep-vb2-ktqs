@@ -555,7 +555,7 @@ h1#logo, h1#logo-text {
 h1#logo a {
 	width: 200px;
 	display: block;
-	background: url(../img/logo.png) no-repeat;
+	/*background: url(../img/logo.png) no-repeat;*/
 	position: absolute;
 	height: 78px;
 	top: 10px;
@@ -701,7 +701,7 @@ li.firstitem {
 	display: block;
 	height: 20px;
 	text-indent: -9999%;
-	width: 160px;
+	width: 180px;
 	text-decoration: none;
 }
 

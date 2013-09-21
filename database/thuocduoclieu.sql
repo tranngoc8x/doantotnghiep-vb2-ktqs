@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 02, 2013 at 11:52 AM
+-- Generation Time: Sep 21, 2013 at 06:36 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `drugs` (
 --
 
 INSERT INTO `drugs` (`id`, `ten`, `sodk`, `giakekhai`, `dangbaoche`, `types_id`, `thanhphan`, `hamluong`, `chidinh`, `lieudung`, `baoquan`, `manus_id`, `distributes_id`, `trangthai`, `anh`) VALUES
-(1, 'Berberin â€“ BM', '1234', '4000', 'viÃªn nang cá»©ng - Há»™p 3 vá»‰ x 10 viÃªn.', 1, 'Berberin clorid&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.. 25mg<br />\r\nBa cháº½&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; 100mg<br />\r\nMá»™c hÆ°Æ¡ng&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 150mg<br />\r\nT&aacute; dÆ°á»£c vÄ‘&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 1 vi&ecirc;n<br />\r\nT&aacute; dÆ°á»£c (tinh bá»™t sáº¯n 20mg, Calci carbonat 190mg, Magnesi stearat 4.0mg)', 'Berberin clorid&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.. 25mg<br />\nBa cháº½&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; 100mg<br />\nMá»™c hÆ°Æ¡ng&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 150mg<br />\nT&aacute; dÆ°á»£c vÄ‘&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 1 vi&ecirc;n', 'Nhiá»…m khuáº©n Ä‘Æ°á»ng ruá»™t nhÆ°: ti&ecirc;u cháº£y, Ä‘au bá»¥ng, Ä‘áº§y bá»¥ng, vi&ecirc;m ruá»™t cáº¥p v&agrave; máº¡n t&iacute;nh, lá»µ trá»±c tr&ugrave;ng.', 'NgÆ°á»i lá»›n: 2 viÃªn/ láº§n x 3 láº§n/ ngÃ y.  Tráº» em: 1-2 viÃªn/ láº§n x 2 láº§n/ ngÃ y.', 'Äá»ƒ nÆ¡i tho&aacute;ng m&aacute;t, tr&aacute;nh &aacute;nh náº¯ng máº·t trá»i', 1, 1, 1, 'becberin.jpg'),
+(1, 'Berberin â€“ BM', '1234', '5000', 'viÃªn nang cá»©ng - Há»™p 3 vá»‰ x 10 viÃªn.', 1, 'Berberin clorid&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.. 25mg<br />\r\nBa cháº½&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; 100mg<br />\r\nMá»™c hÆ°Æ¡ng&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 150mg<br />\r\nT&aacute; dÆ°á»£c vÄ‘&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 1 vi&ecirc;n<br />\r\nT&aacute; dÆ°á»£c (tinh bá»™t sáº¯n 20mg, Calci carbonat 190mg, Magnesi stearat 4.0mg)', 'Berberin clorid&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.. 25mg<br />\r\nBa cháº½&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; 100mg<br />\r\nMá»™c hÆ°Æ¡ng&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 150mg<br />\r\nT&aacute; dÆ°á»£c vÄ‘&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;. 1 vi&ecirc;n', 'Nhiá»…m khuáº©n Ä‘Æ°á»ng ruá»™t nhÆ°: ti&ecirc;u cháº£y, Ä‘au bá»¥ng, Ä‘áº§y bá»¥ng, vi&ecirc;m ruá»™t cáº¥p v&agrave; máº¡n t&iacute;nh, lá»µ trá»±c tr&ugrave;ng.', 'NgÆ°á»i lá»›n: 2 viÃªn/ láº§n x 3 láº§n/ ngÃ y.  Tráº» em: 1-2 viÃªn/ láº§n x 2 láº§n/ ngÃ y.', 'Äá»ƒ nÆ¡i tho&aacute;ng m&aacute;t, tr&aacute;nh &aacute;nh náº¯ng máº·t trá»i', 1, 1, 1, 'becberin.jpg'),
 (2, 'Becberin', '1234', '5', '1610mg x 365 viÃªn/ lá»', 1, '<p>DÆ°á»£c t&aacute; vá»«a Ä‘á»§</p>\r\n', '<p>1 2 3 4mg/vi&ecirc;n</p>\r\n', '<p>Äi ngo&agrave;i</p>\r\n', '20v/láº§n', '<p>Tho&aacute;ng m&aacute;t</p>\r\n', 1, 1, 1, 'becberin.jpg'),
 (3, 'QPLUS SUPER', 'VN-9074-09', '135', 'ViÃªn nang má»m - Lá» 30 viÃªn', 2, 'Má»—i viÃªn nang má»m chá»©a 30mg Coenzyme Q10', 'Pháº§n thÃ´ng tin tham kháº£o â€“ DÃ¹ng thuá»‘c theo chá»‰ Ä‘á»‹nh cá»§a BÃ¡c sÄ©', 'DÃ¹ng Ä‘iá»u trá»‹ há»— trá»£ : bá»‡nh cÆ¡ tim, thiá»ƒu nÄƒng tuáº§n hoÃ n, bá»‡nh thiáº¿u mÃ¡u á»Ÿ tim, tÄƒng huyáº¿t Ã¡p Ä‘á»™ng máº¡ch, chá»©ng loáº¡n nhá»‹p Ä‘i kÃ¨m thiá»ƒu nÄƒng tuáº§n hoÃ n, ngoÃ i ra thuá»‘c cÃ²n Ä‘Æ°á»£c dÃ¹ng Ä‘á»ƒ:\r\n- chá»‘ng lÃ£o hÃ³a, tÄƒng cÆ°á»ng miá»…n dá»‹ch\r\n- phÃ²ng vÃ  Ä‘iá»u trá»‹ xÆ¡ vá»¯a Ä‘á»™ng máº¡ch\r\n- Há»™i chá»©ng má»‡t má»i kÃ©o dÃ i, suy giáº£m kháº£ nÄƒng hoáº¡t Ä‘á»™ng thá»ƒ cháº¥t do thiáº¿u há»¥t coenzym Q10 Ä‘áº·c biá»‡t á»Ÿ ngÆ°á»i cao tuá»•i.\r\n\r\nTÃ¡c dá»¥ng phá»¥:\r\n\r\nThuá»‘c thÆ°á»ng Ä‘Æ°á»£c dung náº¡p tá»‘t. Hiáº¿m khi xuáº¥t hiá»‡n cÃ¡c triá»‡u chá»©ng cá»§a tÃ¡c dá»¥ng khÃ´ng mong muá»‘n (khoáº£ng 1,4%)nhÆ°: buá»“n nÃ´n, nÃ´n, tiÃªu cháº£y, máº¥t cáº£m giÃ¡c khi Äƒn, Ä‘á» da\r\nCáº£nh bÃ¡o Ä‘áº·c biá»‡t vÃ  tháº­n trá»ng Ä‘áº·c biá»‡t khi sá»­ dá»¥ng: Trong quÃ¡ trÃ¬nh Ä‘iá»u trá»‹ cÃ³ thá»ƒ xuáº¥t hiá»‡n tÄƒng khÃ´ng Ä‘Ã¡ng ká»ƒ ná»“ng Ä‘á»™ dehydrogenase vÃ  tranaminase trong mÃ¡u.\r\n\r\nChÃº Ã½ Ä‘á» phÃ²ng:\r\n\r\nPhá»¥ ná»¯ cÃ³ thai vÃ  cho con bÃº: TrÃ¡nh dÃ¹ng cho phá»¥ ná»¯ cÃ³ thai hoáº·c Ä‘ang cho con bÃº vÃ¬ Ä‘á»™ an toÃ n chÆ°a xÃ¡c Ä‘á»‹nh.\r\náº£nh hÆ°á»Ÿng lÃªn kháº£ nÄƒng lÃ¡i xe vÃ  váº­n hÃ nh mÃ¡y mÃ³c: thuá»‘c khÃ´ng áº£nh hÆ°á»Ÿng lÃªn kháº£ nÄƒng lÃ¡i xe vÃ  váº­n hÃ nh mÃ¡y mÃ³c\r\ncoenzym Q10 cÃ³ thá»ƒ lÃ m tÄƒng tÃ¡c dá»¥ng cá»§a thuá»‘c lá»£i tiá»ƒu, cÃ¡c thuá»‘c glycosid trá»£ tim vÃ  nitrat.\r\nThuá»‘c lÃ m tÄƒng tÃ¡c dá»¥ng chá»‘ng oxy hÃ³a cá»§a vitamin E, thuá»‘c cÃ³ thá»ƒ lÃ m kÃ©o dÃ i thá»i gian tÃ¡c dá»¥ng giáº£m huyáº¿t Ã¡p cá»§a enalapril vÃ  nitrendipin. coenzym Q10 cÃ³ tÃ¡c dá»¥ng Ä‘á»“ng váº­n vá»›i L-canrnitin trong quÃ¡ trÃ¬nh chuyá»ƒn hÃ³a vÃ  tuáº§n hoÃ n. Thuá»‘c cÃ³ thá»ƒ lÃ m giáº£m nguy cÆ¡ xuáº¥t hiá»‡n cÃ¡c triá»‡u chá»©ng áº£nh hÆ°á»Ÿng suy giáº£m lÃªn cÆ¡ tim cá»§a cÃ¡c thuá»‘c nhÃ³m giáº£i phÃ³ng adrenolytic bÃªta, kÃ¬m hÃ£m tÃ¡c dá»¥ng chá»‘ng Ä‘Ã´ng cá»§a warpharin. coenzym Q10 cÃ²n lÃ m giáº£m Ä‘á»™c tÃ­nh cá»§a cÃ¡c khÃ¡ng sinh chá»‘ng ung thÆ° thuá»™c nhÃ³n antracyclin.\r\nSá»­ dá»¥ng quÃ¡ liá»u: chÆ°a cÃ³ dá»¯ liá»‡u vá» viá»‡c Sá»­ dá»¥ng quÃ¡ liá»u coenzym Q10', 'Thuá»‘c cáº§n Ä‘Æ°á»£c uá»‘ng sau khi Äƒn Liá»u dÃ¹ng cho ngÆ°á»i lá»›n vÃ  tráº» em trÃªn 15 tuá»•i: - Ä‘iá»u trá»‹ há»— trá»£ trong bá»‡nh thuá»™c há»‡ tuáº§n hÃ²a: 60-80mg (2-6 viÃªn)/ngÃ y, chia lÃ m 2-3 láº§n - Chá»‘ng lÃ£o hÃ³a, tÄƒng cÆ°á»ng kháº£ nÄƒng miá»…n dá»‹ch: 60-120 mg (2-4 viÃªn)/ngÃ y, chia lÃ m 2-3 láº§n - Vá»¯a xÆ¡ Ä‘á»™ng máº¡ch: 30-300mg (1-10 viÃªn)/ngÃ y, chia lÃ m 2-3 láº§n - Há»™i chá»©ng má»‡t má»i kÃ©o dÃ i, suy giáº£m kháº£ nÄƒng hoáº¡t Ä‘á»™ng thá»ƒ cháº¥t: 60-120 mg (2-4 viÃªn)/ngÃ y, chia lÃ m 2-3 láº§n. Hoáº·c theo chá»‰ Ä‘á»‹nh cá»§a bÃ¡c sÄ©. Coenzym Q10 cÃ³ thá»ƒ dÃ¹ng lÃ¢u dÃ i, hiá»‡u quáº£ lÃ¢m sÃ n thÆ°á»ng Ä‘Æ°á»£c tháº¥y sau chu ká»³ Ä‘iá»u trá»‹ dÃ i ngÃ y. Sau chu ká»³ dÃ¹ng dÃ i ngÃ y, khÃ´ng nÃªn dá»«ng Ä‘á»™t ngá»™t, náº¿u khÃ´ng há»i Ã½ kiáº¿n bÃ¡c sÄ©.', 'Äá»ƒ nÆ¡i khÃ´ thoÃ¡ng, trÃ¡nh Ã¡nh sÃ¡ng', 1, 2, 1, 'qplussupper.jpg'),
 (4, 'SlimFit USA', 'xxx', '1', 'Lá» 30 ViÃªn', 1, 'Nutratherm Thermogenic Complex: Micronized Green Tea Leaf extract, Cactus extract, Clary Sage extract\r\nCortfem: Beta-sisosterol, Phophatidylserine, Theanine\r\nAquaplex Water Removal Complex: Dandelion leaf and root, Uva Ursi extract, French maritime pine extract\r\nXtend Absorption Complex: Cellulose ethers\r\nVitamin D (as Cholcalciferol)\r\nVitamin B-6 (as Pyridonxine Hydrochloride) Folic Acid\r\nVitamin B-12 (as Cyanocobalamin)\r\nCalcium (as Calcium Hydroxide/Carbonate)\r\nGelatin, magiÃª stearate.', 'xxx', '- Tan má»¡ tá»« bÃªn trong nhanh chÃ³ng.\r\n- TÄƒng cÆ°á»ng nÄƒng lÆ°á»£ng cÆ¡ thá»ƒ.\r\n- NgÄƒn cháº·n chuyá»ƒn hoÃ¡ cháº¥t thá»«a thÃ nh má»¡ tÃ­ch tá»¥.\r\n- Loáº¡i tháº£i Ä‘á»™c tá»‘ trong cÆ¡ thá»ƒ\r\n- Chá»‘ng lÃ£o hoÃ¡ giÃºp da tÆ°Æ¡i tráº».', '- Uá»‘ng 1 viÃªn/ngÃ y trÆ°á»›c khi Äƒn sÃ¡ng vá»›i nÆ°á»›c lá»c. - Xin Äƒn uá»‘ng Ä‘Ãºng bá»¯a, Ä‘á»«ng bá» bá»¯a Äƒn nÃ o. - Sau khi Ä‘Ã£ Ä‘Æ°á»£c sá»‘ cÃ¢n náº·ng nhÆ° mÃ¬nh mong muá»‘n, nÃªn uá»‘ng 1 tuáº§n 3 viÃªn Ä‘á»ƒ giá»¯ nguyÃªn sá»‘ cÃ¢n.', 'ThoÃ¡ng mÃ¡t', 1, 1, 1, 'slim-fit-2.jpg'),
@@ -288,8 +288,8 @@ CREATE TABLE IF NOT EXISTS `equips` (
 --
 
 INSERT INTO `equips` (`id`, `ten`, `anh`, `chucnang`, `manus_id`, `distributes_id`, `gioithieu`, `trangthai`) VALUES
-(1, 'MÃ¡y trá»£ tim', 'trotim.jpg', 'Trá»£ tim', 1, 1, 'xxx', 1),
-(2, 'MÃ¡y trá»£ thÃ­nh', 'trotim.jpg', 'MÃ¡y trá»£ thÃ­nh', 1, 1, 'xxx', 1);
+(1, 'MÃ¡y trá»£ tim', 'welcome.png', 'Trá»£ tim', 1, 1, 'xxx', 1),
+(2, 'MÃ¡y trá»£ thÃ­nh', 'welcome.png', 'MÃ¡y trá»£ thÃ­nh', 1, 1, 'xxx', 1);
 
 -- --------------------------------------------------------
 
@@ -345,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `infors` (
 --
 
 INSERT INTO `infors` (`id`, `ten`, `content`, `trangthai`) VALUES
-(1, 'ThÃ´ng tin chÃ¢n trang', '<small>Copyright &copy; 2013 Tran Ngoc. All Rights Reserved. Designed by <a href="https://facebook.com/tranngoc8x" target="_blank">TranNgoc</a>.</small>', 1),
+(1, 'ThÃ´ng tin chÃ¢n trang', '<small>Copyright &copy; 2013 Thuá»‘c DÆ°á»£c Liá»‡u. All Rights Reserved. Designed by <a href="https://facebook.com/tranngoc8x" target="_blank">Tráº§n Ngá»c Tháº¯ng</a>.</small>', 1),
 (2, 'ThÃ´ng tin liÃªn há»‡', 'ThÃ´ng tin Ä‘ang cáº­p nháº­t...', 1);
 
 -- --------------------------------------------------------
@@ -383,16 +383,18 @@ CREATE TABLE IF NOT EXISTS `members` (
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `ten` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `infor` text COLLATE utf8_unicode_ci,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`id`, `username`, `password`, `ten`, `infor`) VALUES
-(1, 'user1', '202cb962ac59075b964b07152d234b70', 'User 1', 'User 1'),
-(2, 'user2', '202cb962ac59075b964b07152d234b70', 'User 2', 'User 2');
+INSERT INTO `members` (`id`, `username`, `password`, `ten`, `infor`, `email`) VALUES
+(1, 'user1', '202cb962ac59075b964b07152d234b70', 'User 1', 'User 1', ''),
+(2, 'user2', '202cb962ac59075b964b07152d234b70', 'User 2', 'User 2', ''),
+(3, 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'Tráº§n Ngá»c Tháº¯ng', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -447,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `rate_drugs` (
   `mark` int(2) NOT NULL,
   `ykien` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
 
 --
 -- Dumping data for table `rate_drugs`
@@ -489,7 +491,8 @@ INSERT INTO `rate_drugs` (`id`, `drugs_id`, `members_id`, `mark`, `ykien`) VALUE
 (64, 1, 2, 5, NULL),
 (65, 7, 2, 4, NULL),
 (66, 7, 2, 4, NULL),
-(67, 7, 2, 4, NULL);
+(67, 7, 2, 4, NULL),
+(68, 3, 3, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -632,7 +635,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `ten`, `username`, `password`, `email`, `trangthai`) VALUES
+(1, 'Tr?n Ng?c', 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1),
+(2, 'Tran Ngoc', 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -709,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `ykien_drugs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `ykien_drugs`
@@ -730,7 +741,8 @@ INSERT INTO `ykien_drugs` (`id`, `drugs_id`, `members_id`, `content`, `ngayviet`
 (34, 6, 1, 'dfddf', '2013-09-01 20:57:26'),
 (35, 6, 1, 'kl;k;l', '2013-09-01 20:57:29'),
 (36, 6, 1, ';lk;lk', '2013-09-01 20:57:32'),
-(37, 6, 1, 'jhgjkg', '2013-09-01 20:57:35');
+(37, 6, 1, 'jhgjkg', '2013-09-01 20:57:35'),
+(38, 3, 3, 'men', '2013-09-11 23:44:04');
 
 -- --------------------------------------------------------
 
