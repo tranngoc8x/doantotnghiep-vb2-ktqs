@@ -91,9 +91,10 @@ class TntController{
 		if(empty($this->_view)){
 			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
 				include (ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php');
+
 			}
 		}else{
-			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
+			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php')) {
 				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_view. '.php');
 			}
 		}

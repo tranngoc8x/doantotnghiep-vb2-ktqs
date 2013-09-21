@@ -11,6 +11,9 @@ class ClinicsController extends AppController {
 		$this->Clinic->showHasMany();
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
+		$this->set(compact('list_city','list_des'));
 	}
 	function admin_index() {
 		$this->Clinic->showHasOne();
@@ -77,6 +80,41 @@ class ClinicsController extends AppController {
 		$results = $this->Clinic->find();
 		$this->set(compact("results"));
 
+	}
+	function search($q,$q1,$q2){
+		$this->_view = "clinics/label";
+		$aq 	= explode(':',$q);
+		$aq1 	= explode(':',$q1);
+		$aq2 	= explode(':',$q2);
+		$array = array();
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
+		{
+			$array[$aq1[0].'s_id'] = $aq1[1];
+			// $$aq1[0] = $aq1[1];
+			// $q1 = $$aq1[0];
+		}
+		if(!empty($aq2[1]) && strtolower($aq2[1]) != "all")
+		{
+			$array[$aq2[0].'s_id'] = $aq2[1];
+		}
+		//debug($array);
+		$this->Clinic->where($array);
+		$this->Clinic->showHasOne();
+		$this->Clinic->showHasMany();
+		$results = $this->Clinic->find();
+		$this->set(compact("results",'q'));
+		$this->set($aq1[0], $aq1[1]);
+		$this->set($aq2[0], $aq2[1]);
+
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
+		$this->set(compact('list_city','list_des'));
 	}
 	function afterAction() {
 

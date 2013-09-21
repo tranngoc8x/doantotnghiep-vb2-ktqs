@@ -1,7 +1,7 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Tìm kiếm</h3>
-        <p>
+
             <div class="pagination">
                 <ul>
                     <li><?php echo $html->link("All",array('controller'=>'clinics','action'=>'index'),array('class'=>'item'));?></li>
@@ -10,7 +10,39 @@
                     <?php }?>
                 </ul>
             </div>
-        </p>
+            <form action="<?php echo BASE_PATH;?>/commons/find" method="POST" class="span12">
+                <div class="row">
+                    <div class="span4">
+                        <input type="hidden" name="model" value="<?php echo $this->_controller;?>" />
+                        <input type="text" placeholder="Từ khóa" name= 'q'  value="<?php echo isset($q)?$q:"";?>" class="span12">
+                    </div>
+                    <div class="span4">
+                        <select name="department" id="department" class="span12">
+                            <option value="">Chuyên khoa</option>
+                            <?php
+                                foreach ($list_des as $key => $value) {
+                            ?>
+                            <option value="<?php echo $value['Department']['id'];?>" <?php if($value['Department']['id'] == $department){echo 'selected';}?>><?php echo $value['Department']['ten'];?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <select name="citie" id="citie" class="span12">
+                            <option value="">Thành phố</option>
+                            <?php
+                                foreach ($list_city as $key => $value) {
+                            ?>
+                            <option value="<?php echo $value['City']['id'];?>" <?php if($value['City']['id'] == $citie){echo 'selected';}?>><?php echo $value['City']['ten'];?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="span4">
+                        <input type="submit" name="" class="btn btn-primary" value="Tìm kiếm" />
+                    </div>
+                </div>
+            </form>
     </div>
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Phòng khám</h3>
@@ -35,8 +67,8 @@
                 </li>
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach?>
-                <?php echo $this->Clinic->paginate();?>
             </ul>
+            <?php echo $this->Clinic->paginate();?>
         </div>
     </div>
 </div>

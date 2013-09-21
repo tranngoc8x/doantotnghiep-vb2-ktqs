@@ -1,16 +1,43 @@
 <div class="mass mass-top clearfix">
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Tìm kiếm</h3>
-        <p>
-            <div class="pagination">
-                <ul>
-                    <li><?php echo $html->link("All",array('controller'=>'equips','action'=>'index'),array('class'=>'item'));?></li>
-                    <?php foreach ($alpa as $key => $value) {?>
-                    <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
-                    <?php }?>
-                </ul>
-            </div>
-        </p>
+        <div class="pagination">
+            <ul>
+                <li><?php echo $html->link("All",array('controller'=>'equips','action'=>'index'),array('class'=>'item'));?></li>
+                <?php foreach ($alpa as $key => $value) {?>
+                <li><?php echo $html->link($value,array('controller'=>'equips','action'=>'label/key:'.$key),array('class'=>'item'));?></li>
+                <?php }?>
+            </ul>
+        </div>
+        <div class="row">
+            <form action="<?php echo BASE_PATH;?>/commons/find" method="POST" class="span12">
+                <input type="hidden" name="model" value="<?php echo $this->_controller;?>" />
+                <div class="span4">
+                    <input type="text" placeholder="Từ khóa" name= 'q' class="span12">
+                    <select name="distribute" id="distribute" class="span12">
+                        <option value="">Nhà phân phối</option>
+                        <?php
+                            foreach ($list_dis as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Distribute']['id'];?>"><?php echo $value['Distribute']['ten'];?></option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="span4">
+                    <select name="manu" id="manu" class="span12">
+                        <option value="All">Nhà sản xuất</option>
+                        <?php
+                            foreach ($list_manus as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Manu']['id'];?>"><?php echo $value['Manu']['ten'];?></option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="span3">
+                    <input type="submit" name="" class="btn btn-primary" value="Tìm kiếm" />
+                </div>
+            </form>
+        </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Trang thiết bị y tế</h3>

@@ -57,11 +57,11 @@
                 <?php foreach ($results as $k=> $item):?>
                 <li class='article'>
                     <?php echo $html->link($html->img('files/drugs/'.$item['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
-                                           array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),
+                                           array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),
                                            array('class'=>"left entry thumbnail"),false);?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $item);?>
             		<p class="item">Nhóm dược lý : <?php echo $html->link($item['Type']['ten'],array('controller'=>'drugs','action'=>'label/Type:'.$item['Type']['id']),array('class'=>'item'));?></p>
@@ -75,8 +75,9 @@
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach?>
                 <?php //debug($item);?>
-                <?php //echo $this->Drug->paginate();?>
+
             </ul>
+            <?php echo $this->Drug->paginate();?>
         </div>
     </div>
 </div>
