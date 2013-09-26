@@ -1,7 +1,7 @@
  <!-- CONTENT -->
 <div id="main">
         <div class="mass mass-top clearfix">
-            <div class="boxheader boxheader-main clearfix" id="Mod88">
+            <div class="boxheader boxheader-main clearfix">
                     <h3>Giới thiệu thuốc</h3>
 
                 <div class="box-ct clearfix">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="boxheader boxheader-main clearfix" id="Mod79">
+            <div class="boxheader boxheader-main clearfix">
                     <h3>Thuốc mới cập nhật</h3>
 
                 <div class="box-ct clearfix">
