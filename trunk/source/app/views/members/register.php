@@ -34,6 +34,9 @@
 							<p>
 								<label for="email">Email</label>
 							    <?php echo $form->input('email',array('class'=>'span12','placeholder'=>'email','id'=>'email'));?>
+								<?php if(!empty($mgs_email)){?>
+								<div class=" span12 errormesage"><?php echo $mgs_email;?></div>
+								<?php }?>
 							</p>
 							<p>
 								<label for="infor">Thông tin</label>

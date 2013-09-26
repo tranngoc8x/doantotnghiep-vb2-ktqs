@@ -551,7 +551,7 @@ class SQLQuery{
 
 	function save($array = null) {
 		if(empty($array)){$array=$_POST;}
-
+		debug($array);
 		$this->_describe($array);
 		if($this->_validate($array) == false){
 			return ;
