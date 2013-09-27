@@ -9,7 +9,7 @@
                 <?php }?>
             </ul>
         </div>
-        <div class="row">
+        <div class="row-fluid">
             <form action="<?php echo BASE_PATH;?>/commons/find" method="POST" class="span12">
                 <input type="hidden" name="model" value="<?php echo $this->_controller;?>" />
                 <div class="span4">

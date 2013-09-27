@@ -142,6 +142,45 @@ class DrugsController extends AppController {
 		$this->set(compact("results"));
 
 	}
+	function admin_search($q,$q1,$q2,$q3){
+		$this->_view = "drugs/admin_index";
+		$aq 	= explode(':',$q);
+		$aq1 	= explode(':',$q1);
+		$aq2 	= explode(':',$q2);
+		$aq3 	= explode(':',$q3);
+		$array = array();
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
+		{
+			$array[$aq1[0].'s_id'] = $aq1[1];
+			// $$aq1[0] = $aq1[1];
+			// $q1 = $$aq1[0];
+		}
+		if(!empty($aq2[1]) && strtolower($aq2[1]) != "all")
+		{
+			$array[$aq2[0].'s_id'] = $aq2[1];
+		}
+		if(!empty($aq3[1]) && strtolower($aq3[1]) != "all")
+		{
+			$array[$aq3[0].'s_id'] = $aq3[1];
+
+
+		}
+		//debug($array);
+		$this->Drug->where($array);
+		$this->Drug->showHasOne();
+		$this->Drug->showHasMany();
+		$drugs = $this->Drug->find();
+		$this->set(compact("drugs",'q'));
+		$this->set($aq1[0], $aq1[1]);
+		$this->set($aq2[0], $aq2[1]);
+		$this->set($aq3[0], $aq3[1]);
+	}
 	function search($q,$q1,$q2,$q3){
 		$this->_view = "drugs/label";
 		$aq 	= explode(':',$q);

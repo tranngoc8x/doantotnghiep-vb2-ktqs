@@ -343,6 +343,19 @@ class CommonsController extends AppController{
 		}
 		$this->redirect(array('controller'=>$model,'action'=>'search/'.$string));
 	}
+	function admin_find(){
+		$string = "";
+		$model = lcfirst($_POST['model']);
+		unset($_POST['model']);
+		$q= empty($_POST['q'])?"All":$_POST['q'];
+		$string .= "q:".$q.'/';
+		unset($_POST['q']);
+		foreach ($_POST as $key => $value) {
+			if(empty($value)) $value = "All";
+			$string.=$key.':'.$value.'/';
+		}
+		$this->redirect(array('controller'=>$model,'action'=>'search/'.$string));
+	}
 	function afterAction() {
 
 	}

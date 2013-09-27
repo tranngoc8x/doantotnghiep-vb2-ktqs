@@ -20,7 +20,8 @@ class HopitalsController extends AppController {
 		$this->Hopital->setLimit('15');
 		$hopitals = $this->Hopital->find();
 		$this->set(compact('hopitals'));
-
+		$list_city = $this->Hopital->query("SELECT * FROM cities where trangthai=1");
+		$this->set(compact('list_city'));
 		//debug($this);
 	}
 	function admin_add(){
@@ -79,7 +80,34 @@ class HopitalsController extends AppController {
 		$this->set(compact("results"));
 
 	}
+	function admin_search($q,$q1){
+		$this->_view = "hopitals/admin_index";
+		$aq 	= explode(':',$q);
+		$aq1 	= explode(':',$q1);
+		$array = array();
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
+		{
+			$array[$aq1[0].'s_id'] = $aq1[1];
+			// $$aq1[0] = $aq1[1];
+			// $q1 = $$aq1[0];
+		}
+		//debug($array);
+		$this->Hopital->where($array);
+		$this->Hopital->showHasOne();
+		$this->Hopital->showHasMany();
+		$hopitals = $this->Hopital->find();
+		$this->set(compact("hopitals",'q'));
+		$this->set($aq1[0], $aq1[1]);
 
+		$list_city = $this->Hopital->query("SELECT * FROM cities where trangthai=1");
+		$this->set(compact('list_city'));
+	}
 	function search($q,$q1){
 		$this->_view = "hopitals/label";
 		$aq 	= explode(':',$q);
