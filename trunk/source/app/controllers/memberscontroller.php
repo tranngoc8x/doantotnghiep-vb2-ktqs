@@ -17,7 +17,7 @@ class MembersController extends AppController {
 
 			if(empty($mgs_code) && empty($mgs_pass)){
 			 	if(!$this->auth($_POST['Member'],'members')){
-			 		$mgs = "Tài khoản hoặc mật khẩu không chính xác !";
+			 		$mgs = "Tài khoản hoặc mật khẩu không chính xác hoặc tài khoản chưa được kích hoạt!";
 			 	}
 			}
 		}

@@ -32,6 +32,20 @@
 			$this->Manu->delete();
 			$this->redirect(array('controller'=>'manus','action'=>'index'));
 		}
+		function admin_search($q){
+			$this->_view = "manus/admin_index";
+			$aq 	= explode(':',$q);
+			$q = "";
+			if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+			{
+				$array['ten LIKE'] = '%'.$aq[1].'%';
+				$q = $aq[1];
+			}
+			$this->Manu->where($array);
+			$manus = $this->Manu->find();
+			$this->set(compact("manus",'q'));
+
+		}
 		function afterAction () {
 		}
 	}

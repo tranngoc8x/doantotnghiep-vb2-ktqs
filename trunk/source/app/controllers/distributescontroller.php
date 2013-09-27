@@ -32,6 +32,21 @@
 			$this->Distribute->delete();
 			$this->redirect(array('controller'=>'distributes','action'=>'index'));
 		}
+		function admin_search($q){
+			$this->_view = "distributes/admin_index";
+			$aq 	= explode(':',$q);
+			$q = "";
+			if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+			{
+				$array['ten LIKE'] = '%'.$aq[1].'%';
+				$q = $aq[1];
+			}
+			$this->Distribute->where($array);
+			$distributes = $this->Distribute->find();
+			$this->set(compact("distributes",'q'));
+
+		}
+
 		function afterAction () {
 		}
 	}

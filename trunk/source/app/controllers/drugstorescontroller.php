@@ -21,6 +21,8 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->setLimit('15');
 		$drugstores = $this->Drugstore->find();
 		$this->set(compact('drugstores'));
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
+		$this->set(compact('list_city'));
 	}
 	function admin_add(){
 		if(isset($_POST['Drugstore']) && !empty($_POST['Drugstore'])){
@@ -79,6 +81,31 @@ class DrugstoresController extends AppController {
 		$results = $this->Drugstore->find();
 		$this->set(compact("results"));
 	}
+	function admin_search($q,$q1){
+		$this->_view = "drugstores/admin_index";
+		$aq 	= explode(':',$q);
+		$aq1 	= explode(':',$q1);
+		$array = array();
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
+		{
+			$array[$aq1[0].'s_id'] = $aq1[1];
+		}
+		$this->Drugstore->where($array);
+		$this->Drugstore->showHasOne();
+		$this->Drugstore->showHasMany();
+		$drugstores = $this->Drugstore->find();
+		$this->set(compact("drugstores",'q'));
+		$this->set($aq1[0], $aq1[1]);
+
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
+		$this->set(compact('list_city'));
+	}
 	function search($q,$q1){
 		$this->_view = "drugstores/label";
 		$aq 	= explode(':',$q);
@@ -93,10 +120,7 @@ class DrugstoresController extends AppController {
 		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
 		{
 			$array[$aq1[0].'s_id'] = $aq1[1];
-			// $$aq1[0] = $aq1[1];
-			// $q1 = $$aq1[0];
 		}
-		//debug($array);
 		$this->Drugstore->where($array);
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();

@@ -9,28 +9,43 @@ class CitiesController extends AppController {
 		$this->set('cities',$cities);
 	}
 	function admin_add(){
-			if(isset($_POST['City']) && !empty($_POST['City'])){
-				if($this->City->save()){
-					$this->redirect(array('controller'=>'cities','action'=>'index'));
-				}
+		if(isset($_POST['City']) && !empty($_POST['City'])){
+			if($this->City->save()){
+				$this->redirect(array('controller'=>'cities','action'=>'index'));
 			}
 		}
-		function admin_edit($id = null){
-			$city = $this->City->read($id);
+	}
+	function admin_edit($id = null){
+		$city = $this->City->read($id);
 
-			if(isset($_POST['City']) && !empty($_POST['City'])){
-				$this->City->id = $id;
-				if($this->City->save()){
-					$this->redirect(array('controller'=>'cities','action'=>'index'));
-				}
-			}
-			$this->set(compact('city','cities'));
-		}
-		function admin_delete($id){
+		if(isset($_POST['City']) && !empty($_POST['City'])){
 			$this->City->id = $id;
-			$this->City->delete();
-			$this->redirect(array('controller'=>'cities','action'=>'index'));
+			if($this->City->save()){
+				$this->redirect(array('controller'=>'cities','action'=>'index'));
+			}
 		}
+		$this->set(compact('city','cities'));
+	}
+	function admin_delete($id){
+		$this->City->id = $id;
+		$this->City->delete();
+		$this->redirect(array('controller'=>'cities','action'=>'index'));
+	}
+	function admin_search($q){
+		$this->_view = "cities/admin_index";
+		$aq 	= explode(':',$q);
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		$this->City->where($array);
+		$cities = $this->City->find();
+		$this->set(compact("cities",'q'));
+
+	}
+
 	function afterAction() {
 
 	}

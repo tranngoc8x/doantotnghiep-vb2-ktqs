@@ -121,7 +121,7 @@ class SQLQuery{
 			$rturn .= '<script>
 				$(document).ready(function(){';
 		    while ($row = mysql_fetch_assoc($result)) {
-		    	if($row["Null"] == "NO" && $row["Field"] != 'id'){
+		    	if($row["Null"] == "NO" && $row["Field"] != 'id' && isset($array[$this->_model][$row['Field']])){
 		    		if($array[$this->_model][$row['Field']] == null || $array[$this->_model][$row['Field']] == ""){
 		    			$rturn .=$session->writeErr("Nội dung không được bỏ trống hoặc không hợp lệ.",$this->_model.$row['Field'],$row['Field']);
 		    			$i++;
@@ -551,7 +551,7 @@ class SQLQuery{
 
 	function save($array = null) {
 		if(empty($array)){$array=$_POST;}
-		debug($array);
+		//debug($array);
 		$this->_describe($array);
 		if($this->_validate($array) == false){
 			return ;

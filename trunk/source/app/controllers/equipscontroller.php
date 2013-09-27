@@ -7,6 +7,9 @@ class EquipsController extends AppController {
 		$this->Equip->showHasOne();
 		$equips = $this->Equip->find();
 		$this->set('equips',$equips);
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
+		$this->set(compact('list_dis','list_manus'));
 	}
 	function admin_add(){
 		if(isset($_POST['Equip']) && !empty($_POST['Equip'])){
@@ -123,6 +126,40 @@ class EquipsController extends AppController {
 		$this->Equip->showHasMany();
 		$results = $this->Equip->find();
 		$this->set(compact("results",'q'));
+		$this->set($aq1[0], $aq1[1]);
+		$this->set($aq2[0], $aq2[1]);
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
+		$this->set(compact('list_dis','list_manus'));
+	}
+	function admin_search($q,$q1,$q2){
+		$this->_view = "equips/admin_index";
+		$aq 	= explode(':',$q);
+		$aq1 	= explode(':',$q1);
+		$aq2 	= explode(':',$q2);
+		$array = array();
+		$q = "";
+		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
+		{
+			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$q = $aq[1];
+		}
+		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
+		{
+			$array[$aq1[0].'s_id'] = $aq1[1];
+			// $$aq1[0] = $aq1[1];
+			// $q1 = $$aq1[0];
+		}
+		if(!empty($aq2[1]) && strtolower($aq2[1]) != "all")
+		{
+			$array[$aq2[0].'s_id'] = $aq2[1];
+		}
+		//debug($array);
+		$this->Equip->where($array);
+		$this->Equip->showHasOne();
+		$this->Equip->showHasMany();
+		$equips = $this->Equip->find();
+		$this->set(compact("equips",'q'));
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
 		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");

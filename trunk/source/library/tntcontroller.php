@@ -50,7 +50,7 @@ class TntController{
 		$this->{$model}->where(array($usr=>$array['username']));
 		$temp = $this->{$model}->find();
 		if(!empty($temp)){
-			if(md5($array['password']) == $temp[0][$model][$pas]){
+			if(md5($array['password']) == $temp[0][$model][$pas] && $temp[0][$model]['trangthai']==1){
 				if($this->_admin == true){
 					$_SESSION['admin'] = $temp[0][$model]['id'];
 					$_SESSION['user'] = $temp[0][$model][$usr];
