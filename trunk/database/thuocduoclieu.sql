@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2013 at 06:36 PM
+-- Generation Time: Sep 29, 2013 at 06:14 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -31,8 +31,10 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ten` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `cities`
@@ -61,8 +63,10 @@ CREATE TABLE IF NOT EXISTS `clinics` (
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
   `map` varchar(255) CHARACTER SET cp1251 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='phòng khám' AUTO_INCREMENT=7 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='phòng khám' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `clinics`
@@ -91,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `parent` int(11) NOT NULL,
   `thoigian` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -121,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `contacts`
@@ -141,8 +145,11 @@ CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ten` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='chuyên khoa ' AUTO_INCREMENT=20 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`),
+  FULLTEXT KEY `ten_3` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='chuyên khoa ' AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `departments`
@@ -180,8 +187,10 @@ CREATE TABLE IF NOT EXISTS `distributes` (
   `ten` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='nhà phân phối' AUTO_INCREMENT=3 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='nhà phân phối' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `distributes`
@@ -214,8 +223,10 @@ CREATE TABLE IF NOT EXISTS `drugs` (
   `distributes_id` int(11) NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
   `anh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+  PRIMARY KEY (`id`),
+  KEY `ten_2` (`ten`),
+  FULLTEXT KEY `ten` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `drugs`
@@ -248,8 +259,10 @@ CREATE TABLE IF NOT EXISTS `drugstores` (
   `map` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `drugstores`
@@ -280,8 +293,10 @@ CREATE TABLE IF NOT EXISTS `equips` (
   `distributes_id` int(11) NOT NULL,
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='trang thiết bị' AUTO_INCREMENT=3 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='trang thiết bị' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `equips`
@@ -306,8 +321,10 @@ CREATE TABLE IF NOT EXISTS `hopitals` (
   `map` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='bệnh viên' AUTO_INCREMENT=11 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='bệnh viên' AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `hopitals`
@@ -338,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `infors` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `infors`
@@ -360,15 +377,18 @@ CREATE TABLE IF NOT EXISTS `manus` (
   `ten` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `gioithieu` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='nhà xản suất' AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='nhà xản suất' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `manus`
 --
 
 INSERT INTO `manus` (`id`, `ten`, `gioithieu`, `trangthai`) VALUES
-(1, 'DÆ°á»£c Pháº©m Trung Æ¯Æ¡ng I', 'DÆ°á»£c Pháº©m Trung Æ¯Æ¡ng I', 1);
+(1, 'DÆ°á»£c Pháº©m Trung Æ¯Æ¡ng I', 'DÆ°á»£c Pháº©m Trung Æ¯Æ¡ng I', 1),
+(2, 'Hoa Linh', 'CÃ´ng ty cá»• pháº§n dÆ°á»£c pháº©m Hoa Linh', 1);
 
 -- --------------------------------------------------------
 
@@ -385,16 +405,16 @@ CREATE TABLE IF NOT EXISTS `members` (
   `infor` text COLLATE utf8_unicode_ci,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `members`
 --
 
 INSERT INTO `members` (`id`, `username`, `password`, `ten`, `infor`, `email`) VALUES
-(1, 'user1', '202cb962ac59075b964b07152d234b70', 'User 1', 'User 1', ''),
-(2, 'user2', '202cb962ac59075b964b07152d234b70', 'User 2', 'User 2', ''),
-(3, 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'Tráº§n Ngá»c Tháº¯ng', NULL, '');
+(1, 'user1', '202cb962ac59075b964b07152d234b70', 'User 1', 'User 1', 'user1@gmail.com'),
+(2, 'user2', '202cb962ac59075b964b07152d234b70', 'User 2', 'User 2', 'user2@gmail.com'),
+(3, 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'Tráº§n Ngá»c Tháº¯ng', 'dep trai :)', 'tranngocthang89@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -410,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `rates` (
   `mark` int(2) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -425,7 +445,7 @@ CREATE TABLE IF NOT EXISTS `rate_clinics` (
   `members_id` int(11) NOT NULL,
   `mark` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `rate_clinics`
@@ -433,7 +453,8 @@ CREATE TABLE IF NOT EXISTS `rate_clinics` (
 
 INSERT INTO `rate_clinics` (`id`, `clinics_id`, `members_id`, `mark`) VALUES
 (1, 6, 2, 3),
-(2, 6, 1, 5);
+(2, 6, 1, 5),
+(3, 1, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -449,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `rate_drugs` (
   `mark` int(2) NOT NULL,
   `ykien` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
 
 --
 -- Dumping data for table `rate_drugs`
@@ -507,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `rate_drugstores` (
   `members_id` int(11) NOT NULL,
   `mark` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `rate_drugstores`
@@ -516,7 +537,9 @@ CREATE TABLE IF NOT EXISTS `rate_drugstores` (
 INSERT INTO `rate_drugstores` (`id`, `drugstores_id`, `members_id`, `mark`) VALUES
 (1, 7, 2, 5),
 (2, 6, 2, 5),
-(3, 7, 1, 4);
+(3, 7, 1, 4),
+(4, 7, 3, 4),
+(5, 6, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -531,7 +554,7 @@ CREATE TABLE IF NOT EXISTS `rate_equips` (
   `members_id` int(11) NOT NULL,
   `mark` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `rate_equips`
@@ -540,7 +563,8 @@ CREATE TABLE IF NOT EXISTS `rate_equips` (
 INSERT INTO `rate_equips` (`id`, `equips_id`, `members_id`, `mark`) VALUES
 (1, 2, 2, 5),
 (5, 1, 2, 3),
-(6, 2, 1, 4);
+(6, 2, 1, 4),
+(7, 2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -555,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `rate_hopitals` (
   `members_id` int(11) NOT NULL,
   `mark` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `rate_hopitals`
@@ -563,7 +587,8 @@ CREATE TABLE IF NOT EXISTS `rate_hopitals` (
 
 INSERT INTO `rate_hopitals` (`id`, `hopitals_id`, `members_id`, `mark`) VALUES
 (1, 10, 2, 4),
-(2, 10, 1, 5);
+(2, 10, 1, 5),
+(3, 10, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -577,8 +602,10 @@ CREATE TABLE IF NOT EXISTS `types` (
   `ten` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mota` text COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='loại thuốc' AUTO_INCREMENT=38 ;
+  PRIMARY KEY (`id`),
+  KEY `ten` (`ten`),
+  FULLTEXT KEY `ten_2` (`ten`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='loại thuốc' AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `types`
@@ -629,21 +656,22 @@ INSERT INTO `types` (`id`, `ten`, `mota`, `trangthai`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ten` varchar(50) CHARACTER SET cp1251 NOT NULL,
+  `ten` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `trangthai` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `ten`, `username`, `password`, `email`, `trangthai`) VALUES
-(1, 'Tr?n Ng?c', 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1),
-(2, 'Tran Ngoc', 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1);
+(1, 'Tráº§n Ngá»c', 'toi_loi_acon', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1),
+(2, 'Tran Ngoc', 'tranngoc8x', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1),
+(3, 'Ngá»c Tháº¯ng', 'tranngocthang89', 'afa8fff7d213c2f4bc9baa3b68389c34', 'tranngocthang89@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -659,7 +687,7 @@ CREATE TABLE IF NOT EXISTS `ykien_clinics` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `ykien_clinics`
@@ -697,7 +725,7 @@ CREATE TABLE IF NOT EXISTS `ykien_clinic_childs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `ykien_clinic_childs`
@@ -720,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `ykien_drugs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `ykien_drugs`
@@ -758,7 +786,7 @@ CREATE TABLE IF NOT EXISTS `ykien_drugstores` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `ykien_drugstores`
@@ -801,7 +829,7 @@ CREATE TABLE IF NOT EXISTS `ykien_drugstore_childs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `ykien_drugstore_childs`
@@ -826,7 +854,7 @@ CREATE TABLE IF NOT EXISTS `ykien_drug_childs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `ykien_drug_childs`
@@ -849,7 +877,7 @@ CREATE TABLE IF NOT EXISTS `ykien_equips` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `ykien_equips`
@@ -898,7 +926,7 @@ CREATE TABLE IF NOT EXISTS `ykien_equip_childs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `ykien_equip_childs`
@@ -923,7 +951,7 @@ CREATE TABLE IF NOT EXISTS `ykien_hopitals` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `ykien_hopitals`
@@ -975,7 +1003,7 @@ CREATE TABLE IF NOT EXISTS `ykien_hopital_childs` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `ngayviet` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `ykien_hopital_childs`
