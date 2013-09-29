@@ -25,7 +25,7 @@
                     </select>
                 </div>
                 <div class="span4">
-                   
+
                     <select name="manu" id="manu" class="span12">
                         <option value="All" selected>Nhà sản xuất</option>
                         <?php
@@ -52,7 +52,7 @@
                                            array('controller'=>'equips','action'=>'view/'.$item['Equip']['id']),
                                            array('class'=>"left entry thumbnail"),false);?>
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$item['Equip']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$item['Equip']['id'].'/'.$item['Equip']['ten']),array('class'=>'item'));?>
             		</h6>
             		<p class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></p>
             		<p class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></p>
@@ -64,7 +64,7 @@
                 </li>
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach?>
-                
+
             </ul>
             <?php echo $this->Equip->paginate();?>
         </div>

@@ -152,7 +152,8 @@ class DrugsController extends AppController {
 		$q = "";
 		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
 		{
-			$array['ten LIKE'] = '%'.$aq[1].'%';
+			//$array['ten LIKE'] = '%'.$aq[1].'%';
+			$array['extend'] = " MATCH(Drug.ten) AGAINST ('+".$aq[1]."*' IN BOOLEAN MODE)";
 			$q = $aq[1];
 		}
 		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
@@ -191,8 +192,10 @@ class DrugsController extends AppController {
 		$q = "";
 		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
 		{
-			$array['ten LIKE'] = '%'.$aq[1].'%';
+			//$array['ten LIKE'] = '%'.$aq[1].'%';
+			$array['extend'] = " MATCH(Drug.ten) AGAINST ('+".$aq[1]."*' IN BOOLEAN MODE)";
 			$q = $aq[1];
+
 		}
 		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
 		{
