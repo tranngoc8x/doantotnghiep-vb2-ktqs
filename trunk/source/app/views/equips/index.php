@@ -49,7 +49,7 @@
                                            array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),
                                            array('class'=>"left entry thumbnail"),false);?>
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($equip['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($equip['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id'].'/'.$equip['Equip']['ten']),array('class'=>'item'));?>
             		</h6>
             		<p class="item">Nhà phân phối: <?php echo $html->link($equip['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></p>
                     <p class="item">Nhà sản xuất: <?php echo $html->link($equip['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></p>

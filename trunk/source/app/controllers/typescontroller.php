@@ -36,7 +36,8 @@ class TypesController extends AppController {
 		$q = "";
 		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
 		{
-			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$array['extend'] = " MATCH(Type.ten) AGAINST ('+".$aq[1]."*' IN BOOLEAN MODE)";
+			//$array['ten LIKE'] = '%'.$aq[1].'%';
 			$q = $aq[1];
 		}
 		$this->Type->where($array);

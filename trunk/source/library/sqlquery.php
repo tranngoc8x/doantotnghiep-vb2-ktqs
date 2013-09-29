@@ -54,12 +54,16 @@ class SQLQuery{
 		foreach ($cond as $key => $value) {
 			$akey = explode(' ', $key);
 			//print_r($akey);
-			if(count($akey) == 1 || (count($akey) > 1 and empty($akey[1]))){
-				$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+			if($key =='extend'){
+				$this->_extraConditions .=  $value .' AND ';
 			}else{
-				$f = array_shift($akey);
-				$s = implode(' ', $akey);
-				$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'` '.$s.' \''.mysql_real_escape_string($value).'\' AND ';
+				if(count($akey) == 1 || (count($akey) > 1 and empty($akey[1]))){
+					$this->_extraConditions .= '`'.$this->_model.'`.`'.$key.'` = \''.mysql_real_escape_string($value).'\' AND ';
+				}else{
+					$f = array_shift($akey);
+					$s = implode(' ', $akey);
+					$this->_extraConditions .= '`'.$this->_model.'`.`'.$f.'` '.$s.' \''.mysql_real_escape_string($value).'\' AND ';
+				}
 			}
 		}
 		#echo $this->_extraConditions;
@@ -240,7 +244,7 @@ class SQLQuery{
 			}
 		}
 		$this->_query = 'SELECT '.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
-		#echo  $this->_query ;
+		# echo  $this->_query ;
 		$this->_result = mysql_query($this->_query, $this->_dbHandle);
 		$result = array();
 		$table = array();

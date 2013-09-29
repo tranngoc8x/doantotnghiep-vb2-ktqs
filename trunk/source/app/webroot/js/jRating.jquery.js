@@ -12,9 +12,9 @@
 	$.fn.jRating = function(op) {
 		var defaults = {
 			/** String vars **/
-			bigStarsPath : '../../img/stars.png', // path of the icon stars.png
-			smallStarsPath : '../../img/stars-small.png', // path of the icon small.png
-			phpPath : '../../commons/view', // path of the php file jRating.php
+			bigStarsPath : '../../../img/stars.png', // path of the icon stars.png
+			smallStarsPath : '../../../img/stars-small.png', // path of the icon small.png
+			phpPath : '../../../commons/view', // path of the php file jRating.php
 			type : 'big', // can be set to 'small' or 'big'
 
 			/** Boolean vars **/

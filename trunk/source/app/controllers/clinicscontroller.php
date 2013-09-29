@@ -92,7 +92,8 @@ class ClinicsController extends AppController {
 		$q = "";
 		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
 		{
-			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$array['extend'] = " MATCH(Clinic.ten) AGAINST ('+".$aq[1]."*' IN BOOLEAN MODE)";
+			//$array['ten LIKE'] = '%'.$aq[1].'%';
 			$q = $aq[1];
 		}
 		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")
@@ -127,7 +128,9 @@ class ClinicsController extends AppController {
 		$q = "";
 		if(!empty($aq[1]) && strtolower($aq[1]) != "all")
 		{
-			$array['ten LIKE'] = '%'.$aq[1].'%';
+			$array['extend'] = " MATCH(Clinic.ten) AGAINST ('+".$aq[1]."*' IN BOOLEAN MODE)";
+			//$array['ten LIKE'] = '%'.$aq[1].'%';
+
 			$q = $aq[1];
 		}
 		if(!empty($aq1[1]) && strtolower($aq1[1]) != "all")

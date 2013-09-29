@@ -76,7 +76,7 @@
 	                        $(document).ready(function(){
 	                            $('.write-rating').jRating({
 
-	                                phpPath : '../../commons/rating',
+	                                phpPath : '../../../commons/rating',
 	                                tables : 'clinics',
 	                                members : <?php echo $_SESSION['ssid'];?>,
 	                                values : <?php echo $clinic['Clinic']['id'];?>

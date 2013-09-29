@@ -72,7 +72,7 @@
 		                        $(document).ready(function(){
 		                            $('.write-rating').jRating({
 
-		                                phpPath : '../../commons/rating',
+		                                phpPath : '../../../commons/rating',
 		                                tables : 'hopitals',
 		                                members : <?php echo $_SESSION['ssid'];?>,
 		                                values : <?php echo $hopital['Hopital']['id'];?>

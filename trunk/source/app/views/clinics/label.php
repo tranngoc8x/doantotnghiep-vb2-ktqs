@@ -52,7 +52,7 @@
                 <li >
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id'].'/'.$clinic['Clinic']['ten']),array('class'=>'item'));?>
             		</h6>
             		<?php //debug( $Clinic);?>
             		<p class="item"><b>Chuyên khoa :</b> <?php echo $html->link($clinic['Department']['ten'],array('controller'=>'clinics','action'=>'label/Department:'.$clinic['Department']['id']),array('class'=>'item'));?></p>
