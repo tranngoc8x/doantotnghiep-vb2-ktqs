@@ -42,6 +42,12 @@
           </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="linhvuc">Lĩnh vực chuyên môn</label>
+            <div class="controls">
+              <?php echo $form->textarea('linhvuc',$clinic['Clinic']['linhvuc'],array('class'=>'span12 ckeditor','id'=>'linhvuc'));?>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label" for="gioithieu">Thông tin</label>
             <div class="controls">
               <?php echo $form->textarea('gioithieu',$clinic['Clinic']['gioithieu'],array('class'=>'span12 ckeditor','id'=>'gioithieu'));?>

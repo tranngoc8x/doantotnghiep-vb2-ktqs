@@ -28,18 +28,25 @@ class ContactsController extends AppController {
 		$this->set(compact('mgs_code'));
 	}
 	function admin_view($id = null){
-		$contact = $this->Contact->read($id);
-
-		if(isset($_POST['Contact']) && !empty($_POST['Contact'])){
-			$this->Contact->id = $id;
-			$this->Contact->save();
-			$this->redirect(array('controller'=>'contacts','action'=>'index'));
-		}
-		$this->set(compact('contact'));
+		$contacts = $this->Contact->read($id);
+		$this->set(compact('contacts'));
 	}
 	function admin_delete($id){
 		$this->Contact->id = $id;
 		$this->Contact->delete();
+		$this->redirect(array('controller'=>'contacts','action'=>'index'));
+	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Contact->id = $v;
+					$this->Contact->delete();
+				}
+			}
+		}
 		$this->redirect(array('controller'=>'contacts','action'=>'index'));
 	}
 	function view($id = null) {

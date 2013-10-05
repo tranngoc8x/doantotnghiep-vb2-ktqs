@@ -52,6 +52,18 @@ class EquipsController extends AppController {
 		$this->Equip->delete();
 		$this->redirect(array('controller'=>'equips','action'=>'index'));
 	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Equip->id = $v;
+					$this->Equip->delete();
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'equips','action'=>'index'));
+	}
 	function index() {
 		$this->Equip->orderBy('id','DESC');
 		$this->Equip->setLimit('20');

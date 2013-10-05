@@ -22,7 +22,7 @@
 <div class="separator"></div>
 <table class="table table-bordered table-hover" width=100%>
 	<tr>
-		<th>id</th>
+		<th><input type='checkbox' value='' class='checkall' name='checkall' id='checkall' /></th>
         <th>Tên nhà phân phối</th>
 		<th>Trạng thái</th>
 		<th>Tùy chọn</th>
@@ -30,7 +30,7 @@
 	</tr>
 	 <?php foreach ($distributes as $dis):?>
     <tr>
-    	<td>id</td>
+    	<td><input type='checkbox' value='<?php echo $dis['Distribute']['id'];?>' name='check'/></td>
     	<td>
     	<?php echo $html->link($dis['Distribute']['ten'],
                             array('controller'=>'distributes','action'=>'edit/'.$dis['Distribute']['id']));?>
@@ -43,4 +43,12 @@
                             array('controller'=>'distributes','action'=>'delete/'.$dis['Distribute']['id']),null,true);?></td>
     </tr>
     <?php endforeach?>
+</table>
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0);" class="delall">Xóa các mục đã chọn</a>
+        </td>
+        <td></td>
+    </tr>
 </table>

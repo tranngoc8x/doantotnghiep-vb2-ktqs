@@ -42,7 +42,7 @@
 <div class="separator"></div>
 <table class="table table-bordered table-hover" width=100%>
 	<tr>
-		<th>id</th>
+		<th><input type='checkbox' value='' class='checkall' name='checkall' id='checkall' /></th>
         <th>Nhà sản xuất</th>
         <th>Nhà phân phối</th>
 		<th>Vị trí</th>
@@ -51,7 +51,7 @@
 	</tr>
 	 <?php foreach ($equips as $equip):?>
     <tr>
-    	<td>id</td>
+    	<td><input type='checkbox' value='<?php echo $equip['Equip']['id'];?>' name='check'/></td>
     	<td>
     	<?php echo $equip['Equip']['ten'];?>
     	</td>
@@ -69,4 +69,12 @@
         </td>
     </tr>
     <?php endforeach?>
+</table>
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0);" class="delall">Xóa các mục đã chọn</a>
+        </td>
+        <td></td>
+    </tr>
 </table>

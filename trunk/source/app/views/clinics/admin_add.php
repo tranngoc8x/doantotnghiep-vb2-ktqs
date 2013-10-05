@@ -42,6 +42,12 @@
 	        </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="linhvuc">Lĩnh vực chuyên môn</label>
+            <div class="controls">
+              <?php echo $form->textarea('linhvuc',null,array('class'=>'span12 ckeditor','id'=>'linhvuc'));?>
+            </div>
+        </div>
+        <div class="control-group">
           	<label class="control-label" for="gioithieu">Thông tin</label>
           	<div class="controls">
             	<?php echo $form->textarea('gioithieu',null,array('class'=>'span12 ckeditor','id'=>'gioithieu'));?>
@@ -53,7 +59,6 @@
             	 <?php echo $form->input('map',array('class'=>'span8','id'=>'map'));?>
           	</div>
         </div>
-        
        <div class="control-group">
           	<label class="control-label" for="trangthai">Trạng thái</label>
           	<div class="controls">

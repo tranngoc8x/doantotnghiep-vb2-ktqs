@@ -50,6 +50,18 @@ class HopitalsController extends AppController {
 		$this->Hopital->delete();
 		$this->redirect(array('controller'=>'hopitals','action'=>'index'));
 	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Hopital->id = $v;
+					$this->Hopital->delete();
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'hopitals','action'=>'index'));
+	}
 	function view($id = null) {
 		$this->Hopital->id = $id;
 		$this->Hopital->showHasOne();

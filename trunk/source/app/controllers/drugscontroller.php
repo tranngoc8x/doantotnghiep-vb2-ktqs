@@ -97,10 +97,22 @@ class DrugsController extends AppController {
 		$this->Drug->delete();
 		$this->redirect(array('controller'=>'drugs','action'=>'index'));
 	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Drug->id = $v;
+					$this->Drug->delete();
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'drugs','action'=>'index'));
+	}
 	function view($id = null) {
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
-		$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
+		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$drug = $this->Drug->find();
 		$type_id = @$drug['Drug']['types_id'];
 		$manu_id = @$drug['Drug']['manus_id'];
@@ -110,7 +122,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('5');
 		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id));
 		$this->Drug->showHasOne();
-		$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
+		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten"));
 		//rate
 		$rates = $this->Drug->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugs as Rate WHERE drugs_id = '$id' GROUP BY mark");
@@ -118,10 +130,7 @@ class DrugsController extends AppController {
 			$ssid = $_SESSION["ssid"];
 			$your_review = $this->Drug->query("SELECT id,mark FROM  rate_drugs as Rate WHERE drugs_id = '$id' AND members_id='$ssid'");
 		}
-
-		//comment
-		$comments = $this->Drug->query("SELECT * FROM  comments WHERE drugs_id = '$id'");
-		$this->set(compact('drug','type_drugs','manu_drugs','rates','your_review','comments'));
+		$this->set(compact('drug','type_drugs','manu_drugs','rates','your_review'));
 
 	}
 	function mark(){}

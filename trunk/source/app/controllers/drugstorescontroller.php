@@ -50,6 +50,18 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->delete();
 		$this->redirect(array('controller'=>'drugstores','action'=>'index'));
 	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Drugstore->id = $v;
+					$this->Drugstore->delete();
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'drugstores','action'=>'index'));
+	}
 	function view($id = null) {
 		$this->Drugstore->id = $id;
 		$this->Drugstore->showHasOne();

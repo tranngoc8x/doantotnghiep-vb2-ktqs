@@ -95,6 +95,9 @@
 						<li class="glyphicons edit <?php if($this->_controller == "Infors") echo "active";?>">
 							<?php echo $html->link('<i></i><span>Nội dung chung</span>',array('controller'=>'infors','action'=>'index'));?>
 						</li>
+						<li class="glyphicons edit <?php if($this->_controller == "Contacts") echo "active";?>">
+							<?php echo $html->link('<i></i><span>Liên hệ</span>',array('controller'=>'contacts','action'=>'index'));?>
+						</li>
 					</ul>
 				</div>
 			</div>

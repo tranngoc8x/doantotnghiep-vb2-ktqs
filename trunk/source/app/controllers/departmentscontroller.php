@@ -26,9 +26,32 @@ class DepartmentsController extends AppController {
 		$this->set(compact('department','departments'));
 	}
 	function admin_delete($id){
-		$this->Department->id = $id;
-		$this->Department->delete();
+		if($this->_ischild($v) == false){
+			$this->Department->id = $id;
+			$this->Department->delete();
+		}
 		$this->redirect(array('controller'=>'departments','action'=>'index'));
+	}
+	function _ischild($id){
+		$c1 = $this->Department->query("SELECT COUNT(*) as tong FROM clinics WHERE departments_id='$id'");
+		if($c1[0][""]['tong'] >0 )
+			return true;
+		return false;
+	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					if($this->_ischild($v) == false){
+						$this->Department->id = $v;
+						$this->Department->delete();
+					}
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'types','action'=>'index'));
 	}
 	function admin_search($q){
 		$this->_view = "departments/admin_index";
