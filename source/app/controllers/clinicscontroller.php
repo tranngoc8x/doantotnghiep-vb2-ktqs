@@ -55,6 +55,18 @@ class ClinicsController extends AppController {
 		$this->Clinic->delete();
 		$this->redirect(array('controller'=>'clinics','action'=>'index'));
 	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					$this->Clinic->id = $v;
+					$this->Clinic->delete();
+				}
+			}
+		}
+		$this->redirect(array('controller'=>'clinics','action'=>'index'));
+	}
 	function view($id = null) {
 		$this->Clinic->id = $id;
 		$this->Clinic->showHasOne();

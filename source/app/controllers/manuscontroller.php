@@ -28,8 +28,32 @@
 			$this->set(compact('manu','manus'));
 		}
 		function admin_delete($id){
-			$this->Manu->id = $id;
-			$this->Manu->delete();
+			if($this->_ischild($id) == false){
+				$this->Manu->id = $id;
+				$this->Manu->delete();
+			}
+			$this->redirect(array('controller'=>'manus','action'=>'index'));
+		}
+		function _ischild($id){
+			$c1 = $this->Manu->query("SELECT COUNT(*) as tong FROM drugs WHERE manus_id='$id'");
+			$c2 = $this->Manu->query("SELECT COUNT(*) as tong FROM equips WHERE manus_id='$id'");
+			if($c1[0][""]['tong'] >0 || $c2[0][""]['tong']>0)
+				return true;
+			return false;
+		}
+		function admin_multidel($str = null){
+			if($str!=null){
+				$ar = explode(',', $str);
+
+				foreach ($ar as   $v) {
+					if(!empty($v) && is_numeric($v)){
+						if($this->_ischild($v) == false){
+							$this->Manu->id = $v;
+							$this->Manu->delete();
+						}
+					}
+				}
+			}
 			$this->redirect(array('controller'=>'manus','action'=>'index'));
 		}
 		function admin_search($q){

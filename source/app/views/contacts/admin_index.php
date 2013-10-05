@@ -8,7 +8,7 @@
 <div class="separator"></div>
 <table class="table table-bordered table-hover" width=100%>
 	<tr>
-		<th>id</th>
+		<th><input type='checkbox' value='' class='checkall' name='checkall' id='checkall' /></th>
         <th>Tên người liên hệ</th>
         <th>Số điện thoại</th>
         <th>Email</th>
@@ -18,7 +18,7 @@
 	</tr>
 	 <?php foreach ($contacts as $contact):?>
     <tr>
-    	<td>id</td>
+    	<td><input type='checkbox' value='<?php echo $contact['Contact']['id'];?>' name='check'/></td>
     	<td><?php echo $contact['Contact']['ten'];?></td>
         <td><?php echo $contact['Contact']['phone'];?></td>
         <td><a href="mailto:<?php echo $contact['Contact']['email'];?>"><?php echo $contact['Contact']['email'];?></a></td>
@@ -31,4 +31,12 @@
         </td>
     </tr>
     <?php endforeach?>
+</table>
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0);" class="delall">Xóa các mục đã chọn</a>
+        </td>
+        <td></td>
+    </tr>
 </table>

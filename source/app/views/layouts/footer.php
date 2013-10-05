@@ -17,8 +17,8 @@
                             <div class="copyright">
                                 <ul id="mainlevel-nav">
                                     <li class="firstitem"><?php echo $html->link("Trang chủ",array('drugs/home'),array('title'=>'Trang chủ'));?></li>
-                                    <li><a href="#" class="mainlevel-nav">Giới thiệu</a></li>
-                                    <li><a href="#" class="mainlevel-nav">Điều khoản</a> </li>
+                                    <li><?php echo $html->link("Giới thiệu",array('infors/index/4/Giới thiệu'),array('title'=>'Giới thiệu'));?></li>
+                                    <li><?php echo $html->link("Điều khoản",array('infors/index/3/Điều khoản'),array('title'=>'Điều khoản'));?></li>
                                     <li><?php echo $html->link("Liên hệ",array('contacts/index'),array('title'=>'Liên hệ'));?> </li>
                                  </ul>
                                     <?php echo $footer[0]['Infor']['content'];?>

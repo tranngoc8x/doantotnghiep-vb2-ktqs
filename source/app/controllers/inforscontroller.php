@@ -13,6 +13,10 @@ class InforsController extends AppController {
 			}
 		}
 	}
+	function index($id=null){
+		$infor = $this->Infor->read($id);
+		$this->set(compact('infor'));
+	}
 	function admin_edit($id = null){
 		$infor = $this->Infor->read($id);
 

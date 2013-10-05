@@ -26,8 +26,31 @@ class TypesController extends AppController {
 		$this->set(compact('type','types'));
 	}
 	function admin_delete($id){
-		$this->Type->id = $id;
-		$this->Type->delete();
+		if($this->_ischild($v) == false){
+			$this->Type->id = $id;
+			$this->Type->delete();
+		}
+		$this->redirect(array('controller'=>'types','action'=>'index'));
+	}
+	function _ischild($id){
+		$c1 = $this->Type->query("SELECT COUNT(*) as tong FROM drugs WHERE types_id='$id'");
+		if($c1[0][""]['tong'] >0 )
+			return true;
+		return false;
+	}
+	function admin_multidel($str = null){
+		if($str!=null){
+			$ar = explode(',', $str);
+
+			foreach ($ar as   $v) {
+				if(!empty($v) && is_numeric($v)){
+					if($this->_ischild($v) == false){
+						$this->Type->id = $v;
+						$this->Type->delete();
+					}
+				}
+			}
+		}
 		$this->redirect(array('controller'=>'types','action'=>'index'));
 	}
 	function admin_search($q){
