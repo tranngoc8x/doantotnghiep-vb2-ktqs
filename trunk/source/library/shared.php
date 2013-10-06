@@ -76,6 +76,7 @@ function routeURL($url) {
 
 /** Autoload any classes that are required **/
 function __autoload($className) {
+	//echo $className."<br>";
 	if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.php');
 	} else if (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . strtolower($className) . '.php')) {
@@ -84,17 +85,15 @@ function __autoload($className) {
 		require_once(ROOT . DS . 'app' . DS . 'models' . DS . strtolower($className) . '.php');
 	} else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . strtolower($className) . '.php');
-	}else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'controllers' . DS . strtolower($className) . '.php')) {
-		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'controllers' . DS . strtolower($className) . '.php');
-	}else if (file_exists(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'models' . DS . strtolower($className) . '.php')) {
-		require_once(ROOT . DS . 'app' . DS . 'components' . DS . strtolower($className) . DS . 'models' . DS . strtolower($className) . '.php');
+	} else if (file_exists(ROOT . DS . 'app' . DS . 'helpers' . DS . strtolower($className) .DS . $className . '.php')) {
+		require_once(ROOT . DS . 'app' . DS . 'helpers' . DS . strtolower($className)  . DS . strtolower($className) . '.php');
 	} else {
 		/* Error Generation Code Here */
+        @include( PHPEXCEL_ROOT .str_replace('_',DIRECTORY_SEPARATOR,$className) .'.php');
 	}
 }
 
 /** Main Call Function **/
-
 function callHook() {
 	global $url;
 	global $default;
@@ -133,9 +132,6 @@ function callHook() {
 		/* Error Generation Code Here */
 	}
 }
-
-
-
 /** GZip Output **/
 
 function gzipOutput() {

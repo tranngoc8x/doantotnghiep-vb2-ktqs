@@ -1,0 +1,229 @@
+body {
+    background: url("../../img/pattern2.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    margin: 0;
+    padding: 0;
+}
+
+
+.wrapper {
+    float: left;
+    width: 100%;
+}
+
+
+
+/*** Header Section ***/
+header {
+    border-top: 4px solid rgba(0, 0, 0, 0.07);
+    float: left;
+    width: 100%;
+}
+.container {
+    display: table;
+    margin: 0 auto;
+    width: 980px;
+}
+
+/*** Logo ***/
+.logo {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+    height: 60px;
+    width: 120px;
+	float:left;
+}
+.logo span {
+    color: #D12A33;
+    font-size: 24px;
+}
+.logo {
+    color: #161616;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 58px;
+    position: relative;
+    text-align: center;
+}
+.logo:before {
+    border-left: 60px solid rgba(0, 0, 0, 0);
+    border-right: 60px solid rgba(0, 0, 0, 0);
+    border-top: 34px solid rgba(0, 0, 0, 0.07);
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    width: 0;
+}
+
+
+/*** Menu ***/
+
+.menu {
+    float: right;
+    padding: 19px 0;
+}
+.menu.animated{
+	-webkit-animation-duration:3s;
+	-moz-animation-duration:3s;
+	-ms-animation-duration:3s;
+	-o-animation-duration:3s;
+	animation-duration:3s;
+}
+
+.menu > ul {
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    float: left;
+    list-style: none outside none;
+    margin-left: 20px;
+}
+
+.menu li a:hover {
+    background: none repeat scroll 0 0 #00A9DD;
+    border: 1px solid #00A9DD;
+    color: #FFFFFF;
+}
+.menu li a {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #D4D4D4;
+    color: #161616;
+    float: left;
+    font-family: open sans;
+    font-size: 13px;
+    line-height: 9px;
+    padding: 10px 20px;
+    text-decoration: none;
+
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+
+	-webkit-transition: all 0.4s ease 0s;
+	-moz-transition: all 0.4s ease 0s;
+	-ms-transition: all 0.4s ease 0s;
+	-o-transition: all 0.4s ease 0s;
+	transition: all 0.4s ease 0s;
+}
+
+/*** Error Area ***/
+.error-area{
+	float: right;
+    margin-top: 80px;
+	text-align:center;
+}
+
+/*** 404 Image ***/
+.error-area img {
+    margin: 0 auto;
+}
+.error-area img.animated{
+	-webkit-animation-duration:3s;
+	-moz-animation-duration:3s;
+	-ms-animation-duration:3s;
+	-o-animation-duration:3s;
+	animation-duration:3s;
+}
+
+/*** H2 ***/
+h2 span {
+    color: #0088D5;
+    font-family: open sans;
+    font-size: 37px;
+    font-weight: bold;
+}
+h2{
+	color: #242426;
+    font-family: open sans;
+    font-size: 37px;
+    font-weight: 500;
+    line-height: 27px;
+    margin: 50px 0;
+	text-align: center;
+}
+h2.animated{
+	-webkit-animation-duration:3s;
+	-moz-animation-duration:3s;
+	-ms-animation-duration:3s;
+	-o-animation-duration:3s;
+	animation-duration:3s;
+}
+
+/*** H3 ***/
+h3 {
+    color: #242426;
+    font-family: open sans;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+/*** Clock ***/
+#clock {
+    background-image: url("../../img/clockface.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 400px 400px;
+    height: 400px;
+    left: 22%;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 21%;
+    width: 400px;
+}
+
+
+#clock-wrap {
+    float: left;
+    height: 400px;
+    margin: -60px 0 0 -141px;
+    padding: 0;
+    width: 400px;
+}
+
+#sec{
+	position: absolute;												/* Seconds, minutes and hour hands can go anywhere they want */
+	width: 20px;													/* Width of containers */
+	height: 400px;													/* Height of containers */
+	left: 192px;
+    background-image: url("../../img/sechand.png");                 /* Sets background image of second hand */
+    z-index: 3;
+    top: 26px;                                                      /* This is on top */
+    animation: secSpin 5s ease;                                     /* Sets up animations for second hand spinning, easing for 5 seconds duration */
+    -moz-animation: secSpin 5s ease;
+    -webkit-animation: secSpin 5s ease;
+    -o-animation: secSpin 5s ease;											/* A little extra distance from left */
+}
+#min{
+	position: absolute;												/* Seconds, minutes and hour hands can go anywhere they want */
+	width: 20px;													/* Width of containers */
+	height: 400px;													/* Height of containers */
+	left: 192px;													/* A little extra distance from left */
+    background-image: url("../../img/minhand.png");                 /* Sets minute hand background image */
+    z-index: 2;
+    left: 51%;
+    top: 20px;  /* Below second hand */
+    animation: minSpin 4s ease;                                     /* Animation for minute hand, only 4s for spinning at different rates */
+    -moz-animation: minSpin 4s ease;
+    -webkit-animation: minSpin 4s ease;
+    -o-animation: minSpin 4s ease;
+}
+#hour {
+	position: absolute;												/* Seconds, minutes and hour hands can go anywhere they want */
+	width: 20px;													/* Width of containers */
+	height: 400px;													/* Height of containers */
+	background-image: url("../../img/hourhand.png");					/* Sets hour hand background image */
+	z-index: 1;
+    left: 51%;
+    top: 30px;
+	animation: hourSpin 3.5s ease;									/* Animation for hour hand, only 3.5s for spinning at different rates */
+	-moz-animation: hourSpin 3.5s ease;
+	-webkit-animation: hourSpin 3.5s ease;
+	-o-animation: hourSpin 3.5s ease;
+}
