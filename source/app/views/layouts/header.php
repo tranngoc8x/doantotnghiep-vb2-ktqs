@@ -42,10 +42,8 @@
 		                 <h1 id="logo">
 					        <a href="#" title="THUỐC VÀ DƯỢC LIỆU">
 								<?php echo $html->img('img/logo.png',array('title'=>"Tra cứu thuốc và dược liệu",'alt'=>"Thuốc dược liệu"));?>
-					        	<span>
-					        	
-
-					        </span></a>
+					        	<span></span>
+					        </a>
 					    </h1>
 				    	<ul id="top">
 				    		<?php if(!isset($_SESSION['ssid']) || empty($_SESSION['ssid'])){?>

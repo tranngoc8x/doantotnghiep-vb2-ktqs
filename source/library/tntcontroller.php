@@ -7,6 +7,7 @@ class TntController{
 	protected $data = array();
 	protected $_view;
 	protected $helper = array();
+	protected $component = array();
 	protected $variables = array();
 	public $doNotRenderHeader;
 	protected $session;
@@ -15,6 +16,12 @@ class TntController{
 		global $inflect;
 		global $authpath;
 		$this->session = new Session();
+		if(!empty($this->component) && is_array($this->component)){
+			foreach ($this->component as $v) {
+				$vv  = strtolower($v);
+				$$vv = new $v();
+			}
+		}
 		$this->_controller = ucfirst($controller);
 		$this->_action = $action;
 		$model = ucfirst($inflect->singularize($controller));
@@ -76,33 +83,39 @@ class TntController{
 		$session = new Session;//view
 		if(!empty($this->helper) && is_array($this->helper)){
 			foreach ($this->helper as $v) {
-				$vv  = lcfirst($v);
+				$vv  = strtolower($v);
 				$$vv = new $v();
 			}
 		}
 		extract($this->variables);
-		if ($doNotRenderHeader == 0) {
-			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'header.php')) {
-				include (ROOT . DS . 'app' . DS . 'views' . DS . $controller . DS . $this->_template.'header.php');
-			} else {
-				include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'header.php');
+		if(!file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php'))
+		{
+			include(ROOT . DS . 'app' . DS . 'views/layouts/error404.php');
+		}else
+		{
+			if ($doNotRenderHeader == 0) {
+				if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'header.php')) {
+					include (ROOT . DS . 'app' . DS . 'views' . DS . $controller . DS . $this->_template.'header.php');
+				} else {
+					include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'header.php');
+				}
 			}
-		}
-		if(empty($this->_view)){
-			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
-				include (ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php');
+			if(empty($this->_view)){
+				if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php')) {
+					include (ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php');
 
+				}
+			}else{
+				if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php')) {
+					include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_view. '.php');
+				}
 			}
-		}else{
-			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php')) {
-				include (ROOT . DS . 'app' . DS . 'views' . DS . $this->_view. '.php');
-			}
-		}
-		if ($doNotRenderHeader == 0) {
-			if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'footer.php')) {
-				include (ROOT . DS . 'app' . DS . 'views' . DS .lcfirst( $this->_controller) . DS . $this->_template.'footer.php');
-			} else {
-				include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'footer.php');
+			if ($doNotRenderHeader == 0) {
+				if (file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_template.'footer.php')) {
+					include (ROOT . DS . 'app' . DS . 'views' . DS .lcfirst( $this->_controller) . DS . $this->_template.'footer.php');
+				} else {
+					include (ROOT . DS . 'app' . DS . 'views' . DS .'layouts'. DS . $this->_template.'footer.php');
+				}
 			}
 		}
     }
@@ -126,7 +139,6 @@ class TntController{
     	}
     }
     function __destruct() {
-		//$common = new CommonsController($this->_controller, $this->_action);
 		if ($this->render) {
 			$this->render($this->doNotRenderHeader);
 		}
