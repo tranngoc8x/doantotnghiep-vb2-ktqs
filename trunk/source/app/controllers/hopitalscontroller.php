@@ -9,6 +9,7 @@ class HopitalsController extends AppController {
 		$this->Hopital->setLimit('20');
 		$this->Hopital->showHasOne();
 		$this->Hopital->showHasMany();
+		$this->Hopital->where(array('trangthai'=>1));
 		$hopitals = $this->Hopital->find();
 		$this->set(compact('hopitals'));
 		$list_city = $this->Hopital->query("SELECT * FROM cities where trangthai=1");
@@ -64,6 +65,7 @@ class HopitalsController extends AppController {
 	}
 	function view($id = null) {
 		$this->Hopital->id = $id;
+		$this->Hopital->where(array('trangthai'=>1));
 		$this->Hopital->showHasOne();
 		$hopital = $this->Hopital->find();
 		$rates = $this->Hopital->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_hopitals as Rate WHERE hopitals_id = '$id' GROUP BY mark");
@@ -86,6 +88,7 @@ class HopitalsController extends AppController {
 			$this->Hopital->where(array($key=>$f_id.'%'));
 		}else
 		$this->Hopital->where(array($f_key=>$f_id));
+		$this->Hopital->where(array('trangthai'=>1));
 		$this->Hopital->showHasOne();
 		$this->Hopital->showHasMany();
 		$results = $this->Hopital->find();
@@ -141,6 +144,7 @@ class HopitalsController extends AppController {
 		}
 		//debug($array);
 		$this->Hopital->where($array);
+		$this->Hopital->where(array('trangthai'=>1));
 		$this->Hopital->showHasOne();
 		$this->Hopital->showHasMany();
 		$results = $this->Hopital->find();

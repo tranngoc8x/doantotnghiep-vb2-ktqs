@@ -9,6 +9,7 @@ class ClinicsController extends AppController {
 		$this->Clinic->setLimit('20');
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
+		$this->Clinic->where(array('trangthai'=>1));
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
 		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
@@ -70,6 +71,7 @@ class ClinicsController extends AppController {
 	function view($id = null) {
 		$this->Clinic->id = $id;
 		$this->Clinic->showHasOne();
+		$this->Clinic->where(array('trangthai'=>1));
 		$clinic = $this->Clinic->find();
 		$rates = $this->Clinic->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_clinics as Rate WHERE clinics_id = '$id' GROUP BY mark");
 		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
@@ -89,6 +91,7 @@ class ClinicsController extends AppController {
 			$this->Clinic->where(array($key=>$f_id.'%'));
 		}else
 		$this->Clinic->where(array($f_key=>$f_id));
+		$this->Clinic->where(array('trangthai'=>1));
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
 		$results = $this->Clinic->find();
@@ -156,7 +159,9 @@ class ClinicsController extends AppController {
 			$array[$aq2[0].'s_id'] = $aq2[1];
 		}
 		//debug($array);
+
 		$this->Clinic->where($array);
+		$this->Clinic->where(array('trangthai'=>1));
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
 		$results = $this->Clinic->find();

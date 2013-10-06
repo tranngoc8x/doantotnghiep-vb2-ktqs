@@ -88,7 +88,7 @@ class TntController{
 			}
 		}
 		extract($this->variables);
-		if(!file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php'))
+		if(!file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php') && !file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php'))
 		{
 			include(ROOT . DS . 'app' . DS . 'views/layouts/error404.php');
 		}else

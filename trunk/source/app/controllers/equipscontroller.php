@@ -69,6 +69,7 @@ class EquipsController extends AppController {
 		$this->Equip->setLimit('20');
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
+		$this->Equip->where(array('trangthai'=>1));
 		$equips = $this->Equip->find();
 		$this->set(compact('equips'));
 		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
@@ -104,6 +105,7 @@ class EquipsController extends AppController {
 			$this->Equip->where(array($key=>$f_id.'%'));
 		}else
 		$this->Equip->where(array($f_key=>$f_id));
+		$this->Equip->where(array('trangthai'=>1));
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
 		$results = $this->Equip->find();
@@ -135,6 +137,7 @@ class EquipsController extends AppController {
 		}
 		//debug($array);
 		$this->Equip->where($array);
+		$this->Equip->where(array('trangthai'=>1));
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
 		$results = $this->Equip->find();

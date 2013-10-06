@@ -1,4 +1,5 @@
 <div class="mass mass-top clearfix">
+	<?php if(!empty($clinic)){?>
     <div class="boxheader boxheader-main clearfix">
     	<h3><?php echo $html->img('img/icon-home.png');?> :: Phòng khám :: <?php echo $clinic['Clinic']['ten']?></h3>
 	    <div class="box-ct clearfix row-fluid">
@@ -136,7 +137,7 @@
 	                <button id="shareButton" type='button' class="btn btn-icon btn-primary glyphicons circle_ok">Bình luận</button>
 	            </form>
 	            <?php }else{?>
-	            <p style='color:#f00'>Hãy đăng nhập để thực hiện đánh giá của bạn !<p>
+	            <p style='color:#f00'>Hãy đăng nhập để thực hiện đánh giá của bạn !</p>
 	            <?php }?>
 	            <hr class='clearfix'/>
 	            <div id="posting" align="center">
@@ -240,4 +241,14 @@
 	        </div>
         </div>
 	</div>
+	<?php }else{?>
+	<div class="boxheader boxheader-main clearfix">
+	    <h3><?php echo $html->img('img/icon-home.png');?> :: Thông báo</h3>
+	    <div class="box-ct clearfix row-fluid">
+	        <div class='span12 article detail'>
+	            <p>Không thể hiển thị bản ghi này. Bạn không có quền xem hoặc bản ghi không tồn tại .</p>
+	        </div>
+	    </div>
+	</div>
+	<?php }?>
 </div>

@@ -1,4 +1,6 @@
+
 <div class="mass mass-top clearfix">
+    <?php if(!empty($drug)){?>
     <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: <?php echo ($drug['Type']['ten']);?> :: <?php echo $drug['Drug']['ten']?></h3>
         <div class="box-ct clearfix row-fluid">
@@ -98,10 +100,7 @@
         	</div>
 		</div>
 	</div>
-</div>
-<!-- mainbotsl -->
-<div id="mainbotsl" class="clearfix">
-    <div class="boxheader boxheader-main">
+    <div class="boxheader boxheader-main  clearfix">
         <h3>Thuốc cùng nhóm dược lý</h3>
         <div class="box-ct clearfix">
              <ul class='ulitem row-fluid'>
@@ -129,17 +128,18 @@
                 <?php endforeach;?>
             </ul>
         </div>
-        <div class="boxheader boxheader-main clearfix">
-            <h3>Đánh giá</h3>
-            <div class="box-ct clearfix row-fluid">
-                <?php
-                    if(isset($_SESSION['user_token'])) unset($_SESSION['user_token']);
-                    $formtoken = uniqid();
-                    $_SESSION['user_token'] = $formtoken;
-                ?>
+    </div>
+    <div class="boxheader boxheader-main clearfix">
+        <h3>Đánh giá</h3>
+        <div class="box-ct clearfix row-fluid">
+            <?php
+                if(isset($_SESSION['user_token'])) unset($_SESSION['user_token']);
+                $formtoken = uniqid();
+                $_SESSION['user_token'] = $formtoken;
+            ?>
 
-                <?php $comments = CommonsController::showpost($drug['Drug']['id']);?>
-                <div class='span12 article detail'>
+            <?php $comments = CommonsController::showpost($drug['Drug']['id']);?>
+            <div class='span12 article detail'>
                 <?php
                     $show_more_button = count($comments);
                 ?>
@@ -253,8 +253,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+<?php }else{?>
+    <div class="boxheader boxheader-main clearfix">
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Thông báo</h3>
+        <div class="box-ct clearfix row-fluid">
+            <div class='span12 article detail'>
+                <p>Không thể hiển thị bản ghi này. Bạn không có quền xem hoặc bản ghi không tồn tại .</p>
             </div>
         </div>
     </div>
+<?php }?>
 </div>
 <div class="clearfix"><br></div>
