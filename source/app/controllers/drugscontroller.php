@@ -11,6 +11,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('6');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->where(array('trangthai'=>1));
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		//$this->Drug->BindModel(array('hasMany' => array('Comment')));
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id","Distribute.ten",'Type.id','Type.ten'));
@@ -28,6 +29,7 @@ class DrugsController extends AppController {
 		$this->Drug->orderBy('id','DESC');
 		//$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
+		$this->Drug->where(array('trangthai'=>1));
 		$this->Drug->showHasMany();
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id",'Type.id',"Distribute.ten",'Type.ten'));
@@ -38,6 +40,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->where(array('trangthai'=>1));
 		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
@@ -50,7 +53,6 @@ class DrugsController extends AppController {
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$this->Drug->orderBy('ten','ASC');
-		$this->Drug->setLimit('15');
 		$drugs = $this->Drug->find();
 		$this->set(compact('drugs'));
 
@@ -110,17 +112,18 @@ class DrugsController extends AppController {
 		$this->redirect(array('controller'=>'drugs','action'=>'index'));
 	}
 	function view($id = null) {
+
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
+		$this->Drug->where(array('trangthai'=>1));
 		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$drug = $this->Drug->find();
 		$type_id = @$drug['Drug']['types_id'];
 		$manu_id = @$drug['Drug']['manus_id'];
 		$this->Drug->id = null;
-
 		//thuốc cùng nhóm dược lý
-		$this->Drug->setLimit('5');
-		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id));
+		$this->Drug->setLimit('4');
+		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id,'trangthai'=>1));
 		$this->Drug->showHasOne();
 		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten"));
@@ -142,9 +145,9 @@ class DrugsController extends AppController {
 		$f_id = $f[1];//id forign
 		if($f[0] == 'key'){
 			$key = 'ten like';
-			$this->Drug->where(array($key=>$f_id.'%'));
+			$this->Drug->where(array('trangthai'=>1,$key=>$f_id.'%'));
 		}else
-		$this->Drug->where(array($f_key=>$f_id));
+		$this->Drug->where(array('trangthai'=>1,$f_key=>$f_id));
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$results = $this->Drug->find();
@@ -223,6 +226,7 @@ class DrugsController extends AppController {
 
 		}
 		//debug($array);
+		$array = array_merge($array,array('trangthai'=>1));
 		$this->Drug->where($array);
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();

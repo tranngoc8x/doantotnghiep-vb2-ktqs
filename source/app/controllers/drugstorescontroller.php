@@ -10,6 +10,7 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->setLimit('20');
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();
+		$this->Drugstore->where(array('trangthai'=>1));
 		$drugstores = $this->Drugstore->find();
 		$this->set(compact('drugstores'));
 		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
@@ -65,7 +66,7 @@ class DrugstoresController extends AppController {
 	function view($id = null) {
 		$this->Drugstore->id = $id;
 		$this->Drugstore->showHasOne();
-		$this->Drugstore->where(array('id'=>$id));
+		$this->Drugstore->where(array('trangthai'=>1));
 		$drugstore = $this->Drugstore->find();
 
 		$rates = $this->Drugstore->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugstores as Rate WHERE drugstores_id = '$id' GROUP BY mark");
@@ -88,6 +89,7 @@ class DrugstoresController extends AppController {
 			$this->Drugstore->where(array($key=>$f_id.'%'));
 		}else
 		$this->Drugstore->where(array($f_key=>$f_id));
+		$this->Drugstore->where(array('trangthai'=>1));
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();
 		$results = $this->Drugstore->find();
@@ -136,6 +138,7 @@ class DrugstoresController extends AppController {
 			$array[$aq1[0].'s_id'] = $aq1[1];
 		}
 		$this->Drugstore->where($array);
+		$this->Drugstore->where(array('trangthai'=>1));
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();
 		$results = $this->Drugstore->find();
