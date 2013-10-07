@@ -4,6 +4,9 @@
     <div class="buttons pull-right">
         <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'types','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
     </div>
+    <div class="buttons pull-right">
+        <?php echo $html->link("<i></i>Nhập Excel", array('controller'=>'types','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+    </div>
     <div class="clearfix" style="clear: both;"></div>
 </div>
 <div class="separator"></div>

@@ -1,9 +1,14 @@
 <div class="heading-buttons">
 
     <h3 class="glyphicons display"><i></i> Quản lý nhà sản xuất</h3>
+
     <div class="buttons pull-right">
         <?php echo $html->link("<i></i>Thêm mới",
                             array('controller'=>'manus','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+    </div>
+    <div class="buttons pull-right">
+        <?php echo $html->link("<i></i>Nhập excel",
+                            array('controller'=>'manus','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
     </div>
     <div class="clearfix" style="clear: both;"></div>
 </div>

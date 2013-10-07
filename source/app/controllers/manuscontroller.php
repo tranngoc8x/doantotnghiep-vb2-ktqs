@@ -11,6 +11,7 @@
 		}
 		function admin_add(){
 			if(isset($_POST['Manu']) && !empty($_POST['Manu'])){
+				//var_dump($_POST['Manu']);
 				if($this->Manu->save()){
 					$this->redirect(array('controller'=>'manus','action'=>'index'));
 				}
@@ -70,6 +71,44 @@
 			$manus = $this->Manu->find();
 			$this->set(compact("manus",'q'));
 
+		}
+		function admin_reader(){
+			$mgs = "";
+			if(isset($_POST['Manu']) && !empty($_POST['Manu']))
+			{
+				$fileupload = CommonsController::upload($_FILES,'file','files/temps/');
+				if($fileupload != '1' && $fileupload != '2')
+				{
+					$excel = new Spreadsheet_Excel_Reader(WEBROOT."/files/temps/".$fileupload);
+					$sheet = 0;
+					for($row=2;$row<=($excel->rowcount($sheet));$row++)
+					{
+						$this->data = array();
+						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
+						{
+							$ten = $excel->val($row,1);
+							$gioithieu = $excel->val($row,2);
+							$trangthai = $excel->val($row,3);
+
+							$this->data['Manu']['ten'] = $ten;
+							$this->data['Manu']['gioithieu'] = $gioithieu;
+							$this->data['Manu']['trangthai'] = (string)$trangthai;
+						}
+						//debug($this->data);
+
+						if(!$this->Manu->save($this->data)){
+							$mgs = "Có lỗi trong quá trình nhập dữ liệu. Xuất hiện lỗi ở bản ghi số :".($i);
+							break;
+						}
+					}
+					@unlink(WEBROOT."/files/temps/".$fileupload);
+					$mgs = "Quá trình nhập đã hoàn tất!";
+				}else{
+					$mgs = "File upload không đúng!";
+				}
+
+			}
+			$this->set(compact('mgs'));
 		}
 		function afterAction () {
 		}

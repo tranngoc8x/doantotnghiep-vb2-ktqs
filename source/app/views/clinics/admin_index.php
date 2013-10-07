@@ -1,7 +1,10 @@
 <div class="heading-buttons">
-<h3 class="glyphicons display"><i></i> Quản lý thông tin phòng khám</h3>
+<h3 class="glyphicons display"><i></i> Quản lý phòng khám</h3>
 <div class="buttons pull-right">
     <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'clinics','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+</div>
+<div class="buttons pull-right">
+    <?php echo $html->link("<i></i>Nhập Excel", array('controller'=>'clinics','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
 </div>
 <div class="clearfix" style="clear: both;"></div>
 </div>

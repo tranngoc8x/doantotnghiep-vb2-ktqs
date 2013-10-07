@@ -1,4 +1,3 @@
-
 <div class="mass mass-top clearfix">
     <?php if(!empty($drug)){?>
     <div class="boxheader boxheader-main clearfix">

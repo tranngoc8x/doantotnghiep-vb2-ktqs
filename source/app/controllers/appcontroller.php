@@ -1,7 +1,7 @@
 <?php
 class AppController extends TntController {
 	var $helper = array('Counter');
-	var $component =array("PHPExcel");
+	//var $component =array("Spreadsheet_Excel_Reader");
 	function __construct($controller, $action) {
 		parent:: __construct($controller, $action);
 		if($this->_admin){
