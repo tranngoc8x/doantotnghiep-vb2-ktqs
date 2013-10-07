@@ -148,6 +148,59 @@ class DrugstoresController extends AppController {
 		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
 		$this->set(compact('list_city'));
 	}
+	function admin_reader(){
+			$mgs = "";
+			if(isset($_POST['Drugstore']) && !empty($_POST['Drugstore']))
+			{
+				$fileupload = CommonsController::upload($_FILES,'file','files/temps/');
+				if($fileupload != '1' && $fileupload != '2')
+				{
+					$excel = new Spreadsheet_Excel_Reader(WEBROOT."/files/temps/".$fileupload);
+					$sheet = 0;
+					for($row=2;$row<=($excel->rowcount($sheet));$row++)
+					{
+						$this->data = array();
+						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
+						{
+							$ten 			= $excel->val($row,1);
+							$daidien 		= $excel->val($row,2);
+							$giayphep 		= $excel->val($row,3);
+							$ngaycap 		= $excel->val($row,4);
+							$ngaycap 		= date("Y-m-d",strtotime($ngaycap));
+							$diachi 		= $excel->val($row,5);
+							$dienthoai 		= $excel->val($row,6);
+							$gioithieu 		= $excel->val($row,7);
+							$map 			= $excel->val($row,8);
+							$cities_id 		= $excel->val($row,9);
+							$trangthai 		= $excel->val($row,10);
+
+							$this->data['Drugstore']['ten'] = $ten;
+							$this->data['Drugstore']['daidien'] = $daidien;
+							$this->data['Drugstore']['giayphep'] =(string) $giayphep;
+							$this->data['Drugstore']['ngaycap'] = $ngaycap;
+							$this->data['Drugstore']['diachi'] = $diachi;
+							$this->data['Drugstore']['dienthoai'] = (string)$dienthoai;
+							$this->data['Drugstore']['map'] = (string)$map;
+							$this->data['Drugstore']['gioithieu'] = $gioithieu;
+							$this->data['Drugstore']['cities_id'] = (string)$cities_id;
+							$this->data['Drugstore']['trangthai'] = (string)$trangthai;
+						}
+						//debug($this->data);
+
+						if(!$this->Drugstore->save($this->data)){
+							$mgs = "Có lỗi trong quá trình nhập dữ liệu. Xuất hiện lỗi ở bản ghi số :".($i);
+							break;
+						}
+					}
+					@unlink(WEBROOT."/files/temps/".$fileupload);
+					$mgs = "Quá trình nhập đã hoàn tất!";
+				}else{
+					$mgs = "File upload không đúng!";
+				}
+
+			}
+			$this->set(compact('mgs'));
+		}
 	function afterAction() {
 
 	}

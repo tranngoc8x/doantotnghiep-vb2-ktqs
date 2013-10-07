@@ -3,6 +3,9 @@
 <div class="buttons pull-right">
     <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'drugs','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
 </div>
+<div class="buttons pull-right">
+    <?php echo $html->link("<i></i>Nhập Excel", array('controller'=>'drugs','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+</div>
 <div class="separator"></div>
 <form action="<?php echo BASE_PATH;?>/admin/commons/find" method="POST" class="span10">
     <input type="hidden" name="model" value="<?php echo $this->_controller;?>" />

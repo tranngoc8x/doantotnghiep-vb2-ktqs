@@ -3,6 +3,9 @@
 <div class="buttons pull-right">
     <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'hopitals','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
 </div>
+<div class="buttons pull-right">
+    <?php echo $html->link("<i></i>Nhập Excel", array('controller'=>'hopitals','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+</div>
 <div class="clearfix" style="clear: both;"></div>
 </div>
 

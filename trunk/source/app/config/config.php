@@ -1,6 +1,6 @@
 <?php
 	/** Configuration Variables **/
-	define ('DEVELOPMENT_ENVIRONMENT',true);
+	define ('DEVELOPMENT_ENVIRONMENT',false);
 	define('DB_NAME', 'thuocduoclieu');
 	define('DB_USER', 'root');
 	define('DB_PASSWORD', '');

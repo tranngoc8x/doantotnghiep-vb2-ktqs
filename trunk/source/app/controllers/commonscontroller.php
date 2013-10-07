@@ -244,7 +244,7 @@ class CommonsController extends AppController{
 	function upload($file,$name,$path=''){
 		global $inflect;
 		$model = $inflect->singularize($this->_controller);
-		$allowedExts = array("gif", "jpeg", "jpg", "png");
+		$allowedExts = array("gif", "jpeg", "jpg", "png",'xls');
 		$temp = explode(".", $file[$model]["name"][$name]);
 		$extension = end($temp);
 		array_pop($temp);
@@ -255,11 +255,13 @@ class CommonsController extends AppController{
 		|| ($file[$model]["type"][$name] == "image/jpg")
 		|| ($file[$model]["type"][$name] == "image/pjpeg")
 		|| ($file[$model]["type"][$name] == "image/x-png")
-		|| ($file[$model]["type"][$name] == "image/png"))
+		|| ($file[$model]["type"][$name] == "image/png")
+		|| ($file[$model]["type"][$name] == "application/vnd.ms-excel")
+		)
 		&& ($file[$model]["size"][$name] < 5000000)
 		&& in_array($extension, $allowedExts))
 		{
-			if ($file[$model]["error"]['anh'] > 0)
+			if ($file[$model]["error"][$name] > 0)
 			    $re = 1;
 			else
 			{

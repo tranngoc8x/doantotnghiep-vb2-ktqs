@@ -89,7 +89,6 @@ function __autoload($className) {
 		require_once(ROOT . DS . 'app' . DS . 'helpers' . DS . strtolower($className)  . DS . strtolower($className) . '.php');
 	} else {
 		/* Error Generation Code Here */
-        @include( PHPEXCEL_ROOT .str_replace('_',DIRECTORY_SEPARATOR,$className) .'.php');
 	}
 }
 

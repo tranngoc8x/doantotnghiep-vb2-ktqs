@@ -183,6 +183,60 @@ class EquipsController extends AppController {
 		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
 		$this->set(compact('list_dis','list_manus'));
 	}
+	function admin_reader(){
+			$mgs = "";
+			if(isset($_POST['Equip']) && !empty($_POST['Equip']))
+			{
+				$fileupload = CommonsController::upload($_FILES,'file','files/temps/');
+				if($fileupload != '1' && $fileupload != '2')
+				{
+					$excel = new Spreadsheet_Excel_Reader(WEBROOT."/files/temps/".$fileupload);
+					$sheet = 0;
+					$i=1;
+					for($row=2;$row<=($excel->rowcount($sheet));$row++)
+					{
+						$this->data = array();
+						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
+						{
+							$ten 			= $excel->val($row,1);
+							$daidien 		= $excel->val($row,2);
+							$linhvuc 		= $excel->val($row,3);
+							$diachi 		= $excel->val($row,4);
+							$dienthoai 		= $excel->val($row,5);
+							$gioithieu 		= $excel->val($row,6);
+							$map 			= $excel->val($row,7);
+							$departments_id = $excel->val($row,8);
+							$cities_id 		= $excel->val($row,9);
+							$trangthai 		= $excel->val($row,10);
+
+							$this->data['Equip']['ten'] = $ten;
+							$this->data['Equip']['daidien'] = $daidien;
+							$this->data['Equip']['linhvuc'] = $linhvuc;
+							$this->data['Equip']['diachi'] = $diachi;
+							$this->data['Equip']['dienthoai'] = (string)$dienthoai;
+							$this->data['Equip']['gioithieu'] = $gioithieu;
+							$this->data['Equip']['map'] = (string)$map;
+							$this->data['Equip']['departments_id'] = (string)$departments_id;
+							$this->data['Equip']['cities_id'] = (string)$cities_id;
+							$this->data['Equip']['trangthai'] = (string)$trangthai;
+						}
+						//debug($this->data);
+
+						if(!$this->Equip->save($this->data)){
+							$mgs = "Có lỗi trong quá trình nhập dữ liệu. Xuất hiện lỗi ở bản ghi số :".($i);
+							break;
+						}
+						$i++;
+					}
+					@unlink(WEBROOT."/files/temps/".$fileupload);
+					if($i==$excel->rowcount($sheet)){$mgs = "Quá trình nhập đã hoàn tất!";}
+				}else{
+					$mgs = "File upload không đúng!";
+				}
+
+			}
+			$this->set(compact('mgs'));
+		}
 	function afterAction() {
 
 	}

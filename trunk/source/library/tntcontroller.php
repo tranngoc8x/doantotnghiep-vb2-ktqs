@@ -52,7 +52,6 @@ class TntController{
 	}
 	function auth($array,$table='users',$usr = 'username',$pas = 'password'){
 		global $inflect;
-
 		$model = ucfirst($inflect->singularize($table));
 		$this->{$model}->where(array($usr=>$array['username']));
 		$temp = $this->{$model}->find();
@@ -78,7 +77,7 @@ class TntController{
 	}
 	function render($doNotRenderHeader = 0) {
 		$html = new HTML;
-		$view = new view;
+		$view = new View;
 		$form = new Form;
 		$session = new Session;//view
 		if(!empty($this->helper) && is_array($this->helper)){

@@ -112,11 +112,10 @@ class DrugsController extends AppController {
 		$this->redirect(array('controller'=>'drugs','action'=>'index'));
 	}
 	function view($id = null) {
-
+		//debug($this);
 		$this->Drug->id = $id;
 		$this->Drug->showHasOne();
 		$this->Drug->where(array('trangthai'=>1));
-		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
 		$drug = $this->Drug->find();
 		$type_id = @$drug['Drug']['types_id'];
 		$manu_id = @$drug['Drug']['manus_id'];
@@ -236,6 +235,70 @@ class DrugsController extends AppController {
 		$this->set($aq2[0], $aq2[1]);
 		$this->set($aq3[0], $aq3[1]);
 	}
+
+
+	function admin_reader(){
+			$mgs = "";
+			if(isset($_POST['Drug']) && !empty($_POST['Drug']))
+			{
+				$fileupload = CommonsController::upload($_FILES,'file','files/temps/');
+				if($fileupload != '1' && $fileupload != '2')
+				{
+					$excel = new Spreadsheet_Excel_Reader(WEBROOT."/files/temps/".$fileupload);
+					$sheet = 0;
+					$i=1;
+					for($row=2;$row<=($excel->rowcount($sheet));$row++)
+					{
+						$this->data = array();
+						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
+						{
+							$ten = $excel->val($row,1);
+							$sodk = $excel->val($row,2);
+							$giakekhai 		= $excel->val($row,3);
+							$dangbaoche 	= $excel->val($row,4);
+							$thanhphan 		= $excel->val($row,5);
+							$hamluong 		= $excel->val($row,6);
+							$chidinh 		= $excel->val($row,7);
+							$lieudung 		= $excel->val($row,8);
+							$baoquan 		= $excel->val($row,9);
+							$anh 			= $excel->val($row,10);
+							$types_id 		= $excel->val($row,11);
+							$distributes_id = $excel->val($row,12);
+							$manus_id 		= $excel->val($row,13);
+							$trangthai 		= $excel->val($row,14);
+
+							$this->data['Drug']['ten'] = $ten;
+							$this->data['Drug']['sodk'] = (string)$sodk;
+							$this->data['Drug']['giakekhai'] = (string)$giakekhai;
+							$this->data['Drug']['dangbaoche'] = $dangbaoche;
+							$this->data['Drug']['thanhphan'] = $thanhphan;
+							$this->data['Drug']['hamluong'] = $hamluong;
+							$this->data['Drug']['chidinh'] = $chidinh;
+							$this->data['Drug']['lieudung'] = $lieudung;
+							$this->data['Drug']['baoquan'] = $baoquan;
+							$this->data['Drug']['anh'] = $anh;
+							$this->data['Drug']['types_id'] = (string)$types_id;
+							$this->data['Drug']['distributes_id'] = (string)$distributes_id;
+							$this->data['Drug']['manus_id'] = (string)$manus_id;
+							$this->data['Drug']['trangthai'] = (string)$trangthai;
+						}
+						//debug($this->data);
+
+						if(!$this->Drug->save($this->data)){
+							$mgs = "Có lỗi trong quá trình nhập dữ liệu. Xuất hiện lỗi ở bản ghi số :".($i);
+							break;
+						}
+						$i++;
+					}
+					@unlink(WEBROOT."/files/temps/".$fileupload);
+					if($i==1){$mgs = "Quá trình nhập đã hoàn tất!";}
+				}else{
+					$mgs = "File upload không đúng!";
+				}
+
+			}
+			$this->set(compact('mgs'));
+		}
 	function afterAction() {
 
 	}

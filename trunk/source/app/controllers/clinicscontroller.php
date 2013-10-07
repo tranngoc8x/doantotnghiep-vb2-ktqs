@@ -173,6 +173,60 @@ class ClinicsController extends AppController {
 		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
 		$this->set(compact('list_city','list_des'));
 	}
+
+	function admin_reader(){
+			$mgs = "";
+			if(isset($_POST['Clinic']) && !empty($_POST['Clinic']))
+			{
+				$fileupload = CommonsController::upload($_FILES,'file','files/temps/');
+				if($fileupload != '1' && $fileupload != '2')
+				{
+					$excel = new Spreadsheet_Excel_Reader(WEBROOT."/files/temps/".$fileupload);
+					$sheet = 0;
+					for($row=2;$row<=($excel->rowcount($sheet));$row++)
+					{
+						$this->data = array();
+						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
+						{
+							$ten 			= $excel->val($row,1);
+							$daidien 		= $excel->val($row,2);
+							$linhvuc 		= $excel->val($row,3);
+							$diachi 		= $excel->val($row,4);
+							$dienthoai 		= $excel->val($row,5);
+							$gioithieu 		= $excel->val($row,6);
+							$map 			= $excel->val($row,7);
+							$departments_id = $excel->val($row,8);
+							$cities_id 		= $excel->val($row,9);
+							$trangthai 		= $excel->val($row,10);
+
+							$this->data['Clinic']['ten'] = $ten;
+							$this->data['Clinic']['daidien'] = $daidien;
+							$this->data['Clinic']['linhvuc'] = $linhvuc;
+							$this->data['Clinic']['diachi'] = $diachi;
+							$this->data['Clinic']['dienthoai'] = (string)$dienthoai;
+							$this->data['Clinic']['gioithieu'] = $gioithieu;
+							$this->data['Clinic']['map'] = (string)$map;
+							$this->data['Clinic']['departments_id'] = (string)$departments_id;
+							$this->data['Clinic']['cities_id'] = (string)$cities_id;
+							$this->data['Clinic']['trangthai'] = (string)$trangthai;
+						}
+						//debug($this->data);
+
+						if(!$this->Clinic->save($this->data)){
+							$mgs = "Có lỗi trong quá trình nhập dữ liệu. Xuất hiện lỗi ở bản ghi số :".($i);
+							break;
+						}
+					}
+					@unlink(WEBROOT."/files/temps/".$fileupload);
+					$mgs = "Quá trình nhập đã hoàn tất!";
+				}else{
+					$mgs = "File upload không đúng!";
+				}
+
+			}
+			$this->set(compact('mgs'));
+		}
+
 	function afterAction() {
 
 	}
