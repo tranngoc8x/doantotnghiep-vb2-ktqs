@@ -52,7 +52,6 @@ $(document).ready(function(){
         var path = $(location).attr('href');
         arpath = path.split('/');
         arpath.pop();
-        var a = new Array("Wind","Rain","Fire");
         var path = arpath.join('/')+'/multidel/'+str;
         window.location.href = path;
 

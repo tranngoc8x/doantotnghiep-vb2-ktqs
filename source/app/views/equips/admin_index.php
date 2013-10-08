@@ -3,6 +3,9 @@
 <div class="buttons pull-right">
     <?php echo $html->link("<i></i>Thêm mới", array('controller'=>'equips','action'=>'add'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
 </div>
+<div class="buttons pull-right">
+    <?php echo $html->link("<i></i>Nhập Excel", array('controller'=>'equips','action'=>'reader'),array('class'=>"btn btn-default btn-icon glyphicons edit"),false);?>
+</div>
 <div class="clearfix" style="clear: both;"></div>
 </div>
 <div class="separator"></div>
@@ -43,9 +46,9 @@
 <table class="table table-bordered table-hover" width=100%>
 	<tr>
 		<th><input type='checkbox' value='' class='checkall' name='checkall' id='checkall' /></th>
+        <th>Tên thiết bị</th>
         <th>Nhà sản xuất</th>
         <th>Nhà phân phối</th>
-		<th>Vị trí</th>
 		<th>Tùy chọn</th>
 
 	</tr>

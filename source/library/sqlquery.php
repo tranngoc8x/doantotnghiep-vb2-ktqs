@@ -244,7 +244,7 @@ class SQLQuery{
 			}
 		}
 		$this->_query = 'SELECT '.$this->_fields.' FROM '.$from.' WHERE '.$conditions;
-		# echo  $this->_query ;
+		 #echo  $this->_query ;
 		$this->_result = mysql_query($this->_query, $this->_dbHandle);
 		$result = array();
 		$table = array();
