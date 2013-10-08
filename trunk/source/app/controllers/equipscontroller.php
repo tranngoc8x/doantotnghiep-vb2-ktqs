@@ -198,26 +198,20 @@ class EquipsController extends AppController {
 						$this->data = array();
 						if(!$excel->sheets[$sheet]['cellsInfo'][$row][$col]['dontprint'])
 						{
-							$ten 			= $excel->val($row,1);
-							$daidien 		= $excel->val($row,2);
-							$linhvuc 		= $excel->val($row,3);
-							$diachi 		= $excel->val($row,4);
-							$dienthoai 		= $excel->val($row,5);
-							$gioithieu 		= $excel->val($row,6);
-							$map 			= $excel->val($row,7);
-							$departments_id = $excel->val($row,8);
-							$cities_id 		= $excel->val($row,9);
-							$trangthai 		= $excel->val($row,10);
+							$ten 				= $excel->val($row,1);
+							$anh 				= $excel->val($row,2);
+							$chucnang 			= $excel->val($row,3);
+							$gioithieu 			= $excel->val($row,4);
+							$manus_id 			= $excel->val($row,5);
+							$distributes_id 	= $excel->val($row,6);
+							$trangthai 			= $excel->val($row,7);
 
 							$this->data['Equip']['ten'] = $ten;
-							$this->data['Equip']['daidien'] = $daidien;
-							$this->data['Equip']['linhvuc'] = $linhvuc;
-							$this->data['Equip']['diachi'] = $diachi;
-							$this->data['Equip']['dienthoai'] = (string)$dienthoai;
+							$this->data['Equip']['anh'] = $anh;
+							$this->data['Equip']['chucnang'] = $chucnang;
 							$this->data['Equip']['gioithieu'] = $gioithieu;
-							$this->data['Equip']['map'] = (string)$map;
-							$this->data['Equip']['departments_id'] = (string)$departments_id;
-							$this->data['Equip']['cities_id'] = (string)$cities_id;
+							$this->data['Equip']['manus_id'] = (string)$manus_id;
+							$this->data['Equip']['distributes_id'] = (string)$distributes_id;
 							$this->data['Equip']['trangthai'] = (string)$trangthai;
 						}
 						//debug($this->data);

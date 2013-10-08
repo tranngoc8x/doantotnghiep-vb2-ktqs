@@ -1,9 +1,9 @@
-    <?php echo $form->create("Manu",array('controller'=>'manus','action'=>'reader'),array("enctype"=>"multipart/form-data"));?>
+    <?php echo $form->create("Department",array('controller'=>'departments','action'=>'reader'),array("enctype"=>"multipart/form-data"));?>
     <h4>Nhập dữ liệu từ file Excel</h4>
      <hr class="separator">
     <div class="row-fluid">
       <div class="span12">
-        <?php echo $session->setFlash("Manu");?>
+        <?php echo $session->setFlash("Department");?>
         <div class="control-group">
           	<label class="control-label" for="file">Chọn file Excel(file cần theo đúng định dạng quy định để tránh lỗi)</label>
           	<div class="controls">
