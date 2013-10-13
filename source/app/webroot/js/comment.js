@@ -9,7 +9,7 @@
 			//if(a!='' && )
 			if(a != "" && token !='')
 			{
-				$.post("../../commons/writePost/"+a+"/"+token+"/"+items, {
+				$.post("../../../commons/writePost/"+a+"/"+token+"/"+items, {
 				}, function(response){
 					$('#posting').prepend($(response).fadeIn('slow'));
 					$("#watermark").val('');
@@ -35,7 +35,7 @@
 			var items = $("#itemid").val().split('_');
 			if(comment_text != "")
 			{
-				$.post("../../commons/replypost/"+items[0]+"/"+getpID+"/"+comment_text+"/"+token, {
+				$.post("../../../commons/replypost/"+items[0]+"/"+getpID+"/"+comment_text+"/"+token, {
 				}, function(response2){
 					$('#CommentPosted'+getpID).append($(response2).fadeIn('slow'));
 					$("#commentMark-"+getpID).val("");
@@ -48,7 +48,7 @@
 		$('a.more_records').livequery("click", function(e){
 			var next =  $('a.more_records').attr('id').replace('more_','');
 			var items = $("#itemid").val();
-			$.post("../../commons/morepost/"+next+'/'+items, {}, function(response){
+			$.post("../../../commons/morepost/"+next+'/'+items, {}, function(response){
 				$('#bottomMoreButton').remove();
 					$('#posting').append($(response).fadeIn('slow'));
 			});
@@ -65,7 +65,7 @@
 			var items = $("#itemid").val().split('_');
 			$.ajax({
 				type: 'get',
-				url: '../../commons/deleteCmt/'+ pid+"/"+items[0]+"/"+token,
+				url: '../../../commons/deleteCmt/'+ pid+"/"+items[0]+"/"+token,
 				data: '',
 				beforeSend: function(){
 				},
@@ -90,7 +90,7 @@
 
 			$.ajax({
 				type: 'get',
-				url: '../../commons/deleteCmtChild/'+ c_id+"/"+items[0]+"/"+token,
+				url: '../../../commons/deleteCmtChild/'+ c_id+"/"+items[0]+"/"+token,
 				data: '',
 				beforeSend: function(){
 				},

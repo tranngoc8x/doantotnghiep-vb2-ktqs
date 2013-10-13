@@ -16,6 +16,19 @@ class ClinicsController extends AppController {
 		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
 		$this->set(compact('list_city','list_des'));
 	}
+
+	function types($id) {
+		$this->Clinic->orderBy('id','DESC');
+		$this->Clinic->setLimit('20');
+		$this->Clinic->showHasOne();
+		$this->Clinic->showHasMany();
+		$this->Clinic->where(array('trangthai'=>1,'departments_id'=>$id));
+		$clinics = $this->Clinic->find();
+		$this->set(compact('clinics'));
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
+		$this->set(compact('list_city','list_des'));
+	}
 	function admin_index() {
 		$this->Clinic->showHasOne();
 		$this->Clinic->orderBy('id','DESC');

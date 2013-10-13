@@ -55,6 +55,8 @@ class TntController{
 		$model = ucfirst($inflect->singularize($table));
 		$this->{$model}->where(array($usr=>$array['username']));
 		$temp = $this->{$model}->find();
+		//debug($temp);
+		//debug($temp[0][$model]);
 		if(!empty($temp)){
 			if(md5($array['password']) == $temp[0][$model][$pas] && $temp[0][$model]['trangthai']==1){
 				if($this->_admin == true){
@@ -65,7 +67,6 @@ class TntController{
 					$_SESSION['ssid'] = $temp[0][$model]['id'];
 					$_SESSION['username'] = $temp[0][$model][$usr];
 					$_SESSION['ten'] = $temp[0][$model]['ten'];
-
 				}
 				return true;
 			}
@@ -87,7 +88,7 @@ class TntController{
 			}
 		}
 		extract($this->variables);
-		if(!file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php') && !file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php'))
+		if(lcfirst($this->_controller) != 'commons' && !file_exists(ROOT . DS . 'app' . DS . 'views' . DS . lcfirst($this->_controller) . DS . $this->_action . '.php') && !file_exists(ROOT . DS . 'app' . DS . 'views' . DS . $this->_view . '.php'))
 		{
 			include(ROOT . DS . 'app' . DS . 'views/layouts/error404.php');
 		}else

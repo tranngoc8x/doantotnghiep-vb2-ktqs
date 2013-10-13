@@ -11,8 +11,10 @@ class AppController extends TntController {
 			{
 				$this->redirect(array('controller'=>'users','action'=>'login'));
 			}
+		}else{
+			$this->_common();
 		}
-		$this->_common();
+		
 	}
 	function beforeAction () {
 	}
@@ -31,6 +33,13 @@ class AppController extends TntController {
 		$contact = $this->{$model}->query("select content from infors where id = 2 and trangthai = 1 limit 1");
 		$this->set(compact("sidebar","footer","contact","title_bar","alpa"));
 		// debug($footer);
+		$totaldrugs 		= $this->{$model}->query("select count(id) as total from drugs where trangthai = 1");
+		$totaldrugstores 	= $this->{$model}->query("select count(id) as total from drugstores where trangthai = 1");
+		$totalclinics 		= $this->{$model}->query("select count(id) as total from clinics where trangthai = 1");
+		$totalhopitals		= $this->{$model}->query("select count(id) as total from hopitals where trangthai = 1");
+		$totalequips 		= $this->{$model}->query("select count(id) as total from equips where trangthai = 1");
+		$this->set(compact("totaldrugs","totaldrugstores","totalclinics","totalhopitals","totalequips"));
+	
 	}
 
 	function afterAction() {

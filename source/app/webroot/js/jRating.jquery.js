@@ -159,8 +159,8 @@
 
 
 					/** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
-						$('.datasSent p').html('<strong>idBox : </strong>'+idBox+'<br /><strong>rate : </strong>'+rate+'<br /><strong>action :</strong> rating');
-						$('.serverResponse p').html('<strong>Loading...</strong>');
+					$('.datasSent p').html('<strong>idBox : </strong>'+idBox+'<br /><strong>rate : </strong>'+rate+'<br /><strong>action :</strong> rating');
+					$('.serverResponse p').html('<strong>Loading...</strong>');
 					/** END ONLY FOR THE DEMO **/
 
 					if(opts.onClick) opts.onClick( element, rate );

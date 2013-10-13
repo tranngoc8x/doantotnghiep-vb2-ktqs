@@ -7,8 +7,8 @@
 	        	<div class='contentblock span7'>
 	        		<?php echo $html->img('files/equips/'.$equip['Equip']['anh'],array('width'=>'220','class'=>'img-thumbnail left'));?>
 					<h6> <?php echo $equip['Equip']['ten']?> </h6>
-    				<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($equip['Distribute']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Manu']['id']),array('class'=>'item'));?></p>
-    	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($equip['Manu']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Manu']['id']),array('class'=>'item'));?></p>
+    				<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($equip['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></p>
+    	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($equip['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></p>
                 </div>
                 <div class='rateblock span5'>
                     <?php if(!empty($rates)){//if1?>
@@ -101,20 +101,23 @@
     <div class="boxheader boxheader-main clearfix">
         <h3>Các thiết bị y tế khác</h3>
         <div class="box-ct clearfix">
-        	<?php foreach ($manu_equips as $item):?>
-            <div class="innerdiv article clearfix span6">
-                <?php echo $html->link($html->img('files/equips/'.$item['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
-                                       array('controller'=>'equips','action'=>'view/'.$item['Equip']['id']),
-                                       array('class'=>"left entry thumbnail img-head"),false);?>
+            <ul class='ulitem row-fluid'>
+            	<?php foreach ($manu_equips as $k=> $item):?>
+                <li class='article'>
+                    <?php echo $html->link($html->img('files/equips/'.$item['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'equips','action'=>'view/'.$item['Equip']['id'].'/'.$item['Equip']['ten']),
+                                           array('class'=>"left entry thumbnail img-head"),false);?>
 
-            	<h6 style="word-wrap:none;overflow: hidden;">
-                <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),array('class'=>'item'));?>
-        		</h6>
-        		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'manus','action'=>'view/'.$equip['Manu']['id']),array('class'=>'item'));?></div>
-        		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'distributes','action'=>'view/'.$equip['Distribute']['id']),array('class'=>'item'));?></div>
-            	<div class="clearfix"></div>
-            </div>
-            <?php endforeach;?>
+                	<h6 style="word-wrap:none;overflow: hidden;">
+                    <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),array('class'=>'item'));?>
+            		</h6>
+            		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></div>
+                	<div class="clearfix"></div>
+                </li>
+                <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
+                <?php endforeach;?>
+            </ul>
         </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
@@ -171,7 +174,7 @@
                                    <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
                                    <?php }?>
                                    <?php
-                                    if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                    if((isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                     <a href="#" class="delete"> Xóa</a>
                                    <?php }?>
                                    </label>
@@ -209,7 +212,7 @@
                                                 ?>
                                                 </span>
                                                 <?php
-                                                    if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
+                                                    if((isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                                     &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
                                                 <?php }?>
                                             </div>

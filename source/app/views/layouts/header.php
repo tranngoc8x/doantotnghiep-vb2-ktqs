@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="robots" content="index, follow">
-        <meta name="keywords" content="Duoc lieu, nha thuoc, tung tam kham benh, y te, thuoc">
-        <meta name="description" content="Website tra cứu thuoc va dược liệu">
+        <meta name="keywords" content="Duoc lieu, nha thuoc, trung tam kham benh, y te, thuoc">
+        <meta name="description" content="Website tra cứu thuốc và dược liệu">
         <meta name="generator" content="TRAN NGOC THANG">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?php echo $html->css(array('reset','bootstrap','bootstrap-responsive','docs','prettify','template','respone','jRating.jquery','comment'));?>
@@ -119,14 +119,14 @@
 						    <div class="boxheader">
 						        <h3>Thống kê</h3>
 						        <div class="box-ct">
-						        	<ul class="menu"><li>
-							            <strong>Số người online</strong> :<?php echo $counter->getCountFormated();?>
-							            <br><strong>Số người đã truy cập</strong> : <?php echo $counter->getCountFormated();?>
-							            <br><strong>Tổng số thuốc</strong> : 6
-							            <br><strong>Số loại thuốc</strong> : 2
-							            <br><strong>Tổng số nhà thuốc</strong> : 148
-							            <br><strong>Trung tâm y tế</strong> :168
-						        	</li></ul>
+						        	<ul class="thongke">
+							            <li><strong>Tổng số thuốc</strong> : <?php echo $totaldrugs[0]['']['total'];?></li>
+							            <li><strong>Tổng số nhà thuốc</strong> : <?php echo $totaldrugstores[0]['']['total'];?></li>
+							            <li><strong>Phòng khám</strong> : <?php echo $totalclinics[0]['']['total'];?></li>
+							            <li><strong>Bệnh viện</strong> : <?php echo $totalhopitals[0]['']['total'];?></li>
+							            <li><strong>Thiết bị y tế</strong> : <?php echo $totalequips[0]['']['total'];?></li>
+						        		<li><strong>Số người đã truy cập</strong> : <?php echo $counter->getCountFormated();?></li>
+									</ul>
 						        </div>
 						    </div>
 						</div>

@@ -214,17 +214,24 @@ class CommonsController extends AppController{
 		global $inflect;
 		$this->doNotRenderHeader=1;
 		if(!isset($id) || empty($id)) exit();
-		if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+		if((!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){
 			$table = $this->_type($item);
 			$temp = lcfirst($table);
 			$temp2 = $inflect->singularize($table);
 			$tbl = 'ykien_'.$temp;
 			$ctbl = 'ykien_'.$temp2.'_childs';// bảng trả lời
 			$fieldid = 'ykien_'.$temp.'_id';
-			$sql = "DELETE FROM $ctbl WHERE $fieldid ='".$id."' AND members_id ='".$_SESSION['ssid']."'";
-			$result = $this->Common->query($sql);
-			$sqlx = "DELETE FROM $tbl WHERE id ='".$id."' AND members_id ='".$_SESSION['ssid']."'";
-			$result = $this->Common->query($sqlx);
+			$member_id = @$_SESSION['ssid'];
+			$sql = "DELETE FROM $ctbl WHERE $fieldid ='".$id."' AND members_id ='".$member_id."'";
+			if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+				$sql = "DELETE FROM $ctbl WHERE $fieldid ='".$id."'";
+			}
+			$this->Common->query($sql);
+			$sqlx = @"DELETE FROM $tbl WHERE id ='".$id."' AND members_id ='".$member_id."'";
+			if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+				$sqlx = "DELETE FROM $tbl WHERE id ='".$id."'";
+			}
+			$this->Common->query($sqlx);
 		}
 	}
 	//BẤM NÚT XÓA TRẢ LỜI
@@ -232,11 +239,16 @@ class CommonsController extends AppController{
 		global $inflect;
 		$this->doNotRenderHeader=1;
 		if(!isset($id) || empty($id)) exit();
-		if(!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid'])){
+		if((!empty($token) && $token == $_SESSION['user_token'] && isset($_SESSION['ssid']) && !empty($_SESSION['ssid']))|| (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){
 			$table = $this->_type($item);
 			$temp2 = $inflect->singularize($table);
 			$ctbl = 'ykien_'.$temp2.'_childs';// bảng trả lời
-			$result = $this->Common->query("DELETE FROM $ctbl WHERE id ='".$id."' AND members_id ='".$_SESSION['ssid']."'");
+			$member_id = @$_SESSION['ssid'];
+			$sql= @"DELETE FROM $ctbl WHERE id ='".$id."' AND members_id ='".$member_id."'";
+			if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+				$sql = "DELETE FROM $ctbl WHERE id ='".$id."'";
+			}
+			$this->Common->query($sql);
 		}
 	}
 
