@@ -87,7 +87,7 @@
                     <h6 style="word-wrap:none;overflow: hidden;">
                         <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id'].'/'.$clinic['Clinic']['ten']),array('class'=>'item'));?>
                     </h6>
-                    <div class="item"><b>Chuyên khoa :</b><?php echo $clinic['Department']['ten'];?></div>
+                    <div class="item">Chuyên khoa : <?php echo $html->link($clinic['Department']['ten'],array('controller'=>'clinics','action'=>'label/Department:'.$clinic['Department']['id']),array('class'=>'item'));?></div>
                     <div class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['Clinic']['ten'];?></div>
                     <div class='item rates'>
                         <?php echo $view->rateother($clinic['Rate_clinic'],'clinic');?>

@@ -138,6 +138,11 @@ ul.topmenu li a {
 	margin: 0;
 	padding: 0;
 }
+#left ul.thongke li{
+	padding-left: 10px;
+	height: 22px;
+	line-height: 22px;
+}
 /*END NAV*/
 
 

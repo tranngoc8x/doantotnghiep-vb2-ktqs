@@ -7,9 +7,9 @@
 	        	<div class='contentblock span7'>
 	        		<?php echo $html->img('files/drugs/'.$drug['Drug']['anh'],array('width'=>'220','class'=>'img-thumbnail left'));?>
     				<h6> <?php echo $drug['Drug']['ten']?> </h6>
-    				<p class="item"><b>Nhóm dược lý :</b> <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></p>
-    	    		<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($drug['Distribute']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></p>
-    	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Manu']['id']),array('class'=>'item'));?></p>
+    				<p class="item"><b>Nhóm dược lý :</b> <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'types/'.$drug['Type']['id'].'/'.$drug['Type']['ten']),array('class'=>'item'));?></p>
+    	    		<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($drug['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$drug['Distribute']['id']),array('class'=>'item'));?></p>
+    	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
     	    		<p class="item"><b>Số đăng ký : </b><?php echo $drug['Drug']['sodk'];?></p>
     	    		<p class="item"><b>Dạng bào chế : </b><?php echo $drug['Drug']['dangbaoche'];?></p>
     	    		<p class="item"><b>Giá kê khai : </b><?php echo $drug['Drug']['giakekhai'];?></p>
@@ -106,14 +106,14 @@
             	<?php foreach ($type_drugs as $k => $item):?>
                 <li class='article'>
                     <?php echo $html->link($html->img('files/drugs/'.$item['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
-                                           array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),
+                                           array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),
                                            array('class'=>"left entry thumbnail img-head"),false);?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),array('class'=>'item'));?>
             		</h6>
-            		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Manu']['id']),array('class'=>'item'));?></div>
-            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$item['Manu']['id']),array('class'=>'item'));?></div>
             		<div class='item rates'>
                         <?php echo $html->img('img/star_full.png');?>
                         <?php echo $html->img('img/star_full.png');?>
@@ -182,7 +182,7 @@
                                    <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
                                    <?php }?>
                                    <?php
-                                    if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                    if((isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                     <a href="#" class="delete"> Xóa</a>
                                    <?php }?>
                                    </label>
@@ -220,7 +220,7 @@
                                                 ?>
                                                 </span>
                                                 <?php
-                                                    if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
+                                                    if((isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                                     &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
                                                 <?php }?>
                                             </div>

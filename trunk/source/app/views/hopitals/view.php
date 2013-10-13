@@ -166,7 +166,7 @@
                                    <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
                                    <?php }?>
                                    <?php
-                                    if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+                                    if((isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                     <a href="#" class="delete"> Xóa</a>
                                    <?php }?>
                                    </label>
@@ -204,7 +204,7 @@
                                                 ?>
                                                 </span>
                                                 <?php
-                                                    if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
+                                                    if((isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
                                                     &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
                                                 <?php }?>
                                             </div>

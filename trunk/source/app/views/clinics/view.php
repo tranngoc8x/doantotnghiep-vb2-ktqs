@@ -14,6 +14,8 @@
 		        		<p class="item"><b>Chủ phòng khám :</b> <?php echo $clinic['Clinic']['daidien'];?></p>
 		        		<p class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['City']['ten'];?></p>
 		                <p class="item"><b>Điện thoại :</b> <?php echo $clinic['Clinic']['dienthoai'];?></p>
+		                <p class="item"><b>Chuyên điều trị :</b></p>
+		                <p class="item"><?php echo $clinic['Clinic']['linhvuc'];?></p>
 		        	</div>
 		        	<div class="span8">
 						<script type="text/javascript">
@@ -169,7 +171,7 @@
 	                               <a href="javascript: void(0)" id="post_id<?php  echo $item['Comment']['id']?>" class="showCommentBox">Trả lời</a>
 	                               <?php }?>
 	                               <?php
-	                                if(isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']){?>
+	                                if((isset($_SESSION['ssid']) &&  $item['Comment']['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
 	                                <a href="#" class="delete"> Xóa</a>
 	                               <?php }?>
 	                               </label>
@@ -207,7 +209,7 @@
 	                                            ?>
 	                                            </span>
 	                                            <?php
-	                                                if(isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']){?>
+	                                                if((isset($_SESSION['ssid']) &&  $value['members_id'] == $_SESSION['ssid']) || (isset($_SESSION['admin']) && !empty($_SESSION['admin']))){?>
 	                                                &nbsp;&nbsp;<a href="#" id="CID-<?php  echo $value['id'];?>" class="c_delete">Xóa</a>
 	                                            <?php }?>
 	                                        </div>
