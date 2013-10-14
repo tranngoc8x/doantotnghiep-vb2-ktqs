@@ -16,7 +16,7 @@
     	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
     	    		<p class="item"><b>Số đăng ký : </b><?php echo $drug['Drug']['sodk'];?></p>
     	    		<p class="item"><b>Dạng bào chế : </b><?php echo $drug['Drug']['dangbaoche'];?></p>
-    	    		<p class="item"><b>Giá kê khai : </b><?php echo $drug['Drug']['giakekhai'];?></p>
+    	    		<p class="item"><b>Giá kê khai : </b><?php echo $drug['Drug']['giakekhai'];?> đ</p>
                     <div class='clearfix'><p></p></div>
                 </div>
 

@@ -140,6 +140,7 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('4');
 		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id,'trangthai'=>1));
 		$this->Drug->showHasOne();
+		$this->Drug->orderBy('id','DESC');
 		$this->Drug->showHasMany();
 		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id","Distribute.ten"));
 		//rate
@@ -166,7 +167,7 @@ class DrugsController extends AppController {
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$this->Drug->orderBy('id','DESC');
-		$this->Drug->orderBy('id','DESC');
+		
 		if(isset($_POST['orderfield'])){
 			$_POST['orderfield'];
 			$a = CommonsController::orderData($_POST['orderfield']);
