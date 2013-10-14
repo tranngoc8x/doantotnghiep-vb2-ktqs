@@ -130,14 +130,6 @@ class TntController{
 		}
 		header("Location:".$d_path.DS.$controller.DS.$action);
     }
-    function element($name,$path = 'elements'){
-    	if(empty($name)) return;
-    	if($path== 'elements'){
-    		include(BASE_PATH.'/views/elements/'.$name);
-    	}else{
-    		include(BASE_PATH.'/'.$path.'/'.$name);
-    	}
-    }
     function __destruct() {
 		if ($this->render) {
 			$this->render($this->doNotRenderHeader);

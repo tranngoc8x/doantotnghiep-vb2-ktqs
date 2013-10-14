@@ -32,7 +32,16 @@
         </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
-        <h3><?php echo $html->img('img/icon-home.png');?> :: Kết quả tìm kiếm</h3>
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Kết quả tìm kiếm
+            <form action="" id='frm' method='POST' class='right' style='margin:-5px 0 0;'>
+                <select onchange='document.getElementById("frm").submit();' name="orderfield">
+                    <option value="3" <?php if( !isset($n) || $n == 3 ){echo 'selected';}?>>Mới nhất</option>
+                    <option value="4" <?php if(isset($n) && $n == 4){echo 'selected';}?>>Bệnh viện cũ</option>
+                    <option value="1" <?php if(isset($n) && $n == 1){echo 'selected';}?>>Tên từ A->Z</option>
+                    <option value="2" <?php if(isset($n) && $n == 2){echo 'selected';}?>>Tên từ Z->A</option>
+                </select>
+            </form>
+        </h3>
         <div class="box-ct clearfix row-fluid">
             <ul class='ulitem row-fluid'>
                 <?php foreach ($results as $k=> $hopital):?>

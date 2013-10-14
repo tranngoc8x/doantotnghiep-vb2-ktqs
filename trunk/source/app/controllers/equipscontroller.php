@@ -5,10 +5,11 @@ class EquipsController extends AppController {
 	function admin_index() {
 		$this->Equip->showHasMany();
 		$this->Equip->showHasOne();
+		$this->Equip->orderBy('id','DESC');
 		$equips = $this->Equip->find();
 		$this->set('equips',$equips);
-		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
-		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1 order by ten asc");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1  order by ten asc");
 		$this->set(compact('list_dis','list_manus'));
 	}
 	function admin_add(){
@@ -66,15 +67,23 @@ class EquipsController extends AppController {
 	}
 	function index() {
 		$this->Equip->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Equip->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Equip->setLimit('20');
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
 		$this->Equip->where(array('trangthai'=>1));
 		$equips = $this->Equip->find();
 		$this->set(compact('equips'));
-		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
-		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
-		$this->set(compact('list_dis','list_manus'));
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1  order by ten asc");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1  order by ten asc");
+		$this->set(compact('list_dis','list_manus','n'));
 	}
 	function view($id = null) {
 		$this->Equip->id = $id;
@@ -85,7 +94,8 @@ class EquipsController extends AppController {
 		$this->Equip->setLimit('8');
 		$this->Equip->where(array('id !='=>$id,'manus_id'=>$manu_id));
 		$this->Equip->showHasOne();
-		$manu_equips = $this->Equip->find(array("Equip.id","Equip.ten","Equip.anh",'Manu.ten',"Distribute.ten"));
+		$this->Equip->showHasMany();
+		$manu_equips = $this->Equip->find(array("Equip.id","Equip.ten","Equip.anh",'Manu.ten',"Distribute.id","Distribute.ten"));
 		$rates = $this->Equip->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_equips as Rate WHERE equips_id = '$id' GROUP BY mark");
 		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
 			$ssid = $_SESSION["ssid"];
@@ -106,10 +116,19 @@ class EquipsController extends AppController {
 		}else
 		$this->Equip->where(array($f_key=>$f_id));
 		$this->Equip->where(array('trangthai'=>1));
+		$this->Equip->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Equip->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
 		$results = $this->Equip->find();
-		$this->set(compact("results"));
+		$this->set(compact("results",'n'));
 
 	}
 	function search($q,$q1,$q2){
@@ -140,13 +159,22 @@ class EquipsController extends AppController {
 		$this->Equip->where(array('trangthai'=>1));
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
+		$this->Equip->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Equip->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$results = $this->Equip->find();
 		$this->set(compact("results",'q'));
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
-		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
-		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
-		$this->set(compact('list_dis','list_manus'));
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1   order by ten asc");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1  order by ten asc");
+		$this->set(compact('list_dis','list_manus','n'));
 	}
 	function admin_search($q,$q1,$q2){
 		$this->_view = "equips/admin_index";
@@ -175,12 +203,13 @@ class EquipsController extends AppController {
 		$this->Equip->where($array);
 		$this->Equip->showHasOne();
 		$this->Equip->showHasMany();
+		$this->Equip->orderBy('id','DESC');
 		$equips = $this->Equip->find();
 		$this->set(compact("equips",'q'));
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
-		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1");
-		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1");
+		$list_dis = $this->Equip->query("SELECT * FROM distributes where trangthai=1  order by ten asc");
+		$list_manus = $this->Equip->query("SELECT * FROM manus where trangthai=1  order by ten asc");
 		$this->set(compact('list_dis','list_manus'));
 	}
 	function admin_reader(){

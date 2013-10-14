@@ -263,6 +263,10 @@ ul.menu li a:hover, ul.menu li a:active, ul.menu li a:focus {
 }
 .item{
 	text-align:  left;
+
+}
+div.item{
+	padding: 3px 0;
 }
 .left{
 	float: left;

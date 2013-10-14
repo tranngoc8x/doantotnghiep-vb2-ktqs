@@ -8,9 +8,9 @@
 					<div class="row-fluid">
 					   <div class='span4'>
 			        		<h6 style="word-wrap:none;overflow: hidden;">
-		                    <?php echo $html->link($hopital['Hopital']['ten'],array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id']),array('class'=>'item'));?>
+		                    <?php echo $html->link($hopital['Hopital']['ten'],array('controller'=>'hopitals','action'=>'view/'.$hopital['Hopital']['id'].'/'.$hopital['Hopital']['ten']),array('class'=>'item'));?>
 		            		</h6>
-		            		<p class="item"><b>Địa chi :</b> <?php echo $hopital['Hopital']['diachi'],' , '.$hopital['City']['ten'];?></p>
+		            		<div class="item"><b>Địa chi :</b> <?php echo $hopital['Hopital']['diachi'],' , '.$hopital['City']['ten'];?></div>
 
 		                </div>
 			        	<div class="span8">
@@ -106,7 +106,7 @@
 		                    <?php echo "Hãy đăng nhập để đánh giá";?>
 		                    <?php }?>
 					    </div>
-					    <p class="item span7"><b>Thông tin :</b> <?php echo $hopital['Hopital']['gioithieu'];?></p>
+					    <div class="item span7"><b>Thông tin :</b> <?php echo $hopital['Hopital']['gioithieu'];?></div>
 					</div>
 				</div>
 			</div>

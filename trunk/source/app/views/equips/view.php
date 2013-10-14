@@ -5,10 +5,14 @@
         <div class="box-ct clearfix row-fluid">
 			  <div class='span12 article detail'>
 	        	<div class='contentblock span7'>
-	        		<?php echo $html->img('files/equips/'.$equip['Equip']['anh'],array('width'=>'220','class'=>'img-thumbnail left'));?>
+                    <?php if(is_file('files/equips/'.$equip['Equip']['anh'])){?>
+                    <?php echo $html->img('files/equips/'.$equip['Equip']['anh'],array('width'=>'220','class'=>'img-thumbnail left'));?>
+                    <?php }else{?>
+                        <?php echo $html->img('img/no-image.png',array('width'=>'220','class'=>'img-thumbnail left'));?>
+                    <?php }?>
 					<h6> <?php echo $equip['Equip']['ten']?> </h6>
-    				<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($equip['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></p>
-    	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($equip['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></p>
+    				<div class="item"><b>Nhà phân phối :</b> <?php echo $html->link($equip['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></div>
+    	    		<div class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($equip['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></div>
                 </div>
                 <div class='rateblock span5'>
                     <?php if(!empty($rates)){//if1?>
@@ -93,8 +97,8 @@
                     <?php }?>
                 </div>
                 <div class="clearfix"><br></div>
-	        	<p class="item"><b>Chức năng : </b><?php echo $equip['Equip']['chucnang'];?></p>
-	        	<p class="item"><b>Giới thiệu : </b><?php echo $equip['Equip']['gioithieu'];?></p>
+	        	<div class="item"><b>Chức năng : </b><?php echo $equip['Equip']['chucnang'];?></div>
+	        	<div class="item"><b>Giới thiệu : </b><?php echo $equip['Equip']['gioithieu'];?></div>
         	</div>
 		</div>
 	</div>
@@ -102,18 +106,28 @@
         <h3>Các thiết bị y tế khác</h3>
         <div class="box-ct clearfix">
             <ul class='ulitem row-fluid'>
+                 <?php //debug($manu_equips);?>
             	<?php foreach ($manu_equips as $k=> $item):?>
                 <li class='article'>
-                    <?php echo $html->link($html->img('files/equips/'.$item['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
+                    
+                    <?php if(is_file('files/equips/'.$item['Equip']['anh'])){?>
+                        <?php echo $html->link($html->img('files/equips/'.$item['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
                                            array('controller'=>'equips','action'=>'view/'.$item['Equip']['id'].'/'.$item['Equip']['ten']),
                                            array('class'=>"left entry thumbnail img-head"),false);?>
-
+                    <?php }else{?>
+                        <?php echo $html->link($html->img('img/no-image.png',array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'equips','action'=>'view/'.$item['Equip']['id'].'/'.$item['Equip']['ten']),
+                                           array('class'=>"left entry thumbnail img-head"),false);?>
+                    <?php }?>
                 	<h6 style="word-wrap:none;overflow: hidden;">
-                    <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),array('class'=>'item'));?>
+                    <?php echo $html->link($item['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id'].'/'.$equip['Equip']['ten']),array('class'=>'item'));?>
             		</h6>
             		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'equips','action'=>'label/Manu:'.$equip['Manu']['id']),array('class'=>'item'));?></div>
             		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'equips','action'=>'label/Distribute:'.$equip['Distribute']['id']),array('class'=>'item'));?></div>
-                	<div class="clearfix"></div>
+                	<div class='item rates'>
+                        <?php echo $view->rateres($item['Rate_equip'],'equip');?>
+                    </div>
+                    <div class="clearfix"></div>
                 </li>
                 <?php if(($k+1)%2==0 && $k>0) echo "<hr class='clearfix'/>";?>
                 <?php endforeach;?>

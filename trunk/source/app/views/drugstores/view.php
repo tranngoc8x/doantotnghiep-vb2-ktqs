@@ -8,13 +8,13 @@
         		<div class="row-liquid">
 		        	<div class='span4'>
 		        		<h6 style="word-wrap:none;overflow: hidden;">
-	                    <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstores','action'=>'view/'.$drugstore['Drugstore']['id']),array('class'=>'item'));?>
+	                    <?php echo $html->link($drugstore['Drugstore']['ten'],array('controller'=>'drugstores','action'=>'view/'.$drugstore['Drugstore']['id'].'/'.$drugstore['Drugstore']['ten']),array('class'=>'item'));?>
 	            		</h6>
-	            		<p class="item"><b>Chủ nhà thuốc :</b> <?php echo $drugstore['Drugstore']['daidien'];?></p>
-	            		<p class="item"><b>Số giấy phép :</b> <?php echo $drugstore['Drugstore']['giayphep'];?></p>
-	                    <p class="item"><b>Ngày cấp :</b> <?php echo $drugstore['Drugstore']['ngaycap'];?></p>
-	            		<p class="item"><b>Địa chi :</b> <?php echo $drugstore['Drugstore']['diachi'],' , '.$drugstore['City']['ten'];?></p>
-	                    <p class="item"><b>Điện thoại :</b> <?php echo $drugstore['Drugstore']['dienthoai'];?></p>
+	            		<div class="item"><b>Chủ nhà thuốc :</b> <?php echo $drugstore['Drugstore']['daidien'];?></div>
+	            		<div class="item"><b>Số giấy phép :</b> <?php echo $drugstore['Drugstore']['giayphep'];?></div>
+	                    <div class="item"><b>Ngày cấp :</b> <?php echo date('d/m/Y',strtotime($drugstore['Drugstore']['ngaycap']));?></div>
+	            		<div class="item"><b>Địa chi :</b> <?php echo $drugstore['Drugstore']['diachi'],' , '.$drugstore['City']['ten'];?></div>
+	                    <div class="item"><b>Điện thoại :</b> <?php echo $drugstore['Drugstore']['dienthoai'];?></div>
 
 		        	</div>
 		        	<div class="span8">
@@ -104,7 +104,7 @@
 	                    <?php echo "Hãy đăng nhập để đánh giá";?>
 	                    <?php }?>
 	                </div>
-	                <p class="item span7"><b>Thông tin :</b> <?php echo $drugstore['Drugstore']['gioithieu'];?></p>
+	                <div class="item span7"><b>Thông tin :</b> <?php echo $drugstore['Drugstore']['gioithieu'];?></div>
 	            </div>
         	</div>
 		</div>

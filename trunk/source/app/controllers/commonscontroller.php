@@ -370,6 +370,17 @@ class CommonsController extends AppController{
 		}
 		$this->redirect(array('controller'=>$model,'action'=>'search/'.$string));
 	}
+	function orderData($val){
+		switch ($val) {
+			case '1': $k = "ten";$v = "ASC"; break;
+			case '2': $k = "ten";$v = "DESC"; break;
+			case '3': $k = "id";$v = "DESC";break;
+			case '4': $k = "id";$v = "ASC";break;
+			default : $k = "id";$v = "DESC"; break;
+		}
+		$_SESSION['orKey'] = $k;
+		$_SESSION['orVal'] = $v;
+	}
 	function afterAction() {
 
 	}

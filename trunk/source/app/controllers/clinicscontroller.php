@@ -6,28 +6,44 @@ class ClinicsController extends AppController {
 
 	function index() {
 		$this->Clinic->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Clinic->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Clinic->setLimit('20');
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
 		$this->Clinic->where(array('trangthai'=>1));
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
-		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
-		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
-		$this->set(compact('list_city','list_des'));
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1  order by ten asc");
+		$this->set(compact('list_city','list_des','n'));
 	}
 
 	function types($id) {
 		$this->Clinic->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Clinic->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Clinic->setLimit('20');
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
 		$this->Clinic->where(array('trangthai'=>1,'departments_id'=>$id));
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
-		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
-		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
-		$this->set(compact('list_city','list_des'));
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1  order by ten asc");
+		$this->set(compact('list_city','list_des','n'));
 	}
 	function admin_index() {
 		$this->Clinic->showHasOne();
@@ -35,8 +51,8 @@ class ClinicsController extends AppController {
 		$this->Clinic->setLimit('15');
 		$clinics = $this->Clinic->find();
 		$this->set(compact('clinics'));
-		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
-		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1  order by ten asc");
 		$this->set(compact('list_city','list_des'));
 		//debug($this);
 	}
@@ -107,8 +123,17 @@ class ClinicsController extends AppController {
 		$this->Clinic->where(array('trangthai'=>1));
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
+		$this->Clinic->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Clinic->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$results = $this->Clinic->find();
-		$this->set(compact("results"));
+		$this->set(compact("results",'n'));
 
 	}
 	function admin_search($q,$q1,$q2){
@@ -143,8 +168,8 @@ class ClinicsController extends AppController {
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
 
-		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
-		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1  order by ten asc");
 		$this->set(compact('list_city','list_des'));
 	}
 	function search($q,$q1,$q2){
@@ -177,14 +202,23 @@ class ClinicsController extends AppController {
 		$this->Clinic->where(array('trangthai'=>1));
 		$this->Clinic->showHasOne();
 		$this->Clinic->showHasMany();
+		$this->Clinic->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Clinic->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$results = $this->Clinic->find();
 		$this->set(compact("results",'q'));
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
 
-		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1");
-		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1");
-		$this->set(compact('list_city','list_des'));
+		$list_city = $this->Clinic->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$list_des = $this->Clinic->query("SELECT * FROM departments where trangthai=1  order by ten asc");
+		$this->set(compact('list_city','list_des','n'));
 	}
 
 	function admin_reader(){

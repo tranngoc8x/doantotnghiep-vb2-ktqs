@@ -7,15 +7,15 @@
 				<div class='row-fluid'>
 				    <div class='span4'>
 		        		<h6 style="word-wrap:none;overflow: hidden;">
-		                <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'drugstores','action'=>'view/'.$clinic['Clinic']['id']),array('class'=>'item'));?>
+		                <?php echo $html->link($clinic['Clinic']['ten'],array('controller'=>'clinics','action'=>'view/'.$clinic['Clinic']['id'].'/'.$clinic['Clinic']['ten']),array('class'=>'item'));?>
 		        		</h6>
 		        		<?php //debug( $Clinic);?>
-		        		<p class="item"><b>Chuyên khoa :</b> <?php echo $clinic['Department']['ten'];?></p>
-		        		<p class="item"><b>Chủ phòng khám :</b> <?php echo $clinic['Clinic']['daidien'];?></p>
-		        		<p class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['City']['ten'];?></p>
-		                <p class="item"><b>Điện thoại :</b> <?php echo $clinic['Clinic']['dienthoai'];?></p>
-		                <p class="item"><b>Chuyên điều trị :</b></p>
-		                <p class="item"><?php echo $clinic['Clinic']['linhvuc'];?></p>
+		        		<div class="item"><b>Chuyên khoa :</b> <?php echo $clinic['Department']['ten'];?></div>
+		        		<div class="item"><b>Chủ phòng khám :</b> <?php echo $clinic['Clinic']['daidien'];?></div>
+		        		<div class="item"><b>Địa chi :</b> <?php echo $clinic['Clinic']['diachi'],' , '.$clinic['City']['ten'];?></div>
+		                <div class="item"><b>Điện thoại :</b> <?php echo $clinic['Clinic']['dienthoai'];?></div>
+		                <div class="item"><b>Chuyên điều trị :</b></div>
+		                <div class="item"><?php echo $clinic['Clinic']['linhvuc'];?></div>
 		        	</div>
 		        	<div class="span8">
 						<script type="text/javascript">
@@ -112,7 +112,7 @@
 	                    <?php echo "Hãy đăng nhập để đánh giá";?>
 	                    <?php }?>
 	                </div>
-	                <p class="item span7"><b>Thông tin :</b> <?php echo $clinic['Clinic']['gioithieu'];?></p>
+	                <div class="item span7"><b>Thông tin :</b> <?php echo $clinic['Clinic']['gioithieu'];?></div>
 			    </div>
 	    	</div>
 		</div>

@@ -32,7 +32,16 @@
         </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
-        <h3><?php echo $html->img('img/icon-home.png');?> :: Nhà thuốc</h3>
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Nhà thuốc
+            <form action="" id='frm' method='POST' class='right' style='margin:-5px 0 0;'>
+                <select onchange='document.getElementById("frm").submit();' name="orderfield">
+                    <option value="3" <?php if( !isset($n) || $n == 3 ){echo 'selected';}?>>Mới nhất</option>
+                    <option value="4" <?php if(isset($n) && $n == 4){echo 'selected';}?>>Nhà thuốc cũ</option>
+                    <option value="1" <?php if(isset($n) && $n == 1){echo 'selected';}?>>Tên từ A->Z</option>
+                    <option value="2" <?php if(isset($n) && $n == 2){echo 'selected';}?>>Tên từ Z->A</option>
+                </select>
+            </form>
+        </h3>
         <div class="box-ct clearfix row-fluid">
             <ul class='ulitem row-fluid'>
                 <?php foreach ($drugstores as $k=> $drugstore):?>
@@ -44,7 +53,7 @@
             		<?php //debug( $Clinic);?>
             		<p class="item"><b>Chủ nhà thuốc :</b> <?php echo $drugstore['Drugstore']['daidien'];?></p>
             		<p class="item"><b>Số giấy phép :</b> <?php echo $drugstore['Drugstore']['giayphep'];?></p>
-                    <p class="item"><b>Ngày cấp :</b> <?php echo $drugstore['Drugstore']['ngaycap'];?></p>
+                    <p class="item"><b>Ngày cấp :</b> <?php echo date('d/m/Y',strtotime($drugstore['Drugstore']['ngaycap']));?></p>
             		<p class="item"><b>Địa chi :</b> <?php echo $drugstore['Drugstore']['diachi'],' , '.$drugstore['City']['ten'];?></p>
                     <p class="item"><b>Điện thoại :</b> <?php echo $drugstore['Drugstore']['dienthoai'];?></p>
             		<p class="item"><b>Xem chỉ đường :</b> <a target="_blank" href="https://maps.google.com/?q=<?php echo $drugstore['Drugstore']['map'];?>">Xem</a></p>

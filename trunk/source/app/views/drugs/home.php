@@ -5,9 +5,15 @@
             <ul class='ulitem row-fluid'>
                 <?php foreach ($drugs as $k=> $drug):?>
                 <li class='article'>
-                    <?php echo $html->link($html->img('files/drugs/'.$drug['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
+                    <?php if(is_file('files/drugs/'.$drug['Drug']['anh'])){?>
+                        <?php echo $html->link($html->img('files/drugs/'.$drug['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
                                            array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id'].'/'.$drug['Drug']['ten']),
                                            array('class'=>"left entry thumbnail"),false);?>
+                                           <?php }else{?>
+                        <?php echo $html->link($html->img('img/no-image.png',array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id'].'/'.$drug['Drug']['ten']),
+                                           array('class'=>"left entry thumbnail"),false);?>
+                    <?php }?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($drug['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$drug['Drug']['id'].'/'.$drug['Drug']['ten']),array('class'=>'item'));?>
