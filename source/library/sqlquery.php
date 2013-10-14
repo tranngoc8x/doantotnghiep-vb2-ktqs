@@ -93,7 +93,7 @@ class SQLQuery{
 		$this->_page = $page;
 	}
 
-	function orderBy($orderBy, $order = 'ASC') {
+	function orderBy($orderBy, $order = 'DESC') {
 		$this->_orderBy = $orderBy;
 		$this->_order = $order;
 	}

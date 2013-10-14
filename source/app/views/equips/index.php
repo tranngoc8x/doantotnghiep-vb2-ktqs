@@ -40,14 +40,30 @@
         </div>
     </div>
     <div class="boxheader boxheader-main clearfix">
-        <h3><?php echo $html->img('img/icon-home.png');?> :: Trang thiết bị y tế</h3>
+        <h3><?php echo $html->img('img/icon-home.png');?> :: Trang thiết bị y tế
+            <form action="" id='frm' method='POST' class='right' style='margin:-5px 0 0;'>
+                <select onchange='document.getElementById("frm").submit();' name="orderfield">
+                    <option value="3" <?php if( !isset($n) || $n == 3 ){echo 'selected';}?>>Mới nhất</option>
+                    <option value="4" <?php if(isset($n) && $n == 4){echo 'selected';}?>>Thiết bị nhập trước</option>
+                    <option value="1" <?php if(isset($n) && $n == 1){echo 'selected';}?>>Tên từ A->Z</option>
+                    <option value="2" <?php if(isset($n) && $n == 2){echo 'selected';}?>>Tên từ Z->A</option>
+                </select>
+            </form>
+        </h3>
         <div class="box-ct clearfix row-fluid">
             <ul class='ulitem row-fluid'>
                 <?php foreach ($equips as $k=> $equip):?>
                 <li class='article'>
-                     <?php echo $html->link($html->img('files/equips/'.$equip['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
-                                           array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id']),
+
+                    <?php if(is_file('files/equips/'.$equip['Equip']['anh'])){?>
+                        <?php echo $html->link($html->img('files/equips/'.$equip['Equip']['anh'],array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id'].'/'.$equip['Equip']['ten']),
                                            array('class'=>"left entry thumbnail"),false);?>
+                                           <?php }else{?>
+                        <?php echo $html->link($html->img('img/no-image.png',array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id'].'/'.$equip['Equip']['ten']),
+                                           array('class'=>"left entry thumbnail"),false);?>
+                    <?php }?>
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($equip['Equip']['ten'],array('controller'=>'equips','action'=>'view/'.$equip['Equip']['id'].'/'.$equip['Equip']['ten']),array('class'=>'item'));?>
             		</h6>

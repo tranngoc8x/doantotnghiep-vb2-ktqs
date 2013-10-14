@@ -7,22 +7,30 @@ class DrugstoresController extends AppController {
 
 	function index() {
 		$this->Drugstore->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drugstore->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Drugstore->setLimit('20');
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();
 		$this->Drugstore->where(array('trangthai'=>1));
 		$drugstores = $this->Drugstore->find();
 		$this->set(compact('drugstores'));
-		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
-		$this->set(compact('list_city'));
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1  order by ten asc");
+		$this->set(compact('list_city','n'));
 	}
 	function admin_index() {
 		$this->Drugstore->showHasOne();
-		$this->Drugstore->orderBy('ten','ASC');
+		$this->Drugstore->orderBy('id','DESC');
 		$this->Drugstore->setLimit('15');
 		$drugstores = $this->Drugstore->find();
 		$this->set(compact('drugstores'));
-		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1  order by ten asc");
 		$this->set(compact('list_city'));
 	}
 	function admin_add(){
@@ -39,6 +47,7 @@ class DrugstoresController extends AppController {
 
 		if(isset($_POST['Drugstore']) && !empty($_POST['Drugstore'])){
 			$this->Drugstore->id = $id;
+			//debug($_POST);
 			if($this->Drugstore->save()){
 				$this->redirect(array('controller'=>'drugstores','action'=>'index'));
 			}
@@ -91,9 +100,18 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->where(array($f_key=>$f_id));
 		$this->Drugstore->where(array('trangthai'=>1));
 		$this->Drugstore->showHasOne();
+		$this->Drugstore->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drugstore->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Drugstore->showHasMany();
 		$results = $this->Drugstore->find();
-		$this->set(compact("results"));
+		$this->set(compact("results",'n'));
 	}
 	function admin_search($q,$q1){
 		$this->_view = "drugstores/admin_index";
@@ -114,11 +132,12 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->where($array);
 		$this->Drugstore->showHasOne();
 		$this->Drugstore->showHasMany();
+		$this->Drugstore->orderBy('id','DESC');
 		$drugstores = $this->Drugstore->find();
 		$this->set(compact("drugstores",'q'));
 		$this->set($aq1[0], $aq1[1]);
 
-		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1  order by ten asc");
 		$this->set(compact('list_city'));
 	}
 	function search($q,$q1){
@@ -140,12 +159,21 @@ class DrugstoresController extends AppController {
 		$this->Drugstore->where($array);
 		$this->Drugstore->where(array('trangthai'=>1));
 		$this->Drugstore->showHasOne();
+		$this->Drugstore->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drugstore->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Drugstore->showHasMany();
 		$results = $this->Drugstore->find();
-		$this->set(compact("results",'q'));
+		$this->set(compact("results",'q','n'));
 		$this->set($aq1[0], $aq1[1]);
 
-		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1");
+		$list_city = $this->Drugstore->query("SELECT * FROM cities where trangthai=1  order by ten asc");
 		$this->set(compact('list_city'));
 	}
 	function admin_reader(){

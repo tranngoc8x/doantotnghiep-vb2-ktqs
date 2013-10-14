@@ -2,8 +2,8 @@
 
 class DrugsController extends AppController {
 	function beforeAction () {
-		$list_dis = $this->Drug->query("SELECT * FROM distributes where trangthai=1");
-		$list_manus = $this->Drug->query("SELECT * FROM manus where trangthai=1");
+		$list_dis = $this->Drug->query("SELECT * FROM distributes where trangthai=1  order by ten asc");
+		$list_manus = $this->Drug->query("SELECT * FROM manus where trangthai=1  order by ten asc");
 		$this->set(compact('list_dis','list_manus'));
 	}
 	function home() {
@@ -27,21 +27,37 @@ class DrugsController extends AppController {
 	}
 	function index() {
 		$this->Drug->orderBy('id','DESC');
-		//$this->Drug->setLimit('20');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drug->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Drug->showHasOne();
 		$this->Drug->where(array('trangthai'=>1));
 		$this->Drug->showHasMany();
-		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
+		//$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		$drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id",'Type.id',"Distribute.ten",'Type.ten'));
-		$this->set(compact('drugs','idtype'));
+		$this->set(compact('drugs','idtype','n'));
 	}
 	function types($idtype=null) {
 		$this->Drug->orderBy('id','DESC');
+		$this->Drug->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drug->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$this->Drug->setLimit('20');
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
 		$this->Drug->where(array('trangthai'=>1));
-		$this->Drug->unBindModel(array('hasMany' => array('Comment')));
+		//$this->Drug->unBindModel(array('hasMany' => array('Comment')));
 		if(!empty($idtype)){
 			$this->Drug->where(array('types_id'=>$idtype));
 		}
@@ -52,7 +68,7 @@ class DrugsController extends AppController {
 	function admin_index() {
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
-		$this->Drug->orderBy('ten','ASC');
+		$this->Drug->orderBy('id','DESC');
 		$drugs = $this->Drug->find();
 		$this->set(compact('drugs'));
 
@@ -124,8 +140,8 @@ class DrugsController extends AppController {
 		$this->Drug->setLimit('4');
 		$this->Drug->where(array('id !='=>$id,'types_id'=>$type_id,'trangthai'=>1));
 		$this->Drug->showHasOne();
-		//$this->Drug->unBindModel(array('hasMany'=>array('Comment')));
-		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.ten"));
+		$this->Drug->showHasMany();
+		$type_drugs = $this->Drug->find(array("Drug.id","Drug.ten","Drug.anh","Drug.sodk",'Manu.id','Manu.ten',"Distribute.id","Distribute.ten"));
 		//rate
 		$rates = $this->Drug->query("SELECT DISTINCT (mark), COUNT(mark) as numbers FROM  rate_drugs as Rate WHERE drugs_id = '$id' GROUP BY mark");
 		if(isset($_SESSION["ssid"]) && !empty($_SESSION["ssid"])){
@@ -149,8 +165,18 @@ class DrugsController extends AppController {
 		$this->Drug->where(array('trangthai'=>1,$f_key=>$f_id));
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->orderBy('id','DESC');
+		$this->Drug->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drug->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$results = $this->Drug->find();
-		$this->set(compact("results"));
+		$this->set(compact("results",'n'));
 
 	}
 	function admin_search($q,$q1,$q2,$q3){
@@ -187,6 +213,7 @@ class DrugsController extends AppController {
 		$this->Drug->where($array);
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->orderBy('id','DESC');
 		$drugs = $this->Drug->find();
 		$this->set(compact("drugs",'q'));
 		$this->set($aq1[0], $aq1[1]);
@@ -229,8 +256,18 @@ class DrugsController extends AppController {
 		$this->Drug->where($array);
 		$this->Drug->showHasOne();
 		$this->Drug->showHasMany();
+		$this->Drug->orderBy('id','DESC');
+		$this->Drug->orderBy('id','DESC');
+		if(isset($_POST['orderfield'])){
+			$_POST['orderfield'];
+			$a = CommonsController::orderData($_POST['orderfield']);
+			$n = @$_POST['orderfield'];
+		}
+		if(isset($_SESSION['orKey']) && isset($_SESSION['orVal'])){
+			$this->Drug->orderBy($_SESSION['orKey'],$_SESSION['orVal']);
+		}
 		$results = $this->Drug->find();
-		$this->set(compact("results",'q'));
+		$this->set(compact("results",'q','n'));
 		$this->set($aq1[0], $aq1[1]);
 		$this->set($aq2[0], $aq2[1]);
 		$this->set($aq3[0], $aq3[1]);

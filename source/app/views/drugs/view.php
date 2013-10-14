@@ -5,8 +5,12 @@
         <div class="box-ct clearfix row-fluid">
         	<div class='span12 article detail'>
 	        	<div class='contentblock span7'>
+                    <?php if(is_file('files/drugs/'.$drug['Drug']['anh'])){?>
 	        		<?php echo $html->img('files/drugs/'.$drug['Drug']['anh'],array('width'=>'220','class'=>'img-thumbnail left'));?>
-    				<h6> <?php echo $drug['Drug']['ten']?> </h6>
+    				<?php }else{?>
+                        <?php echo $html->img('img/no-image.png',array('width'=>'220','class'=>'img-thumbnail left'));?>
+                    <?php }?>
+                    <h6> <?php echo $drug['Drug']['ten']?> </h6>
     				<p class="item"><b>Nhóm dược lý :</b> <?php echo $html->link($drug['Type']['ten'],array('controller'=>'drugs','action'=>'types/'.$drug['Type']['id'].'/'.$drug['Type']['ten']),array('class'=>'item'));?></p>
     	    		<p class="item"><b>Nhà phân phối :</b> <?php echo $html->link($drug['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$drug['Distribute']['id']),array('class'=>'item'));?></p>
     	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
@@ -103,23 +107,26 @@
         <h3>Thuốc cùng nhóm dược lý</h3>
         <div class="box-ct clearfix">
              <ul class='ulitem row-fluid'>
+                <?php //debug($type_drugs);?>
             	<?php foreach ($type_drugs as $k => $item):?>
                 <li class='article'>
-                    <?php echo $html->link($html->img('files/drugs/'.$item['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
+                    <?php if(is_file('files/drugs/'.$item['Drug']['anh'])){?>
+                        <?php echo $html->link($html->img('files/drugs/'.$item['Drug']['anh'],array("width"=>'100px',"height"=>'80px')),
                                            array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),
                                            array('class'=>"left entry thumbnail img-head"),false);?>
+                                           <?php }else{?>
+                        <?php echo $html->link($html->img('img/no-image.png',array("width"=>'100px',"height"=>'80px')),
+                                           array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),
+                                           array('class'=>"left entry thumbnail img-head"),false);?>
+                    <?php }?>
 
                 	<h6 style="word-wrap:none;overflow: hidden;">
                     <?php echo $html->link($item['Drug']['ten'],array('controller'=>'drugs','action'=>'view/'.$item['Drug']['id'].'/'.$item['Drug']['ten']),array('class'=>'item'));?>
             		</h6>
             		<div class="item">Nhà sản xuất: <?php echo $html->link($item['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$item['Manu']['id']),array('class'=>'item'));?></div>
-            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$item['Manu']['id']),array('class'=>'item'));?></div>
+            		<div class="item">Nhà phân phối: <?php echo $html->link($item['Distribute']['ten'],array('controller'=>'drugs','action'=>'label/Distribute:'.$item['Distribute']['id']),array('class'=>'item'));?></div>
             		<div class='item rates'>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_full.png');?>
-                        <?php echo $html->img('img/star_half.png');?>
+                        <?php echo $view->rateres($item['Rate_drug'],'drug');?>
                     </div>
                 	<div class="clearfix"></div>
                 </li>

@@ -56,9 +56,6 @@ class HTML{
 		}
 		return $data;
 	}
-	function element($fileName = null) {
-		include(APP.'/views/element/'.$fileName.'.php');
-	}
 	function stt($idstt){
 		if($idstt ==0) echo "Ẩn";
 		else echo "Hiển thị";
