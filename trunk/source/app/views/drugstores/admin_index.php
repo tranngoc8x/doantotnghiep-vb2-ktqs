@@ -64,6 +64,6 @@
         <td>
             <a href="javascript:void(0);" class="delall">Xóa các mục đã chọn</a>
         </td>
-        <td></td>
+        <td align='right'><?php echo $this->Drugstore->paginate();?></td>
     </tr>
 </table>

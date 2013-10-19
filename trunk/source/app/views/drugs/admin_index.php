@@ -77,11 +77,11 @@
     </tr>
     <?php endforeach?>
 </table>
-<table>
+<table width=100%>
     <tr>
         <td>
             <a href="javascript:void(0);" class="delall">Xóa các mục đã chọn</a>
         </td>
-        <td></td>
+        <td align='right'><?php echo $this->Drug->paginate();?></td>
     </tr>
 </table>

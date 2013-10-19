@@ -86,9 +86,9 @@
 					</ul>
 					<ul>
 						<li class="heading"><span>Hệ thống</span></li>
-						<li class="glyphicons user">
+						<!-- <li class="glyphicons user">
 							<?php echo $html->link('<i></i><span>Thành viên</span>',array('controller'=>'members','action'=>'index'));?>
-						</li>
+						</li> -->
 						<li class="glyphicons user">
 							<?php echo $html->link('<i></i><span>Nhóm quản trị</span>',array('controller'=>'users','action'=>'index'));?>
 						</li>
