@@ -53,7 +53,7 @@
 		                    <ul class="rateitem span6">
 		                    <?php
 		                        for($i=5;$i>=1;$i--){
-		                        $w = ($data[$i]/$data['total']*130).'px';
+		                        $w = ($data[$i]/$data['total']*95).'px';
 		                    ?>
 		                        <li>
 		                            <span class='r_number'><?php echo $i;?></span>

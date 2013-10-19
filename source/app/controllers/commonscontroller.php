@@ -19,6 +19,7 @@ class CommonsController extends AppController{
 					$table = 'rate_'.$table;
 					$value = $_POST['value'];
 					$rate = floatval($_POST['rate']);
+					$rate = $rate >5?5:$rate;
 					$member =$_SESSION['ssid'];
 					$rated = 0;
 					if($id>0){
