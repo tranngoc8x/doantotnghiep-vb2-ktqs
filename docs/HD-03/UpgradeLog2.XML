@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="HD-03">
+</Property><Property Name="Solution File" Value="C:\Users\IFORCE\Desktop\HD-03\HD-03.sln">
+</Property><Property Name="User Options File" Value="C:\Users\IFORCE\Desktop\HD-03\HD-03.suo">
+</Property><Property Name="Date" Value="Saturday, September 28, 2013">
+</Property><Property Name="Time" Value="9:12 AM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="HD-03.sln" Description="File successfully backed up as C:\Users\IFORCE\Desktop\HD-03\HD-03.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="HD-03.suo" Description="File successfully backed up as C:\Users\IFORCE\Desktop\HD-03\HD-03.suo.old">
+</Event><Event ErrorLevel="0" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="Converting project file 'C:\Users\IFORCE\Desktop\HD-03\HD-01\HD-01.vcproj'.">
+</Event><Event ErrorLevel="1" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="Done converting to new project file 'C:\Users\IFORCE\Desktop\HD-03\HD-01\HD-01.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="HD-01" Source="HD-01\HD-01.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="HD-03.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="HD-03.sln" Description="Converted">
+</Event></UpgradeLog>
