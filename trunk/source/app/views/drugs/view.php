@@ -16,7 +16,7 @@
     	    		<p class="item"><b>Nhà sản xuất :</b> <?php echo $html->link($drug['Manu']['ten'],array('controller'=>'drugs','action'=>'label/Manu:'.$drug['Manu']['id']),array('class'=>'item'));?></p>
     	    		<p class="item"><b>Số đăng ký : </b><?php echo $drug['Drug']['sodk'];?></p>
     	    		<p class="item"><b>Dạng bào chế : </b><?php echo $drug['Drug']['dangbaoche'];?></p>
-    	    		<p class="item"><b>Giá kê khai : </b><?php echo $drug['Drug']['giakekhai'];?> đ</p>
+    	    		<p class="item"><b>Giá kê khai : </b><?php echo number_format($drug['Drug']['giakekhai']);?> đ</p>
                     <div class='clearfix'><p></p></div>
                 </div>
 
@@ -144,7 +144,9 @@
                 $_SESSION['user_token'] = $formtoken;
             ?>
 
-            <?php $comments = CommonsController::showpost($drug['Drug']['id']);?>
+            <?php 
+                $comControler = new CommonsController('drugs','view');
+                $comments = $comControler->showpost($drug['Drug']['id']);?>
             <div class='span12 article detail'>
                 <?php
                     $show_more_button = count($comments);
@@ -211,7 +213,8 @@
                                             <div class='span11'>
                                                 <label class="postedComments">
                                                     <b><?php
-                                                        $member =  MembersController::getInfor($value['members_id']);
+                                                        $memControler = new MembersController('drugs','view');
+                                                        $member =  $memControler->getInfor($value['members_id']);
                                                         echo $member[0]['Member']['ten'];
                                                     ?></b>
                                                     <?php  echo $value['content'];?>
@@ -263,14 +266,14 @@
     </div>
 
 <?php }else{?>
-    <div class="boxheader boxheader-main clearfix">
+    <!-- <div class="boxheader boxheader-main clearfix">
         <h3><?php echo $html->img('img/icon-home.png');?> :: Thông báo</h3>
         <div class="box-ct clearfix row-fluid">
             <div class='span12 article detail'>
                 <p>Không thể hiển thị bản ghi này. Bạn không có quền xem hoặc bản ghi không tồn tại .</p>
             </div>
         </div>
-    </div>
+    </div> -->
 <?php }?>
 </div>
 <div class="clearfix"><br></div>
