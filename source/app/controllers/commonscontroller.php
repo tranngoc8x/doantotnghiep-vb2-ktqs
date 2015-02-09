@@ -106,7 +106,7 @@ class CommonsController extends AppController{
 		return $temp;
 	}
 	//hiển thị lần đầu tiên khi load trang web
-	function showpost($id){
+	public function showpost($id){
 		$this->doNotRenderHeader=1;
 		global $inflect;
 		$result = array();
